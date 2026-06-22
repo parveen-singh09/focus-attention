@@ -11,10 +11,10 @@
 	     ============================================================ -->
 	<section data-phase="setup" class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
 		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">The focus game</p>
-		<h1 class="text-hero text-ink max-w-[14ch]">Hold the words.<br />Measure your focus.</h1>
-		<p class="text-lead text-ink-muted-80 mt-5 max-w-[34ch]">
-			A new word appears at the pace you choose. Keep them in order in your mind.
-			When the timer ends, recall the sequence.
+		<h1 class="text-hero text-ink max-w-[18ch]"><span class="whitespace-nowrap">Hold The Words</span><br /><span class="whitespace-nowrap">Measure Your Focus</span></h1>
+		<p class="text-lead text-ink-muted-80 mt-5 max-w-[42ch]">
+			A new word appears at the pace you choose. Keep them in order in your
+			mind. When the timer ends, <span class="whitespace-nowrap">recall the sequence.</span>
 		</p>
 
 		<!-- Duration presets -->
@@ -51,13 +51,18 @@
 				<p data-duration-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
 			</div>
 
-			<!-- Word pace — how often a new word appears (0.5s → 3min) -->
+			<!-- Word pace — how often a new word appears (1s → 3min) -->
 			<div class="mt-10">
 				<p class="text-caption text-ink-muted-48 mb-3">How often a new word appears</p>
 				<div class="flex items-end justify-center gap-3">
 					<label class="flex flex-col items-center gap-1.5">
-						<input type="number" min="0.5" max="180" step="0.5" value="3" data-word-pace class="time-input" />
-						<span class="text-fine text-ink-muted-48">sec / word</span>
+						<input type="number" min="0" max="3" value="0" data-pace-unit="minutes" class="time-input" />
+						<span class="text-fine text-ink-muted-48">min</span>
+					</label>
+					<span class="text-lead text-hairline pb-6 select-none">:</span>
+					<label class="flex flex-col items-center gap-1.5">
+						<input type="number" min="0" max="59" value="3" data-pace-unit="seconds" class="time-input" />
+						<span class="text-fine text-ink-muted-48">sec</span>
 					</label>
 				</div>
 				<p data-pace-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
@@ -240,9 +245,10 @@
 
 <script>
 	import { randomWord } from "../scripts/words";
+	import { submitBest } from "../lib/leaderboard";
 
 	const DEFAULT_WORD_INTERVAL_MS = 3000; // a fresh word every three seconds
-	const MIN_WORD_INTERVAL_MS = 500; // fastest pace: 0.5 s
+	const MIN_WORD_INTERVAL_MS = 1000; // fastest pace: 1 s
 	const MAX_WORD_INTERVAL_MS = 3 * 60 * 1000; // slowest pace: 3 min
 	const MIN_SECONDS = 10;
 	const MAX_SECONDS = 12 * 60 * 60; // 12 hours
@@ -312,28 +318,54 @@
 			});
 
 			// Word pace is independent of the hold duration — its own listener.
-			this.q<HTMLInputElement>("[data-word-pace]").addEventListener("input", () => this.syncPaceHint());
+			this.querySelectorAll<HTMLInputElement>(".time-input[data-pace-unit]").forEach((input) => {
+				input.addEventListener("input", () => this.syncPaceHint());
+			});
 
 			this.q<HTMLButtonElement>('[data-action="start"]').addEventListener("click", () => this.startWatch());
 		}
 
-		// Read the chosen word pace, clamped to [0.5s, 3min], in ms.
+		// Total of the two pace inputs (min + sec), in seconds.
+		private readPaceInputs(): number {
+			const get = (unit: string) =>
+				Number(this.q<HTMLInputElement>(`.time-input[data-pace-unit="${unit}"]`).value) || 0;
+			return get("minutes") * 60 + get("seconds");
+		}
+
+		// Read the chosen word pace, clamped to [1s, 3min], in ms.
 		private readWordPaceMs(): number {
-			const secs = Number(this.q<HTMLInputElement>("[data-word-pace]").value);
-			if (!Number.isFinite(secs) || secs <= 0) return DEFAULT_WORD_INTERVAL_MS;
+			const secs = this.readPaceInputs();
+			if (secs <= 0) return DEFAULT_WORD_INTERVAL_MS;
 			const ms = secs * 1000;
 			return Math.min(MAX_WORD_INTERVAL_MS, Math.max(MIN_WORD_INTERVAL_MS, ms));
 		}
 
+		// Begin is enabled only when both the hold duration and the word pace
+		// are inside their allowed ranges.
+		private durationValid(): boolean {
+			const secs = this.readDurationInputs();
+			return secs >= MIN_SECONDS && secs <= MAX_SECONDS;
+		}
+
+		private paceValid(): boolean {
+			const ms = this.readPaceInputs() * 1000;
+			return ms >= MIN_WORD_INTERVAL_MS && ms <= MAX_WORD_INTERVAL_MS;
+		}
+
+		private refreshStartButton() {
+			this.q<HTMLButtonElement>('[data-action="start"]').disabled =
+				!this.durationValid() || !this.paceValid();
+		}
+
 		private syncPaceHint() {
-			const raw = Number(this.q<HTMLInputElement>("[data-word-pace]").value);
 			const hint = this.q<HTMLElement>("[data-pace-hint]");
-			if (!Number.isFinite(raw) || raw * 1000 < MIN_WORD_INTERVAL_MS || raw * 1000 > MAX_WORD_INTERVAL_MS) {
-				hint.textContent = "Range: 0.5 seconds to 3 minutes";
+			if (!this.paceValid()) {
+				hint.textContent = "Pace must be between 1 second and 3 minutes";
 				hint.style.color = "var(--color-primary)";
 			} else {
 				hint.textContent = "";
 			}
+			this.refreshStartButton();
 		}
 
 		private readDurationInputs(): number {
@@ -360,19 +392,16 @@
 		private syncDurationHint() {
 			const secs = this.readDurationInputs();
 			const hint = this.q<HTMLElement>("[data-duration-hint]");
-			const startBtn = this.q<HTMLButtonElement>('[data-action="start"]');
 			if (secs < MIN_SECONDS) {
 				hint.textContent = `Hold must be at least ${MIN_SECONDS} seconds`;
 				hint.style.color = "var(--color-primary)";
-				startBtn.disabled = true;
 			} else if (secs > MAX_SECONDS) {
 				hint.textContent = "Hold cannot exceed 12 hours";
 				hint.style.color = "var(--color-primary)";
-				startBtn.disabled = true;
 			} else {
 				hint.textContent = "";
-				startBtn.disabled = false;
 			}
+			this.refreshStartButton();
 		}
 
 		// ============================================================
@@ -600,20 +629,24 @@
 
 		private updateBest(span: number) {
 			let bestWords = 0;
+			let bestAttentionSec = 0;
 			let bestRecallSec = 0;
-			let bestHoldSec = 0;
 			try {
 				const raw = localStorage.getItem(BEST_KEY);
 				if (raw) {
 					const parsed = JSON.parse(raw);
-					// Only adopt a COMPLETE record (current shape). Older bests —
-					// a plain % number, or {words, attentionSec} with no hold time —
-					// are discarded whole so this round sets a true best, instead of
-					// inheriting a word count with 0/0 times.
-					if (parsed && typeof parsed === "object" && Number(parsed.holdSec) > 0) {
+					// Only adopt the CURRENT record shape ({words, attentionSec,
+					// recallSec}). Older bests — a plain % number, {words, attentionSec}
+					// with no recall time, or {words, recallSec, holdSec} — are missing
+					// one of these keys, so they're discarded whole and this round sets
+					// a true best instead of inheriting partial 0 times.
+					if (
+						parsed && typeof parsed === "object" &&
+						"attentionSec" in parsed && "recallSec" in parsed
+					) {
 						bestWords = Number(parsed.words) || 0;
+						bestAttentionSec = Number(parsed.attentionSec) || 0;
 						bestRecallSec = Number(parsed.recallSec) || 0;
-						bestHoldSec = Number(parsed.holdSec) || 0;
 					}
 				}
 			} catch { /* storage blocked or value malformed */ }
@@ -625,18 +658,29 @@
 				(span === bestWords && bestWords > 0 && this.recallSec < bestRecallSec);
 			if (isBetter) {
 				bestWords = span;
+				bestAttentionSec = this.attentionSec;
 				bestRecallSec = this.recallSec;
-				bestHoldSec = this.durationSec;
 				try {
 					localStorage.setItem(
 						BEST_KEY,
-						JSON.stringify({ words: bestWords, recallSec: bestRecallSec, holdSec: bestHoldSec }),
+						JSON.stringify({ words: bestWords, attentionSec: bestAttentionSec, recallSec: bestRecallSec }),
 					);
 				} catch { /* ignore */ }
+
+				// Push a real best to the world leaderboard. No-op when the
+				// backend isn't configured or the player isn't signed in; the
+				// server itself only overwrites when this score actually wins.
+				if (span > 0) {
+					void submitBest({
+						words: bestWords,
+						attentionSec: bestAttentionSec,
+						recallSec: bestRecallSec,
+					});
+				}
 			}
 			line.textContent = bestWords === 0
 				? ""
-				: `Best Score: ${bestWords} ${bestWords === 1 ? "word" : "words"} · recalled in ${this.formatDuration(bestRecallSec)} · ${this.formatDuration(bestHoldSec)} hold.`;
+				: `Best Score: ${bestWords} ${bestWords === 1 ? "word" : "words"} · ${this.formatDuration(bestAttentionSec)} attention · recalled in ${this.formatDuration(bestRecallSec)}.`;
 		}
 
 		private renderReveal() {

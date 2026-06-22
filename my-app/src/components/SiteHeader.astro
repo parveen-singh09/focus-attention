@@ -1,0 +1,360 @@
+---
+// SiteHeader — global top bar.
+// Theme toggle + leaderboard + Google sign-in are functional; language is an
+// icon-only placeholder. The leaderboard/auth pieces degrade gracefully to a
+// "not set up" state when Supabase env vars are absent (see src/lib/supabase.ts).
+---
+
+<header class="sticky top-0 z-40 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md">
+	<div class="mx-auto flex h-14 max-w-300 items-center justify-between px-5">
+		<!-- Profile / auth -->
+		<div class="relative" data-profile-wrap>
+			<button type="button" class="icon-btn" data-action="profile" aria-label="Account" aria-haspopup="menu" aria-expanded="false">
+				<svg data-icon="user" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="8" r="4" />
+					<path d="M4 21a8 8 0 0 1 16 0" />
+				</svg>
+				<img data-avatar hidden alt="" class="h-7 w-7 rounded-full object-cover" />
+			</button>
+
+			<!-- Profile menu (signed in) -->
+			<div data-profile-menu hidden role="menu" class="dropdown right-0 left-auto min-w-56">
+				<p data-profile-name class="px-3 py-2 text-caption text-ink-muted-80 truncate"></p>
+				<div class="h-px w-full bg-hairline"></div>
+				<button type="button" class="menu-item" data-action="signout" role="menuitem">Sign out</button>
+			</div>
+		</div>
+
+		<nav class="flex items-center gap-1" aria-label="Site actions">
+			<!-- Leaderboard -->
+			<div class="relative" data-board-wrap>
+				<button type="button" class="icon-btn" data-action="leaderboard" aria-label="Leaderboard" aria-haspopup="true" aria-expanded="false" title="Leaderboard">
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M8 21h8" /><path d="M12 17v4" />
+						<path d="M7 4h10v5a5 5 0 0 1-10 0V4Z" />
+						<path d="M17 5h3v2a3 3 0 0 1-3 3" /><path d="M7 5H4v2a3 3 0 0 0 3 3" />
+					</svg>
+				</button>
+
+				<!-- Leaderboard dropdown -->
+				<div data-board-panel hidden class="dropdown right-0 left-auto w-[min(92vw,360px)]">
+					<div class="flex items-center justify-between px-3 pt-2 pb-1">
+						<p class="text-caption text-ink uppercase tracking-[0.04em]">World ranking</p>
+						<span data-board-total class="text-fine text-ink-muted-48"></span>
+					</div>
+					<p class="px-3 pb-2 text-fine text-ink-muted-48">By words · attention · recall</p>
+					<div class="h-px w-full bg-hairline"></div>
+
+					<ol data-board-list class="max-h-80 overflow-y-auto py-1"></ol>
+
+					<div data-board-foot class="border-t border-hairline px-3 py-3"></div>
+				</div>
+			</div>
+
+			<!-- Language (placeholder) -->
+			<button type="button" class="icon-btn" data-action="lang" aria-label="Language" title="Language (coming soon)">
+				<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="9" />
+					<path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
+				</svg>
+			</button>
+
+			<!-- Theme toggle (functional) -->
+			<button type="button" class="icon-btn" data-action="theme" aria-label="Toggle dark theme" aria-pressed="false" title="Toggle theme">
+				<svg data-icon="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="4" />
+					<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+				</svg>
+				<svg data-icon="moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+				</svg>
+			</button>
+		</nav>
+	</div>
+</header>
+
+<style>
+	.icon-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 40px;
+		height: 40px;
+		border: none;
+		background: transparent;
+		color: var(--color-ink);
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		transition: background-color 0.18s ease, transform 0.18s ease;
+	}
+	.icon-btn:hover { background-color: var(--color-canvas-parchment); }
+	.icon-btn:active { transform: scale(0.92); }
+	.icon-btn:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
+
+	/* Theme icon: moon in light mode (go dark), sun in dark mode (go light). */
+	[data-icon="sun"] { display: none; }
+	:global(html[data-theme="dark"]) [data-icon="sun"] { display: block; }
+	:global(html[data-theme="dark"]) [data-icon="moon"] { display: none; }
+
+	/* Shared dropdown surface for the leaderboard + profile menu. */
+	.dropdown {
+		position: absolute;
+		top: calc(100% + 8px);
+		background-color: var(--color-canvas);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--radius-md);
+		box-shadow: rgba(0, 0, 0, 0.16) 0 8px 30px 0;
+		z-index: 50;
+		overflow: hidden;
+	}
+
+	.menu-item {
+		display: block;
+		width: 100%;
+		text-align: left;
+		padding: 10px 12px;
+		font-family: var(--font-text);
+		font-size: 15px;
+		color: var(--color-ink);
+		background: transparent;
+		border: none;
+		cursor: pointer;
+	}
+	.menu-item:hover { background-color: var(--color-canvas-parchment); }
+	.menu-item:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: -2px; }
+
+	/* Leaderboard rows — built in JS, so :global(). */
+	:global(.lb-row) {
+		display: grid;
+		grid-template-columns: 2.2rem 1fr auto;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 7px 12px;
+		font-family: var(--font-text);
+		font-size: 14px;
+		color: var(--color-ink);
+	}
+	:global(.lb-row .lb-rank) { color: var(--color-ink-muted-48); font-variant-numeric: tabular-nums; }
+	:global(.lb-row .lb-name) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+	:global(.lb-row .lb-metrics) { color: var(--color-ink-muted-48); font-variant-numeric: tabular-nums; font-size: 12px; }
+	:global(.lb-row.is-me) { background-color: color-mix(in srgb, var(--color-primary) 12%, transparent); }
+	:global(.lb-row.is-me .lb-name) { color: var(--color-primary); font-weight: 600; }
+
+	:global(.lb-empty) { padding: 16px 12px; font-size: 14px; color: var(--color-ink-muted-48); text-align: center; }
+
+	:global(.lb-btn) {
+		display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+		width: 100%;
+		background-color: var(--color-primary);
+		color: var(--color-on-primary);
+		font-family: var(--font-text); font-size: 15px;
+		border: none; border-radius: var(--radius-pill);
+		padding: 10px 16px; cursor: pointer;
+		transition: opacity 0.18s ease, transform 0.18s ease;
+	}
+	:global(.lb-btn:active) { transform: scale(0.97); }
+	:global(.lb-foot-note) { font-size: 13px; color: var(--color-ink-muted-48); text-align: center; }
+</style>
+
+<script>
+	import {
+		isConfigured,
+		getSession,
+		onAuthChange,
+		signInWithGoogle,
+		signOut,
+		displayNameFromSession,
+		fetchTop,
+		fetchMyRank,
+		type LeaderboardRow,
+	} from "../lib/leaderboard";
+	import type { Session } from "@supabase/supabase-js";
+
+	const root = document.documentElement;
+	const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel);
+
+	// ---------- theme ----------
+	const THEME_KEY = "focus-attention:theme";
+	const themeBtn = $<HTMLButtonElement>('[data-action="theme"]');
+	const syncPressed = () =>
+		themeBtn?.setAttribute("aria-pressed", String(root.getAttribute("data-theme") === "dark"));
+	syncPressed();
+	themeBtn?.addEventListener("click", () => {
+		const dark = root.getAttribute("data-theme") === "dark";
+		dark ? root.removeAttribute("data-theme") : root.setAttribute("data-theme", "dark");
+		try { localStorage.setItem(THEME_KEY, dark ? "light" : "dark"); } catch {}
+		syncPressed();
+	});
+
+	// ---------- helpers ----------
+	function fmt(totalSec: number): string {
+		const h = Math.floor(totalSec / 3600);
+		const m = Math.floor((totalSec % 3600) / 60);
+		const s = totalSec % 60;
+		if (h > 0) return `${h}h ${m}m`;
+		if (m > 0) return `${m}m ${s}s`;
+		return `${s}s`;
+	}
+	function metrics(r: LeaderboardRow): string {
+		return `${r.words}w · ${fmt(r.attentionSec)} · ${fmt(r.recallSec)}`;
+	}
+
+	// ---------- auth state ----------
+	let session: Session | null = null;
+
+	const profileWrap = $<HTMLElement>("[data-profile-wrap]");
+	const profileBtn = $<HTMLButtonElement>('[data-action="profile"]');
+	const profileMenu = $<HTMLElement>("[data-profile-menu]");
+	const profileName = $<HTMLElement>("[data-profile-name]");
+	const avatar = $<HTMLImageElement>("[data-avatar]");
+	const userIcon = $<SVGElement & HTMLElement>('[data-icon="user"]');
+
+	function renderAuth() {
+		const name = displayNameFromSession(session);
+		if (session) {
+			profileBtn?.setAttribute("aria-label", name);
+			if (profileName) profileName.textContent = name;
+			const pic = (session.user.user_metadata as Record<string, unknown>)?.avatar_url as string | undefined;
+			if (pic && avatar) {
+				avatar.src = pic;
+				avatar.hidden = false;
+				if (userIcon) userIcon.style.display = "none";
+			}
+		} else {
+			profileBtn?.setAttribute("aria-label", "Sign in");
+			if (avatar) avatar.hidden = true;
+			if (userIcon) userIcon.style.display = "";
+		}
+	}
+
+	function closeProfileMenu() {
+		if (profileMenu) profileMenu.hidden = true;
+		profileBtn?.setAttribute("aria-expanded", "false");
+	}
+
+	profileBtn?.addEventListener("click", async () => {
+		if (!isConfigured) return; // nothing to do without a backend
+		if (!session) { await signInWithGoogle(); return; } // redirects away
+		// Signed in → toggle the menu.
+		const open = profileMenu && profileMenu.hidden;
+		if (profileMenu) profileMenu.hidden = !open;
+		profileBtn.setAttribute("aria-expanded", String(!!open));
+	});
+
+	$<HTMLButtonElement>('[data-action="signout"]')?.addEventListener("click", async () => {
+		await signOut();
+		closeProfileMenu();
+	});
+
+	// ---------- leaderboard dropdown ----------
+	const boardBtn = $<HTMLButtonElement>('[data-action="leaderboard"]');
+	const boardPanel = $<HTMLElement>("[data-board-panel]");
+	const boardList = $<HTMLOListElement>("[data-board-list]");
+	const boardTotal = $<HTMLElement>("[data-board-total]");
+	const boardFoot = $<HTMLElement>("[data-board-foot]");
+
+	function rowEl(r: LeaderboardRow, isMe: boolean): HTMLLIElement {
+		const li = document.createElement("li");
+		li.className = "lb-row" + (isMe ? " is-me" : "");
+		li.innerHTML = `<span class="lb-rank">#${r.rank}</span>` +
+			`<span class="lb-name"></span>` +
+			`<span class="lb-metrics">${metrics(r)}</span>`;
+		(li.querySelector(".lb-name") as HTMLElement).textContent = r.displayName;
+		return li;
+	}
+
+	function setFootSignIn() {
+		if (!boardFoot) return;
+		boardFoot.innerHTML = "";
+		const btn = document.createElement("button");
+		btn.className = "lb-btn";
+		btn.type = "button";
+		btn.textContent = "Sign in with Google to compete";
+		btn.addEventListener("click", () => signInWithGoogle());
+		boardFoot.appendChild(btn);
+	}
+
+	function setFootMyRank(text: string) {
+		if (!boardFoot) return;
+		boardFoot.innerHTML = `<p class="lb-foot-note">${text}</p>`;
+	}
+
+	async function loadBoard() {
+		if (!boardList) return;
+		boardList.innerHTML = `<li class="lb-empty">Loading…</li>`;
+		if (boardFoot) boardFoot.innerHTML = "";
+
+		const top = await fetchTop(10);
+		boardList.innerHTML = "";
+
+		if (top.length === 0) {
+			boardList.innerHTML = `<li class="lb-empty">No scores yet. Be the first.</li>`;
+		} else {
+			const myId = session?.user.id;
+			top.forEach((r) => boardList.appendChild(rowEl(r, r.userId === myId)));
+		}
+
+		if (boardTotal) boardTotal.textContent = top.length ? "" : "";
+
+		// Foot: my position, or a sign-in prompt.
+		if (!session) {
+			setFootSignIn();
+			return;
+		}
+		const mine = await fetchMyRank(session.user.id);
+		if (boardTotal) boardTotal.textContent = mine ? `${mine.total} players` : "";
+		if (!mine) {
+			setFootMyRank("Finish a round to claim your spot.");
+			return;
+		}
+		const inTop = top.some((r) => r.userId === session!.user.id);
+		setFootMyRank(inTop
+			? `You're #${mine.row.rank} of ${mine.total}.`
+			: `You're #${mine.row.rank} of ${mine.total} · ${metrics(mine.row)}`);
+	}
+
+	function openBoard() {
+		if (!boardPanel) return;
+		if (!isConfigured) {
+			boardPanel.hidden = false;
+			boardBtn?.setAttribute("aria-expanded", "true");
+			if (boardList) boardList.innerHTML = `<li class="lb-empty">Leaderboard isn't set up yet.</li>`;
+			if (boardFoot) boardFoot.innerHTML = "";
+			if (boardTotal) boardTotal.textContent = "";
+			return;
+		}
+		boardPanel.hidden = false;
+		boardBtn?.setAttribute("aria-expanded", "true");
+		loadBoard();
+	}
+	function closeBoard() {
+		if (boardPanel) boardPanel.hidden = true;
+		boardBtn?.setAttribute("aria-expanded", "false");
+	}
+
+	boardBtn?.addEventListener("click", () => {
+		const open = boardPanel && boardPanel.hidden;
+		open ? openBoard() : closeBoard();
+	});
+
+	// ---------- global close behaviors ----------
+	document.addEventListener("click", (e) => {
+		const t = e.target as Node;
+		if (boardPanel && !boardPanel.hidden && !$<HTMLElement>("[data-board-wrap]")?.contains(t)) closeBoard();
+		if (profileMenu && !profileMenu.hidden && !profileWrap?.contains(t)) closeProfileMenu();
+	});
+	document.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") { closeBoard(); closeProfileMenu(); }
+	});
+
+	// ---------- init ----------
+	if (isConfigured) {
+		getSession().then((s) => { session = s; renderAuth(); });
+		onAuthChange((s) => {
+			session = s;
+			renderAuth();
+			// Refresh an open board so the highlight follows sign-in/out.
+			if (boardPanel && !boardPanel.hidden) loadBoard();
+		});
+	}
+</script>
