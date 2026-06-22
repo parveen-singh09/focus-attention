@@ -9,24 +9,24 @@
 	<!-- ============================================================
 	     PHASE 1 · SETUP — choose the hold duration (10s → 12hr)
 	     ============================================================ -->
-	<section data-phase="setup" class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-[var(--spacing-section)] text-center">
+	<section data-phase="setup" class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
 		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">The focus game</p>
 		<h1 class="text-hero text-ink max-w-[14ch]">Hold the words.<br />Measure your focus.</h1>
 		<p class="text-lead text-ink-muted-80 mt-5 max-w-[34ch]">
-			A new word appears every three seconds. Keep them in order in your mind.
+			A new word appears at the pace you choose. Keep them in order in your mind.
 			When the timer ends, recall the sequence.
 		</p>
 
 		<!-- Duration presets -->
-		<div class="mt-12 w-full max-w-[520px]">
+		<div class="mt-12 w-full max-w-130">
 			<p class="text-caption text-ink-muted-48 mb-3">Choose how long to hold your attention</p>
 			<div role="group" aria-label="Duration presets" class="flex flex-wrap justify-center gap-2">
 				<button type="button" class="preset" data-seconds="10">10 sec</button>
 				<button type="button" class="preset" data-seconds="20">20 sec</button>
 				<button type="button" class="preset" data-seconds="30">30 sec</button>
 				<button type="button" class="preset" data-seconds="60">1 min</button>
-				<button type="button" class="preset" data-seconds="120">2 min</button>
 				<button type="button" class="preset" data-seconds="180">3 min</button>
+				<button type="button" class="preset" data-seconds="300">5 min</button>
 			</div>
 
 			<!-- Custom duration -->
@@ -48,7 +48,19 @@
 						<span class="text-fine text-ink-muted-48">sec</span>
 					</label>
 				</div>
-				<p data-duration-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite">Range: 10 seconds to 12 hours</p>
+				<p data-duration-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
+			</div>
+
+			<!-- Word pace — how often a new word appears (0.5s → 3min) -->
+			<div class="mt-10">
+				<p class="text-caption text-ink-muted-48 mb-3">How often a new word appears</p>
+				<div class="flex items-end justify-center gap-3">
+					<label class="flex flex-col items-center gap-1.5">
+						<input type="number" min="0.5" max="180" step="0.5" value="3" data-word-pace class="time-input" />
+						<span class="text-fine text-ink-muted-48">sec / word</span>
+					</label>
+				</div>
+				<p data-pace-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
 			</div>
 		</div>
 
@@ -62,7 +74,7 @@
 	     ============================================================ -->
 	<section data-phase="watch" hidden class="fixed inset-0 z-50 bg-surface-tile-1 text-body-on-dark flex flex-col">
 		<!-- thin progress line in Action Blue -->
-		<div class="h-[3px] w-full bg-[rgba(255,255,255,0.12)]">
+		<div class="h-0.75 w-full bg-[rgba(255,255,255,0.12)]">
 			<div data-progress class="h-full bg-primary-on-dark transition-[width] duration-200 ease-linear" style="width:0%"></div>
 		</div>
 
@@ -83,7 +95,7 @@
 	<!-- ============================================================
 	     PHASE 3 · RECALL — type the sequence back, in order
 	     ============================================================ -->
-	<section data-phase="recall" hidden class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-[var(--spacing-section)] text-center">
+	<section data-phase="recall" hidden class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
 		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Recall</p>
 		<h2 class="text-display-lg text-ink max-w-[18ch]">Tap the words in the order they appeared.</h2>
 		<p class="text-lead text-ink-muted-80 mt-4 max-w-[38ch]">Each correct word extends your focus span. One wrong tap ends the round.</p>
@@ -93,17 +105,17 @@
 
 		<!-- the order you've rebuilt so far -->
 		<p data-chosen-caption class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">Chosen sequence so far · 0 of 0</p>
-		<ul data-recall-list class="mt-3 flex flex-wrap justify-center gap-2 min-h-[40px]" aria-live="polite"></ul>
+		<ul data-recall-list class="mt-3 flex flex-wrap justify-center gap-2 min-h-10" aria-live="polite"></ul>
 
 		<!-- shuffled inbox of the words you saw -->
 		<p class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">Tap the words you saw</p>
-		<div data-pool class="mt-3 flex flex-wrap justify-center gap-2.5 max-w-[680px]" role="group" aria-label="Word choices"></div>
+		<div data-pool class="mt-3 flex flex-wrap justify-center gap-2.5 max-w-170" role="group" aria-label="Word choices"></div>
 	</section>
 
 	<!-- ============================================================
 	     PHASE 4 · RESULT — attention span (time held) + focus (% recalled)
 	     ============================================================ -->
-	<section data-phase="result" hidden class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-[var(--spacing-section)] text-center">
+	<section data-phase="result" hidden class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
 		<p class="text-caption text-ink-muted-48 mb-2 uppercase tracking-[0.04em]">Your results</p>
 
 		<!-- Two headline metrics, side by side -->
@@ -126,7 +138,7 @@
 		<p data-best-line class="text-caption text-ink-muted-48 mt-3"></p>
 
 		<!-- The reveal: what was actually shown vs. what you guessed -->
-		<div class="mt-12 w-full max-w-[640px] text-left">
+		<div class="mt-12 w-full max-w-160 text-left">
 			<p class="text-caption text-ink-muted-48 mb-3">The sequence</p>
 			<div data-reveal-list class="flex flex-wrap items-center gap-2"></div>
 		</div>
@@ -229,7 +241,9 @@
 <script>
 	import { randomWord } from "../scripts/words";
 
-	const WORD_INTERVAL_MS = 3000; // a fresh word every three seconds
+	const DEFAULT_WORD_INTERVAL_MS = 3000; // a fresh word every three seconds
+	const MIN_WORD_INTERVAL_MS = 500; // fastest pace: 0.5 s
+	const MAX_WORD_INTERVAL_MS = 3 * 60 * 1000; // slowest pace: 3 min
 	const MIN_SECONDS = 10;
 	const MAX_SECONDS = 12 * 60 * 60; // 12 hours
 	const BEST_KEY = "focus-attention:best";
@@ -239,6 +253,7 @@
 	class FocusGame extends HTMLElement {
 		// --- run state ---
 		private durationSec = 30;
+		private wordIntervalMs = DEFAULT_WORD_INTERVAL_MS; // pace chosen at setup
 		private shown: string[] = [];
 		private guesses: string[] = [];
 		private recallIndex = 0; // next position the player must match
@@ -249,6 +264,8 @@
 		private recallTimer: number | null = null; // recall window = 2× hold
 		private endsAt = 0;
 		private recallEndsAt = 0;
+		private recallStartedAt = 0;
+		private recallSec = 0; // how long the player took to rebuild, for the best score
 
 		connectedCallback() {
 			this.bindSetup();
@@ -256,6 +273,7 @@
 			this.bindRecall();
 			this.bindResult();
 			this.syncDurationHint();
+			this.syncPaceHint();
 		}
 
 		// ---- phase switching ----
@@ -286,14 +304,36 @@
 				});
 			});
 
-			this.querySelectorAll<HTMLInputElement>(".time-input").forEach((input) => {
+			this.querySelectorAll<HTMLInputElement>(".time-input[data-unit]").forEach((input) => {
 				input.addEventListener("input", () => {
 					presets.forEach((b) => b.setAttribute("aria-pressed", "false"));
 					this.syncDurationHint();
 				});
 			});
 
+			// Word pace is independent of the hold duration — its own listener.
+			this.q<HTMLInputElement>("[data-word-pace]").addEventListener("input", () => this.syncPaceHint());
+
 			this.q<HTMLButtonElement>('[data-action="start"]').addEventListener("click", () => this.startWatch());
+		}
+
+		// Read the chosen word pace, clamped to [0.5s, 3min], in ms.
+		private readWordPaceMs(): number {
+			const secs = Number(this.q<HTMLInputElement>("[data-word-pace]").value);
+			if (!Number.isFinite(secs) || secs <= 0) return DEFAULT_WORD_INTERVAL_MS;
+			const ms = secs * 1000;
+			return Math.min(MAX_WORD_INTERVAL_MS, Math.max(MIN_WORD_INTERVAL_MS, ms));
+		}
+
+		private syncPaceHint() {
+			const raw = Number(this.q<HTMLInputElement>("[data-word-pace]").value);
+			const hint = this.q<HTMLElement>("[data-pace-hint]");
+			if (!Number.isFinite(raw) || raw * 1000 < MIN_WORD_INTERVAL_MS || raw * 1000 > MAX_WORD_INTERVAL_MS) {
+				hint.textContent = "Range: 0.5 seconds to 3 minutes";
+				hint.style.color = "var(--color-primary)";
+			} else {
+				hint.textContent = "";
+			}
 		}
 
 		private readDurationInputs(): number {
@@ -330,9 +370,7 @@
 				hint.style.color = "var(--color-primary)";
 				startBtn.disabled = true;
 			} else {
-				const approxWords = Math.floor(secs / (WORD_INTERVAL_MS / 1000));
-				hint.textContent = `${this.formatDuration(secs)} · about ${approxWords} words to hold`;
-				hint.style.color = "var(--color-ink-muted-48)";
+				hint.textContent = "";
 				startBtn.disabled = false;
 			}
 		}
@@ -347,6 +385,7 @@
 		private startWatch() {
 			this.durationSec = this.clampDuration();
 			if (this.durationSec < MIN_SECONDS) return;
+			this.wordIntervalMs = this.readWordPaceMs();
 
 			this.shown = [];
 			this.guesses = [];
@@ -356,8 +395,9 @@
 			const wordEl = this.q<HTMLElement>("[data-word]");
 			const seenEl = this.q<HTMLElement>("[data-seen-count]");
 
-			// One word every two seconds → exactly durationSec / 2 words.
-			const targetWords = Math.floor(this.durationSec / (WORD_INTERVAL_MS / 1000));
+			// One word per chosen interval → durationSec / interval words.
+			// At least one word, even when the interval is longer than the hold.
+			const targetWords = Math.max(1, Math.floor(this.durationSec / (this.wordIntervalMs / 1000)));
 
 			const pushWord = () => {
 				// Stop at the target so no phantom word sneaks in as the timer
@@ -378,7 +418,7 @@
 			};
 
 			pushWord(); // first word immediately
-			this.wordTimer = window.setInterval(pushWord, WORD_INTERVAL_MS);
+			this.wordTimer = window.setInterval(pushWord, this.wordIntervalMs);
 
 			const progressEl = this.q<HTMLElement>("[data-progress]");
 			const clockEl = this.q<HTMLElement>("[data-clock]");
@@ -425,6 +465,32 @@
 			this.renderPool();
 			this.updateRecallProgress();
 			this.show("recall");
+			this.startRecallTimer();
+		}
+
+		// Recall window is double the chosen hold. Rebuilding the whole
+		// sequence ends it early; otherwise the round ends when it expires
+		// and the result reflects whatever was rebuilt so far.
+		private startRecallTimer() {
+			const recallMs = this.durationSec * 2 * 1000;
+			this.recallStartedAt = performance.now();
+			this.recallEndsAt = this.recallStartedAt + recallMs;
+			const clockEl = this.q<HTMLElement>("[data-recall-clock]");
+			const tick = () => {
+				const leftMs = Math.max(0, this.recallEndsAt - performance.now());
+				clockEl.textContent = `${this.formatClock(Math.ceil(leftMs / 1000))} left to recall`;
+				if (leftMs <= 0) {
+					this.stopRecallTimer();
+					this.startResult(); // time's up — score what was rebuilt
+				}
+			};
+			tick();
+			this.recallTimer = window.setInterval(tick, 200);
+		}
+
+		private stopRecallTimer() {
+			if (this.recallTimer !== null) window.clearInterval(this.recallTimer);
+			this.recallTimer = null;
 		}
 
 		// Build the shuffled inbox: one tile per word shown (duplicates kept
@@ -464,6 +530,7 @@
 				this.updateRecallProgress();
 			} else {
 				// Wrong — the chain breaks here, end the round.
+				this.stopRecallTimer();
 				tile.disabled = true;
 				tile.classList.add("is-wrong");
 				this.wrongPick = word;
@@ -498,7 +565,11 @@
 		// RESULT — focus span = words tapped correctly before the chain broke
 		// ============================================================
 		private startResult() {
+			this.stopRecallTimer();
 			this.show("result");
+
+			// How long the player took to rebuild the sequence this round.
+			this.recallSec = Math.max(0, Math.round((performance.now() - this.recallStartedAt) / 1000));
 
 			// Every committed guess was a correct, in-order tap (a wrong tap
 			// ends the round before it is pushed), so the span is their count.
@@ -529,36 +600,43 @@
 
 		private updateBest(span: number) {
 			let bestWords = 0;
-			let bestSec = 0;
+			let bestRecallSec = 0;
+			let bestHoldSec = 0;
 			try {
 				const raw = localStorage.getItem(BEST_KEY);
 				if (raw) {
 					const parsed = JSON.parse(raw);
-					if (parsed && typeof parsed === "object") {
+					// Only adopt a COMPLETE record (current shape). Older bests —
+					// a plain % number, or {words, attentionSec} with no hold time —
+					// are discarded whole so this round sets a true best, instead of
+					// inheriting a word count with 0/0 times.
+					if (parsed && typeof parsed === "object" && Number(parsed.holdSec) > 0) {
 						bestWords = Number(parsed.words) || 0;
-						bestSec = Number(parsed.attentionSec) || 0;
+						bestRecallSec = Number(parsed.recallSec) || 0;
+						bestHoldSec = Number(parsed.holdSec) || 0;
 					}
-					// Legacy values (plain % number, or {focusPct,...}) carry no
-					// word count, so they're treated as no best — the next round sets it.
 				}
 			} catch { /* storage blocked or value malformed */ }
 
 			const line = this.q<HTMLElement>("[data-best-line]");
-			// Rank by words recalled correctly; on a tie, the longer hold wins.
+			// Rank by words recalled correctly; on a tie, the faster rebuild wins.
 			const isBetter =
-				span > bestWords || (span === bestWords && this.attentionSec > bestSec);
+				span > bestWords ||
+				(span === bestWords && bestWords > 0 && this.recallSec < bestRecallSec);
 			if (isBetter) {
 				bestWords = span;
-				bestSec = this.attentionSec;
+				bestRecallSec = this.recallSec;
+				bestHoldSec = this.durationSec;
 				try {
 					localStorage.setItem(
 						BEST_KEY,
-						JSON.stringify({ words: bestWords, attentionSec: bestSec }),
+						JSON.stringify({ words: bestWords, recallSec: bestRecallSec, holdSec: bestHoldSec }),
 					);
 				} catch { /* ignore */ }
 			}
-			line.textContent =
-				`Best Score: ${bestWords} ${bestWords === 1 ? "word" : "words"} · ${this.formatDuration(bestSec)} held.`;
+			line.textContent = bestWords === 0
+				? ""
+				: `Best Score: ${bestWords} ${bestWords === 1 ? "word" : "words"} · recalled in ${this.formatDuration(bestRecallSec)} · ${this.formatDuration(bestHoldSec)} hold.`;
 		}
 
 		private renderReveal() {

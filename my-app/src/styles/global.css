@@ -173,8 +173,6 @@
   border: none;
   cursor: pointer;
   transition: transform 0.18s ease, background-color 0.18s ease, opacity 0.18s ease;
-}
-@utility btn-primary {
   &:active {
     transform: scale(0.95);
   }
@@ -206,8 +204,6 @@
   border: 1px solid var(--color-primary);
   cursor: pointer;
   transition: transform 0.18s ease, opacity 0.18s ease;
-}
-@utility btn-ghost {
   &:active {
     transform: scale(0.95);
   }
@@ -231,8 +227,6 @@
   border: none;
   font: inherit;
   transition: opacity 0.18s ease;
-}
-@utility link-action {
   &:active {
     transform: scale(0.95);
   }
