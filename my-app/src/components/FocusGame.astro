@@ -29,8 +29,9 @@
 				<button type="button" class="preset" data-seconds="300">5 min</button>
 			</div>
 
+			<div class="mt-8 flex flex-col sm:flex-row sm:items-start justify-center gap-8 sm:gap-20">
 			<!-- Custom duration -->
-			<div class="mt-8">
+			<div>
 				<p class="text-caption text-ink-muted-48 mb-3">Or set a custom time</p>
 				<div class="flex items-end justify-center gap-3">
 					<label class="flex flex-col items-center gap-1.5">
@@ -52,7 +53,7 @@
 			</div>
 
 			<!-- Word pace — how often a new word appears (1s → 3min) -->
-			<div class="mt-10">
+			<div>
 				<p class="text-caption text-ink-muted-48 mb-3">How often a new word appears</p>
 				<div class="flex items-end justify-center gap-3">
 					<label class="flex flex-col items-center gap-1.5">
@@ -66,6 +67,7 @@
 					</label>
 				</div>
 				<p data-pace-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
+			</div>
 			</div>
 		</div>
 
@@ -93,7 +95,7 @@
 		</div>
 
 		<div class="px-6 py-8 flex justify-center">
-			<button type="button" data-action="end-early" class="link-action text-caption" style="color:var(--color-primary-on-dark)">End early &amp; recall now</button>
+			<button type="button" data-action="end-early" class="end-early-btn text-caption">End early &amp; recall now</button>
 		</div>
 	</section>
 
@@ -176,6 +178,22 @@
 		color: var(--color-on-primary);
 	}
 
+	/* End-early action — filled blue with a blue border, on the dark watch screen */
+	.end-early-btn {
+		background-color: var(--color-primary);
+		color: var(--color-on-primary);
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-pill);
+		padding: 10px 18px;
+		font-family: var(--font-text);
+		font-weight: 500;
+		cursor: pointer;
+		transition: transform 0.18s ease, background-color 0.18s ease;
+	}
+	.end-early-btn:hover { background-color: color-mix(in srgb, var(--color-primary) 88%, #000); }
+	.end-early-btn:active { transform: scale(0.96); }
+	.end-early-btn:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
+
 	/* Numeric time inputs — quiet, hairline-bottom, big tabular figures */
 	.time-input {
 		width: 84px;
@@ -245,14 +263,13 @@
 
 <script>
 	import { randomWord } from "../scripts/words";
-	import { submitBest } from "../lib/leaderboard";
+	import { submitBest, fetchMyBest } from "../lib/leaderboard";
 
 	const DEFAULT_WORD_INTERVAL_MS = 3000; // a fresh word every three seconds
 	const MIN_WORD_INTERVAL_MS = 1000; // fastest pace: 1 s
 	const MAX_WORD_INTERVAL_MS = 3 * 60 * 1000; // slowest pace: 3 min
 	const MIN_SECONDS = 10;
 	const MAX_SECONDS = 12 * 60 * 60; // 12 hours
-	const BEST_KEY = "focus-attention:best";
 
 	type Phase = "setup" | "watch" | "recall" | "result";
 
@@ -273,6 +290,13 @@
 		private recallStartedAt = 0;
 		private recallSec = 0; // how long the player took to rebuild, for the best score
 
+		// Personal best — sourced from the server per account, held in memory only.
+		// NOT localStorage: that's one shared bucket per browser, so it would show
+		// one account's best to the next account signed in on the same machine.
+		private bestWords = 0;
+		private bestAttentionSec = 0;
+		private bestRecallSec = 0;
+
 		connectedCallback() {
 			this.bindSetup();
 			this.bindWatch();
@@ -280,6 +304,20 @@
 			this.bindResult();
 			this.syncDurationHint();
 			this.syncPaceHint();
+			this.loadBest();
+		}
+
+		// Seed the in-memory best from the server (per account). Refreshes when the
+		// player signs in/out so a new account never inherits the previous best.
+		private async loadBest() {
+			const apply = async () => {
+				const best = await fetchMyBest();
+				this.bestWords = best?.words ?? 0;
+				this.bestAttentionSec = best?.attentionSec ?? 0;
+				this.bestRecallSec = best?.recallSec ?? 0;
+			};
+			void apply();
+			window.addEventListener("focus-attention:auth-changed", () => void apply());
 		}
 
 		// ---- phase switching ----
@@ -628,63 +666,40 @@
 		}
 
 		private updateBest(span: number) {
-			let bestWords = 0;
-			let bestAttentionSec = 0;
-			let bestRecallSec = 0;
-			try {
-				const raw = localStorage.getItem(BEST_KEY);
-				if (raw) {
-					const parsed = JSON.parse(raw);
-					// Only adopt the CURRENT record shape ({words, attentionSec,
-					// recallSec}). Older bests — a plain % number, {words, attentionSec}
-					// with no recall time, or {words, recallSec, holdSec} — are missing
-					// one of these keys, so they're discarded whole and this round sets
-					// a true best instead of inheriting partial 0 times.
-					if (
-						parsed && typeof parsed === "object" &&
-						"attentionSec" in parsed && "recallSec" in parsed
-					) {
-						bestWords = Number(parsed.words) || 0;
-						bestAttentionSec = Number(parsed.attentionSec) || 0;
-						bestRecallSec = Number(parsed.recallSec) || 0;
-					}
-				}
-			} catch { /* storage blocked or value malformed */ }
-
 			const line = this.q<HTMLElement>("[data-best-line]");
 			// Rank by the same lexicographic rule as the server (submit_score):
 			// more words wins; tie → longer attention; tie → faster recall.
 			const isBetter =
-				span > bestWords ||
-				(bestWords > 0 && span === bestWords && (
-					this.attentionSec > bestAttentionSec ||
-					(this.attentionSec === bestAttentionSec && this.recallSec < bestRecallSec)
+				span > this.bestWords ||
+				(this.bestWords > 0 && span === this.bestWords && (
+					this.attentionSec > this.bestAttentionSec ||
+					(this.attentionSec === this.bestAttentionSec && this.recallSec < this.bestRecallSec)
 				));
 			if (isBetter) {
-				bestWords = span;
-				bestAttentionSec = this.attentionSec;
-				bestRecallSec = this.recallSec;
-				try {
-					localStorage.setItem(
-						BEST_KEY,
-						JSON.stringify({ words: bestWords, attentionSec: bestAttentionSec, recallSec: bestRecallSec }),
-					);
-				} catch { /* ignore */ }
+				this.bestWords = span;
+				this.bestAttentionSec = this.attentionSec;
+				this.bestRecallSec = this.recallSec;
 
 				// Push a real best to the world leaderboard. No-op when the
 				// backend isn't configured or the player isn't signed in; the
 				// server itself only overwrites when this score actually wins.
+				// The server is the source of truth — no localStorage, so a best
+				// can't leak across accounts sharing one browser.
+				// Tell the header once the server has it, so an open leaderboard
+				// panel / profile best refreshes instead of showing stale state.
 				if (span > 0) {
 					void submitBest({
-						words: bestWords,
-						attentionSec: bestAttentionSec,
-						recallSec: bestRecallSec,
+						words: this.bestWords,
+						attentionSec: this.bestAttentionSec,
+						recallSec: this.bestRecallSec,
+					}).then(() => {
+						window.dispatchEvent(new CustomEvent("focus-attention:best-updated"));
 					});
 				}
 			}
-			line.textContent = bestWords === 0
+			line.textContent = this.bestWords === 0
 				? ""
-				: `Best Score: ${bestWords} ${bestWords === 1 ? "word" : "words"} · ${this.formatDuration(bestAttentionSec)} attention · recalled in ${this.formatDuration(bestRecallSec)}.`;
+				: `Best Score: ${this.bestWords} ${this.bestWords === 1 ? "word" : "words"} · ${this.formatDuration(this.bestAttentionSec)} attention · recalled in ${this.formatDuration(this.bestRecallSec)}.`;
 		}
 
 		private renderReveal() {

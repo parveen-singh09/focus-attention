@@ -75,6 +75,71 @@ export function avatarFromSession(session: Session | null): string | undefined {
 	return ((meta?.avatar_url as string) || (meta?.picture as string)) || undefined;
 }
 
+// ---- profile ----
+
+// Update the signed-in user's display name and/or avatar. Goes through the
+// update_profile security-definer RPC — direct writes to `scores` are denied by
+// RLS (see migrations). Unlike submit_score (which only writes on a winning
+// score), this always persists, so it can be used for profile edits independent
+// of gameplay. Pass undefined/empty to leave a field unchanged.
+export async function updateProfile(input: { displayName?: string; avatarUrl?: string }): Promise<boolean> {
+	if (!supabase) return false;
+	const session = await getSession();
+	if (!session) return false;
+
+	const { error } = await supabase.rpc("update_profile", {
+		p_display_name: input.displayName !== undefined ? input.displayName.trim().slice(0, 40) : null,
+		p_avatar_url: input.avatarUrl ?? null,
+	});
+	if (error) {
+		console.error("[leaderboard] updateProfile failed:", error.message);
+		return false;
+	}
+	return true;
+}
+
+// Upload an avatar image to the `avatars` storage bucket and return its public
+// URL. Requires a public `avatars` bucket with an INSERT/UPDATE policy scoped to
+// the user's own folder (path is prefixed with their user id).
+export async function uploadAvatar(file: File): Promise<string | null> {
+	if (!supabase) return null;
+	const session = await getSession();
+	if (!session) return null;
+
+	const ext = (file.name.split(".").pop() || "png").toLowerCase().replace(/[^a-z0-9]/g, "");
+	const path = `${session.user.id}/avatar.${ext || "png"}`;
+	const { error } = await supabase.storage
+		.from("avatars")
+		.upload(path, file, { upsert: true, contentType: file.type || "image/png" });
+	if (error) {
+		console.error("[leaderboard] uploadAvatar failed:", error.message);
+		return null;
+	}
+	// Cache-bust so a re-upload to the same path shows immediately.
+	const { data } = supabase.storage.from("avatars").getPublicUrl(path);
+	return data.publicUrl ? `${data.publicUrl}?v=${Date.now()}` : null;
+}
+
+// The signed-in user's stored profile (name + avatar) as persisted on their
+// row — the source of truth for edits made via updateProfile. Returns null when
+// unconfigured, signed out, or the user has no row yet (fall back to the
+// provider name/avatar in that case).
+export async function fetchMyProfile(): Promise<{ displayName: string; avatarUrl: string | null } | null> {
+	if (!supabase) return null;
+	const session = await getSession();
+	if (!session) return null;
+	const { data, error } = await supabase
+		.from("scores")
+		.select("display_name, avatar_url")
+		.eq("user_id", session.user.id)
+		.maybeSingle();
+	if (error || !data) return null;
+	return {
+		displayName: String(data.display_name || ""),
+		avatarUrl: data.avatar_url ? String(data.avatar_url) : null,
+	};
+}
+
 // ---- scores ----
 
 // Submit a finished best. No-op unless configured AND signed in. The server
@@ -148,6 +213,27 @@ export async function fetchMyRank(userId: string): Promise<MyRank | null> {
 
 	if (!mine) return null;
 	return { row: mapRow(mine), total: Number(count ?? 0) };
+}
+
+// The signed-in user's stored best, sourced from the server (the single source
+// of truth per account). Returns null when unconfigured, signed out, or the
+// user has no row yet. Used in place of localStorage so a best never bleeds
+// across accounts sharing one browser.
+export async function fetchMyBest(): Promise<{ words: number; attentionSec: number; recallSec: number } | null> {
+	if (!supabase) return null;
+	const session = await getSession();
+	if (!session) return null;
+	const { data, error } = await supabase
+		.from("scores")
+		.select("words, attention_sec, recall_sec")
+		.eq("user_id", session.user.id)
+		.maybeSingle();
+	if (error || !data) return null;
+	return {
+		words: Number(data.words) || 0,
+		attentionSec: Number(data.attention_sec) || 0,
+		recallSec: Number(data.recall_sec) || 0,
+	};
 }
 
 export { isConfigured };

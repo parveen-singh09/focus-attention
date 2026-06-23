@@ -14,16 +14,42 @@
 					<circle cx="12" cy="8" r="4" />
 					<path d="M4 21a8 8 0 0 1 16 0" />
 				</svg>
-				<img data-avatar hidden alt="" class="h-7 w-7 rounded-full object-cover" />
+				<img data-avatar hidden alt="" referrerpolicy="no-referrer" class="h-7 w-7 rounded-full object-cover" />
 			</button>
 
-			<!-- Profile menu (signed in) -->
-			<div data-profile-menu hidden role="menu" class="dropdown left-0 right-auto min-w-56">
-				<p data-profile-name class="px-3 py-2 text-caption text-ink-muted-80 truncate"></p>
+			<!-- Profile menu -->
+			<div data-profile-menu hidden role="menu" class="dropdown left-0 right-auto min-w-[12rem]">
+				<div class="px-3 py-2">
+					<div data-name-display class="flex items-center gap-1.5">
+						<p data-profile-name class="flex-1 min-w-0 text-caption text-ink-muted-80 truncate"></p>
+						<button type="button" class="name-edit-btn" data-action="edit-name" aria-label="Edit name" title="Edit name">
+							<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M12 20h9" />
+								<path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
+							</svg>
+						</button>
+					</div>
+					<form data-name-form hidden class="flex items-center gap-1.5">
+						<input data-name-input type="text" maxlength="40" class="name-edit" aria-label="Display name" />
+						<button type="submit" class="name-save" aria-label="Save name">Save</button>
+					</form>
+				</div>
 				<div class="h-px w-full bg-hairline"></div>
 				<div data-profile-best class="px-3 py-2"></div>
 				<div class="h-px w-full bg-hairline"></div>
-				<button type="button" class="menu-item" data-action="signout" role="menuitem">Sign out</button>
+				<button type="button" class="menu-item" data-action="change-photo" role="menuitem">Change photo</button>
+				<input data-photo-input type="file" accept="image/*" hidden />
+				<div class="h-px w-full bg-hairline"></div>
+				<button type="button" class="menu-item menu-item--icon" data-action="signin" role="menuitem">
+					<svg class="lb-g" viewBox="0 0 48 48" width="16" height="16" aria-hidden="true">
+						<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z" />
+						<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65Z" />
+						<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19Z" />
+						<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z" />
+					</svg>
+					<span>Log in</span>
+				</button>
+				<button type="button" class="menu-item" data-action="signout" role="menuitem" hidden>Log out</button>
 			</div>
 		</div>
 
@@ -44,7 +70,7 @@
 						<p class="text-caption text-ink uppercase tracking-[0.04em]">World ranking</p>
 						<span data-board-total class="text-fine text-ink-muted-48"></span>
 					</div>
-					<p class="px-3 pb-2 text-fine text-ink-muted-48">By words · attention · recall</p>
+					<p class="px-3 pb-2 text-fine text-ink-muted-48">By Max words recalled, Attention span, Recalling time</p>
 					<div class="h-px w-full bg-hairline"></div>
 
 					<ol data-board-list class="max-h-80 overflow-y-auto py-1"></ol>
@@ -124,6 +150,56 @@
 	}
 	.menu-item:hover { background-color: var(--color-canvas-parchment); }
 	.menu-item:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: -2px; }
+	.menu-item[hidden] { display: none; }
+	.menu-item:disabled { opacity: 0.4; cursor: not-allowed; }
+	.menu-item:disabled:hover { background-color: transparent; }
+	.menu-item--icon { display: flex; align-items: center; gap: 0.5rem; }
+	.menu-item--icon[hidden] { display: none; }
+	.menu-item--icon .lb-g { flex: none; }
+
+	/* Inline name editor. */
+	.name-edit-btn {
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		border: none;
+		background: transparent;
+		color: var(--color-ink-muted-48);
+		border-radius: var(--radius-pill);
+		cursor: pointer;
+		transition: background-color 0.18s ease, color 0.18s ease;
+	}
+	.name-edit-btn:hover { background-color: var(--color-canvas-parchment); color: var(--color-ink); }
+	.name-edit-btn:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 1px; }
+	.name-edit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+	.name-edit-btn:disabled:hover { background-color: transparent; color: var(--color-ink-muted-48); }
+	.name-edit {
+		flex: 1 1 auto;
+		min-width: 0;
+		font-family: var(--font-text);
+		font-size: 14px;
+		color: var(--color-ink);
+		background: var(--color-canvas);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--radius-md);
+		padding: 5px 8px;
+	}
+	.name-edit:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 1px; }
+	.name-save {
+		flex: none;
+		font-family: var(--font-text);
+		font-size: 13px;
+		color: var(--color-primary);
+		background: transparent;
+		border: none;
+		cursor: pointer;
+		padding: 4px 6px;
+	}
+	.name-save:hover { text-decoration: underline; }
+	[data-name-form][hidden] { display: none; }
 
 	/* Leaderboard rows — built in JS, so :global(). */
 	:global(.lb-row) {
@@ -137,6 +213,9 @@
 		color: var(--color-ink);
 	}
 	:global(.lb-row .lb-rank) { color: var(--color-ink-muted-48); font-variant-numeric: tabular-nums; }
+	:global(.lb-row .lb-rank--1) { color: #e5484d; font-weight: 700; }
+	:global(.lb-row .lb-rank--2) { color: #30a46c; font-weight: 700; }
+	:global(.lb-row .lb-rank--3) { color: #3e63dd; font-weight: 700; }
 	:global(.lb-row .lb-dp) {
 		width: 24px; height: 24px; border-radius: var(--radius-pill);
 		object-fit: cover; background-color: var(--color-canvas-parchment);
@@ -155,16 +234,18 @@
 	:global(.lb-empty) { padding: 16px 12px; font-size: 14px; color: var(--color-ink-muted-48); text-align: center; }
 
 	:global(.lb-btn) {
-		display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+		display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem;
 		width: 100%;
-		background-color: var(--color-primary);
-		color: var(--color-on-primary);
-		font-family: var(--font-text); font-size: 15px;
-		border: none; border-radius: var(--radius-pill);
-		padding: 10px 16px; cursor: pointer;
-		transition: opacity 0.18s ease, transform 0.18s ease;
+		background-color: transparent;
+		color: var(--color-ink);
+		font-family: var(--font-text); font-size: 15px; font-weight: 500;
+		border: 1px solid var(--color-hairline); border-radius: var(--radius-pill);
+		padding: 11px 16px; cursor: pointer;
+		transition: background-color 0.18s ease, transform 0.18s ease;
 	}
+	:global(.lb-btn:hover) { background-color: var(--color-canvas-parchment); }
 	:global(.lb-btn:active) { transform: scale(0.97); }
+	:global(.lb-btn .lb-g) { flex: none; }
 	:global(.lb-foot-note) { font-size: 13px; color: var(--color-ink-muted-48); text-align: center; }
 </style>
 
@@ -176,6 +257,11 @@
 		signInWithGoogle,
 		signOut,
 		displayNameFromSession,
+		updateProfile,
+		uploadAvatar,
+		fetchMyProfile,
+		submitBest,
+		fetchMyBest,
 		fetchTop,
 		fetchMyRank,
 		type LeaderboardRow,
@@ -221,36 +307,49 @@
 	const profileBest = $<HTMLElement>("[data-profile-best]");
 	const avatar = $<HTMLImageElement>("[data-avatar]");
 	const userIcon = $<SVGElement & HTMLElement>('[data-icon="user"]');
+	const signInBtn = $<HTMLButtonElement>('[data-action="signin"]');
+	const signOutBtn = $<HTMLButtonElement>('[data-action="signout"]');
+	const editNameBtn = $<HTMLButtonElement>('[data-action="edit-name"]');
+	const changePhotoBtn = $<HTMLButtonElement>('[data-action="change-photo"]');
+	const nameForm = $<HTMLFormElement>("[data-name-form]");
+	const nameDisplay = $<HTMLElement>("[data-name-display]");
+	const nameInput = $<HTMLInputElement>("[data-name-input]");
+	const photoInput = $<HTMLInputElement>("[data-photo-input]");
 
-	// Personal best lives in localStorage (written by the game). Same key + shape.
-	const BEST_KEY = "focus-attention:best";
-	function renderProfileBest() {
+	// Personal best comes from the server (per-account), NOT localStorage —
+	// localStorage is one shared bucket per browser, so it would leak one
+	// account's score to the next account signed in on the same machine.
+	async function renderProfileBest() {
 		if (!profileBest) return;
-		let best: { words: number; attentionSec: number; recallSec: number } | null = null;
-		try {
-			const raw = localStorage.getItem(BEST_KEY);
-			if (raw) {
-				const p = JSON.parse(raw);
-				if (p && typeof p === "object" && "words" in p && "attentionSec" in p && "recallSec" in p) {
-					best = { words: Number(p.words) || 0, attentionSec: Number(p.attentionSec) || 0, recallSec: Number(p.recallSec) || 0 };
-				}
-			}
-		} catch {}
 
-		if (!best || best.words === 0) {
-			profileBest.innerHTML = `<p class="text-caption text-ink-muted-80">Best score</p><p class="text-fine text-ink-muted-48 mt-0.5">No score yet — finish a round.</p>`;
+		if (!session) {
+			profileBest.innerHTML = `<p class="text-caption text-ink-muted-80">Best score</p><p class="text-fine text-ink-muted-48 mt-0.5">Log in to track your best.</p>`;
 			return;
 		}
+
+		const best = await fetchMyBest();
+		// Session may have changed while the request was in flight.
+		if (!session) return;
+
+		// Default to a 0/0/0 baseline when the player hasn't finished a round yet.
+		const words = best?.words ?? 0;
+		const attentionSec = best?.attentionSec ?? 0;
+		const recallSec = best?.recallSec ?? 0;
 		profileBest.innerHTML =
 			`<p class="text-caption text-ink-muted-80">Best score</p>` +
-			`<p class="text-fine text-ink-muted-48 mt-0.5">${best.words}w · ${fmt(best.attentionSec)} · ${fmt(best.recallSec)}</p>`;
+			`<p class="text-fine text-ink-muted-48 mt-0.5">${words}w · ${fmt(attentionSec)} · ${fmt(recallSec)}</p>`;
 	}
 
 	function renderAuth() {
 		const name = displayNameFromSession(session);
+		// Photo upload + name edit are only available while signed in.
+		if (editNameBtn) editNameBtn.disabled = !session;
+		if (changePhotoBtn) changePhotoBtn.disabled = !session;
 		if (session) {
 			profileBtn?.setAttribute("aria-label", name);
 			if (profileName) profileName.textContent = name;
+			if (signInBtn) signInBtn.hidden = true;
+			if (signOutBtn) signOutBtn.hidden = false;
 			const pic = (session.user.user_metadata as Record<string, unknown>)?.avatar_url as string | undefined;
 			if (pic && avatar) {
 				avatar.src = pic;
@@ -258,9 +357,15 @@
 				if (userIcon) userIcon.style.display = "none";
 			}
 		} else {
-			profileBtn?.setAttribute("aria-label", "Sign in");
+			profileBtn?.setAttribute("aria-label", "Account");
+			if (profileName) profileName.textContent = "Anonymous";
+			if (signInBtn) signInBtn.hidden = false;
+			if (signOutBtn) signOutBtn.hidden = true;
 			if (avatar) avatar.hidden = true;
 			if (userIcon) userIcon.style.display = "";
+			// Make sure the name editor is closed when signed out.
+			if (nameForm) nameForm.hidden = true;
+			if (nameDisplay) nameDisplay.hidden = false;
 		}
 	}
 
@@ -269,19 +374,103 @@
 		profileBtn?.setAttribute("aria-expanded", "false");
 	}
 
-	profileBtn?.addEventListener("click", async () => {
-		if (!isConfigured) return; // nothing to do without a backend
-		if (!session) { await signInWithGoogle(); return; } // redirects away
-		// Signed in → toggle the menu.
+	// renderAuth seeds the header from the provider (Google) name/avatar so it
+	// paints instantly. This overlays the player's *saved* name/avatar from their
+	// scores row — the source of truth for edits — once it loads from the server.
+	async function applyStoredProfile() {
+		if (!session) return;
+		const uid = session.user.id;
+		const prof = await fetchMyProfile();
+		// Bail if the session changed while the request was in flight.
+		if (!prof || !session || session.user.id !== uid) return;
+		if (prof.displayName) {
+			if (profileName) profileName.textContent = prof.displayName;
+			profileBtn?.setAttribute("aria-label", prof.displayName);
+		}
+		if (prof.avatarUrl && avatar) {
+			avatar.src = prof.avatarUrl;
+			avatar.hidden = false;
+			if (userIcon) userIcon.style.display = "none";
+		}
+	}
+
+	profileBtn?.addEventListener("click", () => {
+		// Always toggle the menu — signed in or not it shows name + best score.
 		const open = profileMenu && profileMenu.hidden;
 		if (open) renderProfileBest();
 		if (profileMenu) profileMenu.hidden = !open;
 		profileBtn.setAttribute("aria-expanded", String(!!open));
 	});
 
+	signInBtn?.addEventListener("click", async () => {
+		if (!isConfigured) return; // nothing to do without a backend
+		await signInWithGoogle(); // redirects away
+	});
+
 	$<HTMLButtonElement>('[data-action="signout"]')?.addEventListener("click", async () => {
 		await signOut();
 		closeProfileMenu();
+	});
+
+	// ---------- profile editing (signed-in only) ----------
+	// Swap the name+icon row for the inline editor (in place, same line).
+	function openNameEditor() {
+		if (!session || !nameForm || !nameInput || !nameDisplay) return;
+		nameInput.value = displayNameFromSession(session);
+		nameDisplay.hidden = true;
+		nameForm.hidden = false;
+		nameInput.focus();
+		nameInput.select();
+	}
+	function closeNameEditor() {
+		if (nameForm) nameForm.hidden = true;
+		if (nameDisplay) nameDisplay.hidden = false;
+	}
+
+	editNameBtn?.addEventListener("click", openNameEditor);
+
+	// Escape cancels the editor without saving.
+	nameInput?.addEventListener("keydown", (e) => {
+		if (e.key === "Escape") { e.stopPropagation(); closeNameEditor(); }
+	});
+
+	nameForm?.addEventListener("submit", async (e) => {
+		e.preventDefault();
+		if (!session || !nameInput) return;
+		const next = nameInput.value.trim();
+		if (!next) return;
+		const ok = await updateProfile({ displayName: next });
+		if (ok) {
+			if (profileName) profileName.textContent = next;
+			profileBtn?.setAttribute("aria-label", next);
+			closeNameEditor();
+			// Refresh an open board so the new name shows there too.
+			if (boardPanel && !boardPanel.hidden) loadBoard();
+		}
+	});
+
+	// Trigger the hidden file picker; upload + persist on selection.
+	changePhotoBtn?.addEventListener("click", () => {
+		if (!session) return;
+		photoInput?.click();
+	});
+
+	photoInput?.addEventListener("change", async () => {
+		const file = photoInput.files?.[0];
+		if (!file || !session) return;
+		const prevLabel = changePhotoBtn?.textContent;
+		if (changePhotoBtn) { changePhotoBtn.disabled = true; changePhotoBtn.textContent = "Uploading…"; }
+
+		const url = await uploadAvatar(file);
+		if (url) {
+			await updateProfile({ avatarUrl: url });
+			if (avatar) { avatar.src = url; avatar.hidden = false; }
+			if (userIcon) userIcon.style.display = "none";
+			if (boardPanel && !boardPanel.hidden) loadBoard();
+		}
+
+		if (changePhotoBtn) { changePhotoBtn.disabled = false; changePhotoBtn.textContent = prevLabel ?? "Change photo"; }
+		photoInput.value = ""; // allow re-selecting the same file
 	});
 
 	// ---------- leaderboard dropdown ----------
@@ -303,7 +492,7 @@
 		li.className = "lb-row" + (isMe ? " is-me" : "");
 
 		const rank = document.createElement("span");
-		rank.className = "lb-rank";
+		rank.className = "lb-rank" + (r.rank <= 3 ? ` lb-rank--${r.rank}` : "");
 		rank.textContent = `#${r.rank}`;
 
 		let dp: HTMLElement;
@@ -339,7 +528,14 @@
 		const btn = document.createElement("button");
 		btn.className = "lb-btn";
 		btn.type = "button";
-		btn.textContent = "Sign in with Google to compete";
+		btn.innerHTML =
+			`<svg class="lb-g" viewBox="0 0 48 48" width="18" height="18" aria-hidden="true">` +
+				`<path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z"/>` +
+				`<path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65Z"/>` +
+				`<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19Z"/>` +
+				`<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z"/>` +
+			`</svg>` +
+			`<span>Log in to compete</span>`;
 		btn.addEventListener("click", () => signInWithGoogle());
 		boardFoot.appendChild(btn);
 	}
@@ -417,14 +613,45 @@
 		if (e.key === "Escape") { closeBoard(); closeProfileMenu(); }
 	});
 
+	// The game fires this after a new personal best is submitted — refresh any
+	// open panel so it reflects the fresh score instead of stale state.
+	window.addEventListener("focus-attention:best-updated", () => {
+		renderProfileBest();
+		if (boardPanel && !boardPanel.hidden) loadBoard();
+	});
+
 	// ---------- init ----------
+	renderAuth(); // default signed-out state ("Anonymous") until a session loads
+
+	// Ensure a signed-in player has a leaderboard row, even before they finish a
+	// round. submit_score only overwrites on a winning score, so a 0/0/0 baseline
+	// can never clobber a real best — it just seeds the row. Guarded so it runs
+	// once per user id, not on every auth event.
+	let baselinedFor: string | null = null;
+	async function ensureBaseline(s: Session | null) {
+		if (!s || s.user.id === baselinedFor) return;
+		baselinedFor = s.user.id;
+		await submitBest({ words: 0, attentionSec: 0, recallSec: 0 });
+		if (boardPanel && !boardPanel.hidden) loadBoard();
+	}
+
+	let lastUserId: string | null | undefined = undefined;
+	function applySession(s: Session | null) {
+		const changed = (s?.user.id ?? null) !== (lastUserId ?? null);
+		lastUserId = s?.user.id ?? null;
+		session = s;
+		renderAuth();
+		void applyStoredProfile(); // overlay the saved name/avatar over provider defaults
+		void ensureBaseline(s);
+		// Refresh an open board so the highlight follows sign-in/out.
+		if (boardPanel && !boardPanel.hidden) loadBoard();
+		// Let the game re-seed its in-memory best from the new account's row,
+		// so a best never carries over from a previously signed-in account.
+		if (changed) window.dispatchEvent(new CustomEvent("focus-attention:auth-changed"));
+	}
+
 	if (isConfigured) {
-		getSession().then((s) => { session = s; renderAuth(); });
-		onAuthChange((s) => {
-			session = s;
-			renderAuth();
-			// Refresh an open board so the highlight follows sign-in/out.
-			if (boardPanel && !boardPanel.hidden) loadBoard();
-		});
+		getSession().then(applySession);
+		onAuthChange(applySession);
 	}
 </script>

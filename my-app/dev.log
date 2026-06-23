@@ -36,3 +36,135 @@
 [2m08:30:57[22m [34m[200][39m / [2m23ms[22m
 [2m08:38:14[22m [34m[watch][39m src/components/FocusGame.astro
 [2m08:38:17[22m [34m[200][39m / [2m148ms[22m
+[2m08:42:09[22m [34m[watch][39m src/components/FocusGame.astro
+[2m08:42:12[22m [34m[200][39m / [2m101ms[22m
+[2m08:42:19[22m [34m[watch][39m src/components/FocusGame.astro
+[2m08:42:20[22m [34m[200][39m / [2m24ms[22m
+[2m08:42:41[22m [34m[watch][39m src/components/FocusGame.astro
+[2m08:42:42[22m [34m[200][39m / [2m37ms[22m
+[2m08:45:06[22m [34m[watch][39m src/components/FocusGame.astro
+[2m08:45:08[22m [34m[200][39m / [2m146ms[22m
+[2m08:47:18[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m08:47:21[22m [34m[200][39m / [2m164ms[22m
+[2m08:47:56[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m08:47:57[22m [34m[200][39m / [2m47ms[22m
+[2m08:48:44[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m08:48:45[22m [34m[200][39m / [2m36ms[22m
+[2m08:56:50[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m08:56:52[22m [34m[200][39m / [2m347ms[22m
+[2m08:57:08[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m08:58:26[22m [34m[200][39m / [2m64ms[22m
+[2m08:59:00[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m08:59:00[22m [34m[200][39m / [2m127ms[22m
+[2m09:02:51[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:02:54[22m [34m[200][39m / [2m198ms[22m
+[2m09:03:03[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:03:18[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:03:21[22m [34m[200][39m / [2m912ms[22m
+[2m09:03:29[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:03:30[22m [34m[200][39m / [2m21ms[22m
+[2m09:04:03[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:04:03[22m [34m[200][39m / [2m48ms[22m
+[2m09:07:58[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:08:01[22m [34m[200][39m / [2m224ms[22m
+[2m09:08:12[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:08:12[22m [34m[200][39m / [2m24ms[22m
+[2m09:08:42[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m09:09:23[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:09:26[22m [34m[200][39m / [2m179ms[22m
+[2m09:09:33[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:09:34[22m [34m[200][39m / [2m50ms[22m
+[2m09:10:20[22m [34m[200][39m / [2m11ms[22m
+[2m09:12:48[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:12:50[22m [34m[200][39m / [2m150ms[22m
+[2m09:13:01[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m09:13:12[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:13:12[22m [34m[200][39m / [2m50ms[22m
+[2m09:13:21[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:13:21[22m [34m[200][39m / [2m23ms[22m
+[2m09:13:29[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:13:29[22m [34m[200][39m / [2m33ms[22m
+[2m09:15:02[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:15:04[22m [34m[200][39m / [2m170ms[22m
+[2m09:17:42[22m [34m[200][39m / [2m146ms[22m
+[2m09:20:28[22m [34m[200][39m / [2m100ms[22m
+[2m09:20:58[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:21:01[22m [34m[200][39m / [2m586ms[22m
+[2m09:25:51[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:25:54[22m [34m[200][39m / [2m210ms[22m
+[2m09:26:15[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:26:16[22m [34m[200][39m / [2m85ms[22m
+[2m09:26:16[22m [34m[200][39m / [2m85ms[22m
+[2m09:28:00[22m [34m[200][39m / [2m662ms[22m
+[2m09:28:06[22m [34m[200][39m / [2m20ms[22m
+[2m09:28:08[22m [34m[200][39m / [2m23ms[22m
+[2m09:29:16[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:29:17[22m [34m[200][39m / [2m628ms[22m
+[2m09:29:49[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:29:50[22m [34m[200][39m / [2m40ms[22m
+[2m09:35:20[22m [34m[watch][39m src/lib/leaderboard.ts
+[2m09:35:22[22m [34m[200][39m / [2m168ms[22m
+[2m09:37:01[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:37:03[22m [34m[200][39m / [2m359ms[22m
+[2m09:37:20[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:37:20[22m [34m[200][39m / [2m27ms[22m
+[2m09:37:54[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:37:55[22m [34m[200][39m / [2m25ms[22m
+[2m09:38:29[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:38:30[22m [34m[200][39m / [2m30ms[22m
+[2m09:38:42[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:38:43[22m [34m[200][39m / [2m32ms[22m
+[2m09:39:11[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:39:12[22m [34m[200][39m / [2m24ms[22m
+[2m09:39:23[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:39:24[22m [34m[200][39m / [2m24ms[22m
+[2m09:39:52[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:39:53[22m [34m[200][39m / [2m37ms[22m
+[2m09:41:21[22m [34m[200][39m / [2m138ms[22m
+[2m09:42:45[22m [34m[200][39m / [2m9ms[22m
+[2m09:44:22[22m [34m[200][39m / [2m12ms[22m
+[2m09:49:39[22m [34m[watch][39m src/components/FocusGame.astro
+[2m09:49:43[22m [34m[200][39m / [2m574ms[22m
+[2m09:50:01[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m09:53:23[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:53:25[22m [34m[200][39m / [2m202ms[22m
+[2m09:53:33[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m09:55:45[22m [34m[200][39m / [2m86ms[22m
+[2m09:56:57[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m09:56:58[22m [34m[200][39m / [2m116ms[22m
+[2m10:10:42[22m [34m[watch][39m src/lib/leaderboard.ts
+[2m10:10:43[22m [34m[200][39m / [2m215ms[22m
+[2m10:11:25[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:11:26[22m [34m[200][39m / [2m46ms[22m
+[2m10:11:39[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m10:11:54[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:11:55[22m [34m[200][39m / [2m30ms[22m
+[2m10:12:16[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:12:17[22m [34m[200][39m / [2m27ms[22m
+[2m10:12:32[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:12:32[22m [34m[200][39m / [2m18ms[22m
+[2m10:12:46[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:12:47[22m [34m[200][39m / [2m28ms[22m
+[2m10:13:48[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:13:50[22m [34m[200][39m / [2m97ms[22m
+[2m10:14:00[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m10:15:39[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:15:41[22m [34m[200][39m / [2m179ms[22m
+[2m10:15:50[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:15:50[22m [34m[200][39m / [2m34ms[22m
+[2m10:16:12[22m [34m[200][39m / [2m4ms[22m
+[2m10:16:13[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:16:24[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:16:24[22m [34m[200][39m / [2m27ms[22m
+[2m10:17:17[22m [34m[200][39m / [2m49ms[22m
+[2m10:17:43[22m [34m[200][39m / [2m14ms[22m
+[2m10:19:49[22m [34m[watch][39m src/lib/leaderboard.ts
+[2m10:19:51[22m [34m[200][39m / [2m147ms[22m
+[2m10:20:09[22m [34m[watch][39m src/lib/leaderboard.ts
+[2m10:20:12[22m [34m[200][39m / [2m185ms[22m
+[2m10:20:27[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:20:28[22m [34m[200][39m / [2m61ms[22m
+[2m10:21:34[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:21:35[22m [34m[200][39m / [2m115ms[22m
+[2m10:21:46[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:21:46[22m [34m[200][39m / [2m28ms[22m
