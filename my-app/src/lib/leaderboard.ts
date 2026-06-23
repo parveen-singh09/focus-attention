@@ -185,14 +185,16 @@ function mapRow(r: Record<string, unknown>): LeaderboardRow {
 
 const ROW_COLS = "rank, user_id, display_name, avatar_url, words, attention_sec, recall_sec";
 
-// Top N rows of the world ranking.
-export async function fetchTop(limit = 10): Promise<LeaderboardRow[]> {
+// A page of the world ranking: `limit` rows starting at `offset` (0-based),
+// ordered by rank. Pass offset to page through ("Show more"); a full page back
+// (length === limit) means there may be more to load.
+export async function fetchTop(limit = 15, offset = 0): Promise<LeaderboardRow[]> {
 	if (!supabase) return [];
 	const { data, error } = await supabase
 		.from("leaderboard")
 		.select(ROW_COLS)
 		.order("rank", { ascending: true })
-		.limit(limit);
+		.range(offset, offset + limit - 1);
 	if (error || !data) return [];
 	return data.map(mapRow);
 }

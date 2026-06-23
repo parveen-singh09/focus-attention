@@ -141,13 +141,10 @@
 			</div>
 		</div>
 
-		<p data-score-line class="text-lead text-ink-muted-80 mt-10 max-w-[36ch]"></p>
-		<p data-best-line class="text-caption text-ink-muted-48 mt-3"></p>
-
 		<!-- The reveal: what was actually shown vs. what you guessed -->
-		<div class="mt-12 w-full max-w-160 text-left">
+		<div class="mt-12 w-full max-w-240 text-center">
 			<p class="text-caption text-ink-muted-48 mb-3">The sequence</p>
-			<div data-reveal-list class="flex flex-wrap items-center gap-2"></div>
+			<div data-reveal-list class="flex flex-wrap items-center justify-center gap-2"></div>
 		</div>
 
 		<div class="mt-12 flex items-center gap-3">
@@ -224,12 +221,13 @@
 		letter-spacing: -0.374px;
 		color: var(--color-primary);
 		background-color: transparent;
-		border: none;
-		padding: 8px 12px;
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--radius-md);
+		padding: 5px 12px;
 		cursor: pointer;
-		transition: transform 0.14s ease, color 0.18s ease, opacity 0.18s ease;
+		transition: transform 0.14s ease, color 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
 	}
-	:global(.pool-word:hover) { text-decoration: underline; }
+	:global(.pool-word:hover) { border-color: var(--color-primary); }
 	:global(.pool-word:active) { transform: scale(0.95); }
 	:global(.pool-word:focus-visible) { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
 	:global(.pool-word:disabled) { cursor: default; }
@@ -239,13 +237,16 @@
 	}
 	:global(.pool-word.is-dim) { opacity: 0.32; }
 
-	/* Word chips in recall + reveal — also JS-created, so :global(). */
+	/* Word chips in recall + reveal — also JS-created, so :global().
+	   Boxed to match the pool tiles below; color carries the state. */
 	:global(.chip) {
 		font-family: var(--font-text);
-		font-size: 14px;
+		font-size: 17px;
 		letter-spacing: -0.224px;
-		padding: 8px 12px;
+		padding: 5px 12px;
 		background-color: transparent;
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--radius-md);
 		color: var(--color-ink);
 	}
 	:global(.chip-correct) { color: var(--color-success); }
@@ -255,7 +256,17 @@
 	/* Arrow joining words in the result reveal → reads as one sequence */
 	:global(.reveal-arrow) {
 		font-family: var(--font-text);
-		font-size: 14px;
+		font-size: 16px;
+		color: var(--color-ink-muted-48);
+		user-select: none;
+	}
+
+	/* Arrow joining chosen words during recall → word1 → word2 → … */
+	:global(.chip-arrow) {
+		display: inline-flex;
+		align-items: center;
+		font-family: var(--font-text);
+		font-size: 16px;
 		color: var(--color-ink-muted-48);
 		user-select: none;
 	}
@@ -608,6 +619,15 @@
 
 		private appendRebuilt(word: string) {
 			const list = this.q<HTMLUListElement>("[data-recall-list]");
+			// Join chosen words with an arrow so the order reads as a sequence:
+			// word1 → word2 → … (no arrow before the first).
+			if (list.childElementCount > 0) {
+				const sep = document.createElement("li");
+				sep.className = "chip-arrow";
+				sep.setAttribute("aria-hidden", "true");
+				sep.textContent = "→";
+				list.appendChild(sep);
+			}
 			const li = document.createElement("li");
 			li.className = "chip chip-correct";
 			li.textContent = word;
@@ -652,21 +672,11 @@
 			this.q<HTMLElement>("[data-focus-detail]").textContent =
 				`${span} of ${total} ${total === 1 ? "word" : "words"} in order`;
 
-			const scoreLine = this.q<HTMLElement>("[data-score-line]");
-			if (span === 0) {
-				scoreLine.textContent = "The chain broke at the first word. Try a shorter hold and build up.";
-			} else if (span === total) {
-				scoreLine.textContent = `Flawless — you held attention for ${this.formatDuration(this.attentionSec)} and rebuilt all ${total} words.`;
-			} else {
-				scoreLine.textContent = `You held ${span} ${span === 1 ? "word" : "words"} in order before the chain broke at word ${span + 1} of ${total}.`;
-			}
-
 			this.updateBest(span);
 			this.renderReveal();
 		}
 
 		private updateBest(span: number) {
-			const line = this.q<HTMLElement>("[data-best-line]");
 			// Rank by the same lexicographic rule as the server (submit_score):
 			// more words wins; tie → longer attention; tie → faster recall.
 			const isBetter =
@@ -697,9 +707,6 @@
 					});
 				}
 			}
-			line.textContent = this.bestWords === 0
-				? ""
-				: `Best Score: ${this.bestWords} ${this.bestWords === 1 ? "word" : "words"} · ${this.formatDuration(this.bestAttentionSec)} attention · recalled in ${this.formatDuration(this.bestRecallSec)}.`;
 		}
 
 		private renderReveal() {
@@ -747,17 +754,6 @@
 			const s = totalSec % 60;
 			if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 			return `${m}:${String(s).padStart(2, "0")}`;
-		}
-
-		private formatDuration(totalSec: number): string {
-			const h = Math.floor(totalSec / 3600);
-			const m = Math.floor((totalSec % 3600) / 60);
-			const s = totalSec % 60;
-			const parts: string[] = [];
-			if (h) parts.push(`${h} hr`);
-			if (m) parts.push(`${m} min`);
-			if (s) parts.push(`${s} sec`);
-			return parts.join(" ") || "0 sec";
 		}
 	}
 

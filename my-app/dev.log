@@ -168,3 +168,62 @@
 [2m10:21:35[22m [34m[200][39m / [2m115ms[22m
 [2m10:21:46[22m [34m[watch][39m src/components/SiteHeader.astro
 [2m10:21:46[22m [34m[200][39m / [2m28ms[22m
+[2m10:27:27[22m [34m[200][39m / [2m364ms[22m
+[2m10:29:45[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m10:31:09[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m10:31:29[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m10:31:49[22m [34m[200][39m / [2m349ms[22m
+[2m10:32:57[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m10:33:00[22m [34m[200][39m / [2m298ms[22m
+[2m10:40:05[22m [34m[200][39m / [2m209ms[22m
+[2m10:55:25[22m [34m[200][39m / [2m324ms[22m
+[2m10:57:49[22m [34m[200][39m / [2m167ms[22m
+[2m11:06:12[22m [34m[watch][39m src/lib/leaderboard.ts
+[2m11:06:13[22m [34m[200][39m / [2m281ms[22m
+[2m11:07:26[22m [34m[200][39m / [2m261ms[22m
+[2m11:07:51[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:07:52[22m [34m[200][39m / [2m140ms[22m
+[2m11:10:25[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:10:25[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:10:28[22m [34m[200][39m / [2m457ms[22m
+[2m11:10:51[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:10:52[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:10:52[22m [34m[200][39m / [2m80ms[22m
+[2m11:11:23[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:11:34[22m [34m[200][39m / [2m1096ms[22m
+[2m11:11:47[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:11:48[22m [34m[200][39m / [2m29ms[22m
+[2m11:12:09[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:18:24[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:18:27[22m [34m[200][39m / [2m229ms[22m
+[2m11:18:57[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:19:29[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:19:31[22m [34m[200][39m / [2m93ms[22m
+[2m11:19:56[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:19:57[22m [34m[200][39m / [2m153ms[22m
+[2m11:20:31[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:20:32[22m [34m[200][39m / [2m43ms[22m
+[2m11:20:50[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:20:51[22m [34m[200][39m / [2m43ms[22m
+[2m11:21:01[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:21:02[22m [34m[200][39m / [2m42ms[22m
+[2m11:22:24[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:22:50[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:23:25[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:23:34[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:25:23[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:25:33[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:25:42[22m [34m[200][39m / [2m723ms[22m
+[2m11:27:45[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:27:57[22m [34m[watch][39m src/components/SiteHeader.astro
+[2m11:27:59[22m [34m[200][39m / [2m142ms[22m
+[2m11:47:17[22m [34m[200][39m / [2m274ms[22m
+[2m11:48:31[22m [34m[watch][39m /src/components/SiteHeader.astro?astro&type=style&index=0&lang.css
+[2m11:51:37[22m [34m[watch][39m src/components/FocusGame.astro
+[2m11:51:40[22m [34m[200][39m / [2m234ms[22m
+[2m11:52:22[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m11:55:04[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m11:55:30[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m12:06:43[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m12:08:41[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m12:13:15[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
