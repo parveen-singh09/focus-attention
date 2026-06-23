@@ -1,0 +1,48 @@
+---
+// SiteFooter — global footer with site navigation. Lives in the Layout so it
+// renders on every page: each page then links to every other page, which is
+// strong internal linking for SEO and makes the legal / info pages reachable
+// from the home page. Static MPA — these are plain <a> hrefs to real routes.
+const year = new Date().getFullYear();
+
+const links = [
+	{ href: "/", label: "Home" },
+	{ href: "/about", label: "About us" },
+	{ href: "/contact", label: "Contact us" },
+	{ href: "/privacy", label: "Privacy policy" },
+	{ href: "/terms", label: "Terms & conditions" },
+];
+---
+
+<footer class="bg-canvas-parchment text-ink-muted-80 border-t border-hairline">
+	<div class="mx-auto max-w-5xl px-6 py-14">
+		<nav class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3" aria-label="Footer">
+			{links.map((l) => (
+				<a href={l.href} class="footer-link">{l.label}</a>
+			))}
+		</nav>
+		<p class="text-caption text-center mt-8">
+			attentivebrain.com — train your attention span, one sequence at a time.
+		</p>
+		<p class="text-fine text-ink-muted-48 text-center mt-2">
+			© {year} attentivebrain. All rights reserved.
+		</p>
+	</div>
+</footer>
+
+<style>
+	.footer-link {
+		font-family: var(--font-text);
+		font-size: 15px;
+		letter-spacing: -0.224px;
+		color: var(--color-ink-muted-80);
+		text-decoration: none;
+		transition: color 0.18s ease;
+	}
+	.footer-link:hover { color: var(--color-primary); }
+	.footer-link:focus-visible {
+		outline: 2px solid var(--color-primary-focus);
+		outline-offset: 3px;
+		border-radius: var(--radius-xs);
+	}
+</style>

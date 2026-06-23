@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Static build → this compiles to 404.html, which static hosts serve for any
+// unknown route. noindex so the error page never lands in search results.
+---
+
+<Layout
+	title="Page not found (404) — attentivebrain"
+	description="The page you were looking for could not be found. Head back and train your focus instead."
+	noindex={true}
+>
+	<main class="min-h-[78vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Error 404</p>
+		<h1 class="text-hero text-ink max-w-[16ch]">This page wandered off.</h1>
+		<p class="text-lead text-ink-muted-80 mt-5 max-w-[44ch]">
+			The link is broken or the page has moved. It happens to the best of us —
+			even with perfect focus.
+		</p>
+		<div class="mt-12">
+			<a href="/" class="btn-primary">Back to the game</a>
+		</div>
+	</main>
+</Layout>

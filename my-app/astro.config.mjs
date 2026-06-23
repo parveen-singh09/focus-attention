@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   // Absolute base used for canonical + Open Graph URLs. Update if the
   // production domain changes.
-  site: 'https://focus-attention.com',
+  site: 'https://attentivebrain.com',
   vite: {
     plugins: [tailwindcss()]
   }

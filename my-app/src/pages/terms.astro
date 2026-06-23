@@ -1,0 +1,94 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const updated = new Date().toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+const email = "hello@attentivebrain.com";
+---
+
+<Layout
+	title="Terms & conditions — attentivebrain"
+	description="The terms that govern your use of attentivebrain: acceptable use, accounts and leaderboard conduct, intellectual property, and disclaimers."
+	keywords="attentivebrain terms and conditions, terms of service, terms of use"
+>
+	<main class="mx-auto max-w-3xl px-6 py-(--spacing-section)">
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Terms &amp; conditions</p>
+		<h1 class="text-hero text-ink">Terms of use.</h1>
+		<p class="text-caption text-ink-muted-48 mt-4">Last updated {updated}</p>
+
+		<div class="mt-8 space-y-6 text-ink-muted-80">
+			<p>
+				Welcome to attentivebrain. By accessing or using this website and game (the
+				"Service"), you agree to these Terms &amp; Conditions. If you do not agree, please
+				do not use the Service.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">1. Use of the Service</h2>
+			<p>
+				attentivebrain is provided free of charge for personal, non-commercial use. You
+				may use it for your own focus and memory practice. You agree not to misuse the
+				Service — including attempting to disrupt it, access it through automated means
+				to gain an unfair leaderboard advantage, or interfere with other people's use.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">2. Accounts</h2>
+			<p>
+				Signing in is optional and handled through Google. You are responsible for the
+				activity that happens under your account. Choose a display name that is not
+				offensive, impersonating, or infringing — we reserve the right to remove names,
+				photos, or scores that violate these terms or that we reasonably consider
+				inappropriate.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">3. Leaderboard conduct</h2>
+			<p>
+				The leaderboard is meant to be a fair, friendly record of real scores. Submitting
+				falsified scores, exploiting bugs, or otherwise manipulating rankings is not
+				permitted, and we may remove affected entries at our discretion.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">4. Intellectual property</h2>
+			<p>
+				The Service, including its design, text, and code, is owned by attentivebrain and
+				protected by applicable laws. You may not copy, redistribute, or create
+				derivative works from it without permission, except as allowed by law.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">5. Disclaimer</h2>
+			<p>
+				attentivebrain is a casual training game offered "as is." It is not a medical
+				device and does not provide medical, psychological, or diagnostic advice. The
+				metrics it reports are for personal interest only. We make no guarantee of any
+				particular outcome and do not warrant that the Service will be uninterrupted or
+				error-free.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">6. Limitation of liability</h2>
+			<p>
+				To the fullest extent permitted by law, attentivebrain shall not be liable for
+				any indirect, incidental, or consequential damages arising from your use of, or
+				inability to use, the Service.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">7. Changes</h2>
+			<p>
+				We may update these terms as the Service evolves. Continued use after changes
+				means you accept the revised terms. The "last updated" date above reflects the
+				current version.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">8. Contact</h2>
+			<p>
+				Questions about these terms? Email us at
+				<a href={`mailto:${email}`} class="link-action">{email}</a>.
+			</p>
+		</div>
+
+		<div class="mt-12">
+			<a href="/" class="btn-primary">Back to the game</a>
+		</div>
+	</main>
+</Layout>

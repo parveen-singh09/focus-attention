@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
 
 interface Props {
 	title?: string;
@@ -8,19 +9,21 @@ interface Props {
 	keywords?: string;
 	image?: string;
 	ogType?: string;
+	noindex?: boolean;
 }
 
 const {
-	title = "How to Increase Focus & Attention Span — Free Brain Game | focus-attention",
+	title = "How to Increase Focus & Attention Span — Free Brain Game | attentivebrain",
 	description = "Learn how to increase focus, attention span, and memory with a free brain game. Watch words appear, hold the sequence, then recall it — the best game to train focus and improve memory.",
 	keywords = "how to increase focus, how to increase focus and attention span, how to increase focus and memory, best game to increase focus, how to improve memory, brain game, attention span, focus training, memory game, concentration game",
 	image = "/og-image.svg",
 	ogType = "website",
+	noindex = false,
 } = Astro.props;
 
 // Build absolute URLs for canonical + social tags. Astro.site comes from
 // astro.config.mjs; fall back to the production domain if it is unset.
-const siteOrigin = Astro.site?.origin ?? "https://focus-attention.com";
+const siteOrigin = Astro.site?.origin ?? "https://attentivebrain.com";
 const canonicalURL = new URL(Astro.url.pathname, siteOrigin).href;
 const imageURL = new URL(image, siteOrigin).href;
 
@@ -29,7 +32,7 @@ const imageURL = new URL(image, siteOrigin).href;
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "WebApplication",
-	name: "focus-attention",
+	name: "attentivebrain",
 	url: siteOrigin,
 	applicationCategory: "GameApplication",
 	operatingSystem: "Web browser",
@@ -61,18 +64,18 @@ const jsonLd = {
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
-		<meta name="robots" content="index, follow, max-image-preview:large" />
-		<meta name="author" content="focus-attention" />
+		<meta name="robots" content={noindex ? "noindex, nofollow" : "index, follow, max-image-preview:large"} />
+		<meta name="author" content="attentivebrain" />
 		<link rel="canonical" href={canonicalURL} />
 
 		<!-- Open Graph (Facebook, LinkedIn, etc.) -->
-		<meta property="og:site_name" content="focus-attention" />
+		<meta property="og:site_name" content="attentivebrain" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content={ogType} />
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={imageURL} />
-		<meta property="og:image:alt" content="focus-attention — a brain game to increase focus and attention span" />
+		<meta property="og:image:alt" content="attentivebrain — a brain game to increase focus and attention span" />
 		<meta property="og:locale" content="en_US" />
 
 		<!-- Twitter Card -->
@@ -108,5 +111,6 @@ const jsonLd = {
 	<body>
 		<SiteHeader />
 		<slot />
+		<SiteFooter />
 	</body>
 </html>

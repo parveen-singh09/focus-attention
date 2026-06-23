@@ -1,0 +1,87 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Contact email — update to the real inbox when one is set up.
+const email = "hello@attentivebrain.com";
+---
+
+<Layout
+	title="Contact us — attentivebrain"
+	description="Get in touch with the attentivebrain team. Questions, feedback, bug reports, or partnership ideas — we'd love to hear from you."
+	keywords="contact attentivebrain, attentivebrain support, feedback"
+>
+	<main class="mx-auto max-w-2xl px-6 py-(--spacing-section)">
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Contact us</p>
+		<h1 class="text-hero text-ink">Say hello.</h1>
+
+		<div class="mt-8 space-y-6 text-ink-muted-80">
+			<p>
+				Have a question, a bug to report, or an idea to make attentivebrain better? We
+				read every message. The fastest way to reach us is by email:
+			</p>
+			<p>
+				<a href={`mailto:${email}`} class="link-action text-lead">{email}</a>
+			</p>
+		</div>
+
+		<form class="mt-12 space-y-5" data-contact-form>
+			<label class="block">
+				<span class="text-caption text-ink-muted-48">Your name</span>
+				<input type="text" name="name" required autocomplete="name" class="field mt-2" />
+			</label>
+			<label class="block">
+				<span class="text-caption text-ink-muted-48">Your email</span>
+				<input type="email" name="email" required autocomplete="email" class="field mt-2" />
+			</label>
+			<label class="block">
+				<span class="text-caption text-ink-muted-48">Message</span>
+				<textarea name="message" rows="5" required class="field mt-2"></textarea>
+			</label>
+			<button type="submit" class="btn-primary">Send message</button>
+			<p data-contact-note class="text-fine text-ink-muted-48" aria-live="polite"></p>
+		</form>
+	</main>
+</Layout>
+
+<style>
+	.field {
+		display: block;
+		width: 100%;
+		font-family: var(--font-text);
+		font-size: 17px;
+		letter-spacing: -0.374px;
+		color: var(--color-ink);
+		background: var(--color-canvas);
+		border: 1px solid var(--color-hairline);
+		border-radius: var(--radius-md);
+		padding: 11px 14px;
+	}
+	.field:focus {
+		outline: none;
+		border-color: var(--color-primary);
+	}
+	.field:focus-visible {
+		outline: 2px solid var(--color-primary-focus);
+		outline-offset: 1px;
+	}
+</style>
+
+<script>
+	// No backend wired up yet — fall back to the user's mail client with the
+	// fields pre-filled. Swap this for a real POST when an endpoint exists.
+	const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+	const note = document.querySelector<HTMLElement>("[data-contact-note]");
+	const EMAIL = "hello@attentivebrain.com";
+
+	form?.addEventListener("submit", (e) => {
+		e.preventDefault();
+		const data = new FormData(form);
+		const name = String(data.get("name") ?? "").trim();
+		const email = String(data.get("email") ?? "").trim();
+		const message = String(data.get("message") ?? "").trim();
+		const subject = encodeURIComponent(`Message from ${name || "a visitor"}`);
+		const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
+		window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`;
+		if (note) note.textContent = "Opening your email app… if nothing happens, write to us directly at " + EMAIL + ".";
+	});
+</script>

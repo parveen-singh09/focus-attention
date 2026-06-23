@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://focus-attention.com/sitemap.xml
+Sitemap: https://attentivebrain.com/sitemap.xml

@@ -9,7 +9,7 @@
 	<!-- ============================================================
 	     PHASE 1 · SETUP — choose the hold duration (10s → 12hr)
 	     ============================================================ -->
-	<section data-phase="setup" class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
+	<section data-phase="setup" class="min-h-[88vh] flex flex-col items-center justify-center px-6 pt-(--spacing-section) pb-64 text-center">
 		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">The focus game</p>
 		<h1 class="text-hero text-ink max-w-[18ch]"><span class="whitespace-nowrap">Hold The Words</span><br /><span class="whitespace-nowrap">Measure Your Focus</span></h1>
 		<p class="text-lead text-ink-muted-80 mt-5 max-w-[42ch]">
@@ -338,6 +338,13 @@
 			// Every phase now sits on the themed canvas, so keep the page
 			// background in sync with the theme rather than forcing dark.
 			document.documentElement.style.backgroundColor = "var(--color-canvas)";
+			// The watch phase is a fixed, full-screen overlay — lock page scroll
+			// so the underlying document can't scroll behind it.
+			document.documentElement.style.overflow = phase === "watch" ? "hidden" : "";
+			// SEO copy + FAQ are landing-only — hide them once a round starts so
+			// they never show beneath the watch / recall / result screens.
+			const landing = document.querySelector<HTMLElement>("[data-landing-content]");
+			if (landing) landing.hidden = phase !== "setup";
 		}
 
 		private q<T extends HTMLElement>(sel: string): T {

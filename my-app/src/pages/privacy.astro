@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Keep the "last updated" honest by stamping it at build time.
+const updated = new Date().toLocaleDateString("en-US", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+});
+const email = "hello@attentivebrain.com";
+---
+
+<Layout
+	title="Privacy policy — attentivebrain"
+	description="How attentivebrain handles your data: what we collect when you sign in or post a score, how it's used, and your choices. Plain language, no surprises."
+	keywords="attentivebrain privacy policy, data, cookies"
+>
+	<main class="mx-auto max-w-3xl px-6 py-(--spacing-section)">
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Privacy policy</p>
+		<h1 class="text-hero text-ink">Your privacy.</h1>
+		<p class="text-caption text-ink-muted-48 mt-4">Last updated {updated}</p>
+
+		<div class="mt-8 space-y-6 text-ink-muted-80">
+			<p>
+				attentivebrain is built to respect your attention and your privacy. This policy
+				explains, in plain language, what information we collect, why, and what control
+				you have over it. We collect as little as possible.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">Playing without an account</h2>
+			<p>
+				You can play attentivebrain without signing in or giving us any personal
+				information. When you play anonymously, your scores stay on your device and are
+				not sent to us. Your theme preference (light or dark) is stored in your browser's
+				local storage so the site remembers it between visits — this never leaves your
+				device.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">When you sign in</h2>
+			<p>
+				Signing in is optional and uses Google. If you choose to sign in, we receive
+				basic profile information from Google — your name, email address, and profile
+				photo — to identify your account and show your name on the leaderboard. You can
+				edit the display name and photo we show at any time from your profile menu.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">Leaderboard and scores</h2>
+			<p>
+				If you are signed in and finish a round, your best score (words recalled,
+				attention span, and recall time) is stored so it can appear on the public world
+				leaderboard alongside your chosen display name and photo. Only your best score is
+				kept — not a history of every round. Score and profile data are stored with our
+				infrastructure provider (Supabase) on your behalf.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">What we do not do</h2>
+			<p>
+				We do not sell your data. We do not use advertising trackers. We do not build
+				behavioral profiles of you. We do not collect more than what is described above.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">Your choices</h2>
+			<p>
+				You can stop sharing data at any time by logging out, after which anonymous play
+				sends us nothing. To request deletion of your account data — your profile and
+				leaderboard entry — email us and we will remove it. You can also clear the theme
+				preference by clearing your browser's local storage.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">Children</h2>
+			<p>
+				attentivebrain is intended for a general audience and is not directed at children
+				under 13. We do not knowingly collect personal information from children.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">Changes to this policy</h2>
+			<p>
+				We may update this policy as the product evolves. When we do, we will revise the
+				"last updated" date above. Material changes will be reflected here.
+			</p>
+
+			<h2 class="text-display-lg text-ink pt-6">Contact</h2>
+			<p>
+				Questions about your privacy? Email us at
+				<a href={`mailto:${email}`} class="link-action">{email}</a>.
+			</p>
+		</div>
+
+		<div class="mt-12">
+			<a href="/" class="btn-primary">Back to the game</a>
+		</div>
+	</main>
+</Layout>

@@ -308,3 +308,61 @@ Error: Failed to load url astro:server-app.js (resolved id: astro:server-app.js)
 [2m14:08:19[22m [34m[200][39m / [2m217ms[22m
 [2m14:09:59[22m [34m[watch][39m /src/styles/global.css
 [2m14:10:03[22m [34m[200][39m / [2m413ms[22m
+[2m14:15:02[22m [34m[watch][39m /src/styles/global.css
+[2m14:15:05[22m [34m[200][39m / [2m345ms[22m
+[2m14:15:38[22m [34m[watch][39m /src/styles/global.css
+[2m14:15:39[22m [34m[200][39m / [2m79ms[22m
+[2m14:17:37[22m [34m[watch][39m /src/styles/global.css
+[2m14:17:39[22m [34m[200][39m / [2m253ms[22m
+[2m14:19:50[22m [34m[watch][39m /src/styles/global.css
+[2m14:19:52[22m [34m[200][39m / [2m295ms[22m
+[2m14:30:56[22m [34m[watch][39m /src/styles/global.css
+[2m14:30:58[22m [34m[200][39m / [2m272ms[22m
+[2m14:32:13[22m [34m[watch][39m /src/styles/global.css
+[2m14:32:15[22m [34m[200][39m / [2m254ms[22m
+[2m14:32:22[22m [34m[watch][39m /src/styles/global.css
+[2m14:32:23[22m [34m[200][39m / [2m666ms[22m
+[2m14:32:34[22m [34m[watch][39m /src/styles/global.css
+[2m14:32:34[22m [34m[200][39m / [2m33ms[22m
+[2m14:32:51[22m [34m[watch][39m /src/styles/global.css
+[2m14:32:52[22m [34m[200][39m / [2m44ms[22m
+[2m14:33:27[22m [34m[watch][39m /src/styles/global.css
+[2m14:33:28[22m [34m[200][39m / [2m72ms[22m
+[2m14:33:49[22m [34m[watch][39m /src/styles/global.css
+[2m14:33:50[22m [34m[200][39m / [2m62ms[22m
+[2m14:34:07[22m [34m[watch][39m /src/styles/global.css
+[2m14:34:09[22m [34m[200][39m / [2m74ms[22m
+[2m14:34:21[22m [34m[watch][39m /src/styles/global.css
+[2m14:34:22[22m [34m[200][39m / [2m89ms[22m
+[2m14:34:56[22m Configuration file updated. Restarting...
+[vite] program reload
+[vite] An error happened during full reload
+Failed to load url astro:server-app.js (resolved id: astro:server-app.js). Does the file exist?
+Error: Failed to load url astro:server-app.js (resolved id: astro:server-app.js). Does the file exist?
+    at loadAndTransform (file:///N:/focus-attention/my-app/node_modules/vite/dist/node/chunks/config.js:22739:33)
+[vite] connected.
+[2m14:35:05[22m [34m[200][39m / [2m259ms[22m
+[2m14:35:07[22m [34m[watch][39m /src/styles/global.css
+[vite] connected.
+[2m14:35:08[22m [34m[vite][39m Re-optimizing dependencies because vite config has changed
+[2m14:35:08[22m [34m[vite][39m server restarted.
+[2m14:35:20[22m [34m[200][39m / [2m128ms[22m
+[2m14:35:28[22m [34m[vite][39m [32m✨ new dependencies optimized: [33m@supabase/supabase-js[32m[39m
+[2m14:35:28[22m [34m[vite][39m [32m✨ optimized dependencies changed. reloading[39m
+[2m14:35:29[22m [34m[200][39m / [2m10ms[22m
+[vite] program reload
+[vite] An error happened during full reload
+Failed to load url astro:server-app.js (resolved id: astro:server-app.js). Does the file exist?
+Error: Failed to load url astro:server-app.js (resolved id: astro:server-app.js). Does the file exist?
+    at loadAndTransform (file:///N:/focus-attention/my-app/node_modules/vite/dist/node/chunks/config.js:22739:33)
+[2m14:35:51[22m [34m[200][39m / [2m14ms[22m
+[vite] program reload
+[2m14:36:13[22m [34m[200][39m / [2m15ms[22m
+[vite] program reload
+[2m14:36:48[22m [34m[200][39m / [2m142ms[22m
+[2m14:40:25[22m [34m[watch][39m /src/styles/global.css
+[2m14:40:28[22m [34m[200][39m / [2m272ms[22m
+[2m14:53:59[22m [34m[watch][39m /src/styles/global.css
+[2m14:54:02[22m [34m[200][39m / [2m279ms[22m
+[2m14:54:18[22m [34m[watch][39m /src/styles/global.css
+[2m14:54:20[22m [34m[200][39m / [2m307ms[22m

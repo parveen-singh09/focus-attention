@@ -1,0 +1,33 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Static build → 500.html. Static hosts (Netlify, Vercel, Cloudflare Pages)
+// can be configured to serve this for server / runtime errors. noindex so the
+// error page never lands in search results.
+---
+
+<Layout
+	title="Something went wrong (500) — attentivebrain"
+	description="An unexpected error occurred on our end. Try again in a moment."
+	noindex={true}
+>
+	<main class="min-h-[78vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Error 500</p>
+		<h1 class="text-hero text-ink max-w-[16ch]">Something broke on our end.</h1>
+		<p class="text-lead text-ink-muted-80 mt-5 max-w-[44ch]">
+			This one is on us, not you. The page hit an unexpected error — give it a
+			moment and try again.
+		</p>
+		<div class="mt-12 flex items-center gap-3">
+			<button type="button" data-action="retry" class="btn-primary">Try again</button>
+			<a href="/" class="btn-ghost">Back to the game</a>
+		</div>
+	</main>
+</Layout>
+
+<script>
+	// Reload the route that errored, rather than always sending people home.
+	document
+		.querySelector('[data-action="retry"]')
+		?.addEventListener("click", () => location.reload());
+</script>
