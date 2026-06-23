@@ -12,12 +12,14 @@ export interface ScoreInput {
 	attentionSec: number;
 	recallSec: number;
 	displayName?: string; // optional override; defaults to the provider name
+	avatarUrl?: string; // optional override; defaults to the provider avatar
 }
 
 export interface LeaderboardRow {
 	rank: number;
 	userId: string;
 	displayName: string;
+	avatarUrl: string | null;
 	words: number;
 	attentionSec: number;
 	recallSec: number;
@@ -67,6 +69,12 @@ export function displayNameFromSession(session: Session | null): string {
 	return String(name);
 }
 
+// Profile picture URL from a Google session, if any.
+export function avatarFromSession(session: Session | null): string | undefined {
+	const meta = session?.user?.user_metadata as Record<string, unknown> | undefined;
+	return ((meta?.avatar_url as string) || (meta?.picture as string)) || undefined;
+}
+
 // ---- scores ----
 
 // Submit a finished best. No-op unless configured AND signed in. The server
@@ -75,12 +83,15 @@ export async function submitBest(score: ScoreInput): Promise<void> {
 	if (!supabase) return;
 	const session = await getSession();
 	if (!session) return;
-	await supabase.rpc("submit_score", {
+	const { error } = await supabase.rpc("submit_score", {
 		p_words: Math.max(0, Math.round(score.words)),
 		p_attention_sec: Math.max(0, Math.round(score.attentionSec)),
 		p_recall_sec: Math.max(0, Math.round(score.recallSec)),
 		p_display_name: score.displayName ?? displayNameFromSession(session),
+		p_avatar_url: score.avatarUrl ?? avatarFromSession(session) ?? null,
 	});
+	if (error) console.error("[leaderboard] submit_score failed:", error);
+	else console.info("[leaderboard] score submitted");
 }
 
 function mapRow(r: Record<string, unknown>): LeaderboardRow {
@@ -88,18 +99,21 @@ function mapRow(r: Record<string, unknown>): LeaderboardRow {
 		rank: Number(r.rank),
 		userId: String(r.user_id),
 		displayName: String(r.display_name),
+		avatarUrl: r.avatar_url ? String(r.avatar_url) : null,
 		words: Number(r.words),
 		attentionSec: Number(r.attention_sec),
 		recallSec: Number(r.recall_sec),
 	};
 }
 
+const ROW_COLS = "rank, user_id, display_name, avatar_url, words, attention_sec, recall_sec";
+
 // Top N rows of the world ranking.
 export async function fetchTop(limit = 10): Promise<LeaderboardRow[]> {
 	if (!supabase) return [];
 	const { data, error } = await supabase
 		.from("leaderboard")
-		.select("rank, user_id, display_name, words, attention_sec, recall_sec")
+		.select(ROW_COLS)
 		.order("rank", { ascending: true })
 		.limit(limit);
 	if (error || !data) return [];
@@ -114,7 +128,7 @@ export async function fetchMyRank(userId: string): Promise<MyRank | null> {
 	const [{ data: mine }, { count }] = await Promise.all([
 		supabase
 			.from("leaderboard")
-			.select("rank, user_id, display_name, words, attention_sec, recall_sec")
+			.select(ROW_COLS)
 			.eq("user_id", userId)
 			.maybeSingle(),
 		supabase.from("scores").select("user_id", { count: "exact", head: true }),

@@ -126,7 +126,7 @@
 	/* Leaderboard rows — built in JS, so :global(). */
 	:global(.lb-row) {
 		display: grid;
-		grid-template-columns: 2.2rem 1fr auto;
+		grid-template-columns: 1.8rem 1.5rem 1fr auto;
 		align-items: center;
 		gap: 0.5rem;
 		padding: 7px 12px;
@@ -135,6 +135,16 @@
 		color: var(--color-ink);
 	}
 	:global(.lb-row .lb-rank) { color: var(--color-ink-muted-48); font-variant-numeric: tabular-nums; }
+	:global(.lb-row .lb-dp) {
+		width: 24px; height: 24px; border-radius: var(--radius-pill);
+		object-fit: cover; background-color: var(--color-canvas-parchment);
+	}
+	:global(.lb-row .lb-dp-fallback) {
+		width: 24px; height: 24px; border-radius: var(--radius-pill);
+		display: inline-flex; align-items: center; justify-content: center;
+		background-color: var(--color-canvas-parchment);
+		color: var(--color-ink-muted-48); font-size: 11px; font-weight: 600; text-transform: uppercase;
+	}
 	:global(.lb-row .lb-name) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 	:global(.lb-row .lb-metrics) { color: var(--color-ink-muted-48); font-variant-numeric: tabular-nums; font-size: 12px; }
 	:global(.lb-row.is-me) { background-color: color-mix(in srgb, var(--color-primary) 12%, transparent); }
@@ -253,13 +263,45 @@
 	const boardTotal = $<HTMLElement>("[data-board-total]");
 	const boardFoot = $<HTMLElement>("[data-board-foot]");
 
+	function initials(name: string): string {
+		const parts = name.trim().split(/\s+/).filter(Boolean);
+		if (parts.length === 0) return "?";
+		if (parts.length === 1) return parts[0].slice(0, 2);
+		return (parts[0][0] + parts[parts.length - 1][0]);
+	}
+
 	function rowEl(r: LeaderboardRow, isMe: boolean): HTMLLIElement {
 		const li = document.createElement("li");
 		li.className = "lb-row" + (isMe ? " is-me" : "");
-		li.innerHTML = `<span class="lb-rank">#${r.rank}</span>` +
-			`<span class="lb-name"></span>` +
-			`<span class="lb-metrics">${metrics(r)}</span>`;
-		(li.querySelector(".lb-name") as HTMLElement).textContent = r.displayName;
+
+		const rank = document.createElement("span");
+		rank.className = "lb-rank";
+		rank.textContent = `#${r.rank}`;
+
+		let dp: HTMLElement;
+		if (r.avatarUrl) {
+			const img = document.createElement("img");
+			img.className = "lb-dp";
+			img.src = r.avatarUrl;
+			img.alt = "";
+			img.loading = "lazy";
+			img.referrerPolicy = "no-referrer"; // Google avatars block referrer requests
+			dp = img;
+		} else {
+			dp = document.createElement("span");
+			dp.className = "lb-dp-fallback";
+			dp.textContent = initials(r.displayName);
+		}
+
+		const name = document.createElement("span");
+		name.className = "lb-name";
+		name.textContent = r.displayName;
+
+		const met = document.createElement("span");
+		met.className = "lb-metrics";
+		met.textContent = metrics(r);
+
+		li.append(rank, dp, name, met);
 		return li;
 	}
 
