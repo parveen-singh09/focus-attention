@@ -227,3 +227,45 @@
 [2m12:06:43[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
 [2m12:08:41[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
 [2m12:13:15[22m [34m[watch][39m /src/components/FocusGame.astro?astro&type=style&index=0&lang.css
+[2m12:17:20[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:17:24[22m [34m[200][39m / [2m142ms[22m
+[2m12:39:41[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:39:43[22m [34m[200][39m / [2m182ms[22m
+[2m12:39:51[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:39:51[22m [34m[200][39m / [2m39ms[22m
+[2m12:40:16[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:40:16[22m [34m[200][39m / [2m27ms[22m
+[2m12:40:31[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:40:31[22m [34m[200][39m / [2m57ms[22m
+[2m12:42:06[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:42:09[22m [34m[200][39m / [2m207ms[22m
+[31m[1m12:42:10[22m [ERROR] [vite][39m [31mInternal server error: Transform failed with 1 error:
+N:/focus-attention/my-app/src/components/FocusGame.astro?astro&type=script&index=0&lang.ts:484:4: ERROR: Unexpected ")"[39m
+  Plugin: [35mvite:esbuild[39m
+  File: [36mN:/focus-attention/my-app/src/components/FocusGame.astro?astro&type=script&index=0&lang.ts[39m:484:4
+[33m  
+  [33mUnexpected ")"[33m
+  482 |  		}
+  483 |  
+  484 |  			});
+      |      ^
+  485 |  			list.appendChild(chip);
+  486 |  			});
+  [39m
+      at failureErrorWithLog (N:\focus-attention\my-app\node_modules\esbuild\lib\main.js:1748:15)
+      at N:\focus-attention\my-app\node_modules\esbuild\lib\main.js:1017:50
+      at responseCallbacks.<computed> (N:\focus-attention\my-app\node_modules\esbuild\lib\main.js:884:9)
+      at handleIncomingPacket (N:\focus-attention\my-app\node_modules\esbuild\lib\main.js:939:12)
+      at Socket.readFromStdout (N:\focus-attention\my-app\node_modules\esbuild\lib\main.js:862:7)
+      at Socket.emit (node:events:524:28)
+      at addChunk (node:internal/streams/readable:561:12)
+      at readableAddChunkPushByteMode (node:internal/streams/readable:512:3)
+      at Readable.push (node:internal/streams/readable:392:5)
+      at Pipe.onStreamRead (node:internal/stream_base_commons:189:23)
+[2m12:42:42[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:42:44[22m [34m[200][39m / [2m749ms[22m
+[2m12:42:44[22m [34m[200][39m / [2m745ms[22m
+[2m12:49:44[22m [34m[watch][39m src/components/FocusGame.astro
+[2m12:49:47[22m [34m[200][39m / [2m233ms[22m
+[2m13:03:11[22m [34m[200][39m / [2m196ms[22m
+[2m13:04:05[22m [34m[200][39m / [2m17ms[22m
