@@ -652,10 +652,14 @@
 			} catch { /* storage blocked or value malformed */ }
 
 			const line = this.q<HTMLElement>("[data-best-line]");
-			// Rank by words recalled correctly; on a tie, the faster rebuild wins.
+			// Rank by the same lexicographic rule as the server (submit_score):
+			// more words wins; tie → longer attention; tie → faster recall.
 			const isBetter =
 				span > bestWords ||
-				(span === bestWords && bestWords > 0 && this.recallSec < bestRecallSec);
+				(bestWords > 0 && span === bestWords && (
+					this.attentionSec > bestAttentionSec ||
+					(this.attentionSec === bestAttentionSec && this.recallSec < bestRecallSec)
+				));
 			if (isBetter) {
 				bestWords = span;
 				bestAttentionSec = this.attentionSec;

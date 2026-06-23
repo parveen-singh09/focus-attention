@@ -18,8 +18,10 @@
 			</button>
 
 			<!-- Profile menu (signed in) -->
-			<div data-profile-menu hidden role="menu" class="dropdown right-0 left-auto min-w-56">
+			<div data-profile-menu hidden role="menu" class="dropdown left-0 right-auto min-w-56">
 				<p data-profile-name class="px-3 py-2 text-caption text-ink-muted-80 truncate"></p>
+				<div class="h-px w-full bg-hairline"></div>
+				<div data-profile-best class="px-3 py-2"></div>
 				<div class="h-px w-full bg-hairline"></div>
 				<button type="button" class="menu-item" data-action="signout" role="menuitem">Sign out</button>
 			</div>
@@ -216,8 +218,33 @@
 	const profileBtn = $<HTMLButtonElement>('[data-action="profile"]');
 	const profileMenu = $<HTMLElement>("[data-profile-menu]");
 	const profileName = $<HTMLElement>("[data-profile-name]");
+	const profileBest = $<HTMLElement>("[data-profile-best]");
 	const avatar = $<HTMLImageElement>("[data-avatar]");
 	const userIcon = $<SVGElement & HTMLElement>('[data-icon="user"]');
+
+	// Personal best lives in localStorage (written by the game). Same key + shape.
+	const BEST_KEY = "focus-attention:best";
+	function renderProfileBest() {
+		if (!profileBest) return;
+		let best: { words: number; attentionSec: number; recallSec: number } | null = null;
+		try {
+			const raw = localStorage.getItem(BEST_KEY);
+			if (raw) {
+				const p = JSON.parse(raw);
+				if (p && typeof p === "object" && "words" in p && "attentionSec" in p && "recallSec" in p) {
+					best = { words: Number(p.words) || 0, attentionSec: Number(p.attentionSec) || 0, recallSec: Number(p.recallSec) || 0 };
+				}
+			}
+		} catch {}
+
+		if (!best || best.words === 0) {
+			profileBest.innerHTML = `<p class="text-caption text-ink-muted-80">Best score</p><p class="text-fine text-ink-muted-48 mt-0.5">No score yet — finish a round.</p>`;
+			return;
+		}
+		profileBest.innerHTML =
+			`<p class="text-caption text-ink-muted-80">Best score</p>` +
+			`<p class="text-fine text-ink-muted-48 mt-0.5">${best.words}w · ${fmt(best.attentionSec)} · ${fmt(best.recallSec)}</p>`;
+	}
 
 	function renderAuth() {
 		const name = displayNameFromSession(session);
@@ -247,6 +274,7 @@
 		if (!session) { await signInWithGoogle(); return; } // redirects away
 		// Signed in → toggle the menu.
 		const open = profileMenu && profileMenu.hidden;
+		if (open) renderProfileBest();
 		if (profileMenu) profileMenu.hidden = !open;
 		profileBtn.setAttribute("aria-expanded", String(!!open));
 	});

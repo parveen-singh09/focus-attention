@@ -90,8 +90,20 @@ export async function submitBest(score: ScoreInput): Promise<void> {
 		p_display_name: score.displayName ?? displayNameFromSession(session),
 		p_avatar_url: score.avatarUrl ?? avatarFromSession(session) ?? null,
 	});
-	if (error) console.error("[leaderboard] submit_score failed:", error);
-	else console.info("[leaderboard] score submitted");
+	if (error) {
+		// Print the Supabase error as plain text so the reason is readable in
+		// the console without expanding the object (code/message/details/hint).
+		console.error(
+			"[leaderboard] submit_score failed:",
+			JSON.stringify(
+				{ code: error.code, message: error.message, details: error.details, hint: error.hint },
+				null,
+				2,
+			),
+		);
+	} else {
+		console.info("[leaderboard] score submitted");
+	}
 }
 
 function mapRow(r: Record<string, unknown>): LeaderboardRow {
