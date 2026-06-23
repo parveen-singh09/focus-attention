@@ -5,12 +5,47 @@ import SiteHeader from "../components/SiteHeader.astro";
 interface Props {
 	title?: string;
 	description?: string;
+	keywords?: string;
+	image?: string;
+	ogType?: string;
 }
 
 const {
-	title = "focus-attention — train your attention span",
-	description = "A minimal memory game that measures your focus and attention span. Watch words appear, hold the sequence, then recall it.",
+	title = "How to Increase Focus & Attention Span — Free Brain Game | focus-attention",
+	description = "Learn how to increase focus, attention span, and memory with a free brain game. Watch words appear, hold the sequence, then recall it — the best game to train focus and improve memory.",
+	keywords = "how to increase focus, how to increase focus and attention span, how to increase focus and memory, best game to increase focus, how to improve memory, brain game, attention span, focus training, memory game, concentration game",
+	image = "/og-image.svg",
+	ogType = "website",
 } = Astro.props;
+
+// Build absolute URLs for canonical + social tags. Astro.site comes from
+// astro.config.mjs; fall back to the production domain if it is unset.
+const siteOrigin = Astro.site?.origin ?? "https://focus-attention.com";
+const canonicalURL = new URL(Astro.url.pathname, siteOrigin).href;
+const imageURL = new URL(image, siteOrigin).href;
+
+// Structured data: describes the game to search engines so it can surface as
+// a rich result for "brain game" / "focus game" queries.
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@type": "WebApplication",
+	name: "focus-attention",
+	url: siteOrigin,
+	applicationCategory: "GameApplication",
+	operatingSystem: "Web browser",
+	description,
+	offers: {
+		"@type": "Offer",
+		price: "0",
+		priceCurrency: "USD",
+	},
+	about: [
+		"how to increase focus",
+		"attention span",
+		"brain game",
+		"memory improvement",
+	],
+};
 ---
 
 <!doctype html>
@@ -22,13 +57,34 @@ const {
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
 
+		<!-- Primary SEO -->
 		<title>{title}</title>
 		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="robots" content="index, follow, max-image-preview:large" />
+		<meta name="author" content="focus-attention" />
+		<link rel="canonical" href={canonicalURL} />
 
+		<!-- Open Graph (Facebook, LinkedIn, etc.) -->
+		<meta property="og:site_name" content="focus-attention" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:type" content="website" />
+		<meta property="og:type" content={ogType} />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:image" content={imageURL} />
+		<meta property="og:image:alt" content="focus-attention — a brain game to increase focus and attention span" />
+		<meta property="og:locale" content="en_US" />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={imageURL} />
+
 		<meta name="theme-color" content="#ffffff" />
+
+		<!-- Structured data for rich results -->
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
 		<!-- Apply the saved theme before first paint so there is no flash. -->
 		<script is:inline>

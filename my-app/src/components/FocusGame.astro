@@ -79,19 +79,19 @@
 	<!-- ============================================================
 	     PHASE 2 · WATCH — one word at a time, edge-to-edge dark tile
 	     ============================================================ -->
-	<section data-phase="watch" hidden class="fixed inset-0 z-50 bg-surface-tile-1 text-body-on-dark flex flex-col">
+	<section data-phase="watch" hidden class="fixed inset-0 z-50 bg-canvas text-ink flex flex-col">
 		<!-- thin progress line in Action Blue -->
-		<div class="h-0.75 w-full bg-[rgba(255,255,255,0.12)]">
-			<div data-progress class="h-full bg-primary-on-dark transition-[width] duration-200 ease-linear" style="width:0%"></div>
+		<div class="h-0.75 w-full bg-hairline">
+			<div data-progress class="h-full bg-primary transition-[width] duration-200 ease-linear" style="width:0%"></div>
 		</div>
 
 		<div class="flex items-center justify-between px-6 py-5">
-			<span data-clock class="text-caption text-body-muted tabular-nums">0:30</span>
-			<span data-seen-count class="text-caption text-body-muted tabular-nums">0 words</span>
+			<span data-clock class="text-caption text-ink-muted-48 tabular-nums">0:30</span>
+			<span data-seen-count class="text-caption text-ink-muted-48 tabular-nums">0 words</span>
 		</div>
 
 		<div class="flex-1 flex items-center justify-center px-6">
-			<span data-word class="text-display-lg text-body-on-dark" style="font-size:clamp(40px,9vw,88px)">&nbsp;</span>
+			<span data-word class="text-display-lg text-ink" style="font-size:clamp(40px,9vw,88px)">&nbsp;</span>
 		</div>
 
 		<div class="px-6 py-8 flex justify-center">
@@ -335,9 +335,9 @@
 			this.querySelectorAll<HTMLElement>("[data-phase]").forEach((el) => {
 				el.hidden = el.dataset.phase !== phase;
 			});
-			// Dark watch tile wants a dark page behind it on overscroll.
-			document.documentElement.style.backgroundColor =
-				phase === "watch" ? "var(--color-surface-tile-1)" : "var(--color-canvas)";
+			// Every phase now sits on the themed canvas, so keep the page
+			// background in sync with the theme rather than forcing dark.
+			document.documentElement.style.backgroundColor = "var(--color-canvas)";
 		}
 
 		private q<T extends HTMLElement>(sel: string): T {
@@ -570,16 +570,15 @@
 			this.recallTimer = null;
 		}
 
-		// Build the shuffled inbox: one tile per word shown (duplicates kept
-		// so every position in the sequence has a matching tile to tap).
+		// Build the inbox sorted alphabetically: one tile per word shown
+		// (duplicates kept so every position has a matching tile). Sorting —
+		// rather than shuffling — makes a word easy to find when there are many.
 		private renderPool() {
 			const pool = this.q<HTMLElement>("[data-pool]");
 			pool.innerHTML = "";
-			const tiles = this.shown.map((word, i) => ({ word, i }));
-			for (let i = tiles.length - 1; i > 0; i--) {
-				const j = Math.floor(Math.random() * (i + 1));
-				[tiles[i], tiles[j]] = [tiles[j], tiles[i]];
-			}
+			const tiles = this.shown
+				.map((word, i) => ({ word, i }))
+				.sort((a, b) => a.word.localeCompare(b.word));
 			tiles.forEach((t) => {
 				const btn = document.createElement("button");
 				btn.type = "button";

@@ -1,6 +1,6 @@
 // A pool of common, everyday words. These are deliberately simple and
 // concrete (things you see, eat, use, or do every day) so the game tests
-// focus and recall — not vocabulary. 500 unique words.
+// focus and recall — not vocabulary. 1000 unique words.
 export const WORDS: readonly string[] = [
   // people & family
   "baby", "child", "kid", "boy", "girl", "man", "woman", "mother", "father", "sister",
@@ -81,6 +81,95 @@ export const WORDS: readonly string[] = [
   "camera", "radio", "torch", "lantern", "compass", "anchor", "ribbon", "bubble", "feather", "pebble",
   "shell", "coral", "crown", "diamond", "treasure", "medal", "trophy", "tent", "campfire", "sled",
   "skate", "helmet", "straw", "postcard", "newspaper", "magazine", "keyring", "toothbrush", "mug", "spatula",
+
+  // more food
+  "toast", "waffle", "pancake", "muffin", "donut", "pretzel", "popcorn", "chip", "syrup", "jelly",
+  "peanut", "raisin", "apricot", "plum", "pear", "kiwi", "lime", "coconut", "pineapple", "strawberry",
+  "blueberry", "pumpkin", "cabbage", "celery", "spinach", "radish", "pickle", "ginger", "mint", "basil",
+  "flour", "dough", "gravy", "sauce", "ketchup", "mustard", "vinegar", "oil", "yeast", "oat",
+
+  // drinks
+  "cocoa", "lemonade", "smoothie", "shake", "punch", "cider", "whiskey", "brandy", "champagne", "milkshake",
+
+  // actions
+  "run", "walk", "hop", "skip", "crawl", "climb", "swim", "dive", "shout", "whisper",
+  "laugh", "smile", "sleep", "wake", "dream", "sit", "stand", "kneel", "bend", "stretch",
+  "throw", "catch", "kick", "clap", "wave", "point", "hold", "pour", "stir", "slice",
+  "chop", "peel", "cook", "fry", "boil", "wash", "wipe", "sweep", "scrub", "rinse",
+  "fold", "sew", "knit", "count", "spell", "build", "fix", "knock", "fill", "plant",
+  "dig", "feed", "ride", "row", "spin", "roll", "bounce", "melt", "freeze", "shine",
+  "blink", "stare", "listen", "smell", "taste", "touch", "learn", "teach", "share", "buy",
+  "sell", "save", "hide", "chase", "follow", "lead", "greet", "hug", "wink",
+
+  // colors
+  "red", "blue", "green", "yellow", "purple", "pink", "gold", "silver",
+
+  // weather
+  "breeze", "frost", "hail", "mist", "dew", "sunshine", "lightning", "drizzle", "puddle", "icicle",
+  "sunrise", "sunset", "horizon", "comet", "planet", "meteor", "galaxy", "eclipse", "tide", "moonlight",
+
+  // time
+  "second", "minute", "hour", "week", "month", "year", "today", "tomorrow", "noon", "midnight",
+  "dawn", "dusk", "weekend", "holiday", "birthday",
+
+  // jobs
+  "lawyer", "judge", "soldier", "sailor", "captain", "mayor", "clerk", "cashier", "waiter", "janitor",
+  "plumber", "builder", "painter", "barber", "tailor", "butcher", "hunter", "miner", "guard", "scientist",
+  "engineer", "actor", "poet", "author", "reporter", "banker", "gardener", "mechanic", "carpenter", "maid",
+
+  // sports
+  "soccer", "tennis", "golf", "hockey", "baseball", "cricket", "rugby", "boxing", "skiing", "surfing",
+  "bowling", "darts", "chess", "racket", "goal", "jersey", "track", "court", "rink", "team",
+
+  // school
+  "class", "lesson", "homework", "test", "exam", "grade", "subject", "math", "science", "history",
+  "locker", "backpack", "textbook", "globe", "calculator", "blackboard", "recess", "diploma", "lecture", "quiz",
+
+  // places
+  "jungle", "meadow", "prairie", "canyon", "cliff", "tunnel", "tower", "cottage", "cabin", "barn",
+  "stable", "mill", "lighthouse", "dock", "pier", "port", "mall", "bakery", "pharmacy", "cafe",
+  "diner", "cinema", "gallery", "arena", "temple", "prison", "courthouse", "embassy", "cemetery", "playground",
+
+  // body more
+  "forehead", "cheek", "chin", "jaw", "eyebrow", "eyelash", "wrist", "ankle", "heel", "palm",
+  "spine", "rib", "lung", "liver", "kidney", "muscle", "nerve", "vein", "throat", "hip",
+
+  // household
+  "vacuum", "duster", "dustpan", "hanger", "laundry", "detergent", "bleach", "mat", "rug", "blind",
+  "cushion", "quilt", "mattress", "wardrobe", "dresser", "nightstand", "bookshelf", "fireplace", "chimney", "doorknob",
+  "doorbell", "keyhole", "faucet", "drain", "outlet", "thermostat", "heater", "fan", "vase", "poster",
+
+  // tech
+  "laptop", "tablet", "monitor", "printer", "scanner", "speaker", "headphone", "charger", "cable", "router",
+  "modem", "remote", "controller", "joystick", "webcam", "microphone", "earbud", "console", "adapter", "antenna",
+
+  // nature more
+  "boulder", "stream", "creek", "pond", "waterfall", "swamp", "marsh", "dune", "glacier", "volcano",
+  "crater", "reef", "seaweed", "moss", "fern", "vine", "ivy", "cactus", "oak", "pine",
+  "maple", "willow", "birch", "bamboo", "acorn", "pinecone", "blossom", "thorn", "stem",
+
+  // insects & sea
+  "butterfly", "beetle", "grasshopper", "ladybug", "dragonfly", "caterpillar", "wasp", "hornet", "flea", "tick",
+  "slug", "earthworm", "centipede", "scorpion", "jellyfish", "starfish", "octopus", "squid", "lobster", "shrimp",
+  "clam", "oyster", "seahorse", "stingray", "eel", "minnow", "trout", "salmon", "tuna",
+
+  // birds
+  "robin", "sparrow", "finch", "cardinal", "woodpecker", "hummingbird", "seagull", "pelican", "flamingo", "peacock",
+  "turkey", "rooster", "goose", "swan", "stork", "heron", "falcon", "hawk", "vulture", "raven",
+
+  // animals more
+  "lamb", "calf", "foal", "puppy", "kitten", "cub", "piglet", "pony", "mule", "buffalo",
+  "bison", "moose", "antelope", "gazelle", "cheetah", "leopard", "panther", "jaguar", "panda", "koala",
+  "sloth", "otter", "beaver", "raccoon", "skunk", "badger", "hedgehog", "mole", "bat", "weasel",
+  "ferret", "hamster", "gerbil", "chipmunk", "porcupine", "armadillo", "walrus", "seal", "crocodile", "alligator",
+
+  // clothing more
+  "hoodie", "blouse", "vest", "cardigan", "gown", "pajamas", "slipper", "sandal", "sneaker", "mitten",
+  "earmuff", "bandana", "necklace", "bracelet", "earring", "brooch", "shoelace", "collar", "cufflink", "raincoat",
+
+  // misc objects
+  "flashlight", "matchbox", "suitcase", "briefcase", "handbag", "pouch", "keychain", "binocular", "telescope", "microscope",
+  "thermometer", "stopwatch", "hourglass", "funnel", "stepstool", "toolbox", "wheelbarrow", "shovel", "rake", "hoe",
 ];
 
 
