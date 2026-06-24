@@ -101,30 +101,16 @@ const headerI18n = {
 		</div>
 
 		<nav class="flex items-center gap-1" aria-label="Site actions">
-			<!-- Leaderboard -->
-			<div class="relative" data-board-wrap>
-				<button type="button" class="icon-btn" data-action="leaderboard" aria-label={h.leaderboard} aria-haspopup="true" aria-expanded="false" title={h.leaderboard}>
-					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-						<path d="M8 21h8" /><path d="M12 17v4" />
-						<path d="M7 4h10v5a5 5 0 0 1-10 0V4Z" />
-						<path d="M17 5h3v2a3 3 0 0 1-3 3" /><path d="M7 5H4v2a3 3 0 0 0 3 3" />
-					</svg>
-				</button>
-
-				<!-- Leaderboard dropdown -->
-				<div data-board-panel hidden class="dropdown right-0 left-auto w-[min(92vw,360px)]">
-					<div class="flex items-center justify-between px-3 pt-2 pb-1">
-						<p class="text-caption text-ink uppercase tracking-[0.04em]">{h.worldRanking}</p>
-						<span data-board-total class="text-fine text-ink-muted-48"></span>
-					</div>
-					<p class="px-3 pb-2 text-fine text-ink-muted-48">{h.rankedBy}</p>
-					<div class="h-px w-full bg-hairline"></div>
-
-					<ol data-board-list class="max-h-80 overflow-y-auto py-1"></ol>
-
-					<div data-board-foot class="border-t border-hairline px-3 py-3"></div>
-				</div>
-			</div>
+			<!-- Theme toggle (functional) -->
+			<button type="button" class="icon-btn" data-action="theme" aria-label={h.toggleTheme} aria-pressed="false" title={h.toggleTheme}>
+				<svg data-icon="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="4" />
+					<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
+				</svg>
+				<svg data-icon="moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+				</svg>
+			</button>
 
 			<!-- Language picker -->
 			<div class="relative" data-lang-wrap>
@@ -155,16 +141,30 @@ const headerI18n = {
 				</div>
 			</div>
 
-			<!-- Theme toggle (functional) -->
-			<button type="button" class="icon-btn" data-action="theme" aria-label={h.toggleTheme} aria-pressed="false" title={h.toggleTheme}>
-				<svg data-icon="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-					<circle cx="12" cy="12" r="4" />
-					<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
-				</svg>
-				<svg data-icon="moon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-					<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
-				</svg>
-			</button>
+			<!-- Leaderboard -->
+			<div class="relative" data-board-wrap>
+				<button type="button" class="icon-btn" data-action="leaderboard" aria-label={h.leaderboard} aria-haspopup="true" aria-expanded="false" title={h.leaderboard}>
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<path d="M8 21h8" /><path d="M12 17v4" />
+						<path d="M7 4h10v5a5 5 0 0 1-10 0V4Z" />
+						<path d="M17 5h3v2a3 3 0 0 1-3 3" /><path d="M7 5H4v2a3 3 0 0 0 3 3" />
+					</svg>
+				</button>
+
+				<!-- Leaderboard dropdown -->
+				<div data-board-panel hidden class="dropdown right-0 left-auto w-[min(92vw,360px)]">
+					<div class="flex items-center justify-between px-3 pt-2 pb-1">
+						<p class="text-caption text-ink uppercase tracking-[0.04em]">{h.worldRanking}</p>
+						<span data-board-total class="text-fine text-ink-muted-48"></span>
+					</div>
+					<p class="px-3 pb-2 text-fine text-ink-muted-48">{h.rankedBy}</p>
+					<div class="h-px w-full bg-hairline"></div>
+
+					<ol data-board-list class="max-h-80 overflow-y-auto py-1"></ol>
+
+					<div data-board-foot class="border-t border-hairline px-3 py-3"></div>
+				</div>
+			</div>
 		</nav>
 	</div>
 </header>

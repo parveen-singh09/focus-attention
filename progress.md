@@ -26,6 +26,9 @@ Shared progress log for all coding agents working in this repo. Read this first;
 - _None._
 
 ## Log
+- **2026-06-24** — Fixed avatar flash on refresh: updated `updateProfile` in `leaderboard.ts` to sync custom name/avatar changes back to the Supabase Auth session metadata, ensuring the custom profile paints immediately without fallback lag.
+- **2026-06-24** — Swapped the header navigation action icons: placed the Theme toggle icon where the Leaderboard icon was, and the Leaderboard icon where the Theme toggle was.
+- **2026-06-24** — Enhanced mobile responsiveness: scaled down numeric input sizes/gaps on screens below 400px wide in `FocusGame.astro`, replaced fixed bottom padding with responsive margins, enabled title text wrapping on small viewports, and added base rules to `global.css` to hide WebKit's default summary dropdown arrow on Safari/iOS.
 - **2026-06-24** — Changed word unit display to always use `"w"` for leaderboard scores and profile best scores in `SiteHeader.astro`, overriding any language-specific abbreviations.
 - **2026-06-24** — Configured `robots.txt` and updated `sitemap.xml` in the `public` directory to list all 19 localized landing page URLs (`/{lang}`) in addition to English root and static info pages.
 - **2026-06-24** — Added new favicon definitions (PNG, SVG, ICO), Apple touch icon configuration, web app title (`BrainFocus`), and manifest link to `<head>` in `Layout.astro`.

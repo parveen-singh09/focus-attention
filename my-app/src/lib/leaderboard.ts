@@ -95,6 +95,20 @@ export async function updateProfile(input: { displayName?: string; avatarUrl?: s
 		console.error("[leaderboard] updateProfile failed:", error.message);
 		return false;
 	}
+
+	// Sync to user metadata in the Auth session so it paints instantly on refresh
+	// without flashing the old provider (Google) photo/name before fetchMyProfile resolves.
+	const metadata: Record<string, any> = {};
+	if (input.displayName !== undefined) {
+		metadata.full_name = input.displayName.trim().slice(0, 40);
+	}
+	if (input.avatarUrl !== undefined) {
+		metadata.avatar_url = input.avatarUrl;
+	}
+	if (Object.keys(metadata).length > 0) {
+		await supabase.auth.updateUser({ data: metadata });
+	}
+
 	return true;
 }
 
