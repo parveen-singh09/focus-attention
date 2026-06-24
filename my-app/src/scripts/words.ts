@@ -2,96 +2,61 @@
 // concrete (things you see, eat, use, or do every day) so the game tests
 // focus and recall — not vocabulary. 1000 unique words.
 export const WORDS: readonly string[] = [
-  // people & family
   "baby", "child", "kid", "boy", "girl", "man", "woman", "mother", "father", "sister",
   "brother", "uncle", "aunt", "cousin", "friend", "neighbor", "teacher", "doctor", "nurse", "driver",
   "farmer", "chef", "baker", "pilot", "singer", "artist", "writer", "player", "worker", "student",
-
-  // body
   "head", "hair", "face", "eye", "ear", "nose", "mouth", "lip", "tooth", "tongue",
   "neck", "shoulder", "arm", "elbow", "hand", "finger", "thumb", "nail", "chest", "back",
   "stomach", "leg", "knee", "foot", "toe", "heart", "brain", "bone", "skin", "blood",
-
-  // food & drink
   "apple", "banana", "orange", "grape", "lemon", "cherry", "peach", "melon", "berry", "mango",
   "bread", "butter", "cheese", "egg", "milk", "rice", "pasta", "soup", "salad", "pizza",
   "burger", "sandwich", "cake", "cookie", "candy", "sugar", "salt", "pepper", "honey", "jam",
   "meat", "chicken", "fish", "bacon", "beef", "potato", "tomato", "onion", "carrot", "bean",
   "corn", "pea", "garlic", "lettuce", "cucumber", "mushroom", "nut", "seed", "olive", "spice",
   "coffee", "tea", "juice", "water", "soda", "wine", "beer", "cream", "yogurt", "noodle",
-
-  // animals
   "dog", "cat", "bird", "horse", "cow", "pig", "sheep", "goat", "duck", "hen",
   "chick", "rabbit", "mouse", "rat", "fox", "wolf", "bear", "lion", "tiger", "deer",
   "monkey", "elephant", "giraffe", "zebra", "snake", "frog", "turtle", "lizard", "spider", "ant",
   "bee", "fly", "moth", "worm", "snail", "crab", "shark", "whale", "dolphin", "owl",
   "eagle", "crow", "pigeon", "parrot", "penguin", "kangaroo", "camel", "donkey", "squirrel", "hippo",
-
-  // home & furniture
   "house", "room", "door", "window", "wall", "floor", "roof", "stairs", "kitchen", "bedroom",
   "bathroom", "garage", "garden", "yard", "fence", "gate", "table", "chair", "sofa", "bed",
   "pillow", "blanket", "lamp", "clock", "mirror", "shelf", "drawer", "closet", "carpet", "curtain",
   "desk", "bench", "stool", "couch", "cabinet", "bucket", "basket", "box", "bag", "jar",
-
-  // kitchen & dishes
   "plate", "bowl", "cup", "glass", "spoon", "fork", "knife", "pot", "pan", "kettle",
   "oven", "stove", "fridge", "sink", "towel", "napkin", "bottle", "can", "tray", "lid",
-
-  // clothing
   "shirt", "pants", "dress", "skirt", "coat", "jacket", "sweater", "hat", "cap", "scarf",
   "glove", "sock", "shoe", "boot", "belt", "tie", "button", "pocket", "zipper", "shorts",
   "jeans", "suit", "robe", "apron", "ring", "watch", "glasses", "purse", "wallet", "umbrella",
-
-  // nature & weather
   "sun", "moon", "star", "sky", "cloud", "rain", "snow", "wind", "storm", "fog",
   "ice", "fire", "smoke", "tree", "leaf", "branch", "root", "flower", "grass", "bush",
   "rose", "petal", "forest", "field", "hill", "mountain", "valley", "river", "lake", "ocean",
   "sea", "beach", "sand", "rock", "stone", "mud", "dirt", "cave", "island", "desert",
   "rainbow", "thunder", "shadow", "morning", "night", "day", "season", "summer", "winter", "autumn",
-
-  // school & office
   "book", "page", "paper", "pen", "pencil", "eraser", "ruler", "marker", "crayon", "notebook",
   "letter", "word", "number", "story", "map", "chart", "card", "stamp", "envelope", "folder",
   "scissors", "glue", "tape", "clip", "stapler", "board", "chalk", "screen", "keyboard", "calendar",
-
-  // tools & objects
   "hammer", "screw", "saw", "drill", "wrench", "ladder", "rope", "chain", "wire", "brush",
   "broom", "mop", "soap", "sponge", "comb", "razor", "needle", "thread", "key", "lock",
   "battery", "wheel", "engine", "pump", "magnet", "spring", "switch", "plug", "tube", "hook",
-
-  // transport
   "car", "bus", "truck", "train", "plane", "boat", "ship", "bike", "scooter", "taxi",
   "wagon", "cart", "subway", "tractor", "rocket", "helicopter", "sailboat", "canoe", "ferry", "van",
-
-  // places
   "school", "store", "shop", "market", "bank", "office", "hospital", "library", "museum", "park",
   "church", "hotel", "restaurant", "factory", "farm", "station", "airport", "bridge", "road", "street",
   "city", "town", "village", "country", "palace", "castle", "zoo", "harbor", "theater", "stadium",
-
-  // toys & play
   "ball", "toy", "doll", "kite", "puzzle", "game", "block", "drum", "balloon", "marble",
   "swing", "slide", "robot", "puppet", "whistle", "yoyo", "dice", "top", "jump", "race",
-
-  // music & art
   "music", "song", "guitar", "piano", "violin", "flute", "trumpet", "bell", "horn", "harp",
   "paint", "color", "picture", "photo", "frame", "movie", "dance", "stage", "circus", "clown",
-
-  // misc everyday
   "money", "coin", "dollar", "price", "gift", "candle", "match", "flag", "ticket", "phone",
   "camera", "radio", "torch", "lantern", "compass", "anchor", "ribbon", "bubble", "feather", "pebble",
   "shell", "coral", "crown", "diamond", "treasure", "medal", "trophy", "tent", "campfire", "sled",
   "skate", "helmet", "straw", "postcard", "newspaper", "magazine", "keyring", "toothbrush", "mug", "spatula",
-
-  // more food
   "toast", "waffle", "pancake", "muffin", "donut", "pretzel", "popcorn", "chip", "syrup", "jelly",
   "peanut", "raisin", "apricot", "plum", "pear", "kiwi", "lime", "coconut", "pineapple", "strawberry",
   "blueberry", "pumpkin", "cabbage", "celery", "spinach", "radish", "pickle", "ginger", "mint", "basil",
   "flour", "dough", "gravy", "sauce", "ketchup", "mustard", "vinegar", "oil", "yeast", "oat",
-
-  // drinks
   "cocoa", "lemonade", "smoothie", "shake", "punch", "cider", "whiskey", "brandy", "champagne", "milkshake",
-
-  // actions
   "run", "walk", "hop", "skip", "crawl", "climb", "swim", "dive", "shout", "whisper",
   "laugh", "smile", "sleep", "wake", "dream", "sit", "stand", "kneel", "bend", "stretch",
   "throw", "catch", "kick", "clap", "wave", "point", "hold", "pour", "stir", "slice",
@@ -100,74 +65,42 @@ export const WORDS: readonly string[] = [
   "dig", "feed", "ride", "row", "spin", "roll", "bounce", "melt", "freeze", "shine",
   "blink", "stare", "listen", "smell", "taste", "touch", "learn", "teach", "share", "buy",
   "sell", "save", "hide", "chase", "follow", "lead", "greet", "hug", "wink",
-
-  // colors
   "red", "blue", "green", "yellow", "purple", "pink", "gold", "silver",
-
-  // weather
   "breeze", "frost", "hail", "mist", "dew", "sunshine", "lightning", "drizzle", "puddle", "icicle",
   "sunrise", "sunset", "horizon", "comet", "planet", "meteor", "galaxy", "eclipse", "tide", "moonlight",
-
-  // time
   "second", "minute", "hour", "week", "month", "year", "today", "tomorrow", "noon", "midnight",
   "dawn", "dusk", "weekend", "holiday", "birthday",
-
-  // jobs
   "lawyer", "judge", "soldier", "sailor", "captain", "mayor", "clerk", "cashier", "waiter", "janitor",
   "plumber", "builder", "painter", "barber", "tailor", "butcher", "hunter", "miner", "guard", "scientist",
   "engineer", "actor", "poet", "author", "reporter", "banker", "gardener", "mechanic", "carpenter", "maid",
-
-  // sports
   "soccer", "tennis", "golf", "hockey", "baseball", "cricket", "rugby", "boxing", "skiing", "surfing",
   "bowling", "darts", "chess", "racket", "goal", "jersey", "track", "court", "rink", "team",
-
-  // school
   "class", "lesson", "homework", "test", "exam", "grade", "subject", "math", "science", "history",
   "locker", "backpack", "textbook", "globe", "calculator", "blackboard", "recess", "diploma", "lecture", "quiz",
-
-  // places
   "jungle", "meadow", "prairie", "canyon", "cliff", "tunnel", "tower", "cottage", "cabin", "barn",
   "stable", "mill", "lighthouse", "dock", "pier", "port", "mall", "bakery", "pharmacy", "cafe",
   "diner", "cinema", "gallery", "arena", "temple", "prison", "courthouse", "embassy", "cemetery", "playground",
-
-  // body more
   "forehead", "cheek", "chin", "jaw", "eyebrow", "eyelash", "wrist", "ankle", "heel", "palm",
   "spine", "rib", "lung", "liver", "kidney", "muscle", "nerve", "vein", "throat", "hip",
-
-  // household
   "vacuum", "duster", "dustpan", "hanger", "laundry", "detergent", "bleach", "mat", "rug", "blind",
   "cushion", "quilt", "mattress", "wardrobe", "dresser", "nightstand", "bookshelf", "fireplace", "chimney", "doorknob",
   "doorbell", "keyhole", "faucet", "drain", "outlet", "thermostat", "heater", "fan", "vase", "poster",
-
-  // tech
   "laptop", "tablet", "monitor", "printer", "scanner", "speaker", "headphone", "charger", "cable", "router",
   "modem", "remote", "controller", "joystick", "webcam", "microphone", "earbud", "console", "adapter", "antenna",
-
-  // nature more
   "boulder", "stream", "creek", "pond", "waterfall", "swamp", "marsh", "dune", "glacier", "volcano",
   "crater", "reef", "seaweed", "moss", "fern", "vine", "ivy", "cactus", "oak", "pine",
   "maple", "willow", "birch", "bamboo", "acorn", "pinecone", "blossom", "thorn", "stem",
-
-  // insects & sea
   "butterfly", "beetle", "grasshopper", "ladybug", "dragonfly", "caterpillar", "wasp", "hornet", "flea", "tick",
   "slug", "earthworm", "centipede", "scorpion", "jellyfish", "starfish", "octopus", "squid", "lobster", "shrimp",
   "clam", "oyster", "seahorse", "stingray", "eel", "minnow", "trout", "salmon", "tuna",
-
-  // birds
   "robin", "sparrow", "finch", "cardinal", "woodpecker", "hummingbird", "seagull", "pelican", "flamingo", "peacock",
   "turkey", "rooster", "goose", "swan", "stork", "heron", "falcon", "hawk", "vulture", "raven",
-
-  // animals more
   "lamb", "calf", "foal", "puppy", "kitten", "cub", "piglet", "pony", "mule", "buffalo",
   "bison", "moose", "antelope", "gazelle", "cheetah", "leopard", "panther", "jaguar", "panda", "koala",
   "sloth", "otter", "beaver", "raccoon", "skunk", "badger", "hedgehog", "mole", "bat", "weasel",
   "ferret", "hamster", "gerbil", "chipmunk", "porcupine", "armadillo", "walrus", "seal", "crocodile", "alligator",
-
-  // clothing more
   "hoodie", "blouse", "vest", "cardigan", "gown", "pajamas", "slipper", "sandal", "sneaker", "mitten",
   "earmuff", "bandana", "necklace", "bracelet", "earring", "brooch", "shoelace", "collar", "cufflink", "raincoat",
-
-  // misc objects
   "flashlight", "matchbox", "suitcase", "briefcase", "handbag", "pouch", "keychain", "binocular", "telescope", "microscope",
   "thermometer", "stopwatch", "hourglass", "funnel", "stepstool", "toolbox", "wheelbarrow", "shovel", "rake", "hoe",
 ];

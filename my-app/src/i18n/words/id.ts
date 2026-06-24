@@ -1,96 +1,61 @@
 // Kumpulan kata umum sehari-hari. Terjemahan kumpulan kata bahasa Inggris di
 // src/scripts/words.ts — urutan dan kategori yang sama. 1000 kata.
 export const WORDS: readonly string[] = [
-  // people & family
   "bayi", "anak", "bocah", "anak laki-laki", "anak perempuan", "pria", "wanita", "ibu", "ayah", "kakak perempuan",
   "kakak laki-laki", "paman", "bibi", "sepupu", "teman", "tetangga", "guru", "dokter", "perawat", "sopir",
   "petani", "koki", "tukang roti", "pilot", "penyanyi", "seniman", "penulis", "pemain", "pekerja", "pelajar",
-
-  // body
   "kepala", "rambut", "wajah", "mata", "telinga", "hidung", "mulut", "bibir", "gigi", "lidah",
   "leher", "bahu", "lengan", "siku", "tangan", "jari", "ibu jari", "kuku", "dada", "punggung",
   "perut", "kaki", "lutut", "telapak kaki", "jari kaki", "jantung", "otak", "tulang", "kulit", "darah",
-
-  // food & drink
   "apel", "pisang", "jeruk", "anggur", "lemon", "ceri", "persik", "melon", "beri", "mangga",
   "roti", "mentega", "keju", "telur", "susu", "nasi", "pasta", "sup", "salad", "pizza",
   "burger", "roti lapis", "kue", "biskuit", "permen", "gula", "garam", "lada", "madu", "selai",
   "daging", "ayam", "ikan", "daging asap", "daging sapi", "kentang", "tomat", "bawang", "wortel", "kacang",
   "jagung", "kacang polong", "bawang putih", "selada", "mentimun", "jamur", "kacang keras", "biji", "zaitun", "rempah",
   "kopi", "teh", "jus", "air", "soda", "anggur minuman", "bir", "krim", "yogurt", "mi",
-
-  // animals
   "anjing", "kucing", "burung", "kuda", "sapi", "babi", "domba", "kambing", "bebek", "ayam betina",
   "anak ayam", "kelinci", "tikus kecil", "tikus", "rubah", "serigala", "beruang", "singa", "harimau", "rusa",
   "monyet", "gajah", "jerapah", "zebra", "ular", "katak", "kura-kura", "kadal", "laba-laba", "semut",
   "lebah", "lalat", "ngengat", "cacing", "siput", "kepiting", "hiu", "paus", "lumba-lumba", "burung hantu",
   "elang", "gagak", "merpati", "kakaktua", "penguin", "kanguru", "unta", "keledai", "tupai", "kuda nil",
-
-  // home & furniture
   "rumah", "kamar", "pintu", "jendela", "dinding", "lantai", "atap", "tangga", "dapur", "kamar tidur",
   "kamar mandi", "garasi", "taman", "pekarangan", "pagar", "gerbang", "meja", "kursi", "sofa", "tempat tidur",
   "bantal", "selimut", "lampu", "jam dinding", "cermin", "rak", "laci", "lemari", "karpet", "tirai",
   "meja tulis", "bangku", "kursi tinggi", "dipan", "kabinet", "ember", "keranjang", "kotak", "tas", "toples",
-
-  // kitchen & dishes
   "piring", "mangkuk", "cangkir", "gelas", "sendok", "garpu", "pisau", "panci", "wajan", "ketel",
   "oven", "kompor", "kulkas", "wastafel", "handuk", "serbet", "botol", "kaleng", "nampan", "tutup",
-
-  // clothing
   "kemeja", "celana", "gaun", "rok", "mantel", "jaket", "sweter", "topi", "topi pet", "syal",
   "sarung tangan", "kaus kaki", "sepatu", "sepatu bot", "ikat pinggang", "dasi", "kancing", "saku", "ritsleting", "celana pendek",
   "jins", "setelan jas", "jubah", "celemek", "cincin", "jam tangan", "kacamata", "tas tangan", "dompet", "payung",
-
-  // nature & weather
   "matahari", "rembulan", "bintang", "langit", "awan", "hujan", "salju", "angin", "badai", "kabut",
   "es", "api", "asap", "pohon", "daun", "ranting", "akar", "bunga", "rumput", "semak",
   "mawar", "kelopak", "hutan", "ladang", "bukit", "gunung", "lembah", "sungai", "danau", "samudra",
   "laut", "pantai", "pasir", "batu besar", "batu", "lumpur", "tanah", "gua", "pulau", "gurun",
   "pelangi", "guntur", "bayangan", "pagi", "malam", "siang", "musim", "musim panas", "musim dingin", "musim gugur",
-
-  // school & office
   "buku", "halaman", "kertas", "pena", "pensil", "penghapus", "penggaris", "spidol", "krayon", "buku tulis",
   "surat", "kata", "angka", "cerita", "peta", "bagan", "kartu", "perangko", "amplop", "map",
   "gunting", "lem", "selotip", "klip", "stapler", "papan", "kapur", "layar", "papan ketik", "kalender",
-
-  // tools & objects
   "palu", "sekrup", "gergaji", "bor", "kunci pas", "tangga lipat", "tali", "rantai", "kawat", "kuas",
   "sapu", "pel", "sabun", "spons", "sisir", "pisau cukur", "jarum", "benang", "kunci", "gembok",
   "baterai", "roda", "mesin", "pompa", "magnet", "pegas", "sakelar", "colokan", "tabung", "kait",
-
-  // transport
   "mobil", "bus", "truk", "kereta", "pesawat", "perahu", "kapal", "sepeda", "skuter", "taksi",
   "gerobak", "kereta dorong", "kereta bawah tanah", "traktor", "roket", "helikopter", "perahu layar", "kano", "feri", "van",
-
-  // places
   "sekolah", "toko", "kedai", "pasar", "bank", "kantor", "rumah sakit", "perpustakaan", "museum", "taman kota",
   "gereja", "hotel", "restoran", "pabrik", "pertanian", "stasiun", "bandara", "jembatan", "jalan raya", "jalan",
   "kota", "kota kecil", "desa", "negara", "istana", "kastil", "kebun binatang", "pelabuhan", "teater", "stadion",
-
-  // toys & play
   "bola", "mainan", "boneka", "layang-layang", "teka-teki", "permainan", "balok", "drum", "balon", "kelereng",
   "ayunan", "perosotan", "robot", "wayang", "peluit", "yoyo", "dadu", "gasing", "lompat", "balapan",
-
-  // music & art
   "musik", "lagu", "gitar", "piano", "biola", "seruling", "terompet", "lonceng", "klakson", "harpa",
   "cat", "warna", "lukisan", "foto", "bingkai", "film", "tarian", "panggung", "sirkus", "badut",
-
-  // misc everyday
   "uang", "koin", "dolar", "harga", "hadiah", "lilin", "korek api", "bendera", "tiket", "telepon",
   "kamera", "radio", "obor", "lentera", "kompas", "jangkar", "pita", "gelembung", "bulu", "kerikil",
   "cangkang", "karang", "mahkota", "berlian", "harta karun", "medali", "piala", "tenda", "api unggun", "kereta luncur",
   "sepatu roda", "helm", "sedotan", "kartu pos", "koran", "majalah", "gantungan kunci", "sikat gigi", "cangkir besar", "spatula",
-
-  // more food
   "roti panggang", "wafel", "panekuk", "kue muffin", "donat", "pretzel", "berondong jagung", "keripik", "sirop", "agar",
   "kacang tanah", "kismis", "aprikot", "prem", "pir", "kiwi", "jeruk nipis", "kelapa", "nanas", "stroberi",
   "bluberi", "labu", "kubis", "seledri", "bayam", "lobak", "acar", "jahe", "mint", "kemangi",
   "tepung", "adonan", "saus daging", "saus", "saus tomat", "mostar", "cuka", "minyak", "ragi", "gandum",
-
-  // drinks
   "kakao", "limun", "smoothie", "minuman kocok", "punch", "sari apel", "wiski", "brendi", "sampanye", "milkshake",
-
-  // actions
   "berlari", "berjalan", "melompat kecil", "melangkahi", "merangkak", "memanjat", "berenang", "menyelam", "berteriak", "berbisik",
   "tertawa", "tersenyum", "tidur", "bangun", "bermimpi", "duduk", "berdiri", "berlutut", "membungkuk", "meregang",
   "melempar", "menangkap", "menendang", "bertepuk", "melambai", "menunjuk", "memegang", "menuang", "mengaduk", "mengiris",
@@ -99,74 +64,42 @@ export const WORDS: readonly string[] = [
   "menggali", "memberi makan", "menunggang", "mendayung", "memutar", "menggelinding", "memantul", "meleleh", "membeku", "bersinar",
   "berkedip", "menatap", "mendengar", "mencium bau", "mencicipi", "menyentuh", "belajar", "mengajar", "berbagi", "membeli",
   "menjual", "menabung", "menyembunyikan", "mengejar", "mengikuti", "memimpin", "menyapa", "memeluk", "mengedip",
-
-  // colors
   "merah", "biru", "hijau", "kuning", "ungu", "merah muda", "emas", "perak",
-
-  // weather
   "angin sepoi", "embun beku", "hujan es", "kabut tipis", "embun", "sinar matahari", "petir", "gerimis", "genangan", "es gantung",
   "matahari terbit", "matahari terbenam", "cakrawala", "komet", "planet", "meteor", "galaksi", "gerhana", "pasang surut", "cahaya bulan",
-
-  // time
   "detik", "menit", "jam", "minggu", "bulan", "tahun", "hari ini", "besok", "siang hari", "tengah malam",
   "fajar", "senja", "akhir pekan", "hari libur", "ulang tahun",
-
-  // jobs
   "pengacara", "hakim", "tentara", "pelaut", "kapten", "wali kota", "juru tulis", "kasir", "pelayan", "petugas kebersihan",
   "tukang ledeng", "tukang bangunan", "tukang cat", "tukang cukur", "penjahit", "tukang daging", "pemburu", "penambang", "penjaga", "ilmuwan",
   "insinyur", "aktor", "penyair", "pengarang", "wartawan", "bankir", "tukang kebun", "montir", "tukang kayu", "pembantu rumah",
-
-  // sports
   "sepak bola", "tenis", "golf", "hoki", "bisbol", "kriket", "rugbi", "tinju", "ski", "selancar",
   "boling", "lempar panah", "catur", "raket", "gol", "kaus seragam", "lintasan", "lapangan", "arena es", "tim",
-
-  // school
   "kelas", "pelajaran", "pekerjaan rumah", "tes", "ujian", "nilai", "mata pelajaran", "matematika", "ilmu pengetahuan", "sejarah",
   "loker", "ransel", "buku pelajaran", "bola dunia", "kalkulator", "papan tulis", "istirahat", "ijazah", "kuliah", "kuis",
-
-  // places
   "rimba", "padang rumput", "padang luas", "ngarai", "tebing", "terowongan", "menara", "pondok", "kabin", "lumbung",
   "kandang kuda", "penggilingan", "mercusuar", "dermaga", "pelantar", "pelabuhan kecil", "mal", "toko roti", "apotek", "kafe",
   "warung makan", "bioskop", "galeri", "arena pertandingan", "kuil", "penjara", "gedung pengadilan", "kedutaan", "pemakaman", "taman bermain",
-
-  // body more
   "dahi", "pipi", "dagu", "rahang", "alis", "bulu mata", "pergelangan tangan", "pergelangan kaki", "tumit", "telapak tangan",
   "tulang belakang", "tulang rusuk", "paru-paru", "hati", "ginjal", "otot", "saraf", "pembuluh darah", "tenggorokan", "pinggul",
-
-  // household
   "penyedot debu", "kemoceng", "pengki", "gantungan baju", "cucian", "deterjen", "pemutih", "keset", "permadani", "tirai bilah",
   "bantal sofa", "selimut tebal", "kasur", "lemari pakaian", "lemari laci", "meja samping", "rak buku", "perapian", "cerobong asap", "kenop pintu",
   "bel pintu", "lubang kunci", "keran", "saluran air", "stopkontak", "termostat", "pemanas", "kipas angin", "vas bunga", "poster",
-
-  // tech
   "laptop", "tablet", "monitor", "printer", "pemindai", "pengeras suara", "headphone", "pengisi daya", "kabel", "router",
   "modem", "remot", "pengontrol", "joystik", "webcam", "mikrofon", "earbud", "konsol", "adaptor", "antena",
-
-  // nature more
   "batu besar bongkah", "anak sungai", "kali kecil", "kolam", "air terjun", "rawa", "paya", "bukit pasir", "gletser", "gunung berapi",
   "kawah", "terumbu", "rumput laut", "lumut", "pakis", "tanaman rambat", "ivy", "kaktus", "ek", "pinus",
   "mapel", "willow", "birch", "bambu", "biji ek", "buah pinus", "kuntum", "duri", "batang",
-
-  // insects & sea
   "kupu-kupu", "kumbang", "belalang", "kepik", "capung", "ulat", "tawon", "tabuhan", "kutu loncat", "caplak",
   "siput tanpa cangkang", "cacing tanah", "kelabang", "kalajengking", "ubur-ubur", "bintang laut", "gurita", "cumi-cumi", "lobster", "udang",
   "kerang", "tiram", "kuda laut", "ikan pari", "belut", "ikan kecil", "ikan trout", "salmon", "tuna",
-
-  // birds
   "robin", "burung pipit", "burung finch", "burung kardinal", "pelatuk", "kolibri", "camar", "pelikan", "flamingo", "merak",
   "kalkun", "ayam jago", "angsa kecil", "angsa", "bangau", "kuntul", "elang kecil", "rajawali", "burung nasar", "gagak besar",
-
-  // animals more
   "anak domba", "anak sapi", "anak kuda", "anak anjing", "anak kucing", "anak singa", "anak babi", "kuda poni", "bagal", "kerbau",
   "bison", "rusa besar", "antelop", "gazel", "citah", "macan tutul", "panter", "jaguar", "panda", "koala",
   "kungkang", "berang-berang", "berang sungai", "rakun", "sigung", "luak", "landak kecil", "tikus mondok", "kelelawar", "musang kecil",
   "musang ferret", "hamster", "tikus gerbil", "tupai tanah", "landak", "armadilo", "walrus", "anjing laut", "buaya", "aligator",
-
-  // clothing more
   "jaket hoodie", "blus", "rompi", "kardigan", "gaun pesta", "piama", "sandal rumah", "sandal", "sepatu kets", "sarung tangan tertutup",
   "penutup telinga", "ikat kepala", "kalung", "gelang", "anting", "bros", "tali sepatu", "kerah", "kancing manset", "jas hujan",
-
-  // misc objects
   "senter", "kotak korek api", "koper", "tas kerja", "tas tangan wanita", "kantong", "rantai kunci", "teropong", "teleskop", "mikroskop",
   "termometer", "stopwatch", "jam pasir", "corong", "bangku injak", "kotak perkakas", "gerobak dorong", "sekop", "garu", "cangkul",
 ];

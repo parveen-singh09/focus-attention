@@ -2,96 +2,61 @@
 // concrete (cose che vedi, mangi, usi o fai ogni giorno) così che il gioco metta
 // alla prova la concentrazione e il richiamo, non il vocabolario. 1000 parole.
 export const WORDS: readonly string[] = [
-  // persone e famiglia
   "bebè", "bambino", "ragazzino", "ragazzo", "ragazza", "uomo", "donna", "madre", "padre", "sorella",
   "fratello", "zio", "zia", "cugino", "amico", "vicino", "insegnante", "medico", "infermiere", "autista",
   "contadino", "cuoco", "panettiere", "pilota", "cantante", "artista", "scrittore", "giocatore", "operaio", "studente",
-
-  // corpo
   "testa", "capelli", "viso", "occhio", "orecchio", "naso", "bocca", "labbro", "dente", "lingua",
   "collo", "spalla", "braccio", "gomito", "mano", "dito", "pollice", "unghia", "petto", "schiena",
   "stomaco", "gamba", "ginocchio", "piede", "dito del piede", "cuore", "cervello", "osso", "pelle", "sangue",
-
-  // cibo e bevande
   "mela", "banana", "arancia", "uva", "limone", "ciliegia", "pesca", "melone", "bacca", "mango",
   "pane", "burro", "formaggio", "uovo", "latte", "riso", "pasta", "zuppa", "insalata", "pizza",
   "hamburger", "panino", "torta", "biscotto", "caramella", "zucchero", "sale", "pepe", "miele", "marmellata",
   "carne", "pollo", "pesce", "pancetta", "manzo", "patata", "pomodoro", "cipolla", "carota", "fagiolo",
   "mais", "pisello", "aglio", "lattuga", "cetriolo", "fungo", "noce", "seme", "oliva", "spezia",
   "caffè", "tè", "succo", "acqua", "bibita", "vino", "birra", "panna", "yogurt", "spaghetto",
-
-  // animali
   "cane", "gatto", "uccello", "cavallo", "mucca", "maiale", "pecora", "capra", "anatra", "gallina",
   "pulcino", "coniglio", "topo", "ratto", "volpe", "lupo", "orso", "leone", "tigre", "cervo",
   "scimmia", "elefante", "giraffa", "zebra", "serpente", "rana", "tartaruga", "lucertola", "ragno", "formica",
   "ape", "mosca", "falena", "verme", "chiocciola", "granchio", "squalo", "balena", "delfino", "gufo",
   "aquila", "cornacchia", "piccione", "pappagallo", "pinguino", "canguro", "cammello", "asino", "scoiattolo", "ippopotamo",
-
-  // casa e mobili
   "casa", "stanza", "porta", "finestra", "parete", "pavimento", "tetto", "scale", "cucina", "camera da letto",
   "bagno", "garage", "giardino", "cortile", "recinto", "cancello", "tavolo", "sedia", "divano", "letto",
   "guanciale", "coperta", "lampada", "orologio", "specchio", "scaffale", "cassetto", "armadio", "tappeto", "tenda",
   "scrivania", "panca", "sgabello", "sofà", "credenza", "secchio", "cesto", "scatola", "borsa", "barattolo",
-
-  // cucina e stoviglie
   "piatto", "ciotola", "tazza", "bicchiere", "cucchiaio", "forchetta", "coltello", "pentola", "padella", "bollitore",
   "forno", "fornello", "frigorifero", "lavandino", "asciugamano", "tovagliolo", "bottiglia", "lattina", "vassoio", "coperchio",
-
-  // abbigliamento
   "camicia", "pantaloni", "vestito", "gonna", "cappotto", "giacca", "maglione", "cappello", "berretto", "sciarpa",
   "guanto", "calzino", "scarpa", "stivale", "cintura", "cravatta", "bottone", "tasca", "cerniera", "pantaloncini",
   "jeans", "completo", "vestaglia", "grembiule", "anello", "orologio da polso", "occhiali", "borsetta", "portafoglio", "ombrello",
-
-  // natura e meteo
   "sole", "luna", "stella", "cielo", "nuvola", "pioggia", "neve", "vento", "tempesta", "nebbia",
   "ghiaccio", "fuoco", "fumo", "albero", "foglia", "ramo", "radice", "fiore", "erba", "cespuglio",
   "rosa", "petalo", "foresta", "campo", "collina", "montagna", "valle", "fiume", "lago", "oceano",
   "mare", "spiaggia", "sabbia", "roccia", "pietra", "fango", "terra", "grotta", "isola", "deserto",
   "arcobaleno", "tuono", "ombra", "mattina", "notte", "giorno", "stagione", "estate", "inverno", "autunno",
-
-  // scuola e ufficio
   "libro", "pagina", "carta", "penna", "matita", "gomma", "righello", "pennarello", "pastello", "quaderno",
   "lettera", "parola", "numero", "racconto", "mappa", "grafico", "scheda", "francobollo", "busta", "cartella",
   "forbici", "colla", "nastro adesivo", "graffetta", "cucitrice", "lavagna", "gesso", "schermo", "tastiera", "calendario",
-
-  // attrezzi e oggetti
   "martello", "vite", "sega", "trapano", "chiave inglese", "scala a pioli", "corda", "catena", "filo metallico", "spazzola",
   "scopa", "mocio", "sapone", "spugna", "pettine", "rasoio", "ago", "filo", "chiave", "serratura",
   "batteria", "ruota", "motore", "pompa", "magnete", "molla", "interruttore", "spina elettrica", "tubo", "gancio",
-
-  // trasporti
   "auto", "autobus", "camion", "treno", "aereo", "barca", "nave", "bicicletta", "monopattino", "taxi",
   "carro", "carrello", "metropolitana", "trattore", "razzo", "elicottero", "barca a vela", "canoa", "traghetto", "furgone",
-
-  // luoghi
   "scuola", "negozio", "bottega", "mercato", "banca", "ufficio", "ospedale", "biblioteca", "museo", "parco",
   "chiesa", "hotel", "ristorante", "fabbrica", "fattoria", "stazione", "aeroporto", "ponte", "strada", "via",
   "città", "paese", "villaggio", "nazione", "palazzo", "castello", "zoo", "porto", "teatro", "stadio",
-
-  // giocattoli e gioco
   "palla", "giocattolo", "bambola", "aquilone", "puzzle", "gioco", "cubo", "tamburo", "palloncino", "biglia",
   "altalena", "scivolo", "robot", "burattino", "fischietto", "yoyo", "dado", "trottola", "salto", "corsa",
-
-  // musica e arte
   "musica", "canzone", "chitarra", "piano", "violino", "flauto", "tromba", "campana", "corno", "arpa",
   "pittura", "colore", "immagine", "foto", "cornice", "film", "ballo", "palco", "circo", "pagliaccio",
-
-  // varie quotidiane
   "denaro", "moneta", "dollaro", "prezzo", "regalo", "candela", "fiammifero", "bandiera", "biglietto", "telefono",
   "fotocamera", "radio", "torcia", "lanterna", "bussola", "ancora", "nastro", "bolla", "piuma", "ciottolo",
   "conchiglia", "corallo", "corona", "diamante", "tesoro", "medaglia", "trofeo", "tenda da campeggio", "falò", "slitta",
   "pattino", "casco", "cannuccia", "cartolina", "giornale", "rivista", "portachiavi", "spazzolino", "tazzone", "spatola",
-
-  // altro cibo
   "pane tostato", "waffle", "frittella", "muffin", "ciambella", "pretzel", "popcorn", "patatina", "sciroppo", "gelatina",
   "arachide", "uvetta", "albicocca", "prugna", "pera", "kiwi", "lime", "cocco", "ananas", "fragola",
   "mirtillo", "zucca", "cavolo", "sedano", "spinaci", "ravanello", "cetriolino", "zenzero", "menta", "basilico",
   "farina", "impasto", "sugo", "salsa", "ketchup", "senape", "aceto", "olio", "lievito", "avena",
-
-  // bevande
   "cacao", "limonata", "frullato", "frappè", "punch", "sidro", "whisky", "brandy", "champagne", "milkshake",
-
-  // azioni
   "correre", "camminare", "saltellare", "saltare", "gattonare", "arrampicarsi", "nuotare", "tuffarsi", "gridare", "sussurrare",
   "ridere", "sorridere", "dormire", "svegliarsi", "sognare", "sedersi", "stare in piedi", "inginocchiarsi", "curvare", "stirarsi",
   "lanciare", "afferrare", "calciare", "applaudire", "agitare", "indicare", "tenere", "versare", "mescolare", "affettare",
@@ -100,74 +65,42 @@ export const WORDS: readonly string[] = [
   "scavare", "nutrire", "cavalcare", "remare", "girare", "rotolare", "rimbalzare", "sciogliere", "congelare", "brillare",
   "sbattere le palpebre", "fissare", "ascoltare", "annusare", "assaggiare", "toccare", "imparare", "insegnare", "condividere", "comprare",
   "vendere", "salvare", "nascondere", "inseguire", "seguire", "guidare", "salutare", "abbracciare", "ammiccare",
-
-  // colori
   "rosso", "blu", "verde", "giallo", "viola", "rosato", "oro", "argento",
-
-  // meteo
   "brezza", "gelo", "grandine", "foschia", "rugiada", "luce del sole", "fulmine", "pioggerella", "pozzanghera", "ghiacciolo",
   "alba", "tramonto", "orizzonte", "cometa", "pianeta", "meteora", "galassia", "eclissi", "marea", "chiaro di luna",
-
-  // tempo
   "secondo", "minuto", "ora", "settimana", "mese", "anno", "oggi", "domani", "mezzogiorno", "mezzanotte",
   "aurora", "crepuscolo", "weekend", "vacanza", "compleanno",
-
-  // mestieri
   "avvocato", "giudice", "soldato", "marinaio", "capitano", "sindaco", "impiegato", "cassiere", "cameriere", "bidello",
   "idraulico", "costruttore", "imbianchino", "barbiere", "sarto", "macellaio", "cacciatore", "minatore", "guardia", "scienziato",
   "ingegnere", "attore", "poeta", "autore", "giornalista", "banchiere", "giardiniere", "meccanico", "falegname", "domestica",
-
-  // sport
   "calcio", "tennis", "golf", "hockey", "baseball", "cricket", "rugby", "boxe", "sci", "surf",
   "bowling", "freccette", "scacchi", "racchetta", "gol", "maglia", "pista", "campo da gioco", "pista di pattinaggio", "squadra",
-
-  // scuola
   "classe", "lezione", "compiti", "test", "esame", "voto", "materia", "matematica", "scienza", "storia",
   "armadietto", "zaino", "libro di testo", "mappamondo", "calcolatrice", "lavagna nera", "ricreazione", "diploma", "conferenza", "quiz",
-
-  // luoghi
   "giungla", "prato", "prateria", "canyon", "scogliera", "tunnel", "torre", "cottage", "capanna", "fienile",
   "stalla", "mulino", "faro", "molo", "pontile", "scalo", "centro commerciale", "panetteria", "farmacia", "caffetteria",
   "tavola calda", "cinema", "galleria", "arena", "tempio", "prigione", "tribunale", "ambasciata", "cimitero", "parco giochi",
-
-  // altro corpo
   "fronte", "guancia", "mento", "mascella", "sopracciglio", "ciglio", "polso", "caviglia", "tallone", "palmo",
   "spina dorsale", "costola", "polmone", "fegato", "rene", "muscolo", "nervo", "vena", "gola", "anca",
-
-  // casa
   "aspirapolvere", "piumino", "paletta", "gruccia", "bucato", "detersivo", "candeggina", "stuoia", "tappetino", "tapparella",
   "cuscino", "trapunta", "materasso", "guardaroba", "cassettiera", "comodino", "libreria", "camino", "comignolo", "pomello",
   "campanello", "buco della serratura", "rubinetto", "scarico", "presa", "termostato", "stufa", "ventilatore", "vaso", "poster",
-
-  // tecnologia
   "portatile", "tablet", "monitor", "stampante", "scanner", "altoparlante", "cuffia", "caricabatterie", "cavo", "router",
   "modem", "telecomando", "controller", "joystick", "webcam", "microfono", "auricolare", "console", "adattatore", "antenna",
-
-  // altra natura
   "masso", "ruscello", "torrente", "stagno", "cascata", "palude", "acquitrino", "duna", "ghiacciaio", "vulcano",
   "cratere", "barriera corallina", "alga", "muschio", "felce", "rampicante", "edera", "cactus", "quercia", "pino",
   "acero", "salice", "betulla", "bambù", "ghianda", "pigna", "fioritura", "spina", "stelo",
-
-  // insetti e mare
   "farfalla", "scarabeo", "cavalletta", "coccinella", "libellula", "bruco", "vespa", "calabrone", "pulce", "zecca",
   "lumaca", "lombrico", "millepiedi", "scorpione", "medusa", "stella marina", "polpo", "calamaro", "aragosta", "gambero",
   "vongola", "ostrica", "cavalluccio marino", "razza", "anguilla", "pesciolino", "trota", "salmone", "tonno",
-
-  // uccelli
   "pettirosso", "passero", "fringuello", "cardinale", "picchio", "colibrì", "gabbiano", "pellicano", "fenicottero", "pavone",
   "tacchino", "gallo", "oca", "cigno", "cicogna", "airone", "falco", "sparviero", "avvoltoio", "corvo",
-
-  // altri animali
   "agnello", "vitello", "puledro", "cagnolino", "gattino", "cucciolo", "maialino", "pony", "mulo", "bufalo",
   "bisonte", "alce", "antilope", "gazzella", "ghepardo", "leopardo", "pantera", "giaguaro", "panda", "koala",
   "bradipo", "lontra", "castoro", "procione", "puzzola", "tasso", "riccio", "talpa", "pipistrello", "donnola",
   "furetto", "criceto", "gerbillo", "scoiattolo striato", "porcospino", "armadillo", "tricheco", "foca", "coccodrillo", "alligatore",
-
-  // altro abbigliamento
   "felpa", "camicetta", "gilet", "cardigan", "abito da sera", "pigiama", "pantofola", "sandalo", "scarpa da ginnastica", "muffola",
   "paraorecchie", "bandana", "collana", "braccialetto", "orecchino", "spilla", "laccio", "colletto", "gemello", "impermeabile",
-
-  // oggetti vari
   "torcia elettrica", "scatola di fiammiferi", "valigia", "ventiquattrore", "borsa a mano", "sacchetto", "portachiavi da tasca", "binocolo", "telescopio", "microscopio",
   "termometro", "cronometro", "clessidra", "imbuto", "sgabello a scaletta", "cassetta degli attrezzi", "carriola", "pala", "rastrello", "zappa",
 ];

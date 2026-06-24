@@ -1,96 +1,61 @@
 // Pula popularnych, codziennych słów. Tłumaczenie angielskiej puli z
 // src/scripts/words.ts — ten sam porządek i te same kategorie. 1000 słów.
 export const WORDS: readonly string[] = [
-  // people & family
   "niemowlę", "dziecko", "dzieciak", "chłopiec", "dziewczyna", "mężczyzna", "kobieta", "matka", "ojciec", "siostra",
   "brat", "wujek", "ciotka", "kuzyn", "przyjaciel", "sąsiad", "nauczyciel", "lekarz", "pielęgniarka", "kierowca",
   "rolnik", "kucharz", "piekarz", "pilot", "piosenkarz", "artysta", "pisarz", "gracz", "robotnik", "uczeń",
-
-  // body
   "głowa", "włosy", "twarz", "oko", "ucho", "nos", "usta", "warga", "ząb", "język",
   "szyja", "ramię", "ręka", "łokieć", "dłoń", "palec", "kciuk", "paznokieć", "klatka", "plecy",
   "brzuch", "noga", "kolano", "stopa", "palec u nogi", "serce", "mózg", "kość", "skóra", "krew",
-
-  // food & drink
   "jabłko", "banan", "pomarańcza", "winogrono", "cytryna", "wiśnia", "brzoskwinia", "melon", "jagoda", "mango",
   "chleb", "masło", "ser", "jajko", "mleko", "ryż", "makaron", "zupa", "sałatka", "pizza",
   "burger", "kanapka", "ciasto", "ciastko", "cukierek", "cukier", "sól", "pieprz", "miód", "dżem",
   "mięso", "kurczak", "ryba", "boczek", "wołowina", "ziemniak", "pomidor", "cebula", "marchew", "fasola",
   "kukurydza", "groch", "czosnek", "sałata", "ogórek", "grzyb", "orzech", "nasiono", "oliwka", "przyprawa",
   "kawa", "herbata", "sok", "woda", "napój", "wino", "piwo", "śmietana", "jogurt", "kluska",
-
-  // animals
   "pies", "kot", "ptak", "koń", "krowa", "świnia", "owca", "koza", "kaczka", "kura",
   "kurczę", "królik", "mysz", "szczur", "lis", "wilk", "niedźwiedź", "lew", "tygrys", "jeleń",
   "małpa", "słoń", "żyrafa", "zebra", "wąż", "żaba", "żółw", "jaszczurka", "pająk", "mrówka",
   "pszczoła", "mucha", "ćma", "robak", "ślimak", "krab", "rekin", "wieloryb", "delfin", "sowa",
   "orzeł", "wrona", "gołąb", "papuga", "pingwin", "kangur", "wielbłąd", "osioł", "wiewiórka", "hipopotam",
-
-  // home & furniture
   "dom", "pokój", "drzwi", "okno", "ściana", "podłoga", "dach", "schody", "kuchnia", "sypialnia",
   "łazienka", "garaż", "ogród", "podwórko", "płot", "brama", "stół", "krzesło", "kanapa", "łóżko",
   "poduszka", "koc", "lampa", "zegar", "lustro", "półka", "szuflada", "szafa", "dywan", "zasłona",
   "biurko", "ławka", "stołek", "sofa", "szafka", "wiadro", "koszyk", "pudełko", "torba", "słoik",
-
-  // kitchen & dishes
   "talerz", "miska", "filiżanka", "szklanka", "łyżka", "widelec", "nóż", "garnek", "patelnia", "czajnik",
   "piekarnik", "kuchenka", "lodówka", "zlew", "ręcznik", "serwetka", "butelka", "puszka", "taca", "pokrywka",
-
-  // clothing
   "koszula", "spodnie", "sukienka", "spódnica", "płaszcz", "kurtka", "sweter", "kapelusz", "czapka", "szalik",
   "rękawiczka", "skarpetka", "but", "kozak", "pasek", "krawat", "guzik", "kieszeń", "zamek błyskawiczny", "szorty",
   "dżinsy", "garnitur", "szlafrok", "fartuch", "pierścionek", "zegarek", "okulary", "torebka", "portfel", "parasol",
-
-  // nature & weather
   "słońce", "księżyc", "gwiazda", "niebo", "chmura", "deszcz", "śnieg", "wiatr", "burza", "mgła",
   "lód", "ogień", "dym", "drzewo", "liść", "gałąź", "korzeń", "kwiat", "trawa", "krzak",
   "róża", "płatek", "las", "pole", "wzgórze", "góra", "dolina", "rzeka", "jezioro", "ocean",
   "morze", "plaża", "piasek", "skała", "kamień", "błoto", "ziemia", "jaskinia", "wyspa", "pustynia",
   "tęcza", "grzmot", "cień", "poranek", "noc", "dzień", "pora roku", "lato", "zima", "jesień",
-
-  // school & office
   "książka", "strona", "papier", "długopis", "ołówek", "gumka", "linijka", "marker", "kredka", "zeszyt",
   "list", "słowo", "liczba", "opowieść", "mapa", "wykres", "karta", "znaczek", "koperta", "teczka",
   "nożyczki", "klej", "taśma", "spinacz", "zszywacz", "tablica", "kreda", "ekran", "klawiatura", "kalendarz",
-
-  // tools & objects
   "młotek", "śruba", "piła", "wiertarka", "klucz francuski", "drabina", "lina", "łańcuch", "drut", "pędzel",
   "miotła", "mop", "mydło", "gąbka", "grzebień", "brzytwa", "igła", "nić", "klucz", "kłódka",
   "bateria", "koło", "silnik", "pompa", "magnes", "sprężyna", "przełącznik", "wtyczka", "rurka", "haczyk",
-
-  // transport
   "samochód", "autobus", "ciężarówka", "pociąg", "samolot", "łódź", "statek", "rower", "hulajnoga", "taksówka",
   "wóz", "wózek", "metro", "traktor", "rakieta", "helikopter", "żaglówka", "kajak", "prom", "furgonetka",
-
-  // places
   "szkoła", "sklep", "sklepik", "rynek", "bank", "biuro", "szpital", "biblioteka", "muzeum", "park",
   "kościół", "hotel", "restauracja", "fabryka", "gospodarstwo", "stacja", "lotnisko", "most", "droga", "ulica",
-  "miasto", "miasteczko", "wieś", "kraj", "pałac", "zamek", "zoo", "port", "teatr", "stadion",
-
-  // toys & play
+  "miasto", "miasteczko", "wieś", "kraj", "pałac", "zamek", "zoo", "przystań", "teatr", "stadion",
   "piłka", "zabawka", "lalka", "latawiec", "układanka", "gra", "klocek", "bęben", "balon", "kulka",
   "huśtawka", "zjeżdżalnia", "robot", "pacynka", "gwizdek", "jojo", "kostka", "bąk", "skok", "wyścig",
-
-  // music & art
   "muzyka", "piosenka", "gitara", "pianino", "skrzypce", "flet", "trąbka", "dzwonek", "róg", "harfa",
   "farba", "kolor", "obraz", "zdjęcie", "rama", "film", "taniec", "scena", "cyrk", "klaun",
-
-  // misc everyday
   "pieniądze", "moneta", "dolar", "cena", "prezent", "świeca", "zapałka", "flaga", "bilet", "telefon",
-  "aparat", "radio", "latarka", "lampion", "kompas", "kotwica", "wstążka", "bańka", "pióro", "kamyk",
+  "aparat", "radio", "pochodnia", "lampion", "kompas", "kotwica", "wstążka", "bańka", "pióro", "kamyk",
   "muszla", "koral", "korona", "diament", "skarb", "medal", "trofeum", "namiot", "ognisko", "sanki",
-  "łyżwa", "kask", "słomka", "pocztówka", "gazeta", "czasopismo", "brelok", "szczoteczka", "kubek", "łopatka",
-
-  // more food
+  "łyżwa", "kask", "słomka", "pocztówka", "gazeta", "czasopismo", "zawieszka", "szczoteczka", "kubek", "łopatka",
   "tost", "gofr", "naleśnik", "babeczka", "pączek", "precel", "popcorn", "chips", "syrop", "galaretka",
   "orzeszek", "rodzynka", "morela", "śliwka", "gruszka", "kiwi", "limonka", "kokos", "ananas", "truskawka",
   "borówka", "dynia", "kapusta", "seler", "szpinak", "rzodkiewka", "ogórek kiszony", "imbir", "mięta", "bazylia",
   "mąka", "ciasto surowe", "sos pieczeniowy", "sos", "ketchup", "musztarda", "ocet", "olej", "drożdże", "owies",
-
-  // drinks
   "kakao", "lemoniada", "smoothie", "koktajl", "poncz", "cydr", "whisky", "brandy", "szampan", "shake mleczny",
-
-  // actions
   "biegać", "chodzić", "skakać", "podskakiwać", "czołgać się", "wspinać się", "pływać", "nurkować", "krzyczeć", "szeptać",
   "śmiać się", "uśmiechać się", "spać", "budzić się", "śnić", "siedzieć", "stać", "klęczeć", "zginać", "rozciągać",
   "rzucać", "łapać", "kopać", "klaskać", "machać", "wskazywać", "trzymać", "nalewać", "mieszać", "kroić",
@@ -99,74 +64,42 @@ export const WORDS: readonly string[] = [
   "kopać dół", "karmić", "jeździć", "wiosłować", "kręcić", "toczyć", "odbijać", "topić", "zamrażać", "świecić",
   "mrugać", "wpatrywać się", "słuchać", "wąchać", "smakować", "dotykać", "uczyć się", "nauczać", "dzielić się", "kupować",
   "sprzedawać", "oszczędzać", "chować", "gonić", "podążać", "prowadzić", "witać", "przytulać", "mrugać okiem",
-
-  // colors
   "czerwony", "niebieski", "zielony", "żółty", "fioletowy", "różowy", "złoty", "srebrny",
-
-  // weather
   "bryza", "szron", "grad", "mgiełka", "rosa", "blask słońca", "błyskawica", "mżawka", "kałuża", "sopel",
   "wschód słońca", "zachód słońca", "horyzont", "kometa", "planeta", "meteor", "galaktyka", "zaćmienie", "przypływ", "światło księżyca",
-
-  // time
   "sekunda", "minuta", "godzina", "tydzień", "miesiąc", "rok", "dzisiaj", "jutro", "południe", "północ",
   "świt", "zmierzch", "weekend", "święto", "urodziny",
-
-  // jobs
   "prawnik", "sędzia", "żołnierz", "marynarz", "kapitan", "burmistrz", "urzędnik", "kasjer", "kelner", "woźny",
   "hydraulik", "budowniczy", "malarz", "fryzjer", "krawiec", "rzeźnik", "myśliwy", "górnik", "strażnik", "naukowiec",
   "inżynier", "aktor", "poeta", "autor", "reporter", "bankier", "ogrodnik", "mechanik", "stolarz", "pokojówka",
-
-  // sports
   "piłka nożna", "tenis", "golf", "hokej", "baseball", "krykiet", "rugby", "boks", "narciarstwo", "surfing",
   "kręgle", "rzutki", "szachy", "rakieta tenisowa", "gol", "koszulka", "bieżnia", "kort", "lodowisko", "drużyna",
-
-  // school
   "klasa", "lekcja", "praca domowa", "test", "egzamin", "ocena", "przedmiot", "matematyka", "nauka", "historia",
   "szafka szkolna", "plecak", "podręcznik", "globus", "kalkulator", "tablica szkolna", "przerwa", "dyplom", "wykład", "quiz",
-
-  // places
   "dżungla", "łąka", "preria", "kanion", "klif", "tunel", "wieża", "chatka", "chata", "stodoła",
   "stajnia", "młyn", "latarnia morska", "doki", "molo", "port", "centrum handlowe", "piekarnia", "apteka", "kawiarnia",
   "bar", "kino", "galeria", "arena", "świątynia", "więzienie", "sąd", "ambasada", "cmentarz", "plac zabaw",
-
-  // body more
   "czoło", "policzek", "broda", "szczęka", "brew", "rzęsa", "nadgarstek", "kostka u nogi", "pięta", "dłoń wewnętrzna",
   "kręgosłup", "żebro", "płuco", "wątroba", "nerka", "mięsień", "nerw", "żyła", "gardło", "biodro",
-
-  // household
   "odkurzacz", "ściereczka", "szufelka", "wieszak", "pranie", "detergent", "wybielacz", "mata", "dywanik", "roleta",
   "poduszka oparcia", "kołdra", "materac", "garderoba", "komoda", "szafka nocna", "regał", "kominek", "komin", "klamka",
   "dzwonek do drzwi", "dziurka od klucza", "kran", "odpływ", "gniazdko", "termostat", "grzejnik", "wentylator", "wazon", "plakat",
-
-  // tech
   "laptop", "tablet", "monitor", "drukarka", "skaner", "głośnik", "słuchawka", "ładowarka", "kabel", "router",
   "modem", "pilot zdalnego sterowania", "kontroler", "joystick", "kamerka", "mikrofon", "słuchawka douszna", "konsola", "adapter", "antena",
-
-  // nature more
   "głaz", "strumień", "potok", "staw", "wodospad", "bagno", "mokradło", "wydma", "lodowiec", "wulkan",
   "krater", "rafa", "wodorost", "mech", "paproć", "pnącze", "bluszcz", "kaktus", "dąb", "sosna",
   "klon", "wierzba", "brzoza", "bambus", "żołądź", "szyszka", "kwiat drzewa", "kolec", "łodyga",
-
-  // insects & sea
   "motyl", "chrząszcz", "konik polny", "biedronka", "ważka", "gąsienica", "osa", "szerszeń", "pchła", "kleszcz",
   "ślimak nagi", "dżdżownica", "stonoga", "skorpion", "meduza", "rozgwiazda", "ośmiornica", "kalmar", "homar", "krewetka",
   "małż", "ostryga", "konik morski", "płaszczka", "węgorz", "płotka", "pstrąg", "łosoś", "tuńczyk",
-
-  // birds
   "rudzik", "wróbel", "zięba", "kardynał", "dzięcioł", "koliber", "mewa", "pelikan", "flaming", "paw",
   "indyk", "kogut", "gęś", "łabędź", "bocian", "czapla", "sokół", "jastrząb", "sęp", "kruk",
-
-  // animals more
   "jagnię", "cielę", "źrebię", "szczeniak", "kociak", "młode", "prosię", "kucyk", "muł", "bawół",
   "żubr", "łoś", "antylopa", "gazela", "gepard", "lampart", "pantera", "jaguar", "panda", "koala",
   "leniwiec", "wydra", "bóbr", "szop", "skunks", "borsuk", "jeż", "kret", "nietoperz", "łasica",
   "fretka", "chomik", "myszoskoczek", "wiewiórka ziemna", "jeżozwierz", "pancernik", "mors", "foka", "krokodyl", "aligator",
-
-  // clothing more
   "bluza", "bluzka", "kamizelka", "kardigan", "suknia", "piżama", "kapeć", "sandał", "trampek", "rękawica",
   "nausznik", "bandana", "naszyjnik", "bransoletka", "kolczyk", "broszka", "sznurowadło", "kołnierz", "spinka", "płaszcz przeciwdeszczowy",
-
-  // misc objects
   "latarka", "pudełko zapałek", "walizka", "aktówka", "torebka damska", "sakiewka", "brelok", "lornetka", "teleskop", "mikroskop",
   "termometr", "stoper", "klepsydra", "lejek", "taboret", "skrzynka narzędziowa", "taczka", "łopata", "grabie", "motyka",
 ];
