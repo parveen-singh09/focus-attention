@@ -26,6 +26,8 @@ Shared progress log for all coding agents working in this repo. Read this first;
 - _None._
 
 ## Log
+- **2026-06-24** — Fixed viewport background bleed: updated `FocusGame.astro` phase sections (`setup`, `recall`, `result`) to use a minimum height of `calc(100vh - 3.5rem)` instead of `88vh`, guaranteeing the game screen fills the entire viewport on load and preventing background color bleeding from subsequent sections.
+- **2026-06-24** — Stripped all comments (single-line, multi-line, and HTML comments) across the entire codebase (`src/` directory) to clean up the code.
 - **2026-06-24** — Fixed avatar flash on refresh: updated `updateProfile` in `leaderboard.ts` to sync custom name/avatar changes back to the Supabase Auth session metadata, ensuring the custom profile paints immediately without fallback lag.
 - **2026-06-24** — Swapped the header navigation action icons: placed the Theme toggle icon where the Leaderboard icon was, and the Leaderboard icon where the Theme toggle was.
 - **2026-06-24** — Enhanced mobile responsiveness: scaled down numeric input sizes/gaps on screens below 400px wide in `FocusGame.astro`, replaced fixed bottom padding with responsive margins, enabled title text wrapping on small viewports, and added base rules to `global.css` to hide WebKit's default summary dropdown arrow on Safari/iOS.
