@@ -30,7 +30,7 @@ const i18n = {
 <focus-game class="block w-full" data-i18n={JSON.stringify(i18n)}>
 	<script type="application/json" data-words is:inline set:html={JSON.stringify(words)} />
 
-	<section data-phase="setup" class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-6 pt-(--spacing-section) pb-64 text-center">
+	<section data-phase="setup" class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center">
 		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">{g.eyebrow}</p>
 		<h1 class="text-hero text-ink max-w-[18ch]"><span class="whitespace-nowrap">{g.titleLine1}</span><br /><span class="whitespace-nowrap">{g.titleLine2}</span></h1>
 		<p class="text-lead text-ink-muted-80 mt-5 max-w-[42ch]">
@@ -114,7 +114,7 @@ const i18n = {
 		</div>
 	</section>
 
-	<section data-phase="recall" hidden class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
+	<section data-phase="recall" hidden class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center">
 		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">{g.recallEyebrow}</p>
 		<h2 class="text-display-lg text-ink max-w-[18ch]">{g.recallHeading}</h2>
 
@@ -127,7 +127,7 @@ const i18n = {
 		<div data-pool class="mt-3 flex flex-wrap justify-center gap-2.5 max-w-170" role="group" aria-label="Word choices"></div>
 	</section>
 
-	<section data-phase="result" hidden class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
+	<section data-phase="result" hidden class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center">
 		<p class="text-caption text-ink-muted-48 mb-2 uppercase tracking-[0.04em]">{g.resultEyebrow}</p>
 
 		<div class="mt-6 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">

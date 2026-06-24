@@ -26,6 +26,7 @@ Shared progress log for all coding agents working in this repo. Read this first;
 - _None._
 
 ## Log
+- **2026-06-24** — Reduced gap between header and content: updated `FocusGame.astro` phase sections (`setup`, `recall`, `result`) to use a top-aligned layout (`justify-start` instead of `justify-center`) and standardized identical padding (`pt-10 pb-20 md:pt-14 md:pb-28`) across all three phases, ensuring the gap from the sticky SiteHeader is exactly the same and elements do not shift vertically when transitioning between phases.
 - **2026-06-24** — Fixed custom avatar flash on page refresh: implemented client-side `localStorage` profile caching keyed by `userId` in `SiteHeader.astro`. The cache is checked synchronously inside `renderAuth()` when the Supabase session resolves, preventing the default Google avatar from briefly flashing while the profile is fetched asynchronously from the database.
 - **2026-06-24** — Fixed language picker on mobile and non-Windows devices: defined a concrete `COUNTRY_CODES` mapping in `ui.ts` and passed the country code to `localeLinks` in `SiteHeader.astro`. This ensures that instead of loading flag emojis or displaying nothing, a text-based uppercase country code (e.g., `GB`, `ES`, `FR`) is consistently rendered adjacent to the language name on both desktop and mobile platforms.
 - **2026-06-24** — Simplified the header language picker: replaced the flag emoji/globe fallback trigger icon with a short capitalized language code (e.g. `EN`, `ES`, `FR`) and cleaned up the unused `activeFlagEmoji` constant.
