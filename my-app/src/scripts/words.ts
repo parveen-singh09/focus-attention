@@ -102,7 +102,7 @@ export const WORDS: readonly string[] = [
   "hoodie", "blouse", "vest", "cardigan", "gown", "pajamas", "slipper", "sandal", "sneaker", "mitten",
   "earmuff", "bandana", "necklace", "bracelet", "earring", "brooch", "shoelace", "collar", "cufflink", "raincoat",
   "flashlight", "matchbox", "suitcase", "briefcase", "handbag", "pouch", "keychain", "binocular", "telescope", "microscope",
-  "thermometer", "stopwatch", "hourglass", "funnel", "stepstool", "toolbox", "wheelbarrow", "shovel", "rake", "hoe",
+  "thermometer", "stopwatch", "hourglass", "funnel", "stepstool", "toolbox", "wheelbarrow", "shovel", "rake",
 ];
 
 
