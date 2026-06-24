@@ -1,0 +1,93 @@
+---
+// HomePage — the full landing page (game + SEO copy + FAQ), parameterized by
+// locale. Both the English root route (src/pages/index.astro) and the
+// localized routes (src/pages/[lang]/index.astro) render this so the markup
+// lives in one place.
+//
+// All copy comes from the locale's content object; the FAQ array drives both
+// the visible accordion and the FAQPage JSON-LD so the two never drift.
+import type { Lang } from "../i18n/ui";
+import { LOCALES, HTML_LANG } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+import FocusGame from "./FocusGame.astro";
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const L = t.landing;
+
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	inLanguage: HTML_LANG[lang],
+	mainEntity: L.faqs.map((f) => ({
+		"@type": "Question",
+		name: f.q,
+		acceptedAnswer: { "@type": "Answer", text: f.a },
+	})),
+};
+---
+
+<Layout
+	title={t.meta.indexTitle}
+	description={t.meta.indexDescription}
+	keywords={t.meta.indexKeywords}
+	alternates={LOCALES}
+>
+	<main>
+		<FocusGame lang={lang} />
+
+		<!-- Landing-only content: SEO copy + FAQ. The game toggles this off
+		     during the watch / recall / result phases so it never shows behind
+		     an active round (see FocusGame `show()`). -->
+		<div data-landing-content>
+		<!-- ============================================================
+		     SEO content — keyword-targeted copy about the tool. Sits
+		     below the game so it never competes with the interactive
+		     surface, but is fully crawlable, server-rendered HTML.
+		     ============================================================ -->
+		<article class="bg-canvas-parchment text-ink">
+			<div class="mx-auto max-w-5xl px-6 pt-32 pb-(--spacing-section)">
+			<h2 class="text-display-lg text-ink">{L.heading}</h2>
+			<p class="text-ink-muted-80 mt-5 max-w-180" set:html={L.intro} />
+
+			<div class="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+				{L.sections.map((s, i) => (
+					<section class:list={[{ "sm:col-span-2": i === L.sections.length - 1 }]}>
+						<h3 class="text-display-lg text-ink">{s.h}</h3>
+						<p class="text-ink-muted-80 mt-4 max-w-180" set:html={s.body} />
+					</section>
+				))}
+			</div>
+			</div>
+		</article>
+
+		<!-- ============================================================
+		     FAQ — visible accordion + FAQPage JSON-LD for rich results.
+		     Both render from the `faqs` array so they never drift apart.
+		     ============================================================ -->
+		<section class="bg-canvas-parchment text-ink" aria-labelledby="faq-heading">
+			<div class="mx-auto max-w-5xl px-6 pb-(--spacing-section)">
+				<h2 id="faq-heading" class="text-display-lg text-ink">{L.faqHeading}</h2>
+				<div class="mt-8 grid gap-x-10 sm:grid-cols-2">
+					{L.faqs.map((f) => (
+						<details class="group border-b border-ink/10 py-5">
+							<summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-ink">
+								<span class="text-body font-medium">{f.q}</span>
+								<span class="text-ink-muted-48 transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+							</summary>
+							<div class="text-ink-muted-80 mt-3" set:html={f.a} />
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+		</div>
+	</main>
+
+	<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+</Layout>

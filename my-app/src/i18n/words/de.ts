@@ -1,0 +1,185 @@
+// Eine Sammlung gebräuchlicher, alltäglicher Wörter. Diese sind bewusst
+// einfach und konkret (Dinge, die man sieht, isst, benutzt oder täglich tut),
+// damit das Spiel Konzentration und Wiedergabe testet — nicht den Wortschatz.
+// 1000 Wörter.
+export const WORDS: readonly string[] = [
+  // Menschen & Familie
+  "Baby", "Kind", "Kind", "Junge", "Mädchen", "Mann", "Frau", "Mutter", "Vater", "Schwester",
+  "Bruder", "Onkel", "Tante", "Cousin", "Freund", "Nachbar", "Lehrer", "Arzt", "Krankenpfleger", "Fahrer",
+  "Bauer", "Koch", "Bäcker", "Pilot", "Sänger", "Künstler", "Schriftsteller", "Spieler", "Arbeiter", "Schüler",
+
+  // Körper
+  "Kopf", "Haar", "Gesicht", "Auge", "Ohr", "Nase", "Mund", "Lippe", "Zahn", "Zunge",
+  "Hals", "Schulter", "Arm", "Ellbogen", "Hand", "Finger", "Daumen", "Nagel", "Brust", "Rücken",
+  "Bauch", "Bein", "Knie", "Fuß", "Zeh", "Herz", "Gehirn", "Knochen", "Haut", "Blut",
+
+  // Essen & Trinken
+  "Apfel", "Banane", "Orange", "Traube", "Zitrone", "Kirsche", "Pfirsich", "Melone", "Beere", "Mango",
+  "Brot", "Butter", "Käse", "Ei", "Milch", "Reis", "Nudeln", "Suppe", "Salat", "Pizza",
+  "Burger", "Sandwich", "Kuchen", "Keks", "Bonbon", "Zucker", "Salz", "Pfeffer", "Honig", "Marmelade",
+  "Fleisch", "Hähnchen", "Fisch", "Speck", "Rindfleisch", "Kartoffel", "Tomate", "Zwiebel", "Karotte", "Bohne",
+  "Mais", "Erbse", "Knoblauch", "Salat", "Gurke", "Pilz", "Nuss", "Samen", "Olive", "Gewürz",
+  "Kaffee", "Tee", "Saft", "Wasser", "Limonade", "Wein", "Bier", "Sahne", "Joghurt", "Nudel",
+
+  // Tiere
+  "Hund", "Katze", "Vogel", "Pferd", "Kuh", "Schwein", "Schaf", "Ziege", "Ente", "Henne",
+  "Küken", "Kaninchen", "Maus", "Ratte", "Fuchs", "Wolf", "Bär", "Löwe", "Tiger", "Hirsch",
+  "Affe", "Elefant", "Giraffe", "Zebra", "Schlange", "Frosch", "Schildkröte", "Eidechse", "Spinne", "Ameise",
+  "Biene", "Fliege", "Motte", "Wurm", "Schnecke", "Krabbe", "Hai", "Wal", "Delfin", "Eule",
+  "Adler", "Krähe", "Taube", "Papagei", "Pinguin", "Känguru", "Kamel", "Esel", "Eichhörnchen", "Nilpferd",
+
+  // Zuhause & Möbel
+  "Haus", "Zimmer", "Tür", "Fenster", "Wand", "Boden", "Dach", "Treppe", "Küche", "Schlafzimmer",
+  "Badezimmer", "Garage", "Garten", "Hof", "Zaun", "Tor", "Tisch", "Stuhl", "Sofa", "Bett",
+  "Kissen", "Decke", "Lampe", "Uhr", "Spiegel", "Regal", "Schublade", "Schrank", "Teppich", "Vorhang",
+  "Schreibtisch", "Bank", "Hocker", "Couch", "Schrank", "Eimer", "Korb", "Kiste", "Tasche", "Glas",
+
+  // Küche & Geschirr
+  "Teller", "Schüssel", "Tasse", "Glas", "Löffel", "Gabel", "Messer", "Topf", "Pfanne", "Wasserkocher",
+  "Ofen", "Herd", "Kühlschrank", "Spüle", "Handtuch", "Serviette", "Flasche", "Dose", "Tablett", "Deckel",
+
+  // Kleidung
+  "Hemd", "Hose", "Kleid", "Rock", "Mantel", "Jacke", "Pullover", "Hut", "Mütze", "Schal",
+  "Handschuh", "Socke", "Schuh", "Stiefel", "Gürtel", "Krawatte", "Knopf", "Tasche", "Reißverschluss", "Shorts",
+  "Jeans", "Anzug", "Bademantel", "Schürze", "Ring", "Uhr", "Brille", "Handtasche", "Geldbörse", "Regenschirm",
+
+  // Natur & Wetter
+  "Sonne", "Mond", "Stern", "Himmel", "Wolke", "Regen", "Schnee", "Wind", "Sturm", "Nebel",
+  "Eis", "Feuer", "Rauch", "Baum", "Blatt", "Ast", "Wurzel", "Blume", "Gras", "Strauch",
+  "Rose", "Blütenblatt", "Wald", "Feld", "Hügel", "Berg", "Tal", "Fluss", "See", "Ozean",
+  "Meer", "Strand", "Sand", "Felsen", "Stein", "Schlamm", "Erde", "Höhle", "Insel", "Wüste",
+  "Regenbogen", "Donner", "Schatten", "Morgen", "Nacht", "Tag", "Jahreszeit", "Sommer", "Winter", "Herbst",
+
+  // Schule & Büro
+  "Buch", "Seite", "Papier", "Stift", "Bleistift", "Radiergummi", "Lineal", "Marker", "Buntstift", "Notizbuch",
+  "Brief", "Wort", "Zahl", "Geschichte", "Karte", "Diagramm", "Karte", "Briefmarke", "Umschlag", "Ordner",
+  "Schere", "Klebstoff", "Klebeband", "Klammer", "Hefter", "Tafel", "Kreide", "Bildschirm", "Tastatur", "Kalender",
+
+  // Werkzeuge & Gegenstände
+  "Hammer", "Schraube", "Säge", "Bohrer", "Schraubenschlüssel", "Leiter", "Seil", "Kette", "Draht", "Bürste",
+  "Besen", "Wischmopp", "Seife", "Schwamm", "Kamm", "Rasierer", "Nadel", "Faden", "Schlüssel", "Schloss",
+  "Batterie", "Rad", "Motor", "Pumpe", "Magnet", "Feder", "Schalter", "Stecker", "Rohr", "Haken",
+
+  // Verkehr
+  "Auto", "Bus", "Lastwagen", "Zug", "Flugzeug", "Boot", "Schiff", "Fahrrad", "Roller", "Taxi",
+  "Wagen", "Karren", "U-Bahn", "Traktor", "Rakete", "Hubschrauber", "Segelboot", "Kanu", "Fähre", "Lieferwagen",
+
+  // Orte
+  "Schule", "Geschäft", "Laden", "Markt", "Bank", "Büro", "Krankenhaus", "Bibliothek", "Museum", "Park",
+  "Kirche", "Hotel", "Restaurant", "Fabrik", "Bauernhof", "Bahnhof", "Flughafen", "Brücke", "Straße", "Straße",
+  "Stadt", "Stadt", "Dorf", "Land", "Palast", "Schloss", "Zoo", "Hafen", "Theater", "Stadion",
+
+  // Spielzeug & Spiel
+  "Ball", "Spielzeug", "Puppe", "Drachen", "Puzzle", "Spiel", "Baustein", "Trommel", "Luftballon", "Murmel",
+  "Schaukel", "Rutsche", "Roboter", "Marionette", "Pfeife", "Jojo", "Würfel", "Kreisel", "Sprung", "Rennen",
+
+  // Musik & Kunst
+  "Musik", "Lied", "Gitarre", "Klavier", "Geige", "Flöte", "Trompete", "Glocke", "Horn", "Harfe",
+  "Farbe", "Farbe", "Bild", "Foto", "Rahmen", "Film", "Tanz", "Bühne", "Zirkus", "Clown",
+
+  // Verschiedenes Alltägliches
+  "Geld", "Münze", "Dollar", "Preis", "Geschenk", "Kerze", "Streichholz", "Flagge", "Eintrittskarte", "Telefon",
+  "Kamera", "Radio", "Taschenlampe", "Laterne", "Kompass", "Anker", "Band", "Blase", "Feder", "Kiesel",
+  "Muschel", "Koralle", "Krone", "Diamant", "Schatz", "Medaille", "Trophäe", "Zelt", "Lagerfeuer", "Schlitten",
+  "Schlittschuh", "Helm", "Strohhalm", "Postkarte", "Zeitung", "Zeitschrift", "Schlüsselring", "Zahnbürste", "Becher", "Pfannenwender",
+
+  // Mehr Essen
+  "Toast", "Waffel", "Pfannkuchen", "Muffin", "Donut", "Brezel", "Popcorn", "Chip", "Sirup", "Gelee",
+  "Erdnuss", "Rosine", "Aprikose", "Pflaume", "Birne", "Kiwi", "Limette", "Kokosnuss", "Ananas", "Erdbeere",
+  "Blaubeere", "Kürbis", "Kohl", "Sellerie", "Spinat", "Radieschen", "Gurke", "Ingwer", "Minze", "Basilikum",
+  "Mehl", "Teig", "Bratensoße", "Soße", "Ketchup", "Senf", "Essig", "Öl", "Hefe", "Hafer",
+
+  // Getränke
+  "Kakao", "Limonade", "Smoothie", "Shake", "Punsch", "Apfelwein", "Whiskey", "Brandy", "Champagner", "Milchshake",
+
+  // Handlungen
+  "rennen", "gehen", "hüpfen", "springen", "krabbeln", "klettern", "schwimmen", "tauchen", "schreien", "flüstern",
+  "lachen", "lächeln", "schlafen", "aufwachen", "träumen", "sitzen", "stehen", "knien", "beugen", "strecken",
+  "werfen", "fangen", "treten", "klatschen", "winken", "zeigen", "halten", "gießen", "rühren", "schneiden",
+  "hacken", "schälen", "kochen", "braten", "sieden", "waschen", "wischen", "fegen", "schrubben", "spülen",
+  "falten", "nähen", "stricken", "zählen", "buchstabieren", "bauen", "reparieren", "klopfen", "füllen", "pflanzen",
+  "graben", "füttern", "reiten", "rudern", "drehen", "rollen", "springen", "schmelzen", "frieren", "leuchten",
+  "blinzeln", "starren", "zuhören", "riechen", "schmecken", "berühren", "lernen", "lehren", "teilen", "kaufen",
+  "verkaufen", "sparen", "verstecken", "jagen", "folgen", "führen", "grüßen", "umarmen", "zwinkern",
+
+  // Farben
+  "rot", "blau", "grün", "gelb", "lila", "rosa", "gold", "silber",
+
+  // Wetter
+  "Brise", "Frost", "Hagel", "Dunst", "Tau", "Sonnenschein", "Blitz", "Nieselregen", "Pfütze", "Eiszapfen",
+  "Sonnenaufgang", "Sonnenuntergang", "Horizont", "Komet", "Planet", "Meteor", "Galaxie", "Finsternis", "Gezeiten", "Mondlicht",
+
+  // Zeit
+  "Sekunde", "Minute", "Stunde", "Woche", "Monat", "Jahr", "heute", "morgen", "Mittag", "Mitternacht",
+  "Morgendämmerung", "Abenddämmerung", "Wochenende", "Feiertag", "Geburtstag",
+
+  // Berufe
+  "Anwalt", "Richter", "Soldat", "Matrose", "Kapitän", "Bürgermeister", "Angestellter", "Kassierer", "Kellner", "Hausmeister",
+  "Klempner", "Bauarbeiter", "Maler", "Friseur", "Schneider", "Metzger", "Jäger", "Bergmann", "Wächter", "Wissenschaftler",
+  "Ingenieur", "Schauspieler", "Dichter", "Autor", "Reporter", "Banker", "Gärtner", "Mechaniker", "Tischler", "Dienstmädchen",
+
+  // Sport
+  "Fußball", "Tennis", "Golf", "Hockey", "Baseball", "Cricket", "Rugby", "Boxen", "Skifahren", "Surfen",
+  "Bowling", "Darts", "Schach", "Schläger", "Tor", "Trikot", "Bahn", "Platz", "Eisbahn", "Mannschaft",
+
+  // Schule
+  "Klasse", "Unterricht", "Hausaufgabe", "Test", "Prüfung", "Note", "Fach", "Mathematik", "Naturwissenschaft", "Geschichte",
+  "Schließfach", "Rucksack", "Lehrbuch", "Globus", "Taschenrechner", "Tafel", "Pause", "Diplom", "Vorlesung", "Quiz",
+
+  // Orte
+  "Dschungel", "Wiese", "Steppe", "Schlucht", "Klippe", "Tunnel", "Turm", "Häuschen", "Hütte", "Scheune",
+  "Stall", "Mühle", "Leuchtturm", "Anlegestelle", "Pier", "Hafen", "Einkaufszentrum", "Bäckerei", "Apotheke", "Café",
+  "Diner", "Kino", "Galerie", "Arena", "Tempel", "Gefängnis", "Gericht", "Botschaft", "Friedhof", "Spielplatz",
+
+  // Mehr Körper
+  "Stirn", "Wange", "Kinn", "Kiefer", "Augenbraue", "Wimper", "Handgelenk", "Knöchel", "Ferse", "Handfläche",
+  "Wirbelsäule", "Rippe", "Lunge", "Leber", "Niere", "Muskel", "Nerv", "Vene", "Kehle", "Hüfte",
+
+  // Haushalt
+  "Staubsauger", "Staubwedel", "Kehrschaufel", "Kleiderbügel", "Wäsche", "Waschmittel", "Bleichmittel", "Matte", "Teppich", "Jalousie",
+  "Polster", "Steppdecke", "Matratze", "Kleiderschrank", "Kommode", "Nachttisch", "Bücherregal", "Kamin", "Schornstein", "Türklinke",
+  "Türklingel", "Schlüsselloch", "Wasserhahn", "Abfluss", "Steckdose", "Thermostat", "Heizung", "Ventilator", "Vase", "Poster",
+
+  // Technik
+  "Laptop", "Tablet", "Monitor", "Drucker", "Scanner", "Lautsprecher", "Kopfhörer", "Ladegerät", "Kabel", "Router",
+  "Modem", "Fernbedienung", "Controller", "Joystick", "Webcam", "Mikrofon", "Ohrhörer", "Konsole", "Adapter", "Antenne",
+
+  // Mehr Natur
+  "Felsblock", "Bach", "Bach", "Teich", "Wasserfall", "Sumpf", "Marsch", "Düne", "Gletscher", "Vulkan",
+  "Krater", "Riff", "Seetang", "Moos", "Farn", "Ranke", "Efeu", "Kaktus", "Eiche", "Kiefer",
+  "Ahorn", "Weide", "Birke", "Bambus", "Eichel", "Tannenzapfen", "Blüte", "Dorn", "Stängel",
+
+  // Insekten & Meer
+  "Schmetterling", "Käfer", "Heuschrecke", "Marienkäfer", "Libelle", "Raupe", "Wespe", "Hornisse", "Floh", "Zecke",
+  "Nacktschnecke", "Regenwurm", "Tausendfüßler", "Skorpion", "Qualle", "Seestern", "Krake", "Tintenfisch", "Hummer", "Garnele",
+  "Muschel", "Auster", "Seepferdchen", "Stechrochen", "Aal", "Elritze", "Forelle", "Lachs", "Thunfisch",
+
+  // Vögel
+  "Rotkehlchen", "Spatz", "Fink", "Kardinal", "Specht", "Kolibri", "Möwe", "Pelikan", "Flamingo", "Pfau",
+  "Truthahn", "Hahn", "Gans", "Schwan", "Storch", "Reiher", "Falke", "Habicht", "Geier", "Rabe",
+
+  // Mehr Tiere
+  "Lamm", "Kalb", "Fohlen", "Welpe", "Kätzchen", "Junges", "Ferkel", "Pony", "Maultier", "Büffel",
+  "Bison", "Elch", "Antilope", "Gazelle", "Gepard", "Leopard", "Panther", "Jaguar", "Panda", "Koala",
+  "Faultier", "Otter", "Biber", "Waschbär", "Stinktier", "Dachs", "Igel", "Maulwurf", "Fledermaus", "Wiesel",
+  "Frettchen", "Hamster", "Rennmaus", "Streifenhörnchen", "Stachelschwein", "Gürteltier", "Walross", "Robbe", "Krokodil", "Alligator",
+
+  // Mehr Kleidung
+  "Kapuzenpulli", "Bluse", "Weste", "Strickjacke", "Robe", "Schlafanzug", "Hausschuh", "Sandale", "Turnschuh", "Fäustling",
+  "Ohrenschützer", "Kopftuch", "Halskette", "Armband", "Ohrring", "Brosche", "Schnürsenkel", "Kragen", "Manschettenknopf", "Regenmantel",
+
+  // Verschiedene Gegenstände
+  "Taschenlampe", "Streichholzschachtel", "Koffer", "Aktenkoffer", "Handtasche", "Beutel", "Schlüsselanhänger", "Fernglas", "Teleskop", "Mikroskop",
+  "Thermometer", "Stoppuhr", "Sanduhr", "Trichter", "Trittleiter", "Werkzeugkasten", "Schubkarre", "Schaufel", "Rechen", "Hacke",
+];
+
+
+export function randomWord(previous?: string): string {
+  let word = WORDS[Math.floor(Math.random() * WORDS.length)];
+  if (previous && WORDS.length > 1) {
+    while (word === previous) {
+      word = WORDS[Math.floor(Math.random() * WORDS.length)];
+    }
+  }
+  return word;
+}

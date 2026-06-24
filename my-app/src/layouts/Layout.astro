@@ -2,6 +2,9 @@
 import "../styles/global.css";
 import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
+import type { Lang } from "../i18n/ui";
+import { HTML_LANG, defaultLang, dirFor } from "../i18n/ui";
+import { getLangFromUrl, stripLangPrefix, translatePath, useTranslations } from "../i18n/utils";
 
 interface Props {
 	title?: string;
@@ -10,15 +13,26 @@ interface Props {
 	image?: string;
 	ogType?: string;
 	noindex?: boolean;
+	// Locales this page exists in. When set, hreflang alternate links are
+	// emitted for each — only pass it for fully-localized pages (the index and
+	// error pages), NOT the English-only legal/info pages.
+	alternates?: readonly Lang[];
 }
 
+// Active locale comes from the URL (English at the root, others under /<lang>/).
+const lang = getLangFromUrl(Astro.url);
+const dir = dirFor(lang);
+const htmlLang = HTML_LANG[lang];
+const t = useTranslations(lang);
+
 const {
-	title = "How to Increase Focus & Attention Span — Free Brain Game | attentivebrain",
-	description = "Learn how to increase focus, attention span, and memory with a free brain game. Watch words appear, hold the sequence, then recall it — the best game to train focus and improve memory.",
-	keywords = "how to increase focus, how to increase focus and attention span, how to increase focus and memory, best game to increase focus, how to improve memory, brain game, attention span, focus training, memory game, concentration game",
+	title = t.meta.indexTitle,
+	description = t.meta.indexDescription,
+	keywords = t.meta.indexKeywords,
 	image = "/og-image.svg",
 	ogType = "website",
 	noindex = false,
+	alternates,
 } = Astro.props;
 
 // Build absolute URLs for canonical + social tags. Astro.site comes from
@@ -27,13 +41,25 @@ const siteOrigin = Astro.site?.origin ?? "https://attentivebrain.com";
 const canonicalURL = new URL(Astro.url.pathname, siteOrigin).href;
 const imageURL = new URL(image, siteOrigin).href;
 
+// hreflang alternates: for each locale this page exists in, the localized URL
+// for the same route. Plus x-default → the English (default-locale) version.
+// Lets search engines serve the right language and avoids duplicate-content
+// penalties across the localized copies.
+const route = stripLangPrefix(Astro.url.pathname);
+const hreflangs = (alternates ?? []).map((l) => ({
+	lang: HTML_LANG[l],
+	href: new URL(translatePath(route, l), siteOrigin).href,
+}));
+const xDefaultHref = new URL(translatePath(route, defaultLang), siteOrigin).href;
+
 // Structured data: describes the game to search engines so it can surface as
-// a rich result for "brain game" / "focus game" queries.
+// a rich result for "brain game" / "focus game" queries. Localized copy.
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "WebApplication",
 	name: "attentivebrain",
 	url: siteOrigin,
+	inLanguage: htmlLang,
 	applicationCategory: "GameApplication",
 	operatingSystem: "Web browser",
 	description,
@@ -42,17 +68,11 @@ const jsonLd = {
 		price: "0",
 		priceCurrency: "USD",
 	},
-	about: [
-		"how to increase focus",
-		"attention span",
-		"brain game",
-		"memory improvement",
-	],
 };
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang} dir={dir}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -68,6 +88,12 @@ const jsonLd = {
 		<meta name="author" content="attentivebrain" />
 		<link rel="canonical" href={canonicalURL} />
 
+		<!-- hreflang alternates (fully-localized pages only) -->
+		{hreflangs.map((h) => (
+			<link rel="alternate" hreflang={h.lang} href={h.href} />
+		))}
+		{hreflangs.length > 0 && <link rel="alternate" hreflang="x-default" href={xDefaultHref} />}
+
 		<!-- Open Graph (Facebook, LinkedIn, etc.) -->
 		<meta property="og:site_name" content="attentivebrain" />
 		<meta property="og:title" content={title} />
@@ -76,7 +102,7 @@ const jsonLd = {
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={imageURL} />
 		<meta property="og:image:alt" content="attentivebrain — a brain game to increase focus and attention span" />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content={htmlLang.replace("-", "_")} />
 
 		<!-- Twitter Card -->
 		<meta name="twitter:card" content="summary_large_image" />

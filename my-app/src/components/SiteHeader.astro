@@ -1,15 +1,56 @@
 ---
 // SiteHeader — global top bar.
-// Theme toggle + leaderboard + Google sign-in are functional; language is an
-// icon-only placeholder. The leaderboard/auth pieces degrade gracefully to a
-// "not set up" state when Supabase env vars are absent (see src/lib/supabase.ts).
+// Theme toggle + leaderboard + Google sign-in + a language picker. The
+// leaderboard/auth pieces degrade gracefully to a "not set up" state when
+// Supabase env vars are absent (see src/lib/supabase.ts).
+//
+// i18n: static aria-labels/visible text are localized here; the client script's
+// dynamic strings (leaderboard rows, prompts) are passed via a data-i18n blob
+// on the <header> that the script reads on load. The language picker links each
+// locale to the current route under that locale (switchLocalePath).
+import { languages, LOCALES } from "../i18n/ui";
+import { getLangFromUrl, switchLocalePath, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const h = t.header;
+
+// Per-locale URL for the same route, used by the language picker.
+const localeLinks = LOCALES.map((code) => ({
+	code,
+	label: languages[code],
+	href: switchLocalePath(Astro.url, code),
+	current: code === lang,
+}));
+
+// Dynamic strings the client script needs (leaderboard rows, prompts, etc.).
+const headerI18n = {
+	account: h.account,
+	anonymous: h.anonymous,
+	bestScore: h.bestScore,
+	loginToTrack: h.loginToTrack,
+	changePhoto: h.changePhoto,
+	uploading: h.uploading,
+	worldRanking: h.worldRanking,
+	loading: h.loading,
+	noScores: h.noScores,
+	players: h.players,
+	showMore: h.showMore,
+	loginToCompete: h.loginToCompete,
+	finishToClaim: h.finishToClaim,
+	yourRank: h.yourRank,
+	yourRankMetrics: h.yourRankMetrics,
+	yourWorldRanking: h.yourWorldRanking,
+	boardNotSetUp: h.boardNotSetUp,
+	wordsUnit: h.wordsUnit,
+};
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md">
+<header class="sticky top-0 z-40 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md" data-i18n={JSON.stringify(headerI18n)}>
 	<div class="mx-auto flex h-14 max-w-300 items-center justify-between px-5">
 		<!-- Profile / auth -->
 		<div class="relative flex items-center gap-2" data-profile-wrap>
-			<button type="button" class="icon-btn" data-action="profile" aria-label="Account" aria-haspopup="menu" aria-expanded="false">
+			<button type="button" class="icon-btn" data-action="profile" aria-label={h.account} aria-haspopup="menu" aria-expanded="false">
 				<svg data-icon="user" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<circle cx="12" cy="8" r="4" />
 					<path d="M4 21a8 8 0 0 1 16 0" />
@@ -18,14 +59,14 @@
 			</button>
 
 			<!-- World rank badge (signed-in players with a ranked row) -->
-			<span data-profile-rank hidden class="rank-badge" title="Your world ranking"></span>
+			<span data-profile-rank hidden class="rank-badge" title={h.yourWorldRanking}></span>
 
 			<!-- Profile menu -->
 			<div data-profile-menu hidden role="menu" class="dropdown left-0 right-auto min-w-[12rem]">
 				<div class="px-3 py-2">
 					<div data-name-display class="flex items-center gap-1.5">
 						<p data-profile-name class="flex-1 min-w-0 text-caption text-ink-muted-80 truncate"></p>
-						<button type="button" class="name-edit-btn" data-action="edit-name" aria-label="Edit name" title="Edit name">
+						<button type="button" class="name-edit-btn" data-action="edit-name" aria-label={h.editName} title={h.editName}>
 							<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 								<path d="M12 20h9" />
 								<path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" />
@@ -33,14 +74,14 @@
 						</button>
 					</div>
 					<form data-name-form hidden class="flex items-center gap-1.5">
-						<input data-name-input type="text" maxlength="40" class="name-edit" aria-label="Display name" />
-						<button type="submit" class="name-save" aria-label="Save name">Save</button>
+						<input data-name-input type="text" maxlength="40" class="name-edit" aria-label={h.displayName} />
+						<button type="submit" class="name-save" aria-label={h.save}>{h.save}</button>
 					</form>
 				</div>
 				<div class="h-px w-full bg-hairline"></div>
 				<div data-profile-best class="px-3 py-2"></div>
 				<div class="h-px w-full bg-hairline"></div>
-				<button type="button" class="menu-item" data-action="change-photo" role="menuitem">Change photo</button>
+				<button type="button" class="menu-item" data-action="change-photo" role="menuitem">{h.changePhoto}</button>
 				<input data-photo-input type="file" accept="image/*" hidden />
 				<div class="h-px w-full bg-hairline"></div>
 				<button type="button" class="menu-item menu-item--icon" data-action="signin" role="menuitem">
@@ -50,16 +91,16 @@
 						<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19Z" />
 						<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z" />
 					</svg>
-					<span>Log in</span>
+					<span>{h.login}</span>
 				</button>
-				<button type="button" class="menu-item" data-action="signout" role="menuitem" hidden>Log out</button>
+				<button type="button" class="menu-item" data-action="signout" role="menuitem" hidden>{h.logout}</button>
 			</div>
 		</div>
 
 		<nav class="flex items-center gap-1" aria-label="Site actions">
 			<!-- Leaderboard -->
 			<div class="relative" data-board-wrap>
-				<button type="button" class="icon-btn" data-action="leaderboard" aria-label="Leaderboard" aria-haspopup="true" aria-expanded="false" title="Leaderboard">
+				<button type="button" class="icon-btn" data-action="leaderboard" aria-label={h.leaderboard} aria-haspopup="true" aria-expanded="false" title={h.leaderboard}>
 					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<path d="M8 21h8" /><path d="M12 17v4" />
 						<path d="M7 4h10v5a5 5 0 0 1-10 0V4Z" />
@@ -70,10 +111,10 @@
 				<!-- Leaderboard dropdown -->
 				<div data-board-panel hidden class="dropdown right-0 left-auto w-[min(92vw,360px)]">
 					<div class="flex items-center justify-between px-3 pt-2 pb-1">
-						<p class="text-caption text-ink uppercase tracking-[0.04em]">World ranking</p>
+						<p class="text-caption text-ink uppercase tracking-[0.04em]">{h.worldRanking}</p>
 						<span data-board-total class="text-fine text-ink-muted-48"></span>
 					</div>
-					<p class="px-3 pb-2 text-fine text-ink-muted-48">By Max words recalled, Attention span, Recalling time</p>
+					<p class="px-3 pb-2 text-fine text-ink-muted-48">{h.rankedBy}</p>
 					<div class="h-px w-full bg-hairline"></div>
 
 					<ol data-board-list class="max-h-80 overflow-y-auto py-1"></ol>
@@ -82,16 +123,32 @@
 				</div>
 			</div>
 
-			<!-- Language (placeholder) -->
-			<button type="button" class="icon-btn" data-action="lang" aria-label="Language" title="Language (coming soon)">
-				<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-					<circle cx="12" cy="12" r="9" />
-					<path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
-				</svg>
-			</button>
+			<!-- Language picker -->
+			<div class="relative" data-lang-wrap>
+				<button type="button" class="icon-btn" data-action="lang" aria-label={h.language} aria-haspopup="menu" aria-expanded="false" title={h.language}>
+					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+						<circle cx="12" cy="12" r="9" />
+						<path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
+					</svg>
+				</button>
+
+				<!-- Language dropdown — each links to the same route under that locale -->
+				<div data-lang-menu hidden role="menu" class="dropdown right-0 left-auto max-h-96 overflow-y-auto w-[12rem]">
+					{localeLinks.map((l) => (
+						<a
+							href={l.href}
+							class:list={["lang-item", { "is-current": l.current }]}
+							role="menuitem"
+							hreflang={l.code}
+							lang={l.code}
+							aria-current={l.current ? "true" : undefined}
+						>{l.label}</a>
+					))}
+				</div>
+			</div>
 
 			<!-- Theme toggle (functional) -->
-			<button type="button" class="icon-btn" data-action="theme" aria-label="Toggle dark theme" aria-pressed="false" title="Toggle theme">
+			<button type="button" class="icon-btn" data-action="theme" aria-label={h.toggleTheme} aria-pressed="false" title={h.toggleTheme}>
 				<svg data-icon="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<circle cx="12" cy="12" r="4" />
 					<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" />
@@ -181,6 +238,19 @@
 	.menu-item--icon { display: flex; align-items: center; gap: 0.5rem; }
 	.menu-item--icon[hidden] { display: none; }
 	.menu-item--icon .lb-g { flex: none; }
+
+	/* Language picker rows — plain <a> links so JS isn't required to switch. */
+	.lang-item {
+		display: block;
+		padding: 9px 12px;
+		font-family: var(--font-text);
+		font-size: 15px;
+		color: var(--color-ink);
+		text-decoration: none;
+	}
+	.lang-item:hover { background-color: var(--color-canvas-parchment); }
+	.lang-item:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: -2px; }
+	.lang-item.is-current { color: var(--color-primary); font-weight: 600; }
 
 	/* Inline name editor. */
 	.name-edit-btn {
@@ -318,6 +388,75 @@
 	const root = document.documentElement;
 	const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel);
 
+	// ---------- i18n ----------
+	// Dynamic strings, injected by the .astro frontmatter as a data-i18n blob on
+	// <header>. English defaults guard against a missing/malformed blob.
+	interface HeaderStrings {
+		account: string;
+		anonymous: string;
+		bestScore: string;
+		loginToTrack: string;
+		changePhoto: string;
+		uploading: string;
+		worldRanking: string;
+		loading: string;
+		noScores: string;
+		players: string; // {n}
+		showMore: string;
+		loginToCompete: string;
+		finishToClaim: string;
+		yourRank: string; // {rank} {total}
+		yourRankMetrics: string; // {rank} {total} {metrics}
+		yourWorldRanking: string;
+		boardNotSetUp: string;
+		wordsUnit: string;
+	}
+	const STR: HeaderStrings = {
+		account: "Account",
+		anonymous: "Anonymous",
+		bestScore: "Best score",
+		loginToTrack: "Log in to track your best.",
+		changePhoto: "Change photo",
+		uploading: "Uploading…",
+		worldRanking: "World ranking",
+		loading: "Loading…",
+		noScores: "No scores yet. Be the first.",
+		players: "{n} players",
+		showMore: "Show more",
+		loginToCompete: "Log in to compete",
+		finishToClaim: "Finish a round to claim your spot.",
+		yourRank: "You're #{rank} of {total}.",
+		yourRankMetrics: "You're #{rank} of {total} · {metrics}",
+		yourWorldRanking: "Your world ranking",
+		boardNotSetUp: "Leaderboard isn't set up yet.",
+		wordsUnit: "w",
+		...(() => {
+			try {
+				const raw = $<HTMLElement>("header[data-i18n]")?.dataset.i18n;
+				return raw ? (JSON.parse(raw) as Partial<HeaderStrings>) : {};
+			} catch {
+				return {};
+			}
+		})(),
+	};
+	const fill = (tpl: string, vars: Record<string, string | number>) =>
+		tpl.replace(/\{(\w+)\}/g, (_, k) => (k in vars ? String(vars[k]) : `{${k}}`));
+
+	// ---------- language picker ----------
+	const langWrap = $<HTMLElement>("[data-lang-wrap]");
+	const langBtn = $<HTMLButtonElement>('[data-action="lang"]');
+	const langMenu = $<HTMLElement>("[data-lang-menu]");
+	function closeLangMenu() {
+		if (langMenu) langMenu.hidden = true;
+		langBtn?.setAttribute("aria-expanded", "false");
+	}
+	langBtn?.addEventListener("click", () => {
+		if (!langMenu) return;
+		const open = langMenu.hidden;
+		langMenu.hidden = !open;
+		langBtn.setAttribute("aria-expanded", String(open));
+	});
+
 	// ---------- theme ----------
 	const THEME_KEY = "focus-attention:theme";
 	const themeBtn = $<HTMLButtonElement>('[data-action="theme"]');
@@ -341,7 +480,7 @@
 		return `${s}s`;
 	}
 	function metrics(r: LeaderboardRow): string {
-		return `${r.words}w · ${fmt(r.attentionSec)} · ${fmt(r.recallSec)}`;
+		return `${r.words}${STR.wordsUnit} · ${fmt(r.attentionSec)} · ${fmt(r.recallSec)}`;
 	}
 
 	// ---------- auth state ----------
@@ -371,7 +510,7 @@
 		if (!profileBest) return;
 
 		if (!session) {
-			profileBest.innerHTML = `<p class="text-caption text-ink-muted-80">Best score</p><p class="text-fine text-ink-muted-48 mt-0.5">Log in to track your best.</p>`;
+			profileBest.innerHTML = `<p class="text-caption text-ink-muted-80">${STR.bestScore}</p><p class="text-fine text-ink-muted-48 mt-0.5">${STR.loginToTrack}</p>`;
 			return;
 		}
 
@@ -384,8 +523,8 @@
 		const attentionSec = best?.attentionSec ?? 0;
 		const recallSec = best?.recallSec ?? 0;
 		profileBest.innerHTML =
-			`<p class="text-caption text-ink-muted-80">Best score</p>` +
-			`<p class="text-fine text-ink-muted-48 mt-0.5">${words}w · ${fmt(attentionSec)} · ${fmt(recallSec)}</p>`;
+			`<p class="text-caption text-ink-muted-80">${STR.bestScore}</p>` +
+			`<p class="text-fine text-ink-muted-48 mt-0.5">${words}${STR.wordsUnit} · ${fmt(attentionSec)} · ${fmt(recallSec)}</p>`;
 	}
 
 	// Show the signed-in player's world rank as a "#N" badge beside the avatar.
@@ -407,7 +546,7 @@
 		);
 		if (mine) {
 			profileRank.textContent = `#${mine.row.rank}`;
-			profileRank.title = `You're #${mine.row.rank} of ${mine.total}`;
+			profileRank.title = fill(STR.yourRank, { rank: mine.row.rank, total: mine.total });
 			// Top 5 get the same color as their leaderboard row.
 			if (mine.row.rank <= 5) profileRank.classList.add(`rank-badge--${mine.row.rank}`);
 			profileRank.hidden = false;
@@ -434,8 +573,8 @@
 				if (userIcon) userIcon.style.display = "none";
 			}
 		} else {
-			profileBtn?.setAttribute("aria-label", "Account");
-			if (profileName) profileName.textContent = "Anonymous";
+			profileBtn?.setAttribute("aria-label", STR.account);
+			if (profileName) profileName.textContent = STR.anonymous;
 			if (signInBtn) signInBtn.hidden = false;
 			if (signOutBtn) signOutBtn.hidden = true;
 			if (avatar) avatar.hidden = true;
@@ -538,7 +677,7 @@
 		const file = photoInput.files?.[0];
 		if (!file || !session) return;
 		const prevLabel = changePhotoBtn?.textContent;
-		if (changePhotoBtn) { changePhotoBtn.disabled = true; changePhotoBtn.textContent = "Uploading…"; }
+		if (changePhotoBtn) { changePhotoBtn.disabled = true; changePhotoBtn.textContent = STR.uploading; }
 
 		const url = await uploadAvatar(file);
 		if (url) {
@@ -548,7 +687,7 @@
 			if (boardPanel && !boardPanel.hidden) loadBoard();
 		}
 
-		if (changePhotoBtn) { changePhotoBtn.disabled = false; changePhotoBtn.textContent = prevLabel ?? "Change photo"; }
+		if (changePhotoBtn) { changePhotoBtn.disabled = false; changePhotoBtn.textContent = prevLabel ?? STR.changePhoto; }
 		photoInput.value = ""; // allow re-selecting the same file
 	});
 
@@ -619,7 +758,7 @@
 				`<path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19Z"/>` +
 				`<path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z"/>` +
 			`</svg>` +
-			`<span>Log in to compete</span>`;
+			`<span>${STR.loginToCompete}</span>`;
 		btn.addEventListener("click", () => signInWithGoogle());
 		boardFoot.appendChild(btn);
 	}
@@ -631,7 +770,7 @@
 
 	async function loadBoard() {
 		if (!boardList) return;
-		boardList.innerHTML = `<li class="lb-empty">Loading…</li>`;
+		boardList.innerHTML = `<li class="lb-empty">${STR.loading}</li>`;
 		if (boardFoot) boardFoot.innerHTML = "";
 
 		boardLoaded = 0;
@@ -641,7 +780,7 @@
 		boardList.innerHTML = "";
 
 		if (top.length === 0) {
-			boardList.innerHTML = `<li class="lb-empty">No scores yet. Be the first.</li>`;
+			boardList.innerHTML = `<li class="lb-empty">${STR.noScores}</li>`;
 		} else {
 			const myId = session?.user.id;
 			top.forEach((r) => boardList.appendChild(rowEl(r, r.userId === myId)));
@@ -658,15 +797,15 @@
 			return;
 		}
 		const mine = await fetchMyRank(session.user.id);
-		if (boardTotal) boardTotal.textContent = mine ? `${mine.total} players` : "";
+		if (boardTotal) boardTotal.textContent = mine ? fill(STR.players, { n: mine.total }) : "";
 		if (!mine) {
-			setFootMyRank("Finish a round to claim your spot.");
+			setFootMyRank(STR.finishToClaim);
 			return;
 		}
 		const inTop = top.some((r) => r.userId === session!.user.id);
 		setFootMyRank(inTop
-			? `You're #${mine.row.rank} of ${mine.total}.`
-			: `You're #${mine.row.rank} of ${mine.total} · ${metrics(mine.row)}`);
+			? fill(STR.yourRank, { rank: mine.row.rank, total: mine.total })
+			: fill(STR.yourRankMetrics, { rank: mine.row.rank, total: mine.total, metrics: metrics(mine.row) }));
 	}
 
 	// Append the next page of rows below those already shown.
@@ -690,10 +829,10 @@
 		const btn = document.createElement("button");
 		btn.type = "button";
 		btn.className = "lb-more-btn";
-		btn.textContent = "Show more";
+		btn.textContent = STR.showMore;
 		btn.addEventListener("click", () => {
 			btn.disabled = true;
-			btn.textContent = "Loading…";
+			btn.textContent = STR.loading;
 			loadMore();
 		});
 		li.appendChild(btn);
@@ -706,7 +845,7 @@
 		if (!isConfigured) {
 			boardPanel.hidden = false;
 			boardBtn?.setAttribute("aria-expanded", "true");
-			if (boardList) boardList.innerHTML = `<li class="lb-empty">Leaderboard isn't set up yet.</li>`;
+			if (boardList) boardList.innerHTML = `<li class="lb-empty">${STR.boardNotSetUp}</li>`;
 			if (boardFoot) boardFoot.innerHTML = "";
 			if (boardTotal) boardTotal.textContent = "";
 			return;
@@ -730,9 +869,10 @@
 		const t = e.target as Node;
 		if (boardPanel && !boardPanel.hidden && !$<HTMLElement>("[data-board-wrap]")?.contains(t)) closeBoard();
 		if (profileMenu && !profileMenu.hidden && !profileWrap?.contains(t)) closeProfileMenu();
+		if (langMenu && !langMenu.hidden && !langWrap?.contains(t)) closeLangMenu();
 	});
 	document.addEventListener("keydown", (e) => {
-		if (e.key === "Escape") { closeBoard(); closeProfileMenu(); }
+		if (e.key === "Escape") { closeBoard(); closeProfileMenu(); closeLangMenu(); }
 	});
 
 	// The game fires this after a new personal best is submitted — refresh any

@@ -3,50 +3,81 @@
 // Four phases live inside one <focus-game> custom element; only one
 // <section data-phase> is visible at a time. All logic ships in the
 // <script> below (bundled + typed by Astro).
+//
+// Locale-aware: the component takes a `lang` prop, then serializes that
+// locale's word pool and UI strings into the rendered markup so the client
+// script can read them without importing all 20 word lists. Static HTML stays
+// server-rendered and crawlable.
+import type { Lang } from "../i18n/ui";
+import { defaultLang } from "../i18n/ui";
+import { useTranslations } from "../i18n/utils";
+import { getWords } from "../i18n/words";
+
+interface Props {
+	lang?: Lang;
+}
+
+const { lang = defaultLang } = Astro.props;
+const t = useTranslations(lang);
+const g = t.game;
+
+// Word pool + the game's dynamic strings, serialized for the client script.
+const words = getWords(lang);
+const i18n = {
+	wordSingular: g.wordSingular,
+	wordPlural: g.wordPlural,
+	leftToRecall: g.leftToRecall,
+	chosenSoFar: g.chosenSoFar,
+	focusDetail: g.focusDetail,
+	youTapped: g.youTapped,
+	durationTooShort: g.durationTooShort,
+	durationTooLong: g.durationTooLong,
+	paceOutOfRange: g.paceOutOfRange,
+};
 ---
 
-<focus-game class="block w-full">
+<focus-game class="block w-full" data-i18n={JSON.stringify(i18n)}>
+	<script type="application/json" data-words is:inline set:html={JSON.stringify(words)} />
 	<!-- ============================================================
 	     PHASE 1 · SETUP — choose the hold duration (10s → 12hr)
 	     ============================================================ -->
 	<section data-phase="setup" class="min-h-[88vh] flex flex-col items-center justify-center px-6 pt-(--spacing-section) pb-64 text-center">
-		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">The focus game</p>
-		<h1 class="text-hero text-ink max-w-[18ch]"><span class="whitespace-nowrap">Hold The Words</span><br /><span class="whitespace-nowrap">Measure Your Focus</span></h1>
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">{g.eyebrow}</p>
+		<h1 class="text-hero text-ink max-w-[18ch]"><span class="whitespace-nowrap">{g.titleLine1}</span><br /><span class="whitespace-nowrap">{g.titleLine2}</span></h1>
 		<p class="text-lead text-ink-muted-80 mt-5 max-w-[42ch]">
-			A new word appears at the pace you choose. Keep them in order in your
-			mind. When the timer ends, <span class="whitespace-nowrap">recall the sequence.</span>
+			{g.intro} <span class="whitespace-nowrap">{g.introRecallTail}</span>
 		</p>
 
 		<!-- Duration presets -->
 		<div class="mt-12 w-full max-w-130">
-			<p class="text-caption text-ink-muted-48 mb-3">Choose how long to hold your attention</p>
+			<p class="text-caption text-ink-muted-48 mb-3">{g.chooseDuration}</p>
 			<div role="group" aria-label="Duration presets" class="flex flex-wrap justify-center gap-2">
-				<button type="button" class="preset" data-seconds="10">10 sec</button>
-				<button type="button" class="preset" data-seconds="20">20 sec</button>
-				<button type="button" class="preset" data-seconds="30">30 sec</button>
-				<button type="button" class="preset" data-seconds="60">1 min</button>
-				<button type="button" class="preset" data-seconds="180">3 min</button>
-				<button type="button" class="preset" data-seconds="300">5 min</button>
+				<button type="button" class="preset" data-seconds="10">{g.presets.s10}</button>
+				<button type="button" class="preset" data-seconds="20">{g.presets.s20}</button>
+				<button type="button" class="preset" data-seconds="30">{g.presets.s30}</button>
+				<button type="button" class="preset" data-seconds="60">{g.presets.m1}</button>
+				<button type="button" class="preset" data-seconds="180">{g.presets.m3}</button>
+				<button type="button" class="preset" data-seconds="300">{g.presets.m5}</button>
 			</div>
 
 			<div class="mt-8 flex flex-col sm:flex-row sm:items-start justify-center gap-8 sm:gap-20">
 			<!-- Custom duration -->
 			<div>
-				<p class="text-caption text-ink-muted-48 mb-3">Or set a custom time</p>
+				<p class="text-caption text-ink-muted-48 mb-3">{g.customTime}</p>
 				<div class="flex items-end justify-center gap-3">
 					<label class="flex flex-col items-center gap-1.5">
 						<input type="number" min="0" max="12" value="0" data-unit="hours" class="time-input" />
-						<span class="text-fine text-ink-muted-48">hours</span>
+						<span class="text-fine text-ink-muted-48">{g.unitHours}</span>
 					</label>
 					<span class="text-lead text-hairline pb-6 select-none">:</span>
 					<label class="flex flex-col items-center gap-1.5">
 						<input type="number" min="0" max="59" value="0" data-unit="minutes" class="time-input" />
-						<span class="text-fine text-ink-muted-48">min</span>
+						<span class="text-fine text-ink-muted-48">{g.unitMin}</span>
 					</label>
 					<span class="text-lead text-hairline pb-6 select-none">:</span>
 					<label class="flex flex-col items-center gap-1.5">
 						<input type="number" min="0" max="59" value="30" data-unit="seconds" class="time-input" />
-						<span class="text-fine text-ink-muted-48">sec</span>
+						<span class="text-fine text-ink-muted-48">{g.unitSec}</span>
 					</label>
 				</div>
 				<p data-duration-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
@@ -54,16 +85,16 @@
 
 			<!-- Word pace — how often a new word appears (1s → 3min) -->
 			<div>
-				<p class="text-caption text-ink-muted-48 mb-3">How often a new word appears</p>
+				<p class="text-caption text-ink-muted-48 mb-3">{g.paceLabel}</p>
 				<div class="flex items-end justify-center gap-3">
 					<label class="flex flex-col items-center gap-1.5">
 						<input type="number" min="0" max="3" value="0" data-pace-unit="minutes" class="time-input" />
-						<span class="text-fine text-ink-muted-48">min</span>
+						<span class="text-fine text-ink-muted-48">{g.unitMin}</span>
 					</label>
 					<span class="text-lead text-hairline pb-6 select-none">:</span>
 					<label class="flex flex-col items-center gap-1.5">
 						<input type="number" min="0" max="59" value="3" data-pace-unit="seconds" class="time-input" />
-						<span class="text-fine text-ink-muted-48">sec</span>
+						<span class="text-fine text-ink-muted-48">{g.unitSec}</span>
 					</label>
 				</div>
 				<p data-pace-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
@@ -72,7 +103,7 @@
 		</div>
 
 		<div class="mt-12">
-			<button type="button" data-action="start" class="btn-primary">Begin</button>
+			<button type="button" data-action="start" class="btn-primary">{g.begin}</button>
 		</div>
 	</section>
 
@@ -95,7 +126,7 @@
 		</div>
 
 		<div class="px-6 py-8 flex justify-center">
-			<button type="button" data-action="end-early" class="end-early-btn text-caption">End early &amp; recall now</button>
+			<button type="button" data-action="end-early" class="end-early-btn text-caption">{g.endEarly}</button>
 		</div>
 	</section>
 
@@ -103,18 +134,18 @@
 	     PHASE 3 · RECALL — type the sequence back, in order
 	     ============================================================ -->
 	<section data-phase="recall" hidden class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
-		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">Recall</p>
-		<h2 class="text-display-lg text-ink max-w-[18ch]">Tap the words in the order they appeared.</h2>
+		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">{g.recallEyebrow}</p>
+		<h2 class="text-display-lg text-ink max-w-[18ch]">{g.recallHeading}</h2>
 
 		<!-- Recall window = double the chosen hold. When it ends, the round ends. -->
-		<p data-recall-clock class="text-caption text-primary tabular-nums mt-5" aria-live="polite">0:00 left to recall</p>
+		<p data-recall-clock class="text-caption text-primary tabular-nums mt-5" aria-live="polite"></p>
 
 		<!-- the order you've rebuilt so far -->
-		<p data-chosen-caption class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">Chosen sequence so far · 0 of 0</p>
+		<p data-chosen-caption class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]"></p>
 		<ul data-recall-list class="mt-3 flex flex-wrap justify-center gap-2 min-h-10" aria-live="polite"></ul>
 
 		<!-- shuffled inbox of the words you saw -->
-		<p class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">Tap the words you saw</p>
+		<p class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">{g.tapWordsYouSaw}</p>
 		<div data-pool class="mt-3 flex flex-wrap justify-center gap-2.5 max-w-170" role="group" aria-label="Word choices"></div>
 	</section>
 
@@ -122,33 +153,33 @@
 	     PHASE 4 · RESULT — attention span (time held) + focus (% recalled)
 	     ============================================================ -->
 	<section data-phase="result" hidden class="min-h-[88vh] flex flex-col items-center justify-center px-6 py-(--spacing-section) text-center">
-		<p class="text-caption text-ink-muted-48 mb-2 uppercase tracking-[0.04em]">Your results</p>
+		<p class="text-caption text-ink-muted-48 mb-2 uppercase tracking-[0.04em]">{g.resultEyebrow}</p>
 
 		<!-- Two headline metrics, side by side -->
 		<div class="mt-6 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
 			<!-- Attention span = how long you held the timer -->
 			<div class="flex flex-col items-center">
 				<span data-attention class="text-ink" style="font-family:var(--font-display);font-weight:600;font-size:clamp(56px,13vw,120px);line-height:1;letter-spacing:-0.02em">0s</span>
-				<span class="text-lead text-ink-muted-48 mt-2">Attention span</span>
-				<span class="text-caption text-ink-muted-48 mt-1">time you held focus</span>
+				<span class="text-lead text-ink-muted-48 mt-2">{g.attentionSpan}</span>
+				<span class="text-caption text-ink-muted-48 mt-1">{g.attentionHint}</span>
 			</div>
 			<!-- Focus = % of the sequence rebuilt correctly -->
 			<div class="flex flex-col items-center">
 				<span data-focus class="text-primary" style="font-family:var(--font-display);font-weight:600;font-size:clamp(56px,13vw,120px);line-height:1;letter-spacing:-0.02em">0%</span>
-				<span class="text-lead text-ink-muted-48 mt-2">Focus</span>
-				<span data-focus-detail class="text-caption text-ink-muted-48 mt-1">0 of 0 words in order</span>
+				<span class="text-lead text-ink-muted-48 mt-2">{g.focus}</span>
+				<span data-focus-detail class="text-caption text-ink-muted-48 mt-1"></span>
 			</div>
 		</div>
 
 		<!-- The reveal: what was actually shown vs. what you guessed -->
 		<div class="mt-12 w-full max-w-240 text-center">
-			<p class="text-caption text-ink-muted-48 mb-3">The sequence</p>
+			<p class="text-caption text-ink-muted-48 mb-3">{g.theSequence}</p>
 			<div data-reveal-list class="flex flex-wrap items-center justify-center gap-2"></div>
 		</div>
 
 		<div class="mt-12 flex items-center gap-3">
-			<button type="button" data-action="again" class="btn-primary">Play again</button>
-			<button type="button" data-action="change-time" class="btn-ghost">Change duration</button>
+			<button type="button" data-action="again" class="btn-primary">{g.playAgain}</button>
+			<button type="button" data-action="change-time" class="btn-ghost">{g.changeDuration}</button>
 		</div>
 	</section>
 </focus-game>
@@ -272,7 +303,6 @@
 </style>
 
 <script>
-	import { randomWord } from "../scripts/words";
 	import { submitBest, fetchMyBest } from "../lib/leaderboard";
 
 	const DEFAULT_WORD_INTERVAL_MS = 3000; // a fresh word every three seconds
@@ -283,7 +313,46 @@
 
 	type Phase = "setup" | "watch" | "recall" | "result";
 
+	// Dynamic strings injected by the .astro frontmatter (data-i18n on the
+	// host element). All carry {placeholder} tokens filled at render time.
+	interface GameStrings {
+		wordSingular: string;
+		wordPlural: string;
+		leftToRecall: string; // {clock}
+		chosenSoFar: string; // {n} {m}
+		focusDetail: string; // {span} {total} {wordUnit}
+		youTapped: string; // {word}
+		durationTooShort: string; // {n}
+		durationTooLong: string;
+		paceOutOfRange: string;
+	}
+
+	// English defaults — used only if the data-i18n blob is missing/malformed,
+	// so the game never renders blank labels.
+	const FALLBACK_STRINGS: GameStrings = {
+		wordSingular: "word",
+		wordPlural: "words",
+		leftToRecall: "{clock} left to recall",
+		chosenSoFar: "Chosen sequence so far · {n} of {m}",
+		focusDetail: "{span} of {total} {wordUnit} in order",
+		youTapped: 'You tapped "{word}"',
+		durationTooShort: "Hold must be at least {n} seconds",
+		durationTooLong: "Hold cannot exceed 12 hours",
+		paceOutOfRange: "Pace must be between 1 second and 3 minutes",
+	};
+
+	// Fill {name} placeholders in a template string.
+	function fill(template: string, vars: Record<string, string | number>): string {
+		return template.replace(/\{(\w+)\}/g, (_, k) =>
+			k in vars ? String(vars[k]) : `{${k}}`,
+		);
+	}
+
 	class FocusGame extends HTMLElement {
+		// --- locale data (read from the rendered markup) ---
+		private words: string[] = [];
+		private str: GameStrings = FALLBACK_STRINGS;
+
 		// --- run state ---
 		private durationSec = 30;
 		private wordIntervalMs = DEFAULT_WORD_INTERVAL_MS; // pace chosen at setup
@@ -308,6 +377,7 @@
 		private bestRecallSec = 0;
 
 		connectedCallback() {
+			this.readLocaleData();
 			this.bindSetup();
 			this.bindWatch();
 			this.bindRecall();
@@ -315,6 +385,40 @@
 			this.syncDurationHint();
 			this.syncPaceHint();
 			this.loadBest();
+		}
+
+		// Pull the locale's word pool + dynamic strings out of the rendered
+		// markup (serialized by the .astro frontmatter). Falls back to English
+		// strings / an empty pool if anything is missing or malformed.
+		private readLocaleData() {
+			const blob = this.querySelector<HTMLScriptElement>("[data-words]");
+			if (blob?.textContent) {
+				try {
+					const parsed = JSON.parse(blob.textContent);
+					if (Array.isArray(parsed)) this.words = parsed.filter((w) => typeof w === "string");
+				} catch {}
+			}
+			const raw = this.dataset.i18n;
+			if (raw) {
+				try {
+					this.str = { ...FALLBACK_STRINGS, ...(JSON.parse(raw) as Partial<GameStrings>) };
+				} catch {}
+			}
+		}
+
+		// Pick a random word from this locale's pool, avoiding an immediate
+		// repeat of `previous`. (Was the imported randomWord(); inlined so the
+		// game operates on the per-locale pool without importing all 20 lists.)
+		private randomWord(previous?: string): string {
+			const pool = this.words;
+			if (pool.length === 0) return "";
+			let word = pool[Math.floor(Math.random() * pool.length)];
+			if (previous && pool.length > 1) {
+				while (word === previous) {
+					word = pool[Math.floor(Math.random() * pool.length)];
+				}
+			}
+			return word;
 		}
 
 		// Seed the in-memory best from the server (per account). Refreshes when the
@@ -415,7 +519,7 @@
 		private syncPaceHint() {
 			const hint = this.q<HTMLElement>("[data-pace-hint]");
 			if (!this.paceValid()) {
-				hint.textContent = "Pace must be between 1 second and 3 minutes";
+				hint.textContent = this.str.paceOutOfRange;
 				hint.style.color = "var(--color-primary)";
 			} else {
 				hint.textContent = "";
@@ -448,10 +552,10 @@
 			const secs = this.readDurationInputs();
 			const hint = this.q<HTMLElement>("[data-duration-hint]");
 			if (secs < MIN_SECONDS) {
-				hint.textContent = `Hold must be at least ${MIN_SECONDS} seconds`;
+				hint.textContent = fill(this.str.durationTooShort, { n: MIN_SECONDS });
 				hint.style.color = "var(--color-primary)";
 			} else if (secs > MAX_SECONDS) {
-				hint.textContent = "Hold cannot exceed 12 hours";
+				hint.textContent = this.str.durationTooLong;
 				hint.style.color = "var(--color-primary)";
 			} else {
 				hint.textContent = "";
@@ -491,14 +595,14 @@
 					this.wordTimer = null;
 					return;
 				}
-				const next = randomWord(this.shown[this.shown.length - 1]);
+				const next = this.randomWord(this.shown[this.shown.length - 1]);
 				this.shown.push(next);
 				wordEl.textContent = next;
 				wordEl.animate(
 					[{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
 					{ duration: 280, easing: "ease-out" },
 				);
-				seenEl.textContent = `${this.shown.length} ${this.shown.length === 1 ? "word" : "words"}`;
+				seenEl.textContent = `${this.shown.length} ${this.shown.length === 1 ? this.str.wordSingular : this.str.wordPlural}`;
 			};
 
 			pushWord(); // first word immediately
@@ -562,7 +666,9 @@
 			const clockEl = this.q<HTMLElement>("[data-recall-clock]");
 			const tick = () => {
 				const leftMs = Math.max(0, this.recallEndsAt - performance.now());
-				clockEl.textContent = `${this.formatClock(Math.ceil(leftMs / 1000))} left to recall`;
+				clockEl.textContent = fill(this.str.leftToRecall, {
+					clock: this.formatClock(Math.ceil(leftMs / 1000)),
+				});
 				if (leftMs <= 0) {
 					this.stopRecallTimer();
 					this.startResult(); // time's up — score what was rebuilt
@@ -649,8 +755,10 @@
 		}
 
 		private updateRecallProgress() {
-			this.q<HTMLElement>("[data-chosen-caption]").textContent =
-				`Chosen sequence so far · ${this.guesses.length} of ${this.shown.length}`;
+			this.q<HTMLElement>("[data-chosen-caption]").textContent = fill(this.str.chosenSoFar, {
+				n: this.guesses.length,
+				m: this.shown.length,
+			});
 		}
 
 		// ============================================================
@@ -674,8 +782,11 @@
 			// Focus = share of the sequence rebuilt correctly, in order.
 			const focusPct = total === 0 ? 0 : Math.round((span / total) * 100);
 			this.q<HTMLElement>("[data-focus]").textContent = `${focusPct}%`;
-			this.q<HTMLElement>("[data-focus-detail]").textContent =
-				`${span} of ${total} ${total === 1 ? "word" : "words"} in order`;
+			this.q<HTMLElement>("[data-focus-detail]").textContent = fill(this.str.focusDetail, {
+				span,
+				total,
+				wordUnit: total === 1 ? this.str.wordSingular : this.str.wordPlural,
+			});
 
 			this.updateBest(span);
 			this.renderReveal();
@@ -735,7 +846,7 @@
 				} else if (i === span && this.wrongPick) {
 					// The break point — mark it, and note what was tapped instead.
 					chip.className = "chip chip-wrong";
-					chip.title = `You tapped "${this.wrongPick}"`;
+					chip.title = fill(this.str.youTapped, { word: this.wrongPick });
 				} else {
 					// Never reached.
 					chip.className = "chip chip-missed";
