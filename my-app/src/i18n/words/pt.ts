@@ -31,7 +31,7 @@ export const WORDS: readonly string[] = [
   "casa", "sala", "porta", "janela", "parede", "chão", "telhado", "escada", "cozinha", "quarto",
   "casa de banho", "garagem", "jardim", "quintal", "cerca", "portão", "mesa", "cadeira", "sofá", "cama",
   "almofada", "cobertor", "candeeiro", "relógio", "espelho", "prateleira", "gaveta", "roupeiro", "tapete", "cortina",
-  "secretária", "banco", "tamborete", "divã", "armário", "balde", "cesto", "caixa", "saco", "frasco",
+  "secretária", "banco de jardim", "tamborete", "divã", "armário", "balde", "cesto", "caixa", "saco", "frasco",
 
   // cozinha e loiça
   "prato", "tigela", "chávena", "copo", "colher", "garfo", "faca", "panela", "frigideira", "chaleira",
@@ -40,18 +40,18 @@ export const WORDS: readonly string[] = [
   // roupa
   "camisa", "calças", "vestido", "saia", "casaco", "blusão", "camisola", "chapéu", "boné", "cachecol",
   "luva", "meia", "sapato", "bota", "cinto", "gravata", "botão", "bolso", "fecho", "calções",
-  "jeans", "fato", "roupão", "avental", "anel", "relógio", "óculos", "bolsa", "carteira", "guarda-chuva",
+  "jeans", "fato", "roupão", "avental", "anel", "relógio de pulso", "óculos", "bolsa", "carteira", "guarda-chuva",
 
   // natureza e clima
   "sol", "lua", "estrela", "céu", "nuvem", "chuva", "neve", "vento", "tempestade", "nevoeiro",
   "gelo", "fogo", "fumo", "árvore", "folha", "ramo", "raiz", "flor", "relva", "arbusto",
   "rosa", "pétala", "floresta", "campo", "colina", "montanha", "vale", "rio", "lago", "oceano",
   "mar", "praia", "areia", "rocha", "pedra", "lama", "terra", "gruta", "ilha", "deserto",
-  "arco-íris", "trovão", "sombra", "manhã", "noite", "dia", "estação", "verão", "inverno", "outono",
+  "arco-íris", "trovão", "sombra", "manhã", "noite", "dia", "estação do ano", "verão", "inverno", "outono",
 
   // escola e escritório
   "livro", "página", "papel", "caneta", "lápis", "borracha", "régua", "marcador", "lápis de cera", "caderno",
-  "letra", "palavra", "número", "história", "mapa", "gráfico", "cartão", "selo", "envelope", "pasta",
+  "letra", "palavra", "número", "conto", "mapa", "gráfico", "cartão", "selo", "envelope", "pasta",
   "tesoura", "cola", "fita", "clipe", "agrafador", "quadro", "giz", "ecrã", "teclado", "calendário",
 
   // ferramentas e objetos
@@ -113,13 +113,13 @@ export const WORDS: readonly string[] = [
   "alvorada", "anoitecer", "fim de semana", "feriado", "aniversário",
 
   // profissões
-  "advogado", "juiz", "soldado", "marinheiro", "capitão", "presidente da câmara", "funcionário", "caixa", "empregado de mesa", "porteiro",
+  "advogado", "juiz", "soldado", "marinheiro", "capitão", "presidente da câmara", "funcionário", "operador de caixa", "empregado de mesa", "porteiro",
   "canalizador", "construtor", "pintor", "barbeiro", "alfaiate", "talhante", "caçador", "mineiro", "guarda", "cientista",
   "engenheiro", "ator", "poeta", "autor", "repórter", "banqueiro", "jardineiro", "mecânico", "carpinteiro", "criada",
 
   // desportos
   "futebol", "ténis", "golfe", "hóquei", "basebol", "críquete", "râguebi", "boxe", "esqui", "surf",
-  "bólingue", "dardos", "xadrez", "raquete", "golo", "camisola", "pista", "campo", "rinque", "equipa",
+  "bólingue", "dardos", "xadrez", "raquete", "golo", "camisola de equipa", "pista", "campo de jogos", "rinque", "equipa",
 
   // escola
   "aula", "lição", "trabalho de casa", "teste", "exame", "nota", "disciplina", "matemática", "ciência", "história",
@@ -127,7 +127,7 @@ export const WORDS: readonly string[] = [
 
   // lugares
   "selva", "prado", "pradaria", "desfiladeiro", "penhasco", "túnel", "torre", "casa de campo", "cabana", "celeiro",
-  "estábulo", "moinho", "farol", "doca", "cais", "porto", "centro comercial", "padaria", "farmácia", "café",
+  "estábulo", "moinho", "farol", "doca", "cais", "porto marítimo", "centro comercial", "padaria", "farmácia", "cafetaria",
   "snack-bar", "cinema", "galeria", "arena", "templo", "prisão", "tribunal", "embaixada", "cemitério", "parque infantil",
 
   // mais corpo
@@ -140,7 +140,7 @@ export const WORDS: readonly string[] = [
   "campainha", "buraco da fechadura", "torneira", "ralo", "tomada", "termóstato", "aquecedor", "ventoinha", "jarra", "cartaz",
 
   // tecnologia
-  "portátil", "tablet", "monitor", "impressora", "scanner", "coluna", "auscultadores", "carregador", "cabo", "router",
+  "portátil", "tablet", "monitor", "impressora", "scanner", "altifalante", "auscultadores", "carregador", "cabo", "router",
   "modem", "comando", "controlador", "joystick", "webcam", "microfone", "auricular", "consola", "adaptador", "antena",
 
   // mais natureza
@@ -164,7 +164,7 @@ export const WORDS: readonly string[] = [
   "furão", "hamster", "gerbil", "esquilo-listrado", "porco-espinho", "tatu", "morsa", "foca", "crocodilo", "jacaré",
 
   // mais roupa
-  "camisola com capuz", "blusa", "colete", "casaco de malha", "túnica", "pijama", "chinelo", "sandália", "ténis", "mitene",
+  "camisola com capuz", "blusa", "colete", "casaco de malha", "túnica", "pijama", "chinelo", "sandália", "sapatilha", "mitene",
   "protetor de orelhas", "bandana", "colar", "pulseira", "brinco", "broche", "atacador", "gola", "botão de punho", "impermeável",
 
   // objetos diversos

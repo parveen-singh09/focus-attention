@@ -25,13 +25,13 @@ export const WORDS: readonly string[] = [
   "pollito", "conejo", "ratón", "rata", "zorro", "lobo", "oso", "león", "tigre", "ciervo",
   "mono", "elefante", "jirafa", "cebra", "serpiente", "rana", "tortuga", "lagarto", "araña", "hormiga",
   "abeja", "mosca", "polilla", "gusano", "caracol", "cangrejo", "tiburón", "ballena", "delfín", "búho",
-  "águila", "cuervo", "paloma", "loro", "pingüino", "canguro", "camello", "burro", "ardilla", "hipopótamo",
+  "águila", "corneja", "paloma", "loro", "pingüino", "canguro", "camello", "burro", "ardilla", "hipopótamo",
 
   // hogar y muebles
   "casa", "habitación", "puerta", "ventana", "pared", "suelo", "techo", "escalera", "cocina", "dormitorio",
   "baño", "garaje", "jardín", "patio", "valla", "portón", "mesa", "silla", "sofá", "cama",
   "almohada", "manta", "lámpara", "reloj", "espejo", "estante", "cajón", "armario", "alfombra", "cortina",
-  "escritorio", "banco", "taburete", "diván", "alacena", "cubo", "cesta", "caja", "bolsa", "tarro",
+  "escritorio", "banca", "taburete", "diván", "alacena", "cubo", "cesta", "caja", "bolsa", "tarro",
 
   // cocina y vajilla
   "plato", "tazón", "taza", "vaso", "cuchara", "tenedor", "cuchillo", "olla", "sartén", "hervidor",
@@ -40,14 +40,14 @@ export const WORDS: readonly string[] = [
   // ropa
   "camisa", "pantalón", "vestido", "falda", "abrigo", "chaqueta", "suéter", "sombrero", "gorra", "bufanda",
   "guante", "calcetín", "zapato", "bota", "cinturón", "corbata", "botón", "bolsillo", "cremallera", "shorts",
-  "vaqueros", "traje", "bata", "delantal", "anillo", "reloj", "gafas", "monedero", "billetera", "paraguas",
+  "vaqueros", "traje", "bata", "delantal", "anillo", "reloj de pulsera", "gafas", "monedero", "billetera", "paraguas",
 
   // naturaleza y clima
   "sol", "luna", "estrella", "cielo", "nube", "lluvia", "nieve", "viento", "tormenta", "niebla",
   "hielo", "fuego", "humo", "árbol", "hoja", "rama", "raíz", "flor", "hierba", "arbusto",
   "rosa", "pétalo", "bosque", "campo", "colina", "montaña", "valle", "río", "lago", "océano",
   "mar", "playa", "arena", "roca", "piedra", "lodo", "tierra", "cueva", "isla", "desierto",
-  "arcoíris", "trueno", "sombra", "mañana", "noche", "día", "estación", "verano", "invierno", "otoño",
+  "arcoíris", "trueno", "sombra", "la mañana", "noche", "día", "estación del año", "verano", "invierno", "otoño",
 
   // escuela y oficina
   "libro", "página", "papel", "bolígrafo", "lápiz", "goma", "regla", "rotulador", "crayón", "cuaderno",
@@ -55,7 +55,7 @@ export const WORDS: readonly string[] = [
   "tijeras", "pegamento", "cinta", "clip", "grapadora", "tablero", "tiza", "pantalla", "teclado", "calendario",
 
   // herramientas y objetos
-  "martillo", "tornillo", "sierra", "taladro", "llave", "escalera de mano", "cuerda", "cadena", "alambre", "cepillo",
+  "martillo", "tornillo", "sierra", "taladro", "llave inglesa", "escalera de mano", "cuerda", "cadena", "alambre", "cepillo",
   "escoba", "fregona", "jabón", "esponja", "peine", "navaja", "aguja", "hilo", "llave", "cerradura",
   "batería", "rueda", "motor", "bomba", "imán", "resorte", "interruptor", "enchufe", "tubo", "gancho",
 
@@ -69,7 +69,7 @@ export const WORDS: readonly string[] = [
   "ciudad", "pueblo", "aldea", "país", "palacio", "castillo", "zoológico", "puerto", "teatro", "estadio",
 
   // juguetes y juego
-  "pelota", "juguete", "muñeca", "cometa", "rompecabezas", "juego", "bloque", "tambor", "globo", "canica",
+  "pelota", "juguete", "muñeca", "papalote", "rompecabezas", "juego", "bloque", "tambor", "globo", "canica",
   "columpio", "tobogán", "robot", "títere", "silbato", "yoyó", "dado", "trompo", "salto", "carrera",
 
   // música y arte
@@ -86,7 +86,7 @@ export const WORDS: readonly string[] = [
   "tostada", "gofre", "panqueque", "magdalena", "dona", "pretzel", "palomitas", "papas", "jarabe", "gelatina",
   "cacahuete", "pasa", "albaricoque", "ciruela", "pera", "kiwi", "lima", "coco", "piña", "fresa",
   "arándano", "calabaza", "col", "apio", "espinaca", "rábano", "encurtido", "jengibre", "menta", "albahaca",
-  "harina", "masa", "salsa", "salsa", "kétchup", "mostaza", "vinagre", "aceite", "levadura", "avena",
+  "harina", "masa", "salsa de carne", "salsa", "kétchup", "mostaza", "vinagre", "aceite", "levadura", "avena",
 
   // bebidas
   "cacao", "limonada", "licuado", "batido", "ponche", "sidra", "whisky", "brandy", "champán", "malteada",
@@ -127,11 +127,11 @@ export const WORDS: readonly string[] = [
 
   // lugares
   "selva", "pradera", "llanura", "cañón", "acantilado", "túnel", "torre", "casita", "cabaña", "granero",
-  "establo", "molino", "faro", "muelle", "embarcadero", "puerto", "centro comercial", "panadería", "farmacia", "cafetería",
+  "establo", "molino", "faro", "muelle", "embarcadero", "puerto marítimo", "centro comercial", "panadería", "farmacia", "cafetería",
   "comedor", "cine", "galería", "ruedo", "templo", "prisión", "juzgado", "embajada", "cementerio", "parque infantil",
 
   // más cuerpo
-  "frente", "mejilla", "barbilla", "mandíbula", "ceja", "pestaña", "muñeca", "tobillo", "talón", "palma",
+  "frente", "mejilla", "barbilla", "mandíbula", "ceja", "pestaña", "muñeca de la mano", "tobillo", "talón", "palma",
   "columna", "costilla", "pulmón", "hígado", "riñón", "músculo", "nervio", "vena", "garganta", "cadera",
 
   // hogar
@@ -164,11 +164,11 @@ export const WORDS: readonly string[] = [
   "hurón", "hámster", "jerbo", "ardilla listada", "puercoespín", "armadillo", "morsa", "foca", "cocodrilo", "caimán",
 
   // más ropa
-  "sudadera", "blusa", "chaleco", "cárdigan", "túnica", "pijama", "zapatilla", "sandalia", "tenis", "manopla",
-  "orejera", "pañuelo", "collar", "pulsera", "arete", "broche", "cordón", "cuello", "gemelo", "impermeable",
+  "sudadera", "blusa", "chaleco", "cárdigan", "túnica", "pijama", "zapatilla", "sandalia", "zapatilla deportiva", "manopla",
+  "orejera", "pañuelo", "collar", "pulsera", "arete", "broche", "cordón", "cuello de camisa", "gemelo", "impermeable",
 
   // objetos varios
-  "linterna", "fosforera", "maleta", "maletín", "bolso", "bolsita", "llavero", "binoculares", "telescopio", "microscopio",
+  "linterna", "fosforera", "maleta", "maletín", "bolso", "bolsita", "cadena para llaves", "binoculares", "telescopio", "microscopio",
   "termómetro", "cronómetro", "reloj de arena", "embudo", "escalón", "caja de herramientas", "carretilla", "pala", "rastrillo", "azada",
 ];
 

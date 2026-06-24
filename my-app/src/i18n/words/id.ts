@@ -28,8 +28,8 @@ export const WORDS: readonly string[] = [
 
   // home & furniture
   "rumah", "kamar", "pintu", "jendela", "dinding", "lantai", "atap", "tangga", "dapur", "kamar tidur",
-  "kamar mandi", "garasi", "taman", "halaman", "pagar", "gerbang", "meja", "kursi", "sofa", "tempat tidur",
-  "bantal", "selimut", "lampu", "jam", "cermin", "rak", "laci", "lemari", "karpet", "tirai",
+  "kamar mandi", "garasi", "taman", "pekarangan", "pagar", "gerbang", "meja", "kursi", "sofa", "tempat tidur",
+  "bantal", "selimut", "lampu", "jam dinding", "cermin", "rak", "laci", "lemari", "karpet", "tirai",
   "meja tulis", "bangku", "kursi tinggi", "dipan", "kabinet", "ember", "keranjang", "kotak", "tas", "toples",
 
   // kitchen & dishes
@@ -42,7 +42,7 @@ export const WORDS: readonly string[] = [
   "jins", "setelan jas", "jubah", "celemek", "cincin", "jam tangan", "kacamata", "tas tangan", "dompet", "payung",
 
   // nature & weather
-  "matahari", "bulan", "bintang", "langit", "awan", "hujan", "salju", "angin", "badai", "kabut",
+  "matahari", "rembulan", "bintang", "langit", "awan", "hujan", "salju", "angin", "badai", "kabut",
   "es", "api", "asap", "pohon", "daun", "ranting", "akar", "bunga", "rumput", "semak",
   "mawar", "kelopak", "hutan", "ladang", "bukit", "gunung", "lembah", "sungai", "danau", "samudra",
   "laut", "pantai", "pasir", "batu besar", "batu", "lumpur", "tanah", "gua", "pulau", "gurun",
@@ -78,7 +78,7 @@ export const WORDS: readonly string[] = [
   // misc everyday
   "uang", "koin", "dolar", "harga", "hadiah", "lilin", "korek api", "bendera", "tiket", "telepon",
   "kamera", "radio", "obor", "lentera", "kompas", "jangkar", "pita", "gelembung", "bulu", "kerikil",
-  "kerang", "karang", "mahkota", "berlian", "harta karun", "medali", "piala", "tenda", "api unggun", "kereta luncur",
+  "cangkang", "karang", "mahkota", "berlian", "harta karun", "medali", "piala", "tenda", "api unggun", "kereta luncur",
   "sepatu roda", "helm", "sedotan", "kartu pos", "koran", "majalah", "gantungan kunci", "sikat gigi", "cangkir besar", "spatula",
 
   // more food

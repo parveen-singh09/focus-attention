@@ -15,7 +15,7 @@ export const WORDS: readonly string[] = [
   "elma", "muz", "portakal", "üzüm", "limon", "kiraz", "şeftali", "kavun", "böğürtlen", "mango",
   "ekmek", "tereyağı", "peynir", "yumurta", "süt", "pirinç", "makarna", "çorba", "salata", "pizza",
   "hamburger", "sandviç", "pasta", "kurabiye", "şeker", "toz şeker", "tuz", "biber", "bal", "reçel",
-  "et", "tavuk", "balık", "pastırma", "dana eti", "patates", "domates", "soğan", "havuç", "fasulye",
+  "et", "tavuk eti", "balık", "pastırma", "dana eti", "patates", "domates", "soğan", "havuç", "fasulye",
   "mısır", "bezelye", "sarımsak", "marul", "salatalık", "mantar", "fındık", "tohum", "zeytin", "baharat",
   "kahve", "çay", "meyve suyu", "su", "gazoz", "şarap", "bira", "krema", "yoğurt", "erişte",
 
@@ -29,7 +29,7 @@ export const WORDS: readonly string[] = [
   // home & furniture
   "ev", "oda", "kapı", "pencere", "duvar", "zemin", "çatı", "merdiven", "mutfak", "yatak odası",
   "banyo", "garaj", "bahçe", "avlu", "çit", "kapı bahçe", "masa", "sandalye", "kanepe", "yatak",
-  "yastık", "battaniye", "lamba", "saat", "ayna", "raf", "çekmece", "dolap", "halı", "perde",
+  "yastık", "battaniye", "lamba", "duvar saati", "ayna", "raf", "çekmece", "dolap", "halı", "perde",
   "çalışma masası", "bank", "tabure", "koltuk", "vitrin", "kova", "sepet", "kutu", "çanta", "kavanoz",
 
   // kitchen & dishes
@@ -42,7 +42,7 @@ export const WORDS: readonly string[] = [
   "kot", "takım elbise", "bornoz", "önlük", "yüzük", "kol saati", "gözlük", "el çantası", "cüzdan", "şemsiye",
 
   // nature & weather
-  "güneş", "ay", "yıldız", "gökyüzü", "bulut", "yağmur", "kar", "rüzgar", "fırtına", "sis",
+  "güneş", "Ay", "yıldız", "gökyüzü", "bulut", "yağmur", "kar", "rüzgar", "fırtına", "sis",
   "buz", "ateş", "duman", "ağaç", "yaprak", "dal", "kök", "çiçek", "çimen", "çalı",
   "gül", "taç yaprağı", "orman", "tarla", "tepe", "dağ", "vadi", "nehir", "göl", "okyanus",
   "deniz", "plaj", "kum", "kaya", "taş", "çamur", "toprak", "mağara", "ada", "çöl",
@@ -77,7 +77,7 @@ export const WORDS: readonly string[] = [
 
   // misc everyday
   "para", "madeni para", "dolar", "fiyat", "hediye", "mum", "kibrit", "bayrak", "bilet", "telefon",
-  "kamera", "radyo", "el feneri", "fener", "pusula", "çapa", "kurdele", "baloncuk", "tüy", "çakıl",
+  "kamera", "radyo", "el feneri", "fener", "pusula", "gemi çapası", "kurdele", "baloncuk", "tüy", "çakıl",
   "deniz kabuğu", "mercan", "taç", "elmas", "hazine", "madalya", "kupa", "çadır", "kamp ateşi", "kızak",
   "paten", "kask", "pipet", "kartpostal", "gazete", "dergi", "anahtarlık", "diş fırçası", "kupa bardak", "spatula",
 
@@ -114,7 +114,7 @@ export const WORDS: readonly string[] = [
   // jobs
   "avukat", "hakim", "asker", "denizci", "kaptan", "belediye başkanı", "memur", "kasiyer", "garson", "kapıcı",
   "tesisatçı", "inşaatçı", "boyacı", "berber", "terzi", "kasap", "avcı", "madenci", "muhafız", "bilim insanı",
-  "mühendis", "aktör", "şair", "yazar", "muhabir", "bankacı", "bahçıvan", "tamirci", "marangoz", "hizmetçi",
+  "mühendis", "aktör", "şair", "müellif", "muhabir", "bankacı", "bahçıvan", "tamirci", "marangoz", "hizmetçi",
 
   // sports
   "futbol", "tenis", "golf", "hokey", "beyzbol", "kriket", "ragbi", "boks", "kayak", "sörf",
@@ -126,7 +126,7 @@ export const WORDS: readonly string[] = [
 
   // places
   "orman tropik", "çayır", "bozkır", "kanyon", "uçurum", "tünel", "kule", "kulübe", "baraka", "ahır",
-  "ahır at", "değirmen", "deniz feneri", "iskele", "rıhtım", "liman", "alışveriş merkezi", "fırın", "eczane", "kafe",
+  "ahır at", "değirmen", "deniz feneri", "iskele", "rıhtım", "deniz limanı", "alışveriş merkezi", "pastane", "eczane", "kafe",
   "lokanta", "sinema", "galeri", "arena", "tapınak", "hapishane", "adliye", "büyükelçilik", "mezarlık", "oyun alanı",
 
   // body more

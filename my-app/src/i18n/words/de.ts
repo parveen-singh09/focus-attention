@@ -4,7 +4,7 @@
 // 1000 Wörter.
 export const WORDS: readonly string[] = [
   // Menschen & Familie
-  "Baby", "Kind", "Kind", "Junge", "Mädchen", "Mann", "Frau", "Mutter", "Vater", "Schwester",
+  "Baby", "Kind", "Knirps", "Junge", "Mädchen", "Mann", "Frau", "Mutter", "Vater", "Schwester",
   "Bruder", "Onkel", "Tante", "Cousin", "Freund", "Nachbar", "Lehrer", "Arzt", "Krankenpfleger", "Fahrer",
   "Bauer", "Koch", "Bäcker", "Pilot", "Sänger", "Künstler", "Schriftsteller", "Spieler", "Arbeiter", "Schüler",
 
@@ -18,8 +18,8 @@ export const WORDS: readonly string[] = [
   "Brot", "Butter", "Käse", "Ei", "Milch", "Reis", "Nudeln", "Suppe", "Salat", "Pizza",
   "Burger", "Sandwich", "Kuchen", "Keks", "Bonbon", "Zucker", "Salz", "Pfeffer", "Honig", "Marmelade",
   "Fleisch", "Hähnchen", "Fisch", "Speck", "Rindfleisch", "Kartoffel", "Tomate", "Zwiebel", "Karotte", "Bohne",
-  "Mais", "Erbse", "Knoblauch", "Salat", "Gurke", "Pilz", "Nuss", "Samen", "Olive", "Gewürz",
-  "Kaffee", "Tee", "Saft", "Wasser", "Limonade", "Wein", "Bier", "Sahne", "Joghurt", "Nudel",
+  "Mais", "Erbse", "Knoblauch", "Kopfsalat", "Gurke", "Pilz", "Nuss", "Samen", "Olive", "Gewürz",
+  "Kaffee", "Tee", "Saft", "Wasser", "Brause", "Wein", "Bier", "Sahne", "Joghurt", "Nudel",
 
   // Tiere
   "Hund", "Katze", "Vogel", "Pferd", "Kuh", "Schwein", "Schaf", "Ziege", "Ente", "Henne",
@@ -32,7 +32,7 @@ export const WORDS: readonly string[] = [
   "Haus", "Zimmer", "Tür", "Fenster", "Wand", "Boden", "Dach", "Treppe", "Küche", "Schlafzimmer",
   "Badezimmer", "Garage", "Garten", "Hof", "Zaun", "Tor", "Tisch", "Stuhl", "Sofa", "Bett",
   "Kissen", "Decke", "Lampe", "Uhr", "Spiegel", "Regal", "Schublade", "Schrank", "Teppich", "Vorhang",
-  "Schreibtisch", "Bank", "Hocker", "Couch", "Schrank", "Eimer", "Korb", "Kiste", "Tasche", "Glas",
+  "Schreibtisch", "Sitzbank", "Hocker", "Couch", "Vitrine", "Eimer", "Korb", "Kiste", "Tasche", "Einmachglas",
 
   // Küche & Geschirr
   "Teller", "Schüssel", "Tasse", "Glas", "Löffel", "Gabel", "Messer", "Topf", "Pfanne", "Wasserkocher",
@@ -40,8 +40,8 @@ export const WORDS: readonly string[] = [
 
   // Kleidung
   "Hemd", "Hose", "Kleid", "Rock", "Mantel", "Jacke", "Pullover", "Hut", "Mütze", "Schal",
-  "Handschuh", "Socke", "Schuh", "Stiefel", "Gürtel", "Krawatte", "Knopf", "Tasche", "Reißverschluss", "Shorts",
-  "Jeans", "Anzug", "Bademantel", "Schürze", "Ring", "Uhr", "Brille", "Handtasche", "Geldbörse", "Regenschirm",
+  "Handschuh", "Socke", "Schuh", "Stiefel", "Gürtel", "Krawatte", "Knopf", "Hosentasche", "Reißverschluss", "Shorts",
+  "Jeans", "Anzug", "Bademantel", "Schürze", "Ring", "Armbanduhr", "Brille", "Handtasche", "Geldbörse", "Regenschirm",
 
   // Natur & Wetter
   "Sonne", "Mond", "Stern", "Himmel", "Wolke", "Regen", "Schnee", "Wind", "Sturm", "Nebel",
@@ -52,13 +52,13 @@ export const WORDS: readonly string[] = [
 
   // Schule & Büro
   "Buch", "Seite", "Papier", "Stift", "Bleistift", "Radiergummi", "Lineal", "Marker", "Buntstift", "Notizbuch",
-  "Brief", "Wort", "Zahl", "Geschichte", "Karte", "Diagramm", "Karte", "Briefmarke", "Umschlag", "Ordner",
+  "Brief", "Wort", "Zahl", "Erzählung", "Landkarte", "Diagramm", "Karte", "Briefmarke", "Umschlag", "Ordner",
   "Schere", "Klebstoff", "Klebeband", "Klammer", "Hefter", "Tafel", "Kreide", "Bildschirm", "Tastatur", "Kalender",
 
   // Werkzeuge & Gegenstände
   "Hammer", "Schraube", "Säge", "Bohrer", "Schraubenschlüssel", "Leiter", "Seil", "Kette", "Draht", "Bürste",
   "Besen", "Wischmopp", "Seife", "Schwamm", "Kamm", "Rasierer", "Nadel", "Faden", "Schlüssel", "Schloss",
-  "Batterie", "Rad", "Motor", "Pumpe", "Magnet", "Feder", "Schalter", "Stecker", "Rohr", "Haken",
+  "Batterie", "Rad", "Motor", "Pumpe", "Magnet", "Sprungfeder", "Schalter", "Stecker", "Rohr", "Haken",
 
   // Verkehr
   "Auto", "Bus", "Lastwagen", "Zug", "Flugzeug", "Boot", "Schiff", "Fahrrad", "Roller", "Taxi",
@@ -66,8 +66,8 @@ export const WORDS: readonly string[] = [
 
   // Orte
   "Schule", "Geschäft", "Laden", "Markt", "Bank", "Büro", "Krankenhaus", "Bibliothek", "Museum", "Park",
-  "Kirche", "Hotel", "Restaurant", "Fabrik", "Bauernhof", "Bahnhof", "Flughafen", "Brücke", "Straße", "Straße",
-  "Stadt", "Stadt", "Dorf", "Land", "Palast", "Schloss", "Zoo", "Hafen", "Theater", "Stadion",
+  "Kirche", "Hotel", "Restaurant", "Fabrik", "Bauernhof", "Bahnhof", "Flughafen", "Brücke", "Landstraße", "Straße",
+  "Stadt", "Ortschaft", "Dorf", "Land", "Palast", "Burg", "Zoo", "Hafen", "Theater", "Stadion",
 
   // Spielzeug & Spiel
   "Ball", "Spielzeug", "Puppe", "Drachen", "Puzzle", "Spiel", "Baustein", "Trommel", "Luftballon", "Murmel",
@@ -75,7 +75,7 @@ export const WORDS: readonly string[] = [
 
   // Musik & Kunst
   "Musik", "Lied", "Gitarre", "Klavier", "Geige", "Flöte", "Trompete", "Glocke", "Horn", "Harfe",
-  "Farbe", "Farbe", "Bild", "Foto", "Rahmen", "Film", "Tanz", "Bühne", "Zirkus", "Clown",
+  "Malfarbe", "Farbe", "Bild", "Foto", "Rahmen", "Film", "Tanz", "Bühne", "Zirkus", "Clown",
 
   // Verschiedenes Alltägliches
   "Geld", "Münze", "Dollar", "Preis", "Geschenk", "Kerze", "Streichholz", "Flagge", "Eintrittskarte", "Telefon",
@@ -86,14 +86,14 @@ export const WORDS: readonly string[] = [
   // Mehr Essen
   "Toast", "Waffel", "Pfannkuchen", "Muffin", "Donut", "Brezel", "Popcorn", "Chip", "Sirup", "Gelee",
   "Erdnuss", "Rosine", "Aprikose", "Pflaume", "Birne", "Kiwi", "Limette", "Kokosnuss", "Ananas", "Erdbeere",
-  "Blaubeere", "Kürbis", "Kohl", "Sellerie", "Spinat", "Radieschen", "Gurke", "Ingwer", "Minze", "Basilikum",
+  "Blaubeere", "Kürbis", "Kohl", "Sellerie", "Spinat", "Radieschen", "Essiggurke", "Ingwer", "Minze", "Basilikum",
   "Mehl", "Teig", "Bratensoße", "Soße", "Ketchup", "Senf", "Essig", "Öl", "Hefe", "Hafer",
 
   // Getränke
   "Kakao", "Limonade", "Smoothie", "Shake", "Punsch", "Apfelwein", "Whiskey", "Brandy", "Champagner", "Milchshake",
 
   // Handlungen
-  "rennen", "gehen", "hüpfen", "springen", "krabbeln", "klettern", "schwimmen", "tauchen", "schreien", "flüstern",
+  "rennen", "gehen", "hüpfen", "hopsen", "krabbeln", "klettern", "schwimmen", "tauchen", "schreien", "flüstern",
   "lachen", "lächeln", "schlafen", "aufwachen", "träumen", "sitzen", "stehen", "knien", "beugen", "strecken",
   "werfen", "fangen", "treten", "klatschen", "winken", "zeigen", "halten", "gießen", "rühren", "schneiden",
   "hacken", "schälen", "kochen", "braten", "sieden", "waschen", "wischen", "fegen", "schrubben", "spülen",
@@ -120,15 +120,15 @@ export const WORDS: readonly string[] = [
 
   // Sport
   "Fußball", "Tennis", "Golf", "Hockey", "Baseball", "Cricket", "Rugby", "Boxen", "Skifahren", "Surfen",
-  "Bowling", "Darts", "Schach", "Schläger", "Tor", "Trikot", "Bahn", "Platz", "Eisbahn", "Mannschaft",
+  "Bowling", "Darts", "Schach", "Schläger", "Treffer", "Trikot", "Bahn", "Platz", "Eisbahn", "Mannschaft",
 
   // Schule
   "Klasse", "Unterricht", "Hausaufgabe", "Test", "Prüfung", "Note", "Fach", "Mathematik", "Naturwissenschaft", "Geschichte",
-  "Schließfach", "Rucksack", "Lehrbuch", "Globus", "Taschenrechner", "Tafel", "Pause", "Diplom", "Vorlesung", "Quiz",
+  "Schließfach", "Rucksack", "Lehrbuch", "Globus", "Taschenrechner", "Wandtafel", "Pause", "Diplom", "Vorlesung", "Quiz",
 
   // Orte
   "Dschungel", "Wiese", "Steppe", "Schlucht", "Klippe", "Tunnel", "Turm", "Häuschen", "Hütte", "Scheune",
-  "Stall", "Mühle", "Leuchtturm", "Anlegestelle", "Pier", "Hafen", "Einkaufszentrum", "Bäckerei", "Apotheke", "Café",
+  "Stall", "Mühle", "Leuchtturm", "Anlegestelle", "Pier", "Seehafen", "Einkaufszentrum", "Bäckerei", "Apotheke", "Café",
   "Diner", "Kino", "Galerie", "Arena", "Tempel", "Gefängnis", "Gericht", "Botschaft", "Friedhof", "Spielplatz",
 
   // Mehr Körper
@@ -136,7 +136,7 @@ export const WORDS: readonly string[] = [
   "Wirbelsäule", "Rippe", "Lunge", "Leber", "Niere", "Muskel", "Nerv", "Vene", "Kehle", "Hüfte",
 
   // Haushalt
-  "Staubsauger", "Staubwedel", "Kehrschaufel", "Kleiderbügel", "Wäsche", "Waschmittel", "Bleichmittel", "Matte", "Teppich", "Jalousie",
+  "Staubsauger", "Staubwedel", "Kehrschaufel", "Kleiderbügel", "Wäsche", "Waschmittel", "Bleichmittel", "Matte", "Läufer", "Jalousie",
   "Polster", "Steppdecke", "Matratze", "Kleiderschrank", "Kommode", "Nachttisch", "Bücherregal", "Kamin", "Schornstein", "Türklinke",
   "Türklingel", "Schlüsselloch", "Wasserhahn", "Abfluss", "Steckdose", "Thermostat", "Heizung", "Ventilator", "Vase", "Poster",
 
@@ -145,14 +145,14 @@ export const WORDS: readonly string[] = [
   "Modem", "Fernbedienung", "Controller", "Joystick", "Webcam", "Mikrofon", "Ohrhörer", "Konsole", "Adapter", "Antenne",
 
   // Mehr Natur
-  "Felsblock", "Bach", "Bach", "Teich", "Wasserfall", "Sumpf", "Marsch", "Düne", "Gletscher", "Vulkan",
-  "Krater", "Riff", "Seetang", "Moos", "Farn", "Ranke", "Efeu", "Kaktus", "Eiche", "Kiefer",
+  "Felsblock", "Bach", "Rinnsal", "Teich", "Wasserfall", "Sumpf", "Marsch", "Düne", "Gletscher", "Vulkan",
+  "Krater", "Riff", "Seetang", "Moos", "Farn", "Ranke", "Efeu", "Kaktus", "Eiche", "Kiefernbaum",
   "Ahorn", "Weide", "Birke", "Bambus", "Eichel", "Tannenzapfen", "Blüte", "Dorn", "Stängel",
 
   // Insekten & Meer
   "Schmetterling", "Käfer", "Heuschrecke", "Marienkäfer", "Libelle", "Raupe", "Wespe", "Hornisse", "Floh", "Zecke",
   "Nacktschnecke", "Regenwurm", "Tausendfüßler", "Skorpion", "Qualle", "Seestern", "Krake", "Tintenfisch", "Hummer", "Garnele",
-  "Muschel", "Auster", "Seepferdchen", "Stechrochen", "Aal", "Elritze", "Forelle", "Lachs", "Thunfisch",
+  "Venusmuschel", "Auster", "Seepferdchen", "Stechrochen", "Aal", "Elritze", "Forelle", "Lachs", "Thunfisch",
 
   // Vögel
   "Rotkehlchen", "Spatz", "Fink", "Kardinal", "Specht", "Kolibri", "Möwe", "Pelikan", "Flamingo", "Pfau",
@@ -169,7 +169,7 @@ export const WORDS: readonly string[] = [
   "Ohrenschützer", "Kopftuch", "Halskette", "Armband", "Ohrring", "Brosche", "Schnürsenkel", "Kragen", "Manschettenknopf", "Regenmantel",
 
   // Verschiedene Gegenstände
-  "Taschenlampe", "Streichholzschachtel", "Koffer", "Aktenkoffer", "Handtasche", "Beutel", "Schlüsselanhänger", "Fernglas", "Teleskop", "Mikroskop",
+  "Stablampe", "Streichholzschachtel", "Koffer", "Aktenkoffer", "Damenhandtasche", "Beutel", "Schlüsselanhänger", "Fernglas", "Teleskop", "Mikroskop",
   "Thermometer", "Stoppuhr", "Sanduhr", "Trichter", "Trittleiter", "Werkzeugkasten", "Schubkarre", "Schaufel", "Rechen", "Hacke",
 ];
 

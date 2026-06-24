@@ -52,7 +52,7 @@ export const WORDS: readonly string[] = [
 
   // école et bureau
   "livre", "page", "papier", "stylo", "crayon", "gomme", "règle", "marqueur", "crayon de couleur", "cahier",
-  "lettre", "mot", "nombre", "histoire", "carte", "graphique", "fiche", "timbre", "enveloppe", "dossier",
+  "lettre", "mot", "nombre", "récit", "carte", "graphique", "fiche", "timbre", "enveloppe", "dossier",
   "ciseaux", "colle", "ruban adhésif", "trombone", "agrafeuse", "tableau", "craie", "écran", "clavier", "calendrier",
 
   // outils et objets
@@ -65,7 +65,7 @@ export const WORDS: readonly string[] = [
   "chariot", "charrette", "métro", "tracteur", "fusée", "hélicoptère", "voilier", "canoë", "ferry", "fourgon",
 
   // lieux
-  "école", "magasin", "boutique", "marché", "banque", "bureau", "hôpital", "bibliothèque", "musée", "parc",
+  "école", "magasin", "boutique", "marché", "banque", "agence", "hôpital", "bibliothèque", "musée", "parc",
   "église", "hôtel", "restaurant", "usine", "ferme", "gare", "aéroport", "pont", "route", "rue",
   "ville", "bourg", "village", "pays", "palais", "château", "zoo", "port", "théâtre", "stade",
 
@@ -78,7 +78,7 @@ export const WORDS: readonly string[] = [
   "peinture", "couleur", "image", "photo", "cadre", "film", "danse", "scène", "cirque", "clown",
 
   // divers du quotidien
-  "argent", "pièce", "dollar", "prix", "cadeau", "bougie", "allumette", "drapeau", "billet", "téléphone",
+  "argent", "pièce de monnaie", "dollar", "prix", "cadeau", "bougie", "allumette", "drapeau", "billet", "téléphone",
   "appareil photo", "radio", "torche", "lanterne", "boussole", "ancre", "ruban", "bulle", "plume", "caillou",
   "coquillage", "corail", "couronne", "diamant", "trésor", "médaille", "trophée", "tente", "feu de camp", "luge",
   "patin", "casque", "paille", "carte postale", "journal", "magazine", "porte-clés", "brosse à dents", "mug", "spatule",
@@ -103,7 +103,7 @@ export const WORDS: readonly string[] = [
   "vendre", "garder", "cacher", "poursuivre", "suivre", "mener", "accueillir", "étreindre", "faire un clin d'œil",
 
   // couleurs
-  "rouge", "bleu", "vert", "jaune", "violet", "rose", "or", "argent",
+  "rouge", "bleu", "vert", "jaune", "violet", "rose bonbon", "or", "argenté",
 
   // météo
   "brise", "givre", "grêle", "brume", "rosée", "soleil radieux", "éclair", "bruine", "flaque", "glaçon",
@@ -128,7 +128,7 @@ export const WORDS: readonly string[] = [
 
   // lieux
   "jungle", "prairie", "plaine", "canyon", "falaise", "tunnel", "tour", "chaumière", "cabane", "grange",
-  "écurie", "moulin", "phare", "quai", "jetée", "port", "centre commercial", "boulangerie", "pharmacie", "café",
+  "écurie", "moulin", "phare", "quai", "jetée", "port maritime", "centre commercial", "boulangerie", "pharmacie", "brasserie",
   "bistrot", "cinéma", "galerie", "arène", "temple", "prison", "palais de justice", "ambassade", "cimetière", "aire de jeux",
 
   // encore le corps
@@ -137,7 +137,7 @@ export const WORDS: readonly string[] = [
 
   // maison
   "aspirateur", "plumeau", "pelle à poussière", "cintre", "linge", "détergent", "eau de javel", "paillasson", "carpette", "store",
-  "coussin", "courtepointe", "matelas", "garde-robe", "commode", "table de chevet", "bibliothèque", "foyer", "cheminée", "poignée de porte",
+  "coussin", "courtepointe", "matelas", "garde-robe", "commode", "table de chevet", "étagère à livres", "foyer", "cheminée", "poignée de porte",
   "sonnette", "trou de serrure", "robinet", "évacuation", "prise de courant", "thermostat", "radiateur", "ventilateur", "vase", "affiche",
 
   // technologie

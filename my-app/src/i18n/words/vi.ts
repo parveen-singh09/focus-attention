@@ -83,7 +83,7 @@ export const WORDS: readonly string[] = [
 
   // more food
   "bánh mì nướng", "bánh quế", "bánh kếp", "bánh nướng nhỏ", "bánh vòng", "bánh quy xoắn", "bỏng ngô", "khoai chiên", "siro", "thạch",
-  "đậu phộng", "nho khô", "mơ", "mận", "lê", "kiwi", "chanh xanh", "dừa", "dứa", "dâu tây",
+  "đậu phộng", "nho khô", "quả mơ", "mận", "lê", "kiwi", "chanh xanh", "dừa", "dứa", "dâu tây",
   "việt quất", "bí ngô", "bắp cải", "cần tây", "rau bina", "củ cải", "dưa muối", "gừng", "bạc hà", "húng quế",
   "bột mì", "bột nhào", "nước sốt thịt", "nước sốt", "tương cà", "mù tạt", "giấm", "dầu ăn", "men", "yến mạch",
 
@@ -91,12 +91,12 @@ export const WORDS: readonly string[] = [
   "ca cao", "nước chanh", "sinh tố", "đồ uống lắc", "rượu pha", "rượu táo", "rượu whisky", "rượu brandy", "sâm panh", "sữa lắc",
 
   // actions
-  "chạy", "đi bộ", "nhảy lò cò", "nhảy cách quãng", "bò", "leo trèo", "bơi", "lặn", "hét", "thì thầm",
+  "chạy", "đi bộ", "nhảy lò cò", "nhảy cách quãng", "trườn", "leo trèo", "bơi", "lặn", "hét", "thì thầm",
   "cười", "mỉm cười", "ngủ", "thức dậy", "mơ", "ngồi", "đứng", "quỳ", "cúi", "vươn vai",
-  "ném", "bắt", "đá", "vỗ tay", "vẫy tay", "chỉ trỏ", "giữ", "rót", "khuấy", "thái lát",
+  "ném", "bắt", "đá bóng", "vỗ tay", "vẫy tay", "chỉ trỏ", "giữ", "rót", "khuấy", "thái lát",
   "băm", "gọt vỏ", "nấu ăn", "chiên", "luộc", "rửa", "lau", "quét", "chà", "tráng",
   "gấp", "may", "đan", "đếm", "đánh vần", "xây dựng", "sửa chữa", "gõ cửa", "đổ đầy", "trồng",
-  "đào", "cho ăn", "cưỡi", "chèo", "xoay", "lăn", "nảy", "tan chảy", "đóng băng", "tỏa sáng",
+  "đào bới", "cho ăn", "cưỡi", "chèo", "xoay", "lăn", "nảy", "tan chảy", "đóng băng", "tỏa sáng",
   "chớp mắt", "nhìn chằm chằm", "lắng nghe", "ngửi", "nếm", "chạm", "học", "dạy", "chia sẻ", "mua",
   "bán", "tiết kiệm", "giấu", "đuổi theo", "đi theo", "dẫn dắt", "chào hỏi", "ôm", "nháy mắt",
 
@@ -139,7 +139,7 @@ export const WORDS: readonly string[] = [
   "chuông cửa", "lỗ khóa", "vòi nước", "ống thoát", "ổ cắm", "bộ điều nhiệt", "máy sưởi", "quạt", "bình hoa", "áp phích",
 
   // tech
-  "máy tính xách tay", "máy tính bảng", "màn hình", "máy in", "máy quét", "loa", "tai nghe", "bộ sạc", "dây cáp", "bộ định tuyến",
+  "máy tính xách tay", "máy tính bảng", "màn hình máy tính", "máy in", "máy quét", "loa", "tai nghe", "bộ sạc", "dây cáp", "bộ định tuyến",
   "modem", "điều khiển từ xa", "tay cầm chơi game", "cần điều khiển", "webcam", "micrô", "tai nghe nhét tai", "máy chơi game", "bộ chuyển đổi", "ăng ten",
 
   // nature more

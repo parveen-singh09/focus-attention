@@ -29,7 +29,7 @@ export const WORDS: readonly string[] = [
 
   // huis en meubels
   "huis", "kamer", "deur", "raam", "muur", "vloer", "dak", "trap", "keuken", "slaapkamer",
-  "badkamer", "garage", "tuin", "erf", "hek", "poort", "tafel", "stoel", "bank", "bed",
+  "badkamer", "garage", "tuin", "erf", "hek", "poort", "tafel", "stoel", "zitbank", "bed",
   "kussen", "deken", "lamp", "klok", "spiegel", "plank", "lade", "kast", "tapijt", "gordijn",
   "bureau", "bankje", "kruk", "sofa", "kastje", "emmer", "mand", "doos", "tas", "pot",
 
@@ -39,12 +39,12 @@ export const WORDS: readonly string[] = [
 
   // kleding
   "overhemd", "broek", "jurk", "rok", "jas", "jasje", "trui", "hoed", "pet", "sjaal",
-  "handschoen", "sok", "schoen", "laars", "riem", "das", "knoop", "zak", "rits", "korte broek",
+  "handschoen", "sok", "schoen", "laars", "riem", "stropdas", "knoop", "zak", "rits", "korte broek",
   "spijkerbroek", "pak", "badjas", "schort", "ring", "horloge", "bril", "handtas", "portemonnee", "paraplu",
 
   // natuur en weer
   "zon", "maan", "ster", "lucht", "wolk", "regen", "sneeuw", "wind", "storm", "mist",
-  "ijs", "vuur", "rook", "boom", "blad", "tak", "wortel", "bloem", "gras", "struik",
+  "ijs", "vuur", "rook", "boom", "blad", "tak", "boomwortel", "bloem", "gras", "struik",
   "roos", "bloemblad", "bos", "veld", "heuvel", "berg", "vallei", "rivier", "meer", "oceaan",
   "zee", "strand", "zand", "rots", "steen", "modder", "aarde", "grot", "eiland", "woestijn",
   "regenboog", "donder", "schaduw", "ochtend", "nacht", "dag", "seizoen", "zomer", "winter", "herfst",
@@ -52,7 +52,7 @@ export const WORDS: readonly string[] = [
   // school en kantoor
   "boek", "pagina", "papier", "pen", "potlood", "gum", "liniaal", "stift", "kleurpotlood", "schrift",
   "letter", "woord", "getal", "verhaal", "landkaart", "grafiek", "kaart", "postzegel", "envelop", "map",
-  "schaar", "lijm", "plakband", "clip", "nietmachine", "bord", "krijt", "scherm", "toetsenbord", "kalender",
+  "schaar", "lijm", "plakband", "clip", "nietmachine", "krijtbord", "krijt", "scherm", "toetsenbord", "kalender",
 
   // gereedschap en voorwerpen
   "hamer", "schroef", "zaag", "boor", "moersleutel", "ladder", "touw", "ketting", "draad", "borstel",
@@ -85,7 +85,7 @@ export const WORDS: readonly string[] = [
   // meer eten
   "toast", "wafel", "pannenkoek", "muffin", "donut", "krakeling", "popcorn", "chip", "siroop", "gelei",
   "pinda", "rozijn", "abrikoos", "pruim", "peer", "kiwi", "limoen", "kokosnoot", "ananas", "aardbei",
-  "bosbes", "pompoen", "kool", "selderij", "spinazie", "radijs", "augurk", "gember", "munt", "basilicum",
+  "bosbes", "pompoen", "kool", "selderij", "spinazie", "radijs", "augurk", "gember", "pepermunt", "basilicum",
   "meel", "deeg", "jus", "saus", "ketchup", "mosterd", "azijn", "olie", "gist", "haver",
 
   // dranken

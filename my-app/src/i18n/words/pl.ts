@@ -38,7 +38,7 @@ export const WORDS: readonly string[] = [
 
   // clothing
   "koszula", "spodnie", "sukienka", "spódnica", "płaszcz", "kurtka", "sweter", "kapelusz", "czapka", "szalik",
-  "rękawiczka", "skarpetka", "but", "kozak", "pasek", "krawat", "guzik", "kieszeń", "zamek", "szorty",
+  "rękawiczka", "skarpetka", "but", "kozak", "pasek", "krawat", "guzik", "kieszeń", "zamek błyskawiczny", "szorty",
   "dżinsy", "garnitur", "szlafrok", "fartuch", "pierścionek", "zegarek", "okulary", "torebka", "portfel", "parasol",
 
   // nature & weather
@@ -54,8 +54,8 @@ export const WORDS: readonly string[] = [
   "nożyczki", "klej", "taśma", "spinacz", "zszywacz", "tablica", "kreda", "ekran", "klawiatura", "kalendarz",
 
   // tools & objects
-  "młotek", "śruba", "piła", "wiertarka", "klucz", "drabina", "lina", "łańcuch", "drut", "pędzel",
-  "miotła", "mop", "mydło", "gąbka", "grzebień", "brzytwa", "igła", "nić", "klucz", "zamek",
+  "młotek", "śruba", "piła", "wiertarka", "klucz francuski", "drabina", "lina", "łańcuch", "drut", "pędzel",
+  "miotła", "mop", "mydło", "gąbka", "grzebień", "brzytwa", "igła", "nić", "klucz", "kłódka",
   "bateria", "koło", "silnik", "pompa", "magnes", "sprężyna", "przełącznik", "wtyczka", "rurka", "haczyk",
 
   // transport
@@ -118,11 +118,11 @@ export const WORDS: readonly string[] = [
 
   // sports
   "piłka nożna", "tenis", "golf", "hokej", "baseball", "krykiet", "rugby", "boks", "narciarstwo", "surfing",
-  "kręgle", "rzutki", "szachy", "rakieta", "gol", "koszulka", "bieżnia", "kort", "lodowisko", "drużyna",
+  "kręgle", "rzutki", "szachy", "rakieta tenisowa", "gol", "koszulka", "bieżnia", "kort", "lodowisko", "drużyna",
 
   // school
   "klasa", "lekcja", "praca domowa", "test", "egzamin", "ocena", "przedmiot", "matematyka", "nauka", "historia",
-  "szafka", "plecak", "podręcznik", "globus", "kalkulator", "tablica szkolna", "przerwa", "dyplom", "wykład", "quiz",
+  "szafka szkolna", "plecak", "podręcznik", "globus", "kalkulator", "tablica szkolna", "przerwa", "dyplom", "wykład", "quiz",
 
   // places
   "dżungla", "łąka", "preria", "kanion", "klif", "tunel", "wieża", "chatka", "chata", "stodoła",
@@ -130,7 +130,7 @@ export const WORDS: readonly string[] = [
   "bar", "kino", "galeria", "arena", "świątynia", "więzienie", "sąd", "ambasada", "cmentarz", "plac zabaw",
 
   // body more
-  "czoło", "policzek", "broda", "szczęka", "brew", "rzęsa", "nadgarstek", "kostka", "pięta", "dłoń wewnętrzna",
+  "czoło", "policzek", "broda", "szczęka", "brew", "rzęsa", "nadgarstek", "kostka u nogi", "pięta", "dłoń wewnętrzna",
   "kręgosłup", "żebro", "płuco", "wątroba", "nerka", "mięsień", "nerw", "żyła", "gardło", "biodro",
 
   // household
@@ -140,7 +140,7 @@ export const WORDS: readonly string[] = [
 
   // tech
   "laptop", "tablet", "monitor", "drukarka", "skaner", "głośnik", "słuchawka", "ładowarka", "kabel", "router",
-  "modem", "pilot", "kontroler", "joystick", "kamerka", "mikrofon", "słuchawka douszna", "konsola", "adapter", "antena",
+  "modem", "pilot zdalnego sterowania", "kontroler", "joystick", "kamerka", "mikrofon", "słuchawka douszna", "konsola", "adapter", "antena",
 
   // nature more
   "głaz", "strumień", "potok", "staw", "wodospad", "bagno", "mokradło", "wydma", "lodowiec", "wulkan",

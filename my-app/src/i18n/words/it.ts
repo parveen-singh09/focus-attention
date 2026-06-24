@@ -40,7 +40,7 @@ export const WORDS: readonly string[] = [
   // abbigliamento
   "camicia", "pantaloni", "vestito", "gonna", "cappotto", "giacca", "maglione", "cappello", "berretto", "sciarpa",
   "guanto", "calzino", "scarpa", "stivale", "cintura", "cravatta", "bottone", "tasca", "cerniera", "pantaloncini",
-  "jeans", "completo", "vestaglia", "grembiule", "anello", "orologio", "occhiali", "borsetta", "portafoglio", "ombrello",
+  "jeans", "completo", "vestaglia", "grembiule", "anello", "orologio da polso", "occhiali", "borsetta", "portafoglio", "ombrello",
 
   // natura e meteo
   "sole", "luna", "stella", "cielo", "nuvola", "pioggia", "neve", "vento", "tempesta", "nebbia",
@@ -57,7 +57,7 @@ export const WORDS: readonly string[] = [
   // attrezzi e oggetti
   "martello", "vite", "sega", "trapano", "chiave inglese", "scala a pioli", "corda", "catena", "filo metallico", "spazzola",
   "scopa", "mocio", "sapone", "spugna", "pettine", "rasoio", "ago", "filo", "chiave", "serratura",
-  "batteria", "ruota", "motore", "pompa", "magnete", "molla", "interruttore", "spina", "tubo", "gancio",
+  "batteria", "ruota", "motore", "pompa", "magnete", "molla", "interruttore", "spina elettrica", "tubo", "gancio",
 
   // trasporti
   "auto", "autobus", "camion", "treno", "aereo", "barca", "nave", "bicicletta", "monopattino", "taxi",
@@ -102,7 +102,7 @@ export const WORDS: readonly string[] = [
   "vendere", "salvare", "nascondere", "inseguire", "seguire", "guidare", "salutare", "abbracciare", "ammiccare",
 
   // colori
-  "rosso", "blu", "verde", "giallo", "viola", "rosa", "oro", "argento",
+  "rosso", "blu", "verde", "giallo", "viola", "rosato", "oro", "argento",
 
   // meteo
   "brezza", "gelo", "grandine", "foschia", "rugiada", "luce del sole", "fulmine", "pioggerella", "pozzanghera", "ghiacciolo",
@@ -119,7 +119,7 @@ export const WORDS: readonly string[] = [
 
   // sport
   "calcio", "tennis", "golf", "hockey", "baseball", "cricket", "rugby", "boxe", "sci", "surf",
-  "bowling", "freccette", "scacchi", "racchetta", "gol", "maglia", "pista", "campo", "pista di pattinaggio", "squadra",
+  "bowling", "freccette", "scacchi", "racchetta", "gol", "maglia", "pista", "campo da gioco", "pista di pattinaggio", "squadra",
 
   // scuola
   "classe", "lezione", "compiti", "test", "esame", "voto", "materia", "matematica", "scienza", "storia",
@@ -127,7 +127,7 @@ export const WORDS: readonly string[] = [
 
   // luoghi
   "giungla", "prato", "prateria", "canyon", "scogliera", "tunnel", "torre", "cottage", "capanna", "fienile",
-  "stalla", "mulino", "faro", "molo", "pontile", "porto", "centro commerciale", "panetteria", "farmacia", "caffetteria",
+  "stalla", "mulino", "faro", "molo", "pontile", "scalo", "centro commerciale", "panetteria", "farmacia", "caffetteria",
   "tavola calda", "cinema", "galleria", "arena", "tempio", "prigione", "tribunale", "ambasciata", "cimitero", "parco giochi",
 
   // altro corpo
