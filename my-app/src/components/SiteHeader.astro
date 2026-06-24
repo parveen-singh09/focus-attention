@@ -1,6 +1,6 @@
 ---
 
-import { languages, LOCALES, FLAGS } from "../i18n/ui";
+import { languages, LOCALES, FLAGS, COUNTRY_CODES } from "../i18n/ui";
 import { getLangFromUrl, switchLocalePath, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -11,6 +11,7 @@ const localeLinks = LOCALES.map((code) => ({
 	code,
 	label: languages[code],
 	flag: FLAGS[code],
+	countryCode: COUNTRY_CODES[code],
 	href: switchLocalePath(Astro.url, code),
 	current: code === lang,
 }));
@@ -113,7 +114,7 @@ const headerI18n = {
 							lang={l.code}
 							aria-current={l.current ? "true" : undefined}
 						>
-							<span class="lang-flag" aria-hidden="true">{l.flag}</span>
+							<span class="w-8 shrink-0 font-semibold uppercase">{l.countryCode}</span>
 							<span>{l.label}</span>
 						</a>
 					))}
@@ -559,17 +560,42 @@ const headerI18n = {
 		}
 	}
 
+	function getProfileCache(uid: string) {
+		try {
+			const raw = localStorage.getItem("focus-attention:profile:" + uid);
+			return raw ? JSON.parse(raw) : null;
+		} catch {
+			return null;
+		}
+	}
+
+	function setProfileCache(uid: string, data: { displayName?: string; avatarUrl?: string | null }) {
+		try {
+			const cached = getProfileCache(uid) || {};
+			if (data.displayName !== undefined) cached.displayName = data.displayName;
+			if (data.avatarUrl !== undefined) cached.avatarUrl = data.avatarUrl;
+			localStorage.setItem("focus-attention:profile:" + uid, JSON.stringify(cached));
+		} catch {}
+	}
+
 	function renderAuth() {
-		const name = displayNameFromSession(session);
+		let name = displayNameFromSession(session);
 
 		if (editNameBtn) editNameBtn.disabled = !session;
 		if (changePhotoBtn) changePhotoBtn.disabled = !session;
 		if (session) {
+			let pic = (session.user.user_metadata as Record<string, unknown>)?.avatar_url as string | undefined;
+
+			const cached = getProfileCache(session.user.id);
+			if (cached) {
+				if (cached.displayName) name = cached.displayName;
+				if (cached.avatarUrl) pic = cached.avatarUrl;
+			}
+
 			profileBtn?.setAttribute("aria-label", name);
 			if (profileName) profileName.textContent = name;
 			if (signInBtn) signInBtn.hidden = true;
 			if (signOutBtn) signOutBtn.hidden = false;
-			const pic = (session.user.user_metadata as Record<string, unknown>)?.avatar_url as string | undefined;
 			if (pic && avatar) {
 				avatar.src = pic;
 				avatar.hidden = false;
@@ -599,6 +625,8 @@ const headerI18n = {
 		const prof = await fetchMyProfile();
 
 		if (!prof || !session || session.user.id !== uid) return;
+		setProfileCache(uid, { displayName: prof.displayName, avatarUrl: prof.avatarUrl });
+
 		if (prof.displayName) {
 			if (profileName) profileName.textContent = prof.displayName;
 			profileBtn?.setAttribute("aria-label", prof.displayName);
@@ -659,6 +687,8 @@ const headerI18n = {
 			profileBtn?.setAttribute("aria-label", next);
 			closeNameEditor();
 
+			setProfileCache(session.user.id, { displayName: next });
+
 			if (boardPanel && !boardPanel.hidden) loadBoard();
 		}
 	});
@@ -679,6 +709,9 @@ const headerI18n = {
 			await updateProfile({ avatarUrl: url });
 			if (avatar) { avatar.src = url; avatar.hidden = false; }
 			if (userIcon) userIcon.style.display = "none";
+
+			setProfileCache(session.user.id, { avatarUrl: url });
+
 			if (boardPanel && !boardPanel.hidden) loadBoard();
 		}
 

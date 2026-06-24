@@ -57,6 +57,29 @@ export const FLAGS: Record<Lang, string> = {
 	uk: "🇺🇦",
 };
 
+export const COUNTRY_CODES: Record<Lang, string> = {
+	en: "gb",
+	es: "es",
+	fr: "fr",
+	de: "de",
+	it: "it",
+	pt: "br",
+	nl: "nl",
+	ru: "ru",
+	pl: "pl",
+	tr: "tr",
+	ar: "sa",
+	hi: "in",
+	bn: "bd",
+	zh: "cn",
+	ja: "jp",
+	ko: "kr",
+	vi: "vn",
+	th: "th",
+	id: "id",
+	uk: "ua",
+};
+
 export function isLang(value: string): value is Lang {
 	return (LOCALES as readonly string[]).includes(value);
 }
@@ -99,11 +122,11 @@ export interface SiteContent {
 
 	game: {
 
-		eyebrow: string; 
-		titleLine1: string; 
-		titleLine2: string; 
+		eyebrow: string;
+		titleLine1: string;
+		titleLine2: string;
 		intro: string;
-		introRecallTail: string; 
+		introRecallTail: string;
 		chooseDuration: string;
 		presets: {
 			s10: string;
@@ -117,39 +140,39 @@ export interface SiteContent {
 		unitHours: string;
 		unitMin: string;
 		unitSec: string;
-		paceLabel: string; 
-		durationTooShort: string; 
-		durationTooLong: string; 
-		paceOutOfRange: string; 
+		paceLabel: string;
+		durationTooShort: string;
+		durationTooLong: string;
+		paceOutOfRange: string;
 		begin: string;
 
-		wordSingular: string; 
-		wordPlural: string; 
-		endEarly: string; 
+		wordSingular: string;
+		wordPlural: string;
+		endEarly: string;
 
-		recallEyebrow: string; 
-		recallHeading: string; 
-		leftToRecall: string; 
-		chosenSoFar: string; 
-		tapWordsYouSaw: string; 
+		recallEyebrow: string;
+		recallHeading: string;
+		leftToRecall: string;
+		chosenSoFar: string;
+		tapWordsYouSaw: string;
 
-		resultEyebrow: string; 
-		attentionSpan: string; 
-		attentionHint: string; 
-		focus: string; 
-		focusDetail: string; 
-		theSequence: string; 
+		resultEyebrow: string;
+		attentionSpan: string;
+		attentionHint: string;
+		focus: string;
+		focusDetail: string;
+		theSequence: string;
 		playAgain: string;
 		changeDuration: string;
-		youTapped: string; 
+		youTapped: string;
 	};
 
 	errors: {
-		notFoundEyebrow: string; 
+		notFoundEyebrow: string;
 		notFoundHeading: string;
 		notFoundLead: string;
 		backToGame: string;
-		errorEyebrow: string; 
+		errorEyebrow: string;
 		errorHeading: string;
 		errorLead: string;
 		tryAgain: string;
@@ -172,18 +195,18 @@ export interface SiteContent {
 		anonymous: string;
 
 		worldRanking: string;
-		rankedBy: string; 
+		rankedBy: string;
 		loading: string;
-		noScores: string; 
-		players: string; 
+		noScores: string;
+		players: string;
 		showMore: string;
 		loginToCompete: string;
-		finishToClaim: string; 
-		yourRank: string; 
-		yourRankMetrics: string; 
-		yourWorldRanking: string; 
-		boardNotSetUp: string; 
-		wordsUnit: string; 
+		finishToClaim: string;
+		yourRank: string;
+		yourRankMetrics: string;
+		yourWorldRanking: string;
+		boardNotSetUp: string;
+		wordsUnit: string;
 	};
 
 	footer: {
@@ -193,14 +216,14 @@ export interface SiteContent {
 		privacy: string;
 		terms: string;
 		tagline: string;
-		rights: string; 
+		rights: string;
 	};
 
 	landing: {
-		heading: string; 
-		intro: string; 
-		sections: SeoSection[]; 
-		faqHeading: string; 
-		faqs: FaqItem[]; 
+		heading: string;
+		intro: string;
+		sections: SeoSection[];
+		faqHeading: string;
+		faqs: FaqItem[];
 	};
 }
