@@ -19,6 +19,7 @@ import { bn } from "./bn";
 import { id } from "./id";
 import { ko } from "./ko";
 import { vi } from "./vi";
+import { th } from "./th";
 
 // Per-locale content registry. English is canonical; other locales are added
 // here as their translation files land. Any locale not yet present falls back
@@ -47,6 +48,7 @@ const content: Partial<Record<Lang, SiteContent>> = {
 	id,
 	ko,
 	vi,
+	th,
 };
 
 export function getContent(lang: Lang): SiteContent {

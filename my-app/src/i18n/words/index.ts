@@ -18,6 +18,7 @@ import { WORDS as KO_WORDS } from "./ko";
 import { WORDS as VI_WORDS } from "./vi";
 import { WORDS as BN_WORDS } from "./bn";
 import { WORDS as ID_WORDS } from "./id";
+import { WORDS as TH_WORDS } from "./th";
 
 // Per-locale word pools. Each locale's game draws from its own translated list
 // of ~1000 concrete everyday words (a faithful translation of the English pool
@@ -51,6 +52,7 @@ const pools: Partial<Record<Lang, readonly string[]>> = {
 	vi: VI_WORDS,
 	bn: BN_WORDS,
 	id: ID_WORDS,
+	th: TH_WORDS,
 };
 
 export function getWords(lang: Lang): readonly string[] {
