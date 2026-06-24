@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// 한국어 — 표준 영어 콘텐츠(en.ts)의 완전한 번역.
-// 키 구조는 완전히 동일하게 유지하고, 텍스트 값만 번역합니다.
 export const ko: SiteContent = {
 	meta: {
 		indexTitle:

@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// বাংলা — ইংরেজি (en.ts) থেকে সম্পূর্ণ অনুবাদ।
-// ঠিক একই কী-কাঠামো বজায় রাখা হয়েছে; শুধুমাত্র টেক্সট মান অনুবাদ করা হয়েছে।
 export const bn: SiteContent = {
 	meta: {
 		indexTitle:

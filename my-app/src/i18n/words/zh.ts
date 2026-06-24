@@ -1,6 +1,5 @@
-// A pool of common, everyday words. These are deliberately simple and
-// concrete (things you see, eat, use, or do every day) so the game tests
-// focus and recall — not vocabulary. 1000 unique words.
+
+
 export const WORDS: readonly string[] = [
   "婴儿", "孩子", "小孩", "男孩", "女孩", "男人", "女人", "母亲", "父亲", "姐妹",
   "兄弟", "叔叔", "阿姨", "表亲", "朋友", "邻居", "老师", "医生", "护士", "司机",

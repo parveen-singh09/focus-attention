@@ -2,9 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import { useTranslations } from "../i18n/utils";
 
-// Static build → 500.html. Static hosts (Netlify, Vercel, Cloudflare Pages)
-// can be configured to serve this for server / runtime errors. noindex so the
-// error page never lands in search results.
 const t = useTranslations("en");
 const e = t.errors;
 ---
@@ -28,7 +25,7 @@ const e = t.errors;
 </Layout>
 
 <script>
-	// Reload the route that errored, rather than always sending people home.
+
 	document
 		.querySelector('[data-action="retry"]')
 		?.addEventListener("click", () => location.reload());

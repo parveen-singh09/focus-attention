@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// 简体中文 — 对英文规范内容（en.ts）的完整翻译。
-// 保持完全相同的键结构；仅翻译文本值。
 export const zh: SiteContent = {
 	meta: {
 		indexTitle:

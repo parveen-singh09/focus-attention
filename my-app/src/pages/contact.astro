@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 
-// Contact email — update to the real inbox when one is set up.
 const email = "hello@attentivebrain.com";
 ---
 
@@ -67,8 +66,7 @@ const email = "hello@attentivebrain.com";
 </style>
 
 <script>
-	// No backend wired up yet — fall back to the user's mail client with the
-	// fields pre-filled. Swap this for a real POST when an endpoint exists.
+
 	const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
 	const note = document.querySelector<HTMLElement>("[data-contact-note]");
 	const EMAIL = "hello@attentivebrain.com";

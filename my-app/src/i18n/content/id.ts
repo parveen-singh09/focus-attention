@@ -1,8 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// Bahasa Indonesia — terjemahan lengkap dari konten kanonis berbahasa Inggris
-// (en.ts). Mempertahankan struktur kunci yang persis sama; hanya nilai teks
-// yang diterjemahkan.
 export const id: SiteContent = {
 	meta: {
 		indexTitle:

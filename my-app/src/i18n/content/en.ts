@@ -1,9 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// English — the canonical source of truth. Every other locale in this folder
-// is a complete translation of this exact shape. When adding or changing a
-// translatable string anywhere on the site, change it here first; TypeScript
-// then flags every other locale that is now missing the key.
 export const en: SiteContent = {
 	meta: {
 		indexTitle:

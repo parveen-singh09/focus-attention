@@ -1,7 +1,5 @@
 ---
-// Localized landing pages at /<lang>/ for every non-default locale. English
-// stays at the root (src/pages/index.astro), so it is excluded here. All
-// markup is shared via HomePage.astro.
+
 import type { GetStaticPaths } from "astro";
 import { LOCALES, defaultLang, isLang } from "../../i18n/ui";
 import HomePage from "../../components/HomePage.astro";
@@ -13,7 +11,7 @@ export const getStaticPaths = (() => {
 }) satisfies GetStaticPaths;
 
 const { lang } = Astro.params;
-// Narrow the route param to a known locale (getStaticPaths guarantees it).
+
 if (!isLang(lang)) throw new Error(`Unknown locale: ${lang}`);
 ---
 

@@ -1,6 +1,5 @@
-// Un insieme di parole comuni e di uso quotidiano. Sono volutamente semplici e
-// concrete (cose che vedi, mangi, usi o fai ogni giorno) così che il gioco metta
-// alla prova la concentrazione e il richiamo, non il vocabolario. 1000 parole.
+
+
 export const WORDS: readonly string[] = [
   "bebè", "bambino", "ragazzino", "ragazzo", "ragazza", "uomo", "donna", "madre", "padre", "sorella",
   "fratello", "zio", "zia", "cugino", "amico", "vicino", "insegnante", "medico", "infermiere", "autista",
@@ -104,7 +103,6 @@ export const WORDS: readonly string[] = [
   "torcia elettrica", "scatola di fiammiferi", "valigia", "ventiquattrore", "borsa a mano", "sacchetto", "portachiavi da tasca", "binocolo", "telescopio", "microscopio",
   "termometro", "cronometro", "clessidra", "imbuto", "sgabello a scaletta", "cassetta degli attrezzi", "carriola", "pala", "rastrello", "zappa",
 ];
-
 
 export function randomWord(previous?: string): string {
   let word = WORDS[Math.floor(Math.random() * WORDS.length)];

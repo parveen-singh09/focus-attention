@@ -1,7 +1,5 @@
 ---
-// Per-locale 500 at /<lang>/500. Like the localized 404, generated for
-// completeness; static hosts serve the root /500.html. English 500 lives at
-// the root (src/pages/500.astro).
+
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { LOCALES, defaultLang, isLang } from "../../i18n/ui";
@@ -38,7 +36,7 @@ const home = translatePath("/", lang);
 	</main>
 
 	<script>
-		// Reload the route that errored, rather than always sending people home.
+
 		document
 			.querySelector('[data-action="retry"]')
 			?.addEventListener("click", () => location.reload());

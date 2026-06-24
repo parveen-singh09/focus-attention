@@ -1,7 +1,5 @@
-// Eine Sammlung gebräuchlicher, alltäglicher Wörter. Diese sind bewusst
-// einfach und konkret (Dinge, die man sieht, isst, benutzt oder täglich tut),
-// damit das Spiel Konzentration und Wiedergabe testet — nicht den Wortschatz.
-// 1000 Wörter.
+
+
 export const WORDS: readonly string[] = [
   "Baby", "Kind", "Knirps", "Junge", "Mädchen", "Mann", "Frau", "Mutter", "Vater", "Schwester",
   "Bruder", "Onkel", "Tante", "Cousin", "Freund", "Nachbar", "Lehrer", "Arzt", "Krankenpfleger", "Fahrer",
@@ -105,7 +103,6 @@ export const WORDS: readonly string[] = [
   "Stablampe", "Streichholzschachtel", "Koffer", "Aktenkoffer", "Damenhandtasche", "Beutel", "Schlüsselanhänger", "Fernglas", "Teleskop", "Mikroskop",
   "Thermometer", "Stoppuhr", "Sanduhr", "Trichter", "Trittleiter", "Werkzeugkasten", "Schubkarre", "Schaufel", "Rechen", "Hacke",
 ];
-
 
 export function randomWord(previous?: string): string {
   let word = WORDS[Math.floor(Math.random() * WORDS.length)];

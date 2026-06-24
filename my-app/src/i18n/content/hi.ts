@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// हिन्दी — अंग्रेज़ी के प्रामाणिक कंटेंट (en.ts) का पूर्ण अनुवाद।
-// कुंजियों की संरचना बिल्कुल वही रहती है; केवल टेक्स्ट मानों का अनुवाद किया गया है।
 export const hi: SiteContent = {
 	meta: {
 		indexTitle:

@@ -1,5 +1,5 @@
-// Yaygın, günlük kelimelerden oluşan havuz. src/scripts/words.ts içindeki
-// İngilizce havuzun çevirisi — aynı sıra ve aynı kategoriler. 1000 kelime.
+
+
 export const WORDS: readonly string[] = [
   "bebek", "çocuk", "afacan", "oğlan", "kız", "adam", "kadın", "anne", "baba", "abla",
   "erkek kardeş", "amca", "teyze", "kuzen", "arkadaş", "komşu", "öğretmen", "doktor", "hemşire", "şoför",

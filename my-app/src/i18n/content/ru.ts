@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// Русский — полный перевод канонического английского контента (en.ts).
-// Структура ключей сохранена точно; переведены только текстовые значения.
 export const ru: SiteContent = {
 	meta: {
 		indexTitle:

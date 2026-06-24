@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// ไทย — แปลจากเนื้อหาภาษาอังกฤษต้นฉบับใน content/en.ts โดยรักษาโครงสร้างคีย์
-// โทเค็น {placeholder} และแท็ก HTML ไว้ทุกประการ
 export const th: SiteContent = {
 	meta: {
 		indexTitle:

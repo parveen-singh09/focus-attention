@@ -1,6 +1,5 @@
-// Een verzameling veelvoorkomende, alledaagse woorden. Ze zijn bewust eenvoudig
-// en concreet (dingen die je ziet, eet, gebruikt of dagelijks doet) zodat het
-// spel focus en herinnering test, niet woordenschat. 1000 woorden.
+
+
 export const WORDS: readonly string[] = [
   "baby", "kind", "joch", "jongen", "meisje", "man", "vrouw", "moeder", "vader", "zus",
   "broer", "oom", "tante", "neef", "vriend", "buurman", "leraar", "dokter", "verpleegster", "chauffeur",
@@ -104,7 +103,6 @@ export const WORDS: readonly string[] = [
   "zaklamp", "luciferdoosje", "koffer", "aktetas", "damestas", "buidel", "sleutelketting", "verrekijker", "telescoop", "microscoop",
   "thermometer", "stopwatch", "zandloper", "trechter", "opstapje", "gereedschapskist", "kruiwagen", "schep", "hark", "schoffel",
 ];
-
 
 export function randomWord(previous?: string): string {
   let word = WORDS[Math.floor(Math.random() * WORDS.length)];

@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// Türkçe — kanonik İngilizce içeriğin (en.ts) tam çevirisi. Anahtar yapısı
-// birebir aynı tutulur; yalnızca metin değerleri çevrilir.
 export const tr: SiteContent = {
 	meta: {
 		indexTitle:

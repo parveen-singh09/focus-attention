@@ -1,8 +1,4 @@
-// Leaderboard helpers — thin wrappers over the Supabase client.
-//
-// Every function is a safe no-op when the backend isn't configured, so the
-// header/game can call them unconditionally. Ranking everywhere follows the
-// single rule: words desc → attention_sec desc → recall_sec asc.
+
 
 import { supabase, isConfigured } from "./supabase";
 import type { Session } from "@supabase/supabase-js";
@@ -11,8 +7,8 @@ export interface ScoreInput {
 	words: number;
 	attentionSec: number;
 	recallSec: number;
-	displayName?: string; // optional override; defaults to the provider name
-	avatarUrl?: string; // optional override; defaults to the provider avatar
+	displayName?: string; 
+	avatarUrl?: string; 
 }
 
 export interface LeaderboardRow {
@@ -30,15 +26,12 @@ export interface MyRank {
 	total: number;
 }
 
-// ---- auth ----
-
 export async function getSession(): Promise<Session | null> {
 	if (!supabase) return null;
 	const { data } = await supabase.auth.getSession();
 	return data.session;
 }
 
-// Returns an unsubscribe function. No-op (returns a noop unsub) when unconfigured.
 export function onAuthChange(cb: (session: Session | null) => void): () => void {
 	if (!supabase) return () => {};
 	const { data } = supabase.auth.onAuthStateChange((_event, session) => cb(session));
@@ -58,7 +51,6 @@ export async function signOut(): Promise<void> {
 	await supabase.auth.signOut();
 }
 
-// Best display name available from a Google session.
 export function displayNameFromSession(session: Session | null): string {
 	const meta = session?.user?.user_metadata as Record<string, unknown> | undefined;
 	const name =
@@ -69,19 +61,11 @@ export function displayNameFromSession(session: Session | null): string {
 	return String(name);
 }
 
-// Profile picture URL from a Google session, if any.
 export function avatarFromSession(session: Session | null): string | undefined {
 	const meta = session?.user?.user_metadata as Record<string, unknown> | undefined;
 	return ((meta?.avatar_url as string) || (meta?.picture as string)) || undefined;
 }
 
-// ---- profile ----
-
-// Update the signed-in user's display name and/or avatar. Goes through the
-// update_profile security-definer RPC — direct writes to `scores` are denied by
-// RLS (see migrations). Unlike submit_score (which only writes on a winning
-// score), this always persists, so it can be used for profile edits independent
-// of gameplay. Pass undefined/empty to leave a field unchanged.
 export async function updateProfile(input: { displayName?: string; avatarUrl?: string }): Promise<boolean> {
 	if (!supabase) return false;
 	const session = await getSession();
@@ -96,8 +80,6 @@ export async function updateProfile(input: { displayName?: string; avatarUrl?: s
 		return false;
 	}
 
-	// Sync to user metadata in the Auth session so it paints instantly on refresh
-	// without flashing the old provider (Google) photo/name before fetchMyProfile resolves.
 	const metadata: Record<string, any> = {};
 	if (input.displayName !== undefined) {
 		metadata.full_name = input.displayName.trim().slice(0, 40);
@@ -112,9 +94,6 @@ export async function updateProfile(input: { displayName?: string; avatarUrl?: s
 	return true;
 }
 
-// Upload an avatar image to the `avatars` storage bucket and return its public
-// URL. Requires a public `avatars` bucket with an INSERT/UPDATE policy scoped to
-// the user's own folder (path is prefixed with their user id).
 export async function uploadAvatar(file: File): Promise<string | null> {
 	if (!supabase) return null;
 	const session = await getSession();
@@ -129,15 +108,11 @@ export async function uploadAvatar(file: File): Promise<string | null> {
 		console.error("[leaderboard] uploadAvatar failed:", error.message);
 		return null;
 	}
-	// Cache-bust so a re-upload to the same path shows immediately.
+
 	const { data } = supabase.storage.from("avatars").getPublicUrl(path);
 	return data.publicUrl ? `${data.publicUrl}?v=${Date.now()}` : null;
 }
 
-// The signed-in user's stored profile (name + avatar) as persisted on their
-// row — the source of truth for edits made via updateProfile. Returns null when
-// unconfigured, signed out, or the user has no row yet (fall back to the
-// provider name/avatar in that case).
 export async function fetchMyProfile(): Promise<{ displayName: string; avatarUrl: string | null } | null> {
 	if (!supabase) return null;
 	const session = await getSession();
@@ -154,10 +129,6 @@ export async function fetchMyProfile(): Promise<{ displayName: string; avatarUrl
 	};
 }
 
-// ---- scores ----
-
-// Submit a finished best. No-op unless configured AND signed in. The server
-// only overwrites the stored row when this score actually wins (submit_score).
 export async function submitBest(score: ScoreInput): Promise<void> {
 	if (!supabase) return;
 	const session = await getSession();
@@ -170,8 +141,7 @@ export async function submitBest(score: ScoreInput): Promise<void> {
 		p_avatar_url: score.avatarUrl ?? avatarFromSession(session) ?? null,
 	});
 	if (error) {
-		// Print the Supabase error as plain text so the reason is readable in
-		// the console without expanding the object (code/message/details/hint).
+
 		console.error(
 			"[leaderboard] submit_score failed:",
 			JSON.stringify(
@@ -199,9 +169,6 @@ function mapRow(r: Record<string, unknown>): LeaderboardRow {
 
 const ROW_COLS = "rank, user_id, display_name, avatar_url, words, attention_sec, recall_sec";
 
-// A page of the world ranking: `limit` rows starting at `offset` (0-based),
-// ordered by rank. Pass offset to page through ("Show more"); a full page back
-// (length === limit) means there may be more to load.
 export async function fetchTop(limit = 15, offset = 0): Promise<LeaderboardRow[]> {
 	if (!supabase) return [];
 	const { data, error } = await supabase
@@ -213,8 +180,6 @@ export async function fetchTop(limit = 15, offset = 0): Promise<LeaderboardRow[]
 	return data.map(mapRow);
 }
 
-// The signed-in user's own ranked row + the total number of ranked players,
-// for "#142 of 3,408". Returns null if the user has no score yet.
 export async function fetchMyRank(userId: string): Promise<MyRank | null> {
 	if (!supabase) return null;
 
@@ -231,10 +196,6 @@ export async function fetchMyRank(userId: string): Promise<MyRank | null> {
 	return { row: mapRow(mine), total: Number(count ?? 0) };
 }
 
-// The signed-in user's stored best, sourced from the server (the single source
-// of truth per account). Returns null when unconfigured, signed out, or the
-// user has no row yet. Used in place of localStorage so a best never bleeds
-// across accounts sharing one browser.
 export async function fetchMyBest(): Promise<{ words: number; attentionSec: number; recallSec: number } | null> {
 	if (!supabase) return null;
 	const session = await getSession();

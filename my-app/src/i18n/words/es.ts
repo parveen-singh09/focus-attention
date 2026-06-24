@@ -1,6 +1,5 @@
-// Un conjunto de palabras comunes y cotidianas. Son deliberadamente simples y
-// concretas (cosas que ves, comes, usas o haces a diario) para que el juego
-// ponga a prueba el enfoque y el recuerdo, no el vocabulario. 1000 palabras.
+
+
 export const WORDS: readonly string[] = [
   "bebé", "niño", "crío", "chico", "chica", "hombre", "mujer", "madre", "padre", "hermana",
   "hermano", "tío", "tía", "primo", "amigo", "vecino", "profesor", "médico", "enfermero", "conductor",
@@ -104,7 +103,6 @@ export const WORDS: readonly string[] = [
   "linterna", "fosforera", "maleta", "maletín", "bolso", "bolsita", "cadena para llaves", "binoculares", "telescopio", "microscopio",
   "termómetro", "cronómetro", "reloj de arena", "embudo", "escalón", "caja de herramientas", "carretilla", "pala", "rastrillo", "azada",
 ];
-
 
 export function randomWord(previous?: string): string {
   let word = WORDS[Math.floor(Math.random() * WORDS.length)];

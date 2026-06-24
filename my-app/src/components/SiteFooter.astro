@@ -1,13 +1,5 @@
 ---
-// SiteFooter — global footer with site navigation. Lives in the Layout so it
-// renders on every page: each page then links to every other page, which is
-// strong internal linking for SEO and makes the legal / info pages reachable
-// from the home page. Static MPA — these are plain <a> hrefs to real routes.
-//
-// i18n: link labels + the tagline/rights line are localized. Only the Home
-// link is locale-aware (→ /<lang>); about/contact/privacy/terms exist ONLY as
-// English pages at the root, so they always link to those root paths (no
-// /<lang>/about route exists to point at).
+
 import { getLangFromUrl, translatePath, useTranslations, fill } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);

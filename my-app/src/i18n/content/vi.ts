@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// Tiếng Việt — bản dịch đầy đủ từ nội dung gốc tiếng Anh (en.ts).
-// Giữ nguyên cấu trúc khóa; chỉ dịch các giá trị văn bản.
 export const vi: SiteContent = {
 	meta: {
 		indexTitle:

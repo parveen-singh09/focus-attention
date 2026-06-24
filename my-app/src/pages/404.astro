@@ -2,8 +2,6 @@
 import Layout from "../layouts/Layout.astro";
 import { useTranslations } from "../i18n/utils";
 
-// Static build → this compiles to 404.html, which static hosts serve for any
-// unknown route. noindex so the error page never lands in search results.
 const t = useTranslations("en");
 const e = t.errors;
 ---

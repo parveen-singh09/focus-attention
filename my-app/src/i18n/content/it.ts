@@ -1,8 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// Italiano — traduzione completa del contenuto canonico in inglese (en.ts).
-// Mantiene esattamente la stessa struttura di chiavi; vengono tradotti solo i
-// valori di testo.
 export const it: SiteContent = {
 	meta: {
 		indexTitle:

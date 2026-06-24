@@ -1,5 +1,5 @@
-// Bộ từ thông dụng hàng ngày. Bản dịch của bộ từ tiếng Anh trong
-// src/scripts/words.ts — cùng thứ tự và cùng danh mục. 1000 từ.
+
+
 export const WORDS: readonly string[] = [
   "em bé", "đứa trẻ", "trẻ con", "cậu bé", "cô bé", "đàn ông", "phụ nữ", "mẹ", "cha", "chị gái",
   "anh trai", "chú", "dì", "anh em họ", "bạn bè", "hàng xóm", "giáo viên", "bác sĩ", "y tá", "tài xế",

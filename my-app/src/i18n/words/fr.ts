@@ -1,7 +1,5 @@
-// Un ensemble de mots courants et du quotidien. Ils sont volontairement simples
-// et concrets (des choses que l'on voit, mange, utilise ou fait chaque jour)
-// pour que le jeu teste la concentration et le rappel, et non le vocabulaire.
-// 1000 mots.
+
+
 export const WORDS: readonly string[] = [
   "bébé", "enfant", "gamin", "garçon", "fille", "homme", "femme", "mère", "père", "sœur",
   "frère", "oncle", "tante", "cousin", "ami", "voisin", "enseignant", "médecin", "infirmier", "chauffeur",
@@ -105,7 +103,6 @@ export const WORDS: readonly string[] = [
   "lampe de poche", "boîte d'allumettes", "valise", "mallette", "sac à main", "sacoche", "trousseau de clés", "jumelles", "télescope", "microscope",
   "thermomètre", "chronomètre", "sablier", "entonnoir", "marchepied", "boîte à outils", "brouette", "pelle", "râteau", "houe",
 ];
-
 
 export function randomWord(previous?: string): string {
   let word = WORDS[Math.floor(Math.random() * WORDS.length)];

@@ -1,6 +1,5 @@
-// A pool of common, everyday words. These are deliberately simple and
-// concrete (things you see, eat, use, or do every day) so the game tests
-// focus and recall — not vocabulary. 1000 unique words.
+
+
 export const WORDS: readonly string[] = [
   "baby", "child", "kid", "boy", "girl", "man", "woman", "mother", "father", "sister",
   "brother", "uncle", "aunt", "cousin", "friend", "neighbor", "teacher", "doctor", "nurse", "driver",
@@ -104,7 +103,6 @@ export const WORDS: readonly string[] = [
   "flashlight", "matchbox", "suitcase", "briefcase", "handbag", "pouch", "keychain", "binocular", "telescope", "microscope",
   "thermometer", "stopwatch", "hourglass", "funnel", "stepstool", "toolbox", "wheelbarrow", "shovel", "rake",
 ];
-
 
 export function randomWord(previous?: string): string {
   let word = WORDS[Math.floor(Math.random() * WORDS.length)];

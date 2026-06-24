@@ -1,13 +1,5 @@
 ---
-// SiteHeader — global top bar.
-// Theme toggle + leaderboard + Google sign-in + a language picker. The
-// leaderboard/auth pieces degrade gracefully to a "not set up" state when
-// Supabase env vars are absent (see src/lib/supabase.ts).
-//
-// i18n: static aria-labels/visible text are localized here; the client script's
-// dynamic strings (leaderboard rows, prompts) are passed via a data-i18n blob
-// on the <header> that the script reads on load. The language picker links each
-// locale to the current route under that locale (switchLocalePath).
+
 import { languages, LOCALES, FLAGS } from "../i18n/ui";
 import { getLangFromUrl, switchLocalePath, useTranslations } from "../i18n/utils";
 
@@ -15,7 +7,6 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const h = t.header;
 
-// Per-locale URL for the same route, used by the language picker.
 const localeLinks = LOCALES.map((code) => ({
 	code,
 	label: languages[code],
@@ -26,7 +17,6 @@ const localeLinks = LOCALES.map((code) => ({
 
 const activeFlagEmoji = FLAGS[lang];
 
-// Dynamic strings the client script needs (leaderboard rows, prompts, etc.).
 const headerI18n = {
 	account: h.account,
 	anonymous: h.anonymous,
@@ -51,7 +41,7 @@ const headerI18n = {
 
 <header class="sticky top-0 z-40 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md" data-i18n={JSON.stringify(headerI18n)}>
 	<div class="mx-auto flex h-14 max-w-300 items-center justify-between px-5">
-		<!-- Profile / auth -->
+
 		<div class="relative flex items-center gap-2" data-profile-wrap>
 			<button type="button" class="icon-btn" data-action="profile" aria-label={h.account} aria-haspopup="menu" aria-expanded="false">
 				<svg data-icon="user" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -61,10 +51,8 @@ const headerI18n = {
 				<img data-avatar hidden alt="" referrerpolicy="no-referrer" class="h-7 w-7 rounded-full object-cover" />
 			</button>
 
-			<!-- World rank badge (signed-in players with a ranked row) -->
 			<span data-profile-rank hidden class="rank-badge" title={h.yourWorldRanking}></span>
 
-			<!-- Profile menu -->
 			<div data-profile-menu hidden role="menu" class="dropdown left-0 right-auto min-w-[12rem]">
 				<div class="px-3 py-2">
 					<div data-name-display class="flex items-center gap-1.5">
@@ -101,7 +89,7 @@ const headerI18n = {
 		</div>
 
 		<nav class="flex items-center gap-1" aria-label="Site actions">
-			<!-- Theme toggle (functional) -->
+
 			<button type="button" class="icon-btn" data-action="theme" aria-label={h.toggleTheme} aria-pressed="false" title={h.toggleTheme}>
 				<svg data-icon="sun" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 					<circle cx="12" cy="12" r="4" />
@@ -112,18 +100,16 @@ const headerI18n = {
 				</svg>
 			</button>
 
-			<!-- Language picker -->
 			<div class="relative" data-lang-wrap>
 				<button type="button" class="icon-btn" data-action="lang" aria-label={h.language} aria-haspopup="menu" aria-expanded="false" title={h.language}>
 					<span class="lang-btn-icon" aria-hidden="true">{activeFlagEmoji}</span>
-					<!-- Fallback globe shown when no flag resolved (should never happen) -->
+
 					<svg data-lang-globe viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style={activeFlagEmoji ? "display:none" : ""}>
 						<circle cx="12" cy="12" r="9" />
 						<path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
 					</svg>
 				</button>
 
-				<!-- Language dropdown — each links to the same route under that locale -->
 				<div data-lang-menu hidden role="menu" class="dropdown lang-dropdown right-0 left-auto w-52">
 					{localeLinks.map((l) => (
 						<a
@@ -141,7 +127,6 @@ const headerI18n = {
 				</div>
 			</div>
 
-			<!-- Leaderboard -->
 			<div class="relative" data-board-wrap>
 				<button type="button" class="icon-btn" data-action="leaderboard" aria-label={h.leaderboard} aria-haspopup="true" aria-expanded="false" title={h.leaderboard}>
 					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -151,7 +136,6 @@ const headerI18n = {
 					</svg>
 				</button>
 
-				<!-- Leaderboard dropdown -->
 				<div data-board-panel hidden class="dropdown right-0 left-auto w-[min(92vw,360px)]">
 					<div class="flex items-center justify-between px-3 pt-2 pb-1">
 						<p class="text-caption text-ink uppercase tracking-[0.04em]">{h.worldRanking}</p>
@@ -187,7 +171,6 @@ const headerI18n = {
 	.icon-btn:active { transform: scale(0.92); }
 	.icon-btn:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
 
-	/* World rank badge to the right of the profile avatar. */
 	.rank-badge {
 		display: inline-flex;
 		align-items: center;
@@ -202,19 +185,17 @@ const headerI18n = {
 		white-space: nowrap;
 	}
 	.rank-badge[hidden] { display: none; }
-	/* Match the leaderboard's per-rank colors (see .lb-rank--N below). */
+
 	.rank-badge--1 { color: #e5484d; }
 	.rank-badge--2 { color: #30a46c; }
 	.rank-badge--3 { color: #3e63dd; }
 	.rank-badge--4 { color: #e93d82; }
 	.rank-badge--5 { color: #eab308; }
 
-	/* Theme icon: moon in light mode (go dark), sun in dark mode (go light). */
 	[data-icon="sun"] { display: none; }
 	:global(html[data-theme="dark"]) [data-icon="sun"] { display: block; }
 	:global(html[data-theme="dark"]) [data-icon="moon"] { display: none; }
 
-	/* Shared dropdown surface for the leaderboard + profile menu. */
 	.dropdown {
 		position: absolute;
 		top: calc(100% + 8px);
@@ -226,7 +207,6 @@ const headerI18n = {
 		overflow: hidden;
 	}
 
-	/* Language picker dropdown — scrollable, thin custom scrollbar. */
 	.lang-dropdown {
 		overflow-y: auto;
 		max-height: min(70vh, 360px);
@@ -271,7 +251,6 @@ const headerI18n = {
 	.menu-item--icon[hidden] { display: none; }
 	.menu-item--icon .lb-g { flex: none; }
 
-	/* Language picker rows — plain <a> links so JS isn't required to switch. */
 	.lang-item {
 		display: flex;
 		align-items: center;
@@ -286,7 +265,6 @@ const headerI18n = {
 	.lang-item:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: -2px; }
 	.lang-item.is-current { color: var(--color-primary); font-weight: 600; }
 
-	/* Flag emoji in picker rows and the trigger button. */
 	.lang-flag {
 		font-size: 18px;
 		line-height: 1;
@@ -300,7 +278,6 @@ const headerI18n = {
 		justify-content: center;
 	}
 
-	/* Inline name editor. */
 	.name-edit-btn {
 		flex: none;
 		display: inline-flex;
@@ -344,7 +321,6 @@ const headerI18n = {
 	.name-save:hover { text-decoration: underline; }
 	[data-name-form][hidden] { display: none; }
 
-	/* Leaderboard rows — built in JS, so :global(). */
 	:global(.lb-row) {
 		display: grid;
 		grid-template-columns: 1.8rem 1.5rem 1fr auto;
@@ -378,7 +354,6 @@ const headerI18n = {
 
 	:global(.lb-empty) { padding: 16px 12px; font-size: 14px; color: var(--color-ink-muted-48); text-align: center; }
 
-	/* "Show more" pager row at the bottom of the list. */
 	:global(.lb-more) { padding: 6px 12px 8px; }
 	:global(.lb-more-btn) {
 		display: block;
@@ -436,9 +411,6 @@ const headerI18n = {
 	const root = document.documentElement;
 	const $ = <T extends HTMLElement>(sel: string) => document.querySelector<T>(sel);
 
-	// ---------- i18n ----------
-	// Dynamic strings, injected by the .astro frontmatter as a data-i18n blob on
-	// <header>. English defaults guard against a missing/malformed blob.
 	interface HeaderStrings {
 		account: string;
 		anonymous: string;
@@ -449,12 +421,12 @@ const headerI18n = {
 		worldRanking: string;
 		loading: string;
 		noScores: string;
-		players: string; // {n}
+		players: string; 
 		showMore: string;
 		loginToCompete: string;
 		finishToClaim: string;
-		yourRank: string; // {rank} {total}
-		yourRankMetrics: string; // {rank} {total} {metrics}
+		yourRank: string; 
+		yourRankMetrics: string; 
 		yourWorldRanking: string;
 		boardNotSetUp: string;
 		wordsUnit: string;
@@ -490,7 +462,6 @@ const headerI18n = {
 	const fill = (tpl: string, vars: Record<string, string | number>) =>
 		tpl.replace(/\{(\w+)\}/g, (_, k) => (k in vars ? String(vars[k]) : `{${k}}`));
 
-	// ---------- language picker ----------
 	const langWrap = $<HTMLElement>("[data-lang-wrap]");
 	const langBtn = $<HTMLButtonElement>('[data-action="lang"]');
 	const langMenu = $<HTMLElement>("[data-lang-menu]");
@@ -505,7 +476,6 @@ const headerI18n = {
 		langBtn.setAttribute("aria-expanded", String(open));
 	});
 
-	// ---------- theme ----------
 	const THEME_KEY = "focus-attention:theme";
 	const themeBtn = $<HTMLButtonElement>('[data-action="theme"]');
 	const syncPressed = () =>
@@ -518,7 +488,6 @@ const headerI18n = {
 		syncPressed();
 	});
 
-	// ---------- helpers ----------
 	function fmt(totalSec: number): string {
 		const h = Math.floor(totalSec / 3600);
 		const m = Math.floor((totalSec % 3600) / 60);
@@ -531,7 +500,6 @@ const headerI18n = {
 		return `${r.words}w · ${fmt(r.attentionSec)} · ${fmt(r.recallSec)}`;
 	}
 
-	// ---------- auth state ----------
 	let session: Session | null = null;
 
 	const profileWrap = $<HTMLElement>("[data-profile-wrap]");
@@ -551,9 +519,6 @@ const headerI18n = {
 	const nameInput = $<HTMLInputElement>("[data-name-input]");
 	const photoInput = $<HTMLInputElement>("[data-photo-input]");
 
-	// Personal best comes from the server (per-account), NOT localStorage —
-	// localStorage is one shared bucket per browser, so it would leak one
-	// account's score to the next account signed in on the same machine.
 	async function renderProfileBest() {
 		if (!profileBest) return;
 
@@ -563,10 +528,9 @@ const headerI18n = {
 		}
 
 		const best = await fetchMyBest();
-		// Session may have changed while the request was in flight.
+
 		if (!session) return;
 
-		// Default to a 0/0/0 baseline when the player hasn't finished a round yet.
 		const words = best?.words ?? 0;
 		const attentionSec = best?.attentionSec ?? 0;
 		const recallSec = best?.recallSec ?? 0;
@@ -575,8 +539,6 @@ const headerI18n = {
 			`<p class="text-fine text-ink-muted-48 mt-0.5">${words}w · ${fmt(attentionSec)} · ${fmt(recallSec)}</p>`;
 	}
 
-	// Show the signed-in player's world rank as a "#N" badge beside the avatar.
-	// Hidden when signed out or the player has no ranked row yet.
 	async function renderRank() {
 		if (!profileRank) return;
 		if (!session) {
@@ -586,16 +548,16 @@ const headerI18n = {
 		}
 		const uid = session.user.id;
 		const mine = await fetchMyRank(uid);
-		// Bail if the session changed while the request was in flight.
+
 		if (!session || session.user.id !== uid) return;
-		// Reset any prior per-rank color class before applying the current one.
+
 		profileRank.classList.remove(
 			"rank-badge--1", "rank-badge--2", "rank-badge--3", "rank-badge--4", "rank-badge--5",
 		);
 		if (mine) {
 			profileRank.textContent = `#${mine.row.rank}`;
 			profileRank.title = fill(STR.yourRank, { rank: mine.row.rank, total: mine.total });
-			// Top 5 get the same color as their leaderboard row.
+
 			if (mine.row.rank <= 5) profileRank.classList.add(`rank-badge--${mine.row.rank}`);
 			profileRank.hidden = false;
 		} else {
@@ -606,7 +568,7 @@ const headerI18n = {
 
 	function renderAuth() {
 		const name = displayNameFromSession(session);
-		// Photo upload + name edit are only available while signed in.
+
 		if (editNameBtn) editNameBtn.disabled = !session;
 		if (changePhotoBtn) changePhotoBtn.disabled = !session;
 		if (session) {
@@ -627,7 +589,7 @@ const headerI18n = {
 			if (signOutBtn) signOutBtn.hidden = true;
 			if (avatar) avatar.hidden = true;
 			if (userIcon) userIcon.style.display = "";
-			// Make sure the name editor is closed when signed out.
+
 			if (nameForm) nameForm.hidden = true;
 			if (nameDisplay) nameDisplay.hidden = false;
 		}
@@ -638,14 +600,11 @@ const headerI18n = {
 		profileBtn?.setAttribute("aria-expanded", "false");
 	}
 
-	// renderAuth seeds the header from the provider (Google) name/avatar so it
-	// paints instantly. This overlays the player's *saved* name/avatar from their
-	// scores row — the source of truth for edits — once it loads from the server.
 	async function applyStoredProfile() {
 		if (!session) return;
 		const uid = session.user.id;
 		const prof = await fetchMyProfile();
-		// Bail if the session changed while the request was in flight.
+
 		if (!prof || !session || session.user.id !== uid) return;
 		if (prof.displayName) {
 			if (profileName) profileName.textContent = prof.displayName;
@@ -659,7 +618,7 @@ const headerI18n = {
 	}
 
 	profileBtn?.addEventListener("click", () => {
-		// Always toggle the menu — signed in or not it shows name + best score.
+
 		const open = profileMenu && profileMenu.hidden;
 		if (open) renderProfileBest();
 		if (profileMenu) profileMenu.hidden = !open;
@@ -667,8 +626,8 @@ const headerI18n = {
 	});
 
 	signInBtn?.addEventListener("click", async () => {
-		if (!isConfigured) return; // nothing to do without a backend
-		await signInWithGoogle(); // redirects away
+		if (!isConfigured) return; 
+		await signInWithGoogle(); 
 	});
 
 	$<HTMLButtonElement>('[data-action="signout"]')?.addEventListener("click", async () => {
@@ -676,12 +635,9 @@ const headerI18n = {
 		closeProfileMenu();
 	});
 
-	// ---------- profile editing (signed-in only) ----------
-	// Swap the name+icon row for the inline editor (in place, same line).
 	function openNameEditor() {
 		if (!session || !nameForm || !nameInput || !nameDisplay) return;
-		// Seed from the currently displayed name (the saved one, set by
-		// applyStoredProfile), falling back to the provider name.
+
 		nameInput.value = profileName?.textContent?.trim() || displayNameFromSession(session);
 		nameDisplay.hidden = true;
 		nameForm.hidden = false;
@@ -695,7 +651,6 @@ const headerI18n = {
 
 	editNameBtn?.addEventListener("click", openNameEditor);
 
-	// Escape cancels the editor without saving.
 	nameInput?.addEventListener("keydown", (e) => {
 		if (e.key === "Escape") { e.stopPropagation(); closeNameEditor(); }
 	});
@@ -710,12 +665,11 @@ const headerI18n = {
 			if (profileName) profileName.textContent = next;
 			profileBtn?.setAttribute("aria-label", next);
 			closeNameEditor();
-			// Refresh an open board so the new name shows there too.
+
 			if (boardPanel && !boardPanel.hidden) loadBoard();
 		}
 	});
 
-	// Trigger the hidden file picker; upload + persist on selection.
 	changePhotoBtn?.addEventListener("click", () => {
 		if (!session) return;
 		photoInput?.click();
@@ -736,20 +690,18 @@ const headerI18n = {
 		}
 
 		if (changePhotoBtn) { changePhotoBtn.disabled = false; changePhotoBtn.textContent = prevLabel ?? STR.changePhoto; }
-		photoInput.value = ""; // allow re-selecting the same file
+		photoInput.value = ""; 
 	});
 
-	// ---------- leaderboard dropdown ----------
 	const boardBtn = $<HTMLButtonElement>('[data-action="leaderboard"]');
 	const boardPanel = $<HTMLElement>("[data-board-panel]");
 	const boardList = $<HTMLOListElement>("[data-board-list]");
 	const boardTotal = $<HTMLElement>("[data-board-total]");
 	const boardFoot = $<HTMLElement>("[data-board-foot]");
 
-	// Pagination: render one page at a time; "Show more" appends the next page.
 	const BOARD_PAGE = 15;
-	let boardLoaded = 0; // number of rows currently rendered
-	let boardMoreLi: HTMLLIElement | null = null; // the "Show more" list item, if shown
+	let boardLoaded = 0; 
+	let boardMoreLi: HTMLLIElement | null = null; 
 
 	function initials(name: string): string {
 		const parts = name.trim().split(/\s+/).filter(Boolean);
@@ -773,7 +725,7 @@ const headerI18n = {
 			img.src = r.avatarUrl;
 			img.alt = "";
 			img.loading = "lazy";
-			img.referrerPolicy = "no-referrer"; // Google avatars block referrer requests
+			img.referrerPolicy = "no-referrer"; 
 			dp = img;
 		} else {
 			dp = document.createElement("span");
@@ -833,13 +785,12 @@ const headerI18n = {
 			const myId = session?.user.id;
 			top.forEach((r) => boardList.appendChild(rowEl(r, r.userId === myId)));
 			boardLoaded = top.length;
-			// A full first page means there may be more — offer "Show more".
+
 			if (top.length === BOARD_PAGE) addShowMore();
 		}
 
 		if (boardTotal) boardTotal.textContent = top.length ? "" : "";
 
-		// Foot: my position, or a sign-in prompt.
 		if (!session) {
 			setFootSignIn();
 			return;
@@ -856,7 +807,6 @@ const headerI18n = {
 			: fill(STR.yourRankMetrics, { rank: mine.row.rank, total: mine.total, metrics: metrics(mine.row) }));
 	}
 
-	// Append the next page of rows below those already shown.
 	async function loadMore() {
 		if (!boardList) return;
 		boardMoreLi?.remove();
@@ -865,11 +815,10 @@ const headerI18n = {
 		const myId = session?.user.id;
 		page.forEach((r) => boardList.appendChild(rowEl(r, r.userId === myId)));
 		boardLoaded += page.length;
-		// Another full page back means there's likely still more.
+
 		if (page.length === BOARD_PAGE) addShowMore();
 	}
 
-	// "Show more" row pinned to the bottom of the list.
 	function addShowMore() {
 		if (!boardList) return;
 		const li = document.createElement("li");
@@ -912,7 +861,6 @@ const headerI18n = {
 		open ? openBoard() : closeBoard();
 	});
 
-	// ---------- global close behaviors ----------
 	document.addEventListener("click", (e) => {
 		const t = e.target as Node;
 		if (boardPanel && !boardPanel.hidden && !$<HTMLElement>("[data-board-wrap]")?.contains(t)) closeBoard();
@@ -923,27 +871,20 @@ const headerI18n = {
 		if (e.key === "Escape") { closeBoard(); closeProfileMenu(); closeLangMenu(); }
 	});
 
-	// The game fires this after a new personal best is submitted — refresh any
-	// open panel so it reflects the fresh score instead of stale state.
 	window.addEventListener("focus-attention:best-updated", () => {
 		renderProfileBest();
-		renderRank(); // a new best may have changed the player's rank
+		renderRank(); 
 		if (boardPanel && !boardPanel.hidden) loadBoard();
 	});
 
-	// ---------- init ----------
-	renderAuth(); // default signed-out state ("Anonymous") until a session loads
+	renderAuth(); 
 
-	// Ensure a signed-in player has a leaderboard row, even before they finish a
-	// round. submit_score only overwrites on a winning score, so a 0/0/0 baseline
-	// can never clobber a real best — it just seeds the row. Guarded so it runs
-	// once per user id, not on every auth event.
 	let baselinedFor: string | null = null;
 	async function ensureBaseline(s: Session | null) {
 		if (!s || s.user.id === baselinedFor) return;
 		baselinedFor = s.user.id;
 		await submitBest({ words: 0, attentionSec: 0, recallSec: 0 });
-		renderRank(); // the row now exists, so a rank is available
+		renderRank(); 
 		if (boardPanel && !boardPanel.hidden) loadBoard();
 	}
 
@@ -953,13 +894,12 @@ const headerI18n = {
 		lastUserId = s?.user.id ?? null;
 		session = s;
 		renderAuth();
-		void applyStoredProfile(); // overlay the saved name/avatar over provider defaults
-		void renderRank(); // show/refresh the world-rank badge for this account
+		void applyStoredProfile(); 
+		void renderRank(); 
 		void ensureBaseline(s);
-		// Refresh an open board so the highlight follows sign-in/out.
+
 		if (boardPanel && !boardPanel.hidden) loadBoard();
-		// Let the game re-seed its in-memory best from the new account's row,
-		// so a best never carries over from a previously signed-in account.
+
 		if (changed) window.dispatchEvent(new CustomEvent("focus-attention:auth-changed"));
 	}
 

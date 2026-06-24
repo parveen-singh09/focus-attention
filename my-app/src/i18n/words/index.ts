@@ -20,18 +20,6 @@ import { WORDS as BN_WORDS } from "./bn";
 import { WORDS as ID_WORDS } from "./id";
 import { WORDS as TH_WORDS } from "./th";
 
-// Per-locale word pools. Each locale's game draws from its own translated list
-// of ~1000 concrete everyday words (a faithful translation of the English pool
-// in src/scripts/words.ts). Locale files are added here as they land; any
-// locale not yet present falls back to the English pool so the game always
-// works.
-//
-// Kept as one-file-per-locale (not a single giant object) and imported only
-// where needed so each page bundles just its own locale's word list.
-//
-// To add a translated locale: create ./<lang>.ts exporting
-// `export const WORDS: readonly string[] = [ ...1000 words... ]`, import it
-// here, and add it to this map.
 const pools: Partial<Record<Lang, readonly string[]>> = {
 	en: EN_WORDS,
 	es: ES_WORDS,

@@ -1,8 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// Nederlands — volledige vertaling van de canonieke Engelse inhoud (en.ts).
-// Houdt exact dezelfde sleutelstructuur aan; alleen de tekstwaarden worden
-// vertaald.
 export const nl: SiteContent = {
 	meta: {
 		indexTitle:

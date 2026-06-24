@@ -1,8 +1,5 @@
 ---
-// Per-locale 404 at /<lang>/404. Static hosts only auto-serve the root
-// /404.html for unknown routes, so these are generated for completeness and
-// correct rendering when linked directly — not auto-served. English 404 lives
-// at the root (src/pages/404.astro).
+
 import type { GetStaticPaths } from "astro";
 import Layout from "../../layouts/Layout.astro";
 import { LOCALES, defaultLang, isLang } from "../../i18n/ui";

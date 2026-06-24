@@ -1,7 +1,5 @@
 import type { SiteContent } from "../ui";
 
-// 日本語 — 英語の正典コンテンツ（en.ts）の完全な翻訳。
-// キー構造はまったく同じに保ち、テキストの値のみを翻訳しています。
 export const ja: SiteContent = {
 	meta: {
 		indexTitle:

@@ -1,5 +1,5 @@
-// Kumpulan kata umum sehari-hari. Terjemahan kumpulan kata bahasa Inggris di
-// src/scripts/words.ts — urutan dan kategori yang sama. 1000 kata.
+
+
 export const WORDS: readonly string[] = [
   "bayi", "anak", "bocah", "anak laki-laki", "anak perempuan", "pria", "wanita", "ibu", "ayah", "kakak perempuan",
   "kakak laki-laki", "paman", "bibi", "sepupu", "teman", "tetangga", "guru", "dokter", "perawat", "sopir",

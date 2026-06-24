@@ -1,5 +1,5 @@
-// Pula popularnych, codziennych słów. Tłumaczenie angielskiej puli z
-// src/scripts/words.ts — ten sam porządek i te same kategorie. 1000 słów.
+
+
 export const WORDS: readonly string[] = [
   "niemowlę", "dziecko", "dzieciak", "chłopiec", "dziewczyna", "mężczyzna", "kobieta", "matka", "ojciec", "siostra",
   "brat", "wujek", "ciotka", "kuzyn", "przyjaciel", "sąsiad", "nauczyciel", "lekarz", "pielęgniarka", "kierowca",
