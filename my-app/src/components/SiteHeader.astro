@@ -102,12 +102,7 @@ const headerI18n = {
 
 			<div class="relative" data-lang-wrap>
 				<button type="button" class="icon-btn" data-action="lang" aria-label={h.language} aria-haspopup="menu" aria-expanded="false" title={h.language}>
-					<span class="lang-btn-icon" aria-hidden="true">{activeFlagEmoji}</span>
-
-					<svg data-lang-globe viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style={activeFlagEmoji ? "display:none" : ""}>
-						<circle cx="12" cy="12" r="9" />
-						<path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
-					</svg>
+					<span class="text-caption font-semibold uppercase">{lang}</span>
 				</button>
 
 				<div data-lang-menu hidden role="menu" class="dropdown lang-dropdown right-0 left-auto w-52">
