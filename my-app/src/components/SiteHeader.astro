@@ -8,7 +8,7 @@
 // dynamic strings (leaderboard rows, prompts) are passed via a data-i18n blob
 // on the <header> that the script reads on load. The language picker links each
 // locale to the current route under that locale (switchLocalePath).
-import { languages, LOCALES } from "../i18n/ui";
+import { languages, LOCALES, FLAGS } from "../i18n/ui";
 import { getLangFromUrl, switchLocalePath, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -19,9 +19,12 @@ const h = t.header;
 const localeLinks = LOCALES.map((code) => ({
 	code,
 	label: languages[code],
+	flag: FLAGS[code],
 	href: switchLocalePath(Astro.url, code),
 	current: code === lang,
 }));
+
+const activeFlagEmoji = FLAGS[lang];
 
 // Dynamic strings the client script needs (leaderboard rows, prompts, etc.).
 const headerI18n = {
@@ -126,14 +129,16 @@ const headerI18n = {
 			<!-- Language picker -->
 			<div class="relative" data-lang-wrap>
 				<button type="button" class="icon-btn" data-action="lang" aria-label={h.language} aria-haspopup="menu" aria-expanded="false" title={h.language}>
-					<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<span class="lang-btn-icon" aria-hidden="true">{activeFlagEmoji}</span>
+					<!-- Fallback globe shown when no flag resolved (should never happen) -->
+					<svg data-lang-globe viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style={activeFlagEmoji ? "display:none" : ""}>
 						<circle cx="12" cy="12" r="9" />
 						<path d="M3 12h18" /><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18Z" />
 					</svg>
 				</button>
 
 				<!-- Language dropdown — each links to the same route under that locale -->
-				<div data-lang-menu hidden role="menu" class="dropdown right-0 left-auto max-h-96 overflow-y-auto w-[12rem]">
+				<div data-lang-menu hidden role="menu" class="dropdown lang-dropdown right-0 left-auto w-52">
 					{localeLinks.map((l) => (
 						<a
 							href={l.href}
@@ -142,7 +147,10 @@ const headerI18n = {
 							hreflang={l.code}
 							lang={l.code}
 							aria-current={l.current ? "true" : undefined}
-						>{l.label}</a>
+						>
+							<span class="lang-flag" aria-hidden="true">{l.flag}</span>
+							<span>{l.label}</span>
+						</a>
 					))}
 				</div>
 			</div>
@@ -218,6 +226,30 @@ const headerI18n = {
 		overflow: hidden;
 	}
 
+	/* Language picker dropdown — scrollable, thin custom scrollbar. */
+	.lang-dropdown {
+		overflow-y: auto;
+		max-height: min(70vh, 360px);
+		scrollbar-width: thin;
+		scrollbar-color: transparent transparent;
+	}
+	.lang-dropdown:hover {
+		scrollbar-color: var(--color-hairline) transparent;
+	}
+	.lang-dropdown::-webkit-scrollbar {
+		width: 3px;
+	}
+	.lang-dropdown::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	.lang-dropdown::-webkit-scrollbar-thumb {
+		background: transparent;
+		border-radius: 99px;
+	}
+	.lang-dropdown:hover::-webkit-scrollbar-thumb {
+		background: var(--color-hairline);
+	}
+
 	.menu-item {
 		display: block;
 		width: 100%;
@@ -241,7 +273,9 @@ const headerI18n = {
 
 	/* Language picker rows — plain <a> links so JS isn't required to switch. */
 	.lang-item {
-		display: block;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
 		padding: 9px 12px;
 		font-family: var(--font-text);
 		font-size: 15px;
@@ -251,6 +285,20 @@ const headerI18n = {
 	.lang-item:hover { background-color: var(--color-canvas-parchment); }
 	.lang-item:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: -2px; }
 	.lang-item.is-current { color: var(--color-primary); font-weight: 600; }
+
+	/* Flag emoji in picker rows and the trigger button. */
+	.lang-flag {
+		font-size: 18px;
+		line-height: 1;
+		flex: none;
+	}
+	.lang-btn-icon {
+		font-size: 20px;
+		line-height: 1;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
 
 	/* Inline name editor. */
 	.name-edit-btn {
@@ -480,7 +528,7 @@ const headerI18n = {
 		return `${s}s`;
 	}
 	function metrics(r: LeaderboardRow): string {
-		return `${r.words}${STR.wordsUnit} · ${fmt(r.attentionSec)} · ${fmt(r.recallSec)}`;
+		return `${r.words}w · ${fmt(r.attentionSec)} · ${fmt(r.recallSec)}`;
 	}
 
 	// ---------- auth state ----------
@@ -524,7 +572,7 @@ const headerI18n = {
 		const recallSec = best?.recallSec ?? 0;
 		profileBest.innerHTML =
 			`<p class="text-caption text-ink-muted-80">${STR.bestScore}</p>` +
-			`<p class="text-fine text-ink-muted-48 mt-0.5">${words}${STR.wordsUnit} · ${fmt(attentionSec)} · ${fmt(recallSec)}</p>`;
+			`<p class="text-fine text-ink-muted-48 mt-0.5">${words}w · ${fmt(attentionSec)} · ${fmt(recallSec)}</p>`;
 	}
 
 	// Show the signed-in player's world rank as a "#N" badge beside the avatar.

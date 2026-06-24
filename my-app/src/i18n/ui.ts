@@ -42,6 +42,30 @@ export const languages: Record<Lang, string> = {
 // Right-to-left locales. Drives <html dir> and a few layout overrides.
 export const RTL_LANGS: ReadonlySet<Lang> = new Set<Lang>(["ar"]);
 
+// Flag emoji for each locale, shown in the language picker button and rows.
+export const FLAGS: Record<Lang, string> = {
+	en: "🇬🇧",
+	es: "🇪🇸",
+	fr: "🇫🇷",
+	de: "🇩🇪",
+	it: "🇮🇹",
+	pt: "🇧🇷",
+	nl: "🇳🇱",
+	ru: "🇷🇺",
+	pl: "🇵🇱",
+	tr: "🇹🇷",
+	ar: "🇸🇦",
+	hi: "🇮🇳",
+	bn: "🇧🇩",
+	zh: "🇨🇳",
+	ja: "🇯🇵",
+	ko: "🇰🇷",
+	vi: "🇻🇳",
+	th: "🇹🇭",
+	id: "🇮🇩",
+	uk: "🇺🇦",
+};
+
 export function isLang(value: string): value is Lang {
 	return (LOCALES as readonly string[]).includes(value);
 }

@@ -449,6 +449,9 @@ const i18n = {
 			// they never show beneath the watch / recall / result screens.
 			const landing = document.querySelector<HTMLElement>("[data-landing-content]");
 			if (landing) landing.hidden = phase !== "setup";
+
+			const footer = document.querySelector<HTMLElement>("[data-site-footer]");
+			if (footer) footer.hidden = phase !== "setup";
 		}
 
 		private q<T extends HTMLElement>(sel: string): T {
