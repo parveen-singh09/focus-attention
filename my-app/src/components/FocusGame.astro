@@ -1251,7 +1251,7 @@ const i18n = {
 			);
 
 			document.addEventListener("click", (e) => {
-				if (!(e.target as HTMLElement).closest(".tp-wrapper")) {
+				if (e.target instanceof Element && !e.target.closest(".tp-panel")) {
 					this.querySelectorAll(".tp-panel.is-open").forEach((p) => {
 						p.classList.remove("is-open");
 						p.querySelectorAll(".tp-col").forEach((c) =>
