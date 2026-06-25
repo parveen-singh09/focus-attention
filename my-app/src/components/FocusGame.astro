@@ -669,11 +669,13 @@ const i18n = {
 							// Jump to equivalent position in middle copy
 							const offset = ((col.scrollTop % oneSetH) + oneSetH) % oneSetH;
 							col.dataset.programmatic = "true";
+							col.style.scrollSnapType = "none";
 							const colAny = col as any;
 							window.clearTimeout(colAny._progTimer);
 							col.scrollTop = oneSetH + offset;
 							this.updateCol3D(col);
 							colAny._progTimer = window.setTimeout(() => {
+								col.style.scrollSnapType = "";
 								col.removeAttribute("data-programmatic");
 							}, 100);
 						}
@@ -703,8 +705,9 @@ const i18n = {
 							const colAny = col as any;
 							window.clearTimeout(colAny._progTimer);
 							colAny._progTimer = window.setTimeout(() => {
+								col.style.scrollSnapType = "";
 								col.removeAttribute("data-programmatic");
-							}, 100);
+							}, 150);
 							return;
 						}
 
@@ -808,21 +811,29 @@ const i18n = {
 			const sel = Array.from(col.querySelectorAll<HTMLElement>(".tp-opt.is-sel"))
 				.find((o) => o.dataset.copy === "1");
 			if (sel) {
+				// Defer scrolling if layout is not ready yet
+				if (col.scrollHeight < 300) {
+					requestAnimationFrame(() => this.scrollToSel(col, smooth));
+					return;
+				}
 				const targetTop = sel.offsetTop - 87;
 				col.dataset.programmatic = "true";
+				col.style.scrollSnapType = "none";
 				const colAny = col as any;
 				window.clearTimeout(colAny._progTimer);
 				if (smooth) {
 					col.scrollTo({ top: targetTop, behavior: "smooth" });
 					colAny._progTimer = window.setTimeout(() => {
+						col.style.scrollSnapType = "";
 						col.removeAttribute("data-programmatic");
 					}, 350); // fallback cleanup
 				} else {
 					col.scrollTop = targetTop;
 					this.updateCol3D(col);
 					colAny._progTimer = window.setTimeout(() => {
+						col.style.scrollSnapType = "";
 						col.removeAttribute("data-programmatic");
-					}, 100); // fallback cleanup
+					}, 150); // fallback cleanup
 				}
 			}
 		}
