@@ -1,5 +1,4 @@
 ---
-
 import type { Lang } from "../i18n/ui";
 import { defaultLang } from "../i18n/ui";
 import { useTranslations } from "../i18n/utils";
@@ -28,137 +27,340 @@ const i18n = {
 ---
 
 <focus-game class="block w-full" data-i18n={JSON.stringify(i18n)}>
-	<script type="application/json" data-words is:inline set:html={JSON.stringify(words)} />
+	<script
+		type="application/json"
+		data-words
+		is:inline
+		set:html={JSON.stringify(words)}
+	/>
 
-	<section data-phase="setup" class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center">
-		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">{g.eyebrow}</p>
-		<h1 class="text-hero text-ink max-w-[18ch]"><span class="whitespace-nowrap">{g.titleLine1}</span><br /><span class="whitespace-nowrap">{g.titleLine2}</span></h1>
+	<section
+		data-phase="setup"
+		class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center"
+	>
+		<p
+			class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]"
+		>
+			{g.eyebrow}
+		</p>
+		<h1 class="text-hero text-ink max-w-[18ch]">
+			<span class="whitespace-nowrap">{g.titleLine1}</span><br /><span
+				class="whitespace-nowrap">{g.titleLine2}</span
+			>
+		</h1>
 		<p class="text-lead text-ink-muted-80 mt-5 max-w-[42ch]">
-			{g.intro} <span class="whitespace-nowrap">{g.introRecallTail}</span>
+			{g.intro}
+			<span class="whitespace-nowrap">{g.introRecallTail}</span>
 		</p>
 
 		<div class="mt-12 w-full max-w-130">
-			<p class="text-caption text-ink-muted-48 mb-3">{g.chooseDuration}</p>
-			<div role="group" aria-label="Duration presets" class="flex flex-wrap justify-center gap-2">
-				<button type="button" class="preset" data-seconds="10">{g.presets.s10}</button>
-				<button type="button" class="preset" data-seconds="20">{g.presets.s20}</button>
-				<button type="button" class="preset" data-seconds="30">{g.presets.s30}</button>
-				<button type="button" class="preset" data-seconds="60">{g.presets.m1}</button>
-				<button type="button" class="preset" data-seconds="180">{g.presets.m3}</button>
-				<button type="button" class="preset" data-seconds="300">{g.presets.m5}</button>
+			<p class="text-caption text-ink-muted-48 mb-3">
+				{g.chooseDuration}
+			</p>
+			<div
+				role="group"
+				aria-label="Duration presets"
+				class="flex flex-wrap justify-center gap-2"
+			>
+				<button type="button" class="preset" data-seconds="10"
+					>{g.presets.s10}</button
+				>
+				<button type="button" class="preset" data-seconds="20"
+					>{g.presets.s20}</button
+				>
+				<button type="button" class="preset" data-seconds="30"
+					>{g.presets.s30}</button
+				>
+				<button type="button" class="preset" data-seconds="60"
+					>{g.presets.m1}</button
+				>
+				<button type="button" class="preset" data-seconds="180"
+					>{g.presets.m3}</button
+				>
+				<button type="button" class="preset" data-seconds="300"
+					>{g.presets.m5}</button
+				>
 			</div>
 
-			<div class="mt-8 flex flex-col sm:flex-row sm:items-start justify-center gap-8 sm:gap-20">
-
-			<div class="tp-wrapper" data-picker-group="duration">
-				<p class="text-caption text-ink-muted-48 mb-3">{g.customTime}</p>
-				<div class="flex items-end justify-center gap-3 cursor-pointer" data-tp-trigger>
-					<label class="flex flex-col items-center gap-1.5">
-						<input type="text" readonly inputmode="none" min="0" max="12" value="0" data-unit="hours" class="time-input" />
-						<span class="text-fine text-ink-muted-48">{g.unitHours}</span>
-					</label>
-					<span class="text-lead text-hairline pb-6 select-none">:</span>
-					<label class="flex flex-col items-center gap-1.5">
-						<input type="text" readonly inputmode="none" min="0" max="59" value="0" data-unit="minutes" class="time-input" />
-						<span class="text-fine text-ink-muted-48">{g.unitMin}</span>
-					</label>
-					<span class="text-lead text-hairline pb-6 select-none">:</span>
-					<label class="flex flex-col items-center gap-1.5">
-						<input type="text" readonly inputmode="none" min="0" max="59" value="30" data-unit="seconds" class="time-input" />
-						<span class="text-fine text-ink-muted-48">{g.unitSec}</span>
-					</label>
+			<div
+				class="mt-8 flex flex-col sm:flex-row sm:items-start justify-center gap-8 sm:gap-20"
+			>
+				<div class="tp-wrapper" data-picker-group="duration">
+					<p class="text-caption text-ink-muted-48 mb-3">
+						{g.customTime}
+					</p>
+					<div
+						class="flex items-end justify-center gap-3 cursor-pointer"
+						data-tp-trigger
+					>
+						<label class="flex flex-col items-center gap-1.5">
+							<input
+								type="text"
+								readonly
+								inputmode="none"
+								min="0"
+								max="12"
+								value="0"
+								data-unit="hours"
+								class="time-input"
+							/>
+							<span class="text-fine text-ink-muted-48"
+								>{g.unitHours}</span
+							>
+						</label>
+						<span class="text-lead text-hairline pb-6 select-none"
+							>:</span
+						>
+						<label class="flex flex-col items-center gap-1.5">
+							<input
+								type="text"
+								readonly
+								inputmode="none"
+								min="0"
+								max="59"
+								value="0"
+								data-unit="minutes"
+								class="time-input"
+							/>
+							<span class="text-fine text-ink-muted-48"
+								>{g.unitMin}</span
+							>
+						</label>
+						<span class="text-lead text-hairline pb-6 select-none"
+							>:</span
+						>
+						<label class="flex flex-col items-center gap-1.5">
+							<input
+								type="text"
+								readonly
+								inputmode="none"
+								min="0"
+								max="59"
+								value="30"
+								data-unit="seconds"
+								class="time-input"
+							/>
+							<span class="text-fine text-ink-muted-48"
+								>{g.unitSec}</span
+							>
+						</label>
+					</div>
+					<p
+						data-duration-hint
+						class="text-fine text-ink-muted-48 mt-4"
+						aria-live="polite"
+					>
+					</p>
 				</div>
-				<p data-duration-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
-			</div>
 
-			<div class="tp-wrapper" data-picker-group="pace">
-				<p class="text-caption text-ink-muted-48 mb-3">{g.paceLabel}</p>
-				<div class="flex items-end justify-center gap-3 cursor-pointer" data-tp-trigger>
-					<label class="flex flex-col items-center gap-1.5">
-						<input type="text" readonly inputmode="none" min="0" max="3" value="0" data-pace-unit="minutes" class="time-input" />
-						<span class="text-fine text-ink-muted-48">{g.unitMin}</span>
-					</label>
-					<span class="text-lead text-hairline pb-6 select-none">:</span>
-					<label class="flex flex-col items-center gap-1.5">
-						<input type="text" readonly inputmode="none" min="0" max="59" value="3" data-pace-unit="seconds" class="time-input" />
-						<span class="text-fine text-ink-muted-48">{g.unitSec}</span>
-					</label>
+				<div class="tp-wrapper" data-picker-group="pace">
+					<p class="text-caption text-ink-muted-48 mb-3">
+						{g.paceLabel}
+					</p>
+					<div
+						class="flex items-end justify-center gap-3 cursor-pointer"
+						data-tp-trigger
+					>
+						<label class="flex flex-col items-center gap-1.5">
+							<input
+								type="text"
+								readonly
+								inputmode="none"
+								min="0"
+								max="4"
+								value="0"
+								data-pace-unit="minutes"
+								class="time-input"
+							/>
+							<span class="text-fine text-ink-muted-48"
+								>{g.unitMin}</span
+							>
+						</label>
+						<span class="text-lead text-hairline pb-6 select-none"
+							>:</span
+						>
+						<label class="flex flex-col items-center gap-1.5">
+							<input
+								type="text"
+								readonly
+								inputmode="none"
+								min="0"
+								max="59"
+								value="3"
+								data-pace-unit="seconds"
+								class="time-input"
+							/>
+							<span class="text-fine text-ink-muted-48"
+								>{g.unitSec}</span
+							>
+						</label>
+					</div>
+					<p
+						data-pace-hint
+						class="text-fine text-ink-muted-48 mt-4"
+						aria-live="polite"
+					>
+					</p>
 				</div>
-				<p data-pace-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
-			</div>
 			</div>
 		</div>
 
 		<div class="mt-12">
-			<button type="button" data-action="start" class="btn-primary">{g.begin}</button>
+			<button type="button" data-action="start" class="btn-primary"
+				>{g.begin}</button
+			>
 		</div>
 	</section>
 
-	<section data-phase="watch" hidden class="fixed inset-0 z-50 bg-canvas text-ink flex flex-col">
-
+	<section
+		data-phase="watch"
+		hidden
+		class="fixed inset-0 z-50 bg-canvas text-ink flex flex-col"
+	>
 		<div class="h-0.75 w-full bg-hairline">
-			<div data-progress class="h-full bg-primary transition-[width] duration-200 ease-linear" style="width:0%"></div>
+			<div
+				data-progress
+				class="h-full bg-primary transition-[width] duration-200 ease-linear"
+				style="width:0%"
+			>
+			</div>
 		</div>
 
 		<div class="flex items-center justify-between px-6 py-5">
-			<span data-clock class="text-caption text-ink-muted-48 tabular-nums">0:30</span>
-			<span data-seen-count class="text-caption text-ink-muted-48 tabular-nums">0 words</span>
+			<span data-clock class="text-caption text-ink-muted-48 tabular-nums"
+				>0:30</span
+			>
+			<span
+				data-seen-count
+				class="text-caption text-ink-muted-48 tabular-nums"
+				>0 words</span
+			>
 		</div>
 
 		<div class="flex-1 flex items-center justify-center px-6">
-			<span data-word class="text-display-lg text-ink" style="font-size:clamp(40px,9vw,88px)">&nbsp;</span>
+			<span
+				data-word
+				class="text-display-lg text-ink"
+				style="font-size:clamp(40px,9vw,88px)">&nbsp;</span
+			>
 		</div>
 
 		<div class="px-6 py-8 flex justify-center">
-			<button type="button" data-action="end-early" class="end-early-btn text-caption">{g.endEarly}</button>
+			<button
+				type="button"
+				data-action="end-early"
+				class="end-early-btn text-caption">{g.endEarly}</button
+			>
 		</div>
 	</section>
 
-	<section data-phase="recall" hidden class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center">
-		<p class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]">{g.recallEyebrow}</p>
+	<section
+		data-phase="recall"
+		hidden
+		class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center"
+	>
+		<p
+			class="text-caption text-ink-muted-48 mb-4 uppercase tracking-[0.04em]"
+		>
+			{g.recallEyebrow}
+		</p>
 		<h2 class="text-display-lg text-ink max-w-[18ch]">{g.recallHeading}</h2>
 
-		<p data-recall-clock class="text-caption text-primary tabular-nums mt-5" aria-live="polite"></p>
+		<p
+			data-recall-clock
+			class="text-caption text-primary tabular-nums mt-5"
+			aria-live="polite"
+		>
+		</p>
 
-		<p data-chosen-caption class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]"></p>
-		<ul data-recall-list class="mt-3 flex flex-wrap justify-center gap-2 min-h-10" aria-live="polite"></ul>
+		<p
+			data-chosen-caption
+			class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]"
+		>
+		</p>
+		<ul
+			data-recall-list
+			class="mt-3 flex flex-wrap justify-center gap-2 min-h-10"
+			aria-live="polite"
+		>
+		</ul>
 
-		<p class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">{g.tapWordsYouSaw}</p>
-		<div data-pool class="mt-3 flex flex-wrap justify-center gap-2.5 max-w-170" role="group" aria-label="Word choices"></div>
+		<p class="text-fine text-ink-muted-48 mt-8 uppercase tracking-[0.04em]">
+			{g.tapWordsYouSaw}
+		</p>
+		<div
+			data-pool
+			class="mt-3 flex flex-wrap justify-center gap-2.5 max-w-170"
+			role="group"
+			aria-label="Word choices"
+		>
+		</div>
 	</section>
 
-	<section data-phase="result" hidden class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center">
-		<p class="text-caption text-ink-muted-48 mb-2 uppercase tracking-[0.04em]">{g.resultEyebrow}</p>
+	<section
+		data-phase="result"
+		hidden
+		class="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-start px-6 pt-10 pb-20 md:pt-14 md:pb-28 text-center"
+	>
+		<p
+			class="text-caption text-ink-muted-48 mb-2 uppercase tracking-[0.04em]"
+		>
+			{g.resultEyebrow}
+		</p>
 
-		<div class="mt-6 flex flex-wrap items-start justify-center gap-x-16 gap-y-10">
-
+		<div
+			class="mt-6 flex flex-wrap items-start justify-center gap-x-16 gap-y-10"
+		>
 			<div class="flex flex-col items-center">
-				<span data-attention class="text-ink" style="font-family:var(--font-display);font-weight:600;font-size:clamp(56px,13vw,120px);line-height:1;letter-spacing:-0.02em">0s</span>
-				<span class="text-lead text-ink-muted-48 mt-2">{g.attentionSpan}</span>
-				<span class="text-caption text-ink-muted-48 mt-1">{g.attentionHint}</span>
+				<span
+					data-attention
+					class="text-ink"
+					style="font-family:var(--font-display);font-weight:600;font-size:clamp(56px,13vw,120px);line-height:1;letter-spacing:-0.02em"
+					>0s</span
+				>
+				<span class="text-lead text-ink-muted-48 mt-2"
+					>{g.attentionSpan}</span
+				>
+				<span class="text-caption text-ink-muted-48 mt-1"
+					>{g.attentionHint}</span
+				>
 			</div>
 
 			<div class="flex flex-col items-center">
-				<span data-focus class="text-primary" style="font-family:var(--font-display);font-weight:600;font-size:clamp(56px,13vw,120px);line-height:1;letter-spacing:-0.02em">0%</span>
+				<span
+					data-focus
+					class="text-primary"
+					style="font-family:var(--font-display);font-weight:600;font-size:clamp(56px,13vw,120px);line-height:1;letter-spacing:-0.02em"
+					>0%</span
+				>
 				<span class="text-lead text-ink-muted-48 mt-2">{g.focus}</span>
-				<span data-focus-detail class="text-caption text-ink-muted-48 mt-1"></span>
+				<span
+					data-focus-detail
+					class="text-caption text-ink-muted-48 mt-1"></span>
 			</div>
 		</div>
 
 		<div class="mt-12 w-full max-w-240 text-center">
 			<p class="text-caption text-ink-muted-48 mb-3">{g.theSequence}</p>
-			<div data-reveal-list class="flex flex-wrap items-center justify-center gap-2"></div>
+			<div
+				data-reveal-list
+				class="flex flex-wrap items-center justify-center gap-2"
+			>
+			</div>
 		</div>
 
 		<div class="mt-12 flex items-center gap-3">
-			<button type="button" data-action="again" class="btn-primary">{g.playAgain}</button>
-			<button type="button" data-action="change-time" class="btn-ghost">{g.changeDuration}</button>
+			<button type="button" data-action="again" class="btn-primary"
+				>{g.playAgain}</button
+			>
+			<button type="button" data-action="change-time" class="btn-ghost"
+				>{g.changeDuration}</button
+			>
 		</div>
 	</section>
 </focus-game>
 
 <style>
-
 	.preset {
 		font-family: var(--font-text);
 		font-size: 14px;
@@ -169,10 +371,18 @@ const i18n = {
 		border-radius: var(--radius-pill);
 		padding: 10px 18px;
 		cursor: pointer;
-		transition: transform 0.18s ease, background-color 0.18s ease, color 0.18s ease;
+		transition:
+			transform 0.18s ease,
+			background-color 0.18s ease,
+			color 0.18s ease;
 	}
-	.preset:active { transform: scale(0.95); }
-	.preset:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
+	.preset:active {
+		transform: scale(0.95);
+	}
+	.preset:focus-visible {
+		outline: 2px solid var(--color-primary-focus);
+		outline-offset: 2px;
+	}
 	.preset[aria-pressed="true"] {
 		background-color: var(--color-primary);
 		color: var(--color-on-primary);
@@ -187,11 +397,20 @@ const i18n = {
 		font-family: var(--font-text);
 		font-weight: 500;
 		cursor: pointer;
-		transition: transform 0.18s ease, background-color 0.18s ease;
+		transition:
+			transform 0.18s ease,
+			background-color 0.18s ease;
 	}
-	.end-early-btn:hover { background-color: color-mix(in srgb, var(--color-primary) 88%, #000); }
-	.end-early-btn:active { transform: scale(0.96); }
-	.end-early-btn:focus-visible { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
+	.end-early-btn:hover {
+		background-color: color-mix(in srgb, var(--color-primary) 88%, #000);
+	}
+	.end-early-btn:active {
+		transform: scale(0.96);
+	}
+	.end-early-btn:focus-visible {
+		outline: 2px solid var(--color-primary-focus);
+		outline-offset: 2px;
+	}
 
 	.time-input {
 		width: 84px;
@@ -212,11 +431,19 @@ const i18n = {
 		appearance: textfield;
 	}
 	.time-input::-webkit-outer-spin-button,
-	.time-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-	.time-input:focus { outline: none; border-bottom-color: var(--color-primary); }
+	.time-input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+	.time-input:focus {
+		outline: none;
+		border-bottom-color: var(--color-primary);
+	}
 
-	.tp-wrapper { position: relative; display: inline-block; }
-
+	.tp-wrapper {
+		position: relative;
+		display: inline-block;
+	}
 
 	:global(.tp-panel) {
 		position: absolute;
@@ -229,7 +456,9 @@ const i18n = {
 		-webkit-backdrop-filter: blur(12px);
 		border: 1px solid var(--color-hairline);
 		border-radius: 12px;
-		box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 2px 10px rgba(0,0,0,0.04);
+		box-shadow:
+			0 10px 40px rgba(0, 0, 0, 0.08),
+			0 2px 10px rgba(0, 0, 0, 0.04);
 		z-index: 60;
 		display: flex;
 		align-items: stretch;
@@ -237,7 +466,10 @@ const i18n = {
 		gap: 0;
 		opacity: 0;
 		visibility: hidden;
-		transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+		transition:
+			opacity 0.18s ease,
+			transform 0.18s ease,
+			visibility 0.18s;
 	}
 
 	:global(.tp-panel.is-open) {
@@ -252,17 +484,15 @@ const i18n = {
 		align-items: center;
 		width: 56px;
 		height: 210px;
-		overflow-y: auto;
-		scroll-snap-type: none;
+		overflow-y: hidden;
 		scrollbar-width: none;
 		padding: 87px 0;
-		scroll-padding-top: 87px;
-		scroll-padding-bottom: 87px;
+		touch-action: none;
+		user-select: none;
 	}
-	:global(.tp-col.is-snapping) {
-		scroll-snap-type: y mandatory;
+	:global(.tp-col::-webkit-scrollbar) {
+		display: none;
 	}
-	:global(.tp-col::-webkit-scrollbar) { display: none; }
 
 	:global(.tp-sep) {
 		display: flex;
@@ -297,13 +527,20 @@ const i18n = {
 		border: 2px solid transparent;
 		border-radius: 6px;
 		cursor: pointer;
-		scroll-snap-align: center;
-		transition: border-color 0.12s ease, color 0.12s ease, font-weight 0.12s ease;
+		touch-action: none;
+		user-select: none;
+		transition:
+			border-color 0.12s ease,
+			color 0.12s ease,
+			font-weight 0.12s ease,
+			background-color 0.12s ease;
 	}
-	:global(.tp-opt:hover) { color: var(--color-ink); }
+	:global(.tp-opt:hover) {
+		color: var(--color-ink);
+	}
 	:global(.tp-opt.is-sel) {
 		border-color: transparent;
-		color: var(--color-ink);
+		color: var(--color-primary);
 		font-weight: 600;
 	}
 
@@ -317,17 +554,32 @@ const i18n = {
 		border-radius: var(--radius-md);
 		padding: 5px 12px;
 		cursor: pointer;
-		transition: transform 0.14s ease, color 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
+		transition:
+			transform 0.14s ease,
+			color 0.18s ease,
+			opacity 0.18s ease,
+			border-color 0.18s ease;
 	}
-	:global(.pool-word:hover) { border-color: var(--color-primary); }
-	:global(.pool-word:active) { transform: scale(0.95); }
-	:global(.pool-word:focus-visible) { outline: 2px solid var(--color-primary-focus); outline-offset: 2px; }
-	:global(.pool-word:disabled) { cursor: default; }
+	:global(.pool-word:hover) {
+		border-color: var(--color-primary);
+	}
+	:global(.pool-word:active) {
+		transform: scale(0.95);
+	}
+	:global(.pool-word:focus-visible) {
+		outline: 2px solid var(--color-primary-focus);
+		outline-offset: 2px;
+	}
+	:global(.pool-word:disabled) {
+		cursor: default;
+	}
 	:global(.pool-word.is-wrong) {
 		color: var(--color-ink-muted-48);
 		text-decoration: line-through;
 	}
-	:global(.pool-word.is-dim) { opacity: 0.32; }
+	:global(.pool-word.is-dim) {
+		opacity: 0.32;
+	}
 
 	:global(.chip) {
 		font-family: var(--font-text);
@@ -339,9 +591,16 @@ const i18n = {
 		border-radius: var(--radius-md);
 		color: var(--color-ink);
 	}
-	:global(.chip-correct) { color: var(--color-success); }
-	:global(.chip-wrong) { color: var(--color-ink-muted-48); text-decoration: line-through; }
-	:global(.chip-missed) { color: var(--color-ink-muted-48); }
+	:global(.chip-correct) {
+		color: var(--color-success);
+	}
+	:global(.chip-wrong) {
+		color: var(--color-ink-muted-48);
+		text-decoration: line-through;
+	}
+	:global(.chip-missed) {
+		color: var(--color-ink-muted-48);
+	}
 
 	:global(.reveal-arrow) {
 		font-family: var(--font-text);
@@ -363,22 +622,22 @@ const i18n = {
 <script>
 	import { submitBest, fetchMyBest } from "../lib/leaderboard";
 
-	const DEFAULT_WORD_INTERVAL_MS = 3000; 
-	const MIN_WORD_INTERVAL_MS = 1000; 
-	const MAX_WORD_INTERVAL_MS = 3 * 60 * 1000; 
+	const DEFAULT_WORD_INTERVAL_MS = 3000;
+	const MIN_WORD_INTERVAL_MS = 1000;
+	const MAX_WORD_INTERVAL_MS = 4 * 60 * 1000;
 	const MIN_SECONDS = 10;
-	const MAX_SECONDS = 12 * 60 * 60; 
+	const MAX_SECONDS = 12 * 60 * 60;
 
 	type Phase = "setup" | "watch" | "recall" | "result";
 
 	interface GameStrings {
 		wordSingular: string;
 		wordPlural: string;
-		leftToRecall: string; 
-		chosenSoFar: string; 
-		focusDetail: string; 
-		youTapped: string; 
-		durationTooShort: string; 
+		leftToRecall: string;
+		chosenSoFar: string;
+		focusDetail: string;
+		youTapped: string;
+		durationTooShort: string;
 		durationTooLong: string;
 		paceOutOfRange: string;
 	}
@@ -395,31 +654,33 @@ const i18n = {
 		paceOutOfRange: "Pace must be between 1 second and 3 minutes",
 	};
 
-	function fill(template: string, vars: Record<string, string | number>): string {
+	function fill(
+		template: string,
+		vars: Record<string, string | number>,
+	): string {
 		return template.replace(/\{(\w+)\}/g, (_, k) =>
 			k in vars ? String(vars[k]) : `{${k}}`,
 		);
 	}
 
 	class FocusGame extends HTMLElement {
-
 		private words: string[] = [];
 		private str: GameStrings = FALLBACK_STRINGS;
 
 		private durationSec = 30;
-		private wordIntervalMs = DEFAULT_WORD_INTERVAL_MS; 
+		private wordIntervalMs = DEFAULT_WORD_INTERVAL_MS;
 		private shown: string[] = [];
 		private guesses: string[] = [];
-		private recallIndex = 0; 
-		private wrongPick: string | null = null; 
-		private attentionSec = 0; 
+		private recallIndex = 0;
+		private wrongPick: string | null = null;
+		private attentionSec = 0;
 		private wordTimer: number | null = null;
 		private countdownTimer: number | null = null;
-		private recallTimer: number | null = null; 
+		private recallTimer: number | null = null;
 		private endsAt = 0;
 		private recallEndsAt = 0;
 		private recallStartedAt = 0;
-		private recallSec = 0; 
+		private recallSec = 0;
 
 		private bestWords = 0;
 		private bestAttentionSec = 0;
@@ -429,7 +690,8 @@ const i18n = {
 
 		private playHapticTick() {
 			try {
-				const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+				const AudioCtx =
+					window.AudioContext || (window as any).webkitAudioContext;
 				if (AudioCtx) {
 					if (!this.audioCtx) {
 						this.audioCtx = new AudioCtx();
@@ -440,7 +702,11 @@ const i18n = {
 
 					const now = this.audioCtx.currentTime;
 					const bufferSize = this.audioCtx.sampleRate * 0.008; // 8ms buffer
-					const buffer = this.audioCtx.createBuffer(1, bufferSize, this.audioCtx.sampleRate);
+					const buffer = this.audioCtx.createBuffer(
+						1,
+						bufferSize,
+						this.audioCtx.sampleRate,
+					);
 					const data = buffer.getChannelData(0);
 					for (let i = 0; i < bufferSize; i++) {
 						data[i] = Math.random() * 2 - 1;
@@ -456,7 +722,10 @@ const i18n = {
 
 					const gainNode = this.audioCtx.createGain();
 					gainNode.gain.setValueAtTime(0.05, now);
-					gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.007); // decays instantly in 7ms
+					gainNode.gain.exponentialRampToValueAtTime(
+						0.0001,
+						now + 0.007,
+					); // decays instantly in 7ms
 
 					noise.connect(filter);
 					filter.connect(gainNode);
@@ -468,7 +737,10 @@ const i18n = {
 			} catch (e) {}
 
 			try {
-				if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+				if (
+					typeof navigator !== "undefined" &&
+					typeof navigator.vibrate === "function"
+				) {
 					navigator.vibrate(8);
 				}
 			} catch (e) {}
@@ -492,13 +764,19 @@ const i18n = {
 			if (blob?.textContent) {
 				try {
 					const parsed = JSON.parse(blob.textContent);
-					if (Array.isArray(parsed)) this.words = parsed.filter((w) => typeof w === "string");
+					if (Array.isArray(parsed))
+						this.words = parsed.filter(
+							(w) => typeof w === "string",
+						);
 				} catch {}
 			}
 			const raw = this.dataset.i18n;
 			if (raw) {
 				try {
-					this.str = { ...FALLBACK_STRINGS, ...(JSON.parse(raw) as Partial<GameStrings>) };
+					this.str = {
+						...FALLBACK_STRINGS,
+						...(JSON.parse(raw) as Partial<GameStrings>),
+					};
 				} catch {}
 			}
 		}
@@ -523,7 +801,10 @@ const i18n = {
 				this.bestRecallSec = best?.recallSec ?? 0;
 			};
 			void apply();
-			window.addEventListener("focus-attention:auth-changed", () => void apply());
+			window.addEventListener(
+				"focus-attention:auth-changed",
+				() => void apply(),
+			);
 		}
 
 		private show(phase: Phase) {
@@ -531,14 +812,19 @@ const i18n = {
 				el.hidden = el.dataset.phase !== phase;
 			});
 
-			document.documentElement.style.backgroundColor = "var(--color-canvas)";
+			document.documentElement.style.backgroundColor =
+				"var(--color-canvas)";
 
-			document.documentElement.style.overflow = phase === "watch" ? "hidden" : "";
+			document.documentElement.style.overflow =
+				phase === "watch" ? "hidden" : "";
 
-			const landing = document.querySelector<HTMLElement>("[data-landing-content]");
+			const landing = document.querySelector<HTMLElement>(
+				"[data-landing-content]",
+			);
 			if (landing) landing.hidden = phase !== "setup";
 
-			const footer = document.querySelector<HTMLElement>("[data-site-footer]");
+			const footer =
+				document.querySelector<HTMLElement>("[data-site-footer]");
 			if (footer) footer.hidden = phase !== "setup";
 		}
 
@@ -552,36 +838,50 @@ const i18n = {
 				btn.addEventListener("click", () => {
 					const secs = Number(btn.dataset.seconds);
 					this.setDurationInputs(secs);
-					presets.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+					presets.forEach((b) =>
+						b.setAttribute("aria-pressed", String(b === btn)),
+					);
 					this.syncDurationHint();
 				});
 			});
 
-			this.querySelectorAll<HTMLInputElement>(".time-input[data-unit]").forEach((input) => {
+			this.querySelectorAll<HTMLInputElement>(
+				".time-input[data-unit]",
+			).forEach((input) => {
 				input.addEventListener("input", () => {
-					presets.forEach((b) => b.setAttribute("aria-pressed", "false"));
+					presets.forEach((b) =>
+						b.setAttribute("aria-pressed", "false"),
+					);
 					this.syncDurationHint();
 				});
 			});
 
-			this.querySelectorAll<HTMLInputElement>(".time-input[data-pace-unit]").forEach((input) => {
+			this.querySelectorAll<HTMLInputElement>(
+				".time-input[data-pace-unit]",
+			).forEach((input) => {
 				input.addEventListener("input", () => this.syncPaceHint());
 			});
 
-			this.q<HTMLButtonElement>('[data-action="start"]').addEventListener("click", () => this.startWatch());
+			this.q<HTMLButtonElement>('[data-action="start"]').addEventListener(
+				"click",
+				() => this.startWatch(),
+			);
 		}
 
 		private readPaceInputs(): number {
 			const get = (unit: string) =>
-				Number(this.q<HTMLInputElement>(`.time-input[data-pace-unit="${unit}"]`).value) || 0;
+				Number(
+					this.q<HTMLInputElement>(
+						`.time-input[data-pace-unit="${unit}"]`,
+					).value,
+				) || 0;
 			return get("minutes") * 60 + get("seconds");
 		}
 
 		private readWordPaceMs(): number {
 			const secs = this.readPaceInputs();
 			if (secs <= 0) return DEFAULT_WORD_INTERVAL_MS;
-			const ms = secs * 1000;
-			return Math.min(MAX_WORD_INTERVAL_MS, Math.max(MIN_WORD_INTERVAL_MS, ms));
+			return Math.max(MIN_WORD_INTERVAL_MS, secs * 1000);
 		}
 
 		private durationValid(): boolean {
@@ -591,7 +891,7 @@ const i18n = {
 
 		private paceValid(): boolean {
 			const ms = this.readPaceInputs() * 1000;
-			return ms >= MIN_WORD_INTERVAL_MS && ms <= MAX_WORD_INTERVAL_MS;
+			return ms >= MIN_WORD_INTERVAL_MS;
 		}
 
 		private refreshStartButton() {
@@ -601,10 +901,7 @@ const i18n = {
 
 		private syncPaceHint() {
 			const hint = this.q<HTMLElement>("[data-pace-hint]");
-			if (!this.paceValid()) {
-				hint.textContent = this.str.paceOutOfRange;
-				hint.style.color = "var(--color-primary)";
-			} else {
+			if (hint) {
 				hint.textContent = "";
 			}
 			this.refreshStartButton();
@@ -612,7 +909,10 @@ const i18n = {
 
 		private readDurationInputs(): number {
 			const get = (unit: string) =>
-				Number(this.q<HTMLInputElement>(`.time-input[data-unit="${unit}"]`).value) || 0;
+				Number(
+					this.q<HTMLInputElement>(`.time-input[data-unit="${unit}"]`)
+						.value,
+				) || 0;
 			return get("hours") * 3600 + get("minutes") * 60 + get("seconds");
 		}
 
@@ -620,195 +920,343 @@ const i18n = {
 			const h = Math.floor(totalSec / 3600);
 			const m = Math.floor((totalSec % 3600) / 60);
 			const s = totalSec % 60;
-			this.q<HTMLInputElement>('.time-input[data-unit="hours"]').value = String(h);
-			this.q<HTMLInputElement>('.time-input[data-unit="minutes"]').value = String(m);
-			this.q<HTMLInputElement>('.time-input[data-unit="seconds"]').value = String(s);
+			this.q<HTMLInputElement>('.time-input[data-unit="hours"]').value =
+				String(h);
+			this.q<HTMLInputElement>('.time-input[data-unit="minutes"]').value =
+				String(m);
+			this.q<HTMLInputElement>('.time-input[data-unit="seconds"]').value =
+				String(s);
 			this.syncPanelsFromInputs();
 		}
 
 		private initTimePickers() {
-			const COPIES = 3; // render 3 copies for infinite illusion
+			const COPIES = 3;
 
-			this.querySelectorAll<HTMLElement>(".tp-wrapper").forEach((wrapper) => {
-				const inputs = Array.from(wrapper.querySelectorAll<HTMLInputElement>(".time-input"));
-				const panel = document.createElement("div");
-				panel.className = "tp-panel";
-				wrapper.appendChild(panel);
+			this.querySelectorAll<HTMLElement>(".tp-wrapper").forEach(
+				(wrapper) => {
+					const inputs = Array.from(
+						wrapper.querySelectorAll<HTMLInputElement>(
+							".time-input",
+						),
+					);
+					const panel = document.createElement("div");
+					panel.className = "tp-panel";
+					wrapper.appendChild(panel);
 
-				inputs.forEach((input, idx) => {
-					if (idx > 0) {
-						const sep = document.createElement("span");
-						sep.className = "tp-sep";
-						panel.appendChild(sep);
-					}
-
-					const col = document.createElement("div");
-					col.className = "tp-col";
-					panel.appendChild(col);
-
-					const mn = Number(input.getAttribute("min")) || 0;
-					const mx = Number(input.getAttribute("max")) || 59;
-					const range = mx - mn + 1;
-					const cur = Number(input.value) || 0;
-					const colAny = col as any;
-					colAny._lastVal = cur;
-
-					// Create 3 copies of the range for infinite scroll
-					for (let copy = 0; copy < COPIES; copy++) {
-						for (let i = mn; i <= mx; i++) {
-							const btn = document.createElement("button");
-							btn.type = "button";
-							btn.className = `tp-opt${i === cur ? " is-sel" : ""}`;
-							btn.dataset.val = String(i);
-							btn.dataset.copy = String(copy);
-							btn.textContent = String(i).padStart(2, "0");
-							col.appendChild(btn);
-
-							btn.addEventListener("click", (e) => {
-								e.stopPropagation();
-								input.value = String(i);
-								input.dispatchEvent(new Event("input", { bubbles: true }));
-								this.markCol(col, i);
-								this.scrollToSel(col, true);
-							});
-						}
-					}
-
-					// Recenter: jump scroll to middle copy without animation
-					const recenter = () => {
-						const oneSetH = range * 36; // each option is 36px tall
-						const midStart = oneSetH;
-						const midEnd = oneSetH * 2 - 36;
-						if (col.scrollTop < midStart - 2 || col.scrollTop > midEnd + 2) {
-							// Jump to equivalent position in middle copy
-							const offset = ((col.scrollTop % oneSetH) + oneSetH) % oneSetH;
-							const targetTop = oneSetH + offset;
-
-							window.clearTimeout(colAny._progTimer);
-							window.clearTimeout(colAny._valTimer);
-
-							col.dataset.programmatic = "true";
-							col.classList.remove("is-snapping");
-
-							const finishRecenter = () => {
-								window.clearTimeout(colAny._progTimer);
-								col.removeEventListener("scrollend", onRecenterScrollEnd);
-								col.classList.add("is-snapping");
-								col.removeAttribute("data-programmatic");
-								this.updateCol3D(col);
-							};
-
-							function onRecenterScrollEnd() {
-								finishRecenter();
-							}
-
-							col.addEventListener("scrollend", onRecenterScrollEnd, { once: true });
-							col.scrollTop = targetTop;
-							colAny._progTimer = window.setTimeout(finishRecenter, 100);
-						}
-					};
-
-					input.addEventListener("wheel", (e) => {
-						e.preventDefault();
-						let v = Number(input.value) || 0;
-						// Wrap around
-						if (e.deltaY < 0) {
-							v = v >= mx ? mn : v + 1;
-						} else {
-							v = v <= mn ? mx : v - 1;
-						}
-						input.value = String(v);
-						input.dispatchEvent(new Event("input", { bubbles: true }));
-						this.markCol(col, v);
-						if (panel.classList.contains("is-open")) this.scrollToSel(col, true);
-					}, { passive: false });
-
-					const enableSnap = () => {
-						col.classList.add("is-snapping");
-					};
-					col.addEventListener("pointerdown", enableSnap, { passive: true });
-					col.addEventListener("wheel", enableSnap, { passive: true });
-
-					col.addEventListener("scroll", () => {
-						this.updateCol3D(col);
-						if (!panel.classList.contains("is-open")) return;
-						if (col.dataset.programmatic === "true") {
-							return;
+					inputs.forEach((input, idx) => {
+						if (idx > 0) {
+							const sep = document.createElement("span");
+							sep.className = "tp-sep";
+							panel.appendChild(sep);
 						}
 
-						const mid = col.scrollTop + 105;
-						let best: HTMLButtonElement | null = null;
-						let bestD = Infinity;
-						col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) => {
-							const d = Math.abs(o.offsetTop + 18 - mid);
-							if (d < bestD) { bestD = d; best = o; }
-						});
-						if (best) {
-							col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) =>
-								o.classList.toggle("is-sel", Number(o.dataset.val) === Number(best!.dataset.val)));
-							
-							const sv = Number((best as HTMLButtonElement).dataset.val);
-							if (sv !== colAny._lastVal) {
-								colAny._lastVal = sv;
-								this.playHapticTick();
+						const col = document.createElement("div");
+						col.className = "tp-col";
+						panel.appendChild(col);
+
+						const mn = Number(input.getAttribute("min")) || 0;
+						const mx = Number(input.getAttribute("max")) || 59;
+						const range = mx - mn + 1;
+						const cur = Number(input.value) || 0;
+						const colAny = col as any;
+						colAny._lastVal = cur;
+						colAny._animId = 0;
+						colAny._isDragging = false;
+						colAny._dragDist = 0;
+
+						for (let copy = 0; copy < COPIES; copy++) {
+							for (let i = mn; i <= mx; i++) {
+								const btn = document.createElement("button");
+								btn.type = "button";
+								btn.className = `tp-opt${i === cur ? " is-sel" : ""}`;
+								btn.dataset.val = String(i);
+								btn.dataset.copy = String(copy);
+								btn.textContent = String(i).padStart(2, "0");
+								col.appendChild(btn);
+
+								btn.addEventListener("click", (e) => {
+									if (colAny._dragDist > 8) {
+										e.preventDefault();
+										e.stopPropagation();
+										return;
+									}
+									e.stopPropagation();
+									input.value = String(i);
+									input.dispatchEvent(
+										new Event("input", { bubbles: true }),
+									);
+									this.markCol(col, i);
+									this.scrollToSel(col, true);
+								});
 							}
 						}
-						window.clearTimeout(colAny._valTimer);
-						colAny._valTimer = window.setTimeout(() => {
-							if (best) {
-								const sv = Number((best as HTMLButtonElement).dataset.val);
-								if (Number(input.value) !== sv) {
-									input.value = String(sv);
-									input.dispatchEvent(new Event("input", { bubbles: true }));
+
+						const snapToClosest = () => {
+							if (colAny._isDragging) return;
+							const mid = col.scrollTop + 105;
+							let best: HTMLButtonElement | null = null;
+							let bestD = Infinity;
+							const opts =
+								col.querySelectorAll<HTMLButtonElement>(
+									".tp-opt",
+								);
+							for (const o of opts) {
+								const d = Math.abs(o.offsetTop + 18 - mid);
+								if (d < bestD) {
+									bestD = d;
+									best = o;
 								}
 							}
-							recenter();
-						}, 200);
-					});
+							if (best) {
+								const targetTop = best.offsetTop - 87;
+								let start = col.scrollTop;
+								const diff = targetTop - start;
+								let snapStart: number | null = null;
+								const duration = 240;
 
-					input.addEventListener("keydown", (e) => {
-						col.classList.add("is-snapping");
-						let v = Number(input.value) || 0;
-						if (e.key === "ArrowUp") {
-							e.preventDefault();
-							v = v >= mx ? mn : v + 1;
-						} else if (e.key === "ArrowDown") {
-							e.preventDefault();
-							v = v <= mn ? mx : v - 1;
-						} else if (e.key === "Escape") {
-							panel.classList.remove("is-open");
-							return;
-						} else return;
-						input.value = String(v);
-						input.dispatchEvent(new Event("input", { bubbles: true }));
-						this.markCol(col, v);
-						if (panel.classList.contains("is-open")) this.scrollToSel(col, true);
-					});
-				});
+								const snapTick = (now: number) => {
+									if (colAny._isDragging) return;
+									if (!snapStart) snapStart = now;
+									const elapsed = now - snapStart;
+									const progress = Math.min(
+										1,
+										elapsed / duration,
+									);
+									const ease = 1 - Math.pow(1 - progress, 3); // cubic ease out
+									col.scrollTop = start + diff * ease;
 
-				const trigger = wrapper.querySelector("[data-tp-trigger]") as HTMLElement;
-				trigger.addEventListener("click", (e) => {
-					e.stopPropagation();
-					const open = panel.classList.contains("is-open");
-					this.querySelectorAll(".tp-panel.is-open").forEach((p) => {
-						p.classList.remove("is-open");
-						p.querySelectorAll(".tp-col").forEach((c) => c.classList.remove("is-snapping"));
-					});
-					if (!open) {
-						panel.classList.add("is-open");
-						const cols = Array.from(panel.querySelectorAll<HTMLElement>(".tp-col"));
-						cols.forEach((c) => {
-							this.scrollToSel(c);
+									if (progress < 1) {
+										colAny._animId =
+											requestAnimationFrame(snapTick);
+									} else {
+										col.scrollTop = targetTop;
+										const sv = Number(best!.dataset.val);
+										if (Number(input.value) !== sv) {
+											input.value = String(sv);
+											input.dispatchEvent(
+												new Event("input", {
+													bubbles: true,
+												}),
+											);
+										}
+										// Recenter
+										const oneSetH = range * 36;
+										const offset =
+											((col.scrollTop % oneSetH) +
+												oneSetH) %
+											oneSetH;
+										col.scrollTop = oneSetH + offset;
+										this.updateCol3D(col);
+									}
+								};
+								colAny._animId =
+									requestAnimationFrame(snapTick);
+							}
+						};
+
+						const animateMomentum = (v: number) => {
+							let vel = v;
+							const friction = 0.95;
+
+							const tick = () => {
+								if (colAny._isDragging) return;
+								if (Math.abs(vel) > 0.05) {
+									col.scrollTop += vel * 16.67;
+									vel *= friction;
+
+									const oneSetH = range * 36;
+									if (col.scrollTop < oneSetH) {
+										col.scrollTop += oneSetH;
+									} else if (col.scrollTop > oneSetH * 2) {
+										col.scrollTop -= oneSetH;
+									}
+									colAny._animId =
+										requestAnimationFrame(tick);
+								} else {
+									snapToClosest();
+								}
+							};
+							colAny._animId = requestAnimationFrame(tick);
+						};
+
+						let startY = 0;
+						let startScrollTop = 0;
+						let startTime = 0;
+						let track: { y: number; t: number }[] = [];
+
+						col.addEventListener("pointerdown", (e) => {
+							if (e.button !== 0 && e.pointerType === "mouse")
+								return;
+							cancelAnimationFrame(colAny._animId);
+							col.setPointerCapture(e.pointerId);
+							colAny._isDragging = true;
+							colAny._dragDist = 0;
+							startY = e.clientY;
+							startScrollTop = col.scrollTop;
+							startTime = performance.now();
+							track = [{ y: e.clientY, t: startTime }];
 						});
-					}
-				});
-			});
+
+						col.addEventListener("pointermove", (e) => {
+							if (!colAny._isDragging) return;
+							const y = e.clientY;
+							const t = performance.now();
+							const dy = y - startY;
+							colAny._dragDist += Math.abs(
+								dy - (track[track.length - 1].y - startY),
+							);
+							col.scrollTop = startScrollTop - dy;
+							track.push({ y, t });
+							while (track.length > 1 && t - track[0].t > 100) {
+								track.shift();
+							}
+						});
+
+						const handlePointerUp = (e: PointerEvent) => {
+							if (!colAny._isDragging) return;
+							colAny._isDragging = false;
+							col.releasePointerCapture(e.pointerId);
+
+							const t = performance.now();
+							const y = e.clientY;
+							let velocity = 0;
+							if (track.length >= 2) {
+								const dt = t - track[0].t;
+								const dy = y - track[0].y;
+								if (dt > 10) {
+									velocity = -dy / dt;
+								}
+							}
+							velocity = Math.max(-2.5, Math.min(2.5, velocity));
+							if (Math.abs(velocity) > 0.15) {
+								animateMomentum(velocity);
+							} else {
+								snapToClosest();
+							}
+						};
+
+						col.addEventListener("pointerup", handlePointerUp);
+						col.addEventListener("pointercancel", handlePointerUp);
+
+						col.addEventListener(
+							"wheel",
+							(e) => {
+								e.preventDefault();
+								cancelAnimationFrame(colAny._animId);
+								col.scrollTop += e.deltaY;
+
+								const oneSetH = range * 36;
+								if (col.scrollTop < oneSetH)
+									col.scrollTop += oneSetH;
+								else if (col.scrollTop > oneSetH * 2)
+									col.scrollTop -= oneSetH;
+
+								this.updateCol3D(col);
+
+								window.clearTimeout(colAny._wheelSnapTimer);
+								colAny._wheelSnapTimer = window.setTimeout(
+									() => {
+										snapToClosest();
+									},
+									120,
+								);
+							},
+							{ passive: false },
+						);
+
+						col.addEventListener("scroll", () => {
+							this.updateCol3D(col);
+							if (!panel.classList.contains("is-open")) return;
+
+							const mid = col.scrollTop + 105;
+							let best: HTMLButtonElement | null = null;
+							let bestD = Infinity;
+							const opts =
+								col.querySelectorAll<HTMLButtonElement>(
+									".tp-opt",
+								);
+							for (const o of opts) {
+								const d = Math.abs(o.offsetTop + 18 - mid);
+								if (d < bestD) {
+									bestD = d;
+									best = o;
+								}
+							}
+							if (best) {
+								col.querySelectorAll<HTMLButtonElement>(
+									".tp-opt",
+								).forEach((o) =>
+									o.classList.toggle(
+										"is-sel",
+										Number(o.dataset.val) ===
+											Number(best!.dataset.val),
+									),
+								);
+
+								const sv = Number(best.dataset.val);
+								if (sv !== colAny._lastVal) {
+									colAny._lastVal = sv;
+									this.playHapticTick();
+								}
+							}
+						});
+
+						input.addEventListener("keydown", (e) => {
+							let v = Number(input.value) || 0;
+							if (e.key === "ArrowUp") {
+								e.preventDefault();
+								v = v >= mx ? mn : v + 1;
+							} else if (e.key === "ArrowDown") {
+								e.preventDefault();
+								v = v <= mn ? mx : v - 1;
+							} else if (e.key === "Escape") {
+								panel.classList.remove("is-open");
+								return;
+							} else return;
+							input.value = String(v);
+							input.dispatchEvent(
+								new Event("input", { bubbles: true }),
+							);
+							this.markCol(col, v);
+							if (panel.classList.contains("is-open"))
+								this.scrollToSel(col, true);
+						});
+					});
+
+					const trigger = wrapper.querySelector(
+						"[data-tp-trigger]",
+					) as HTMLElement;
+					trigger.addEventListener("click", (e) => {
+						e.stopPropagation();
+						const open = panel.classList.contains("is-open");
+						this.querySelectorAll(".tp-panel.is-open").forEach(
+							(p) => {
+								p.classList.remove("is-open");
+								p.querySelectorAll(".tp-col").forEach((c) =>
+									cancelAnimationFrame((c as any)._animId),
+								);
+							},
+						);
+						if (!open) {
+							panel.classList.add("is-open");
+							const cols = Array.from(
+								panel.querySelectorAll<HTMLElement>(".tp-col"),
+							);
+							cols.forEach((c) => {
+								this.scrollToSel(c);
+							});
+						}
+					});
+				},
+			);
 
 			document.addEventListener("click", (e) => {
 				if (!(e.target as HTMLElement).closest(".tp-wrapper")) {
 					this.querySelectorAll(".tp-panel.is-open").forEach((p) => {
 						p.classList.remove("is-open");
-						p.querySelectorAll(".tp-col").forEach((c) => c.classList.remove("is-snapping"));
+						p.querySelectorAll(".tp-col").forEach((c) =>
+							cancelAnimationFrame((c as any)._animId),
+						);
 					});
 				}
 			});
@@ -817,26 +1265,41 @@ const i18n = {
 		private updateCol3D(col: HTMLElement) {
 			const mid = col.scrollTop + 105;
 			col.querySelectorAll<HTMLElement>(".tp-opt").forEach((o) => {
-				const dist = (o.offsetTop + 18) - mid;
+				const dist = o.offsetTop + 18 - mid;
 				const ratio = Math.max(-1.5, Math.min(1.5, dist / 105));
-				
-				// Angle from -60deg to +60deg (in radians)
-				const theta = ratio * (Math.PI / 3);
-				
-				// 2D cylinder projection mimicking 3D rotateX and translateZ
-				const scaleY = Math.cos(theta); // Vertical height compression based on angle
-				const scaleX = 1 - Math.abs(ratio) * 0.15; // Horizontal width scale
-				const translateY = 105 * (Math.sin(theta) - theta); // Circular vertical shift
-				
-				const opacity = Math.max(0.15, 1 - Math.abs(ratio) * 0.65);
+
+				// Curve the cylinder more sharply: angle from -75deg to +75deg (in radians)
+				const maxAngleRad = (75 * Math.PI) / 180;
+				const theta = ratio * maxAngleRad;
+
+				const scaleY = Math.cos(theta);
+
+				// Hide elements on the back / extremes of the cylinder to prevent overlap pileups
+				if (scaleY <= 0.08) {
+					o.style.opacity = "0";
+					o.style.transform = "scale(0)";
+					o.style.pointerEvents = "none";
+					return;
+				}
+
+				// Radius of the cylinder
+				const R = 90;
+				const scaleX = 1 - Math.abs(ratio) * 0.15;
+				const translateY = R * Math.sin(theta) - dist;
+
+				// Natural cosine-based Lambertian opacity fading
+				const opacity = scaleY * 1.0;
+
 				o.style.transform = `translateY(${translateY}px) scale(${scaleX}, ${scaleY})`;
 				o.style.opacity = String(opacity);
+				o.style.pointerEvents = "";
 			});
 		}
 
 		private markCol(col: HTMLElement, val: number) {
 			col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) =>
-				o.classList.toggle("is-sel", Number(o.dataset.val) === val));
+				o.classList.toggle("is-sel", Number(o.dataset.val) === val),
+			);
 			this.updateCol3D(col);
 		}
 
@@ -845,8 +1308,9 @@ const i18n = {
 			if (!panel || !panel.classList.contains("is-open")) {
 				return;
 			}
-			const sel = Array.from(col.querySelectorAll<HTMLElement>(".tp-opt.is-sel"))
-				.find((o) => o.dataset.copy === "1");
+			const sel = Array.from(
+				col.querySelectorAll<HTMLElement>(".tp-opt.is-sel"),
+			).find((o) => o.dataset.copy === "1");
 			if (sel) {
 				if (col.scrollHeight < 300) {
 					requestAnimationFrame(() => this.scrollToSel(col, smooth));
@@ -854,58 +1318,56 @@ const i18n = {
 				}
 				const targetTop = sel.offsetTop - 87;
 				const colAny = col as any;
-
-				window.clearTimeout(colAny._progTimer);
-				window.clearTimeout(colAny._valTimer);
-
-				if (Math.abs(col.scrollTop - targetTop) < 1) {
-					col.scrollTop = targetTop;
-					this.updateCol3D(col);
-					col.classList.add("is-snapping");
-					col.removeAttribute("data-programmatic");
-					return;
-				}
-
-				col.dataset.programmatic = "true";
-				col.classList.remove("is-snapping");
-
-				const finishScroll = () => {
-					window.clearTimeout(colAny._progTimer);
-					col.removeEventListener("scrollend", onScrollEnd);
-					col.classList.add("is-snapping");
-					col.removeAttribute("data-programmatic");
-					this.updateCol3D(col);
-				};
-
-				function onScrollEnd() {
-					finishScroll();
-				}
-
-				col.addEventListener("scrollend", onScrollEnd, { once: true });
+				cancelAnimationFrame(colAny._animId);
 
 				if (smooth) {
-					col.scrollTo({ top: targetTop, behavior: "smooth" });
-					colAny._progTimer = window.setTimeout(finishScroll, 600);
+					let start = col.scrollTop;
+					const diff = targetTop - start;
+					let startTime: number | null = null;
+					const duration = 240;
+
+					const snapTick = (now: number) => {
+						if (colAny._isDragging) return;
+						if (!startTime) startTime = now;
+						const elapsed = now - startTime;
+						const progress = Math.min(1, elapsed / duration);
+						const ease = 1 - Math.pow(1 - progress, 3); // cubic ease out
+						col.scrollTop = start + diff * ease;
+
+						if (progress < 1) {
+							colAny._animId = requestAnimationFrame(snapTick);
+						} else {
+							col.scrollTop = targetTop;
+							this.updateCol3D(col);
+						}
+					};
+					colAny._animId = requestAnimationFrame(snapTick);
 				} else {
 					col.scrollTop = targetTop;
-					colAny._progTimer = window.setTimeout(finishScroll, 100);
+					this.updateCol3D(col);
 				}
 			}
 		}
 
 		private syncPanelsFromInputs() {
-			this.querySelectorAll<HTMLInputElement>(".time-input").forEach((input) => {
-				const w = input.closest(".tp-wrapper");
-				if (!w) return;
-				const cols = Array.from(w.querySelectorAll<HTMLElement>(".tp-col"));
-				const inputs = Array.from(w.querySelectorAll<HTMLInputElement>(".time-input"));
-				const i = inputs.indexOf(input);
-				if (i !== -1 && cols[i]) {
-					this.markCol(cols[i], Number(input.value) || 0);
-					(cols[i] as any)._lastVal = Number(input.value) || 0;
-					this.scrollToSel(cols[i], false);
-				}
-			});
+			this.querySelectorAll<HTMLInputElement>(".time-input").forEach(
+				(input) => {
+					const w = input.closest(".tp-wrapper");
+					if (!w) return;
+					const cols = Array.from(
+						w.querySelectorAll<HTMLElement>(".tp-col"),
+					);
+					const inputs = Array.from(
+						w.querySelectorAll<HTMLInputElement>(".time-input"),
+					);
+					const i = inputs.indexOf(input);
+					if (i !== -1 && cols[i]) {
+						this.markCol(cols[i], Number(input.value) || 0);
+						(cols[i] as any)._lastVal = Number(input.value) || 0;
+						this.scrollToSel(cols[i], false);
+					}
+				},
+			);
 		}
 
 		private clampDuration(): number {
@@ -918,7 +1380,9 @@ const i18n = {
 			const secs = this.readDurationInputs();
 			const hint = this.q<HTMLElement>("[data-duration-hint]");
 			if (secs < MIN_SECONDS) {
-				hint.textContent = fill(this.str.durationTooShort, { n: MIN_SECONDS });
+				hint.textContent = fill(this.str.durationTooShort, {
+					n: MIN_SECONDS,
+				});
 				hint.style.color = "var(--color-primary)";
 			} else if (secs > MAX_SECONDS) {
 				hint.textContent = this.str.durationTooLong;
@@ -930,7 +1394,9 @@ const i18n = {
 		}
 
 		private bindWatch() {
-			this.q<HTMLButtonElement>('[data-action="end-early"]').addEventListener("click", () => this.startRecall());
+			this.q<HTMLButtonElement>(
+				'[data-action="end-early"]',
+			).addEventListener("click", () => this.startRecall());
 		}
 
 		private startWatch() {
@@ -946,12 +1412,15 @@ const i18n = {
 			const wordEl = this.q<HTMLElement>("[data-word]");
 			const seenEl = this.q<HTMLElement>("[data-seen-count]");
 
-			const targetWords = Math.max(1, Math.floor(this.durationSec / (this.wordIntervalMs / 1000)));
+			const targetWords = Math.max(
+				1,
+				Math.floor(this.durationSec / (this.wordIntervalMs / 1000)),
+			);
 
 			const pushWord = () => {
-
 				if (this.shown.length >= targetWords) {
-					if (this.wordTimer !== null) window.clearInterval(this.wordTimer);
+					if (this.wordTimer !== null)
+						window.clearInterval(this.wordTimer);
 					this.wordTimer = null;
 					return;
 				}
@@ -959,22 +1428,30 @@ const i18n = {
 				this.shown.push(next);
 				wordEl.textContent = next;
 				wordEl.animate(
-					[{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "translateY(0)" }],
+					[
+						{ opacity: 0, transform: "translateY(8px)" },
+						{ opacity: 1, transform: "translateY(0)" },
+					],
 					{ duration: 280, easing: "ease-out" },
 				);
 				seenEl.textContent = `${this.shown.length} ${this.shown.length === 1 ? this.str.wordSingular : this.str.wordPlural}`;
 			};
 
-			pushWord(); 
+			pushWord();
 			this.wordTimer = window.setInterval(pushWord, this.wordIntervalMs);
 
 			const progressEl = this.q<HTMLElement>("[data-progress]");
 			const clockEl = this.q<HTMLElement>("[data-clock]");
 			const tick = () => {
-				const remainingMs = Math.max(0, this.endsAt - performance.now());
+				const remainingMs = Math.max(
+					0,
+					this.endsAt - performance.now(),
+				);
 				const elapsed = this.durationSec * 1000 - remainingMs;
 				progressEl.style.width = `${Math.min(100, (elapsed / (this.durationSec * 1000)) * 100)}%`;
-				clockEl.textContent = this.formatClock(Math.ceil(remainingMs / 1000));
+				clockEl.textContent = this.formatClock(
+					Math.ceil(remainingMs / 1000),
+				);
 				if (remainingMs <= 0) this.startRecall();
 			};
 			tick();
@@ -983,24 +1460,31 @@ const i18n = {
 
 		private stopWatchTimers() {
 			if (this.wordTimer !== null) window.clearInterval(this.wordTimer);
-			if (this.countdownTimer !== null) window.clearInterval(this.countdownTimer);
+			if (this.countdownTimer !== null)
+				window.clearInterval(this.countdownTimer);
 			this.wordTimer = null;
 			this.countdownTimer = null;
 		}
 
 		private bindRecall() {
-
-			this.q<HTMLElement>("[data-pool]").addEventListener("click", (e) => {
-				const tile = (e.target as HTMLElement).closest<HTMLButtonElement>(".pool-word");
-				if (tile && !tile.disabled) this.pick(tile);
-			});
+			this.q<HTMLElement>("[data-pool]").addEventListener(
+				"click",
+				(e) => {
+					const tile = (
+						e.target as HTMLElement
+					).closest<HTMLButtonElement>(".pool-word");
+					if (tile && !tile.disabled) this.pick(tile);
+				},
+			);
 		}
 
 		private startRecall() {
 			this.stopWatchTimers();
 
 			const remainingMs = Math.max(0, this.endsAt - performance.now());
-			this.attentionSec = Math.round(this.durationSec - remainingMs / 1000);
+			this.attentionSec = Math.round(
+				this.durationSec - remainingMs / 1000,
+			);
 			this.guesses = [];
 			this.recallIndex = 0;
 			this.wrongPick = null;
@@ -1017,13 +1501,16 @@ const i18n = {
 			this.recallEndsAt = this.recallStartedAt + recallMs;
 			const clockEl = this.q<HTMLElement>("[data-recall-clock]");
 			const tick = () => {
-				const leftMs = Math.max(0, this.recallEndsAt - performance.now());
+				const leftMs = Math.max(
+					0,
+					this.recallEndsAt - performance.now(),
+				);
 				clockEl.textContent = fill(this.str.leftToRecall, {
 					clock: this.formatClock(Math.ceil(leftMs / 1000)),
 				});
 				if (leftMs <= 0) {
 					this.stopRecallTimer();
-					this.startResult(); 
+					this.startResult();
 				}
 			};
 			tick();
@@ -1031,7 +1518,8 @@ const i18n = {
 		}
 
 		private stopRecallTimer() {
-			if (this.recallTimer !== null) window.clearInterval(this.recallTimer);
+			if (this.recallTimer !== null)
+				window.clearInterval(this.recallTimer);
 			this.recallTimer = null;
 		}
 
@@ -1056,18 +1544,16 @@ const i18n = {
 			const target = this.shown[this.recallIndex];
 
 			if (word === target) {
-
 				this.guesses.push(word);
 				this.recallIndex++;
 				this.appendRebuilt(word);
 				tile.remove();
 				if (this.recallIndex >= this.shown.length) {
-					this.startResult(); 
+					this.startResult();
 					return;
 				}
 				this.updateRecallProgress();
 			} else {
-
 				this.stopRecallTimer();
 				tile.disabled = true;
 				tile.classList.add("is-wrong");
@@ -1094,52 +1580,67 @@ const i18n = {
 		}
 
 		private lockPool() {
-			this.querySelectorAll<HTMLButtonElement>(".pool-word").forEach((b) => {
-				if (!b.disabled) {
-					b.disabled = true;
-					b.classList.add("is-dim");
-				}
-			});
+			this.querySelectorAll<HTMLButtonElement>(".pool-word").forEach(
+				(b) => {
+					if (!b.disabled) {
+						b.disabled = true;
+						b.classList.add("is-dim");
+					}
+				},
+			);
 		}
 
 		private updateRecallProgress() {
-			this.q<HTMLElement>("[data-chosen-caption]").textContent = fill(this.str.chosenSoFar, {
-				n: this.guesses.length,
-				m: this.shown.length,
-			});
+			this.q<HTMLElement>("[data-chosen-caption]").textContent = fill(
+				this.str.chosenSoFar,
+				{
+					n: this.guesses.length,
+					m: this.shown.length,
+				},
+			);
 		}
 
 		private startResult() {
 			this.stopRecallTimer();
 			this.show("result");
 
-			this.recallSec = Math.max(0, Math.round((performance.now() - this.recallStartedAt) / 1000));
+			this.recallSec = Math.max(
+				0,
+				Math.round((performance.now() - this.recallStartedAt) / 1000),
+			);
 
 			const span = this.guesses.length;
 			const total = this.shown.length;
 
-			this.q<HTMLElement>("[data-attention]").textContent = this.formatClock(this.attentionSec);
+			this.q<HTMLElement>("[data-attention]").textContent =
+				this.formatClock(this.attentionSec);
 
 			const focusPct = total === 0 ? 0 : Math.round((span / total) * 100);
 			this.q<HTMLElement>("[data-focus]").textContent = `${focusPct}%`;
-			this.q<HTMLElement>("[data-focus-detail]").textContent = fill(this.str.focusDetail, {
-				span,
-				total,
-				wordUnit: total === 1 ? this.str.wordSingular : this.str.wordPlural,
-			});
+			this.q<HTMLElement>("[data-focus-detail]").textContent = fill(
+				this.str.focusDetail,
+				{
+					span,
+					total,
+					wordUnit:
+						total === 1
+							? this.str.wordSingular
+							: this.str.wordPlural,
+				},
+			);
 
 			this.updateBest(span);
 			this.renderReveal();
 		}
 
 		private updateBest(span: number) {
-
 			const isBetter =
 				span > this.bestWords ||
-				(this.bestWords > 0 && span === this.bestWords && (
-					this.attentionSec > this.bestAttentionSec ||
-					(this.attentionSec === this.bestAttentionSec && this.recallSec < this.bestRecallSec)
-				));
+				(this.bestWords > 0 &&
+					span === this.bestWords &&
+					(this.attentionSec > this.bestAttentionSec ||
+						(this.attentionSec === this.bestAttentionSec &&
+							this.recallSec < this.bestRecallSec)));
 			if (isBetter) {
 				this.bestWords = span;
 				this.bestAttentionSec = this.attentionSec;
@@ -1151,7 +1652,9 @@ const i18n = {
 						attentionSec: this.bestAttentionSec,
 						recallSec: this.bestRecallSec,
 					}).then(() => {
-						window.dispatchEvent(new CustomEvent("focus-attention:best-updated"));
+						window.dispatchEvent(
+							new CustomEvent("focus-attention:best-updated"),
+						);
 					});
 				}
 			}
@@ -1162,7 +1665,6 @@ const i18n = {
 			list.innerHTML = "";
 			const span = this.guesses.length;
 			this.shown.forEach((word, i) => {
-
 				if (i > 0) {
 					const arrow = document.createElement("span");
 					arrow.className = "reveal-arrow";
@@ -1173,14 +1675,13 @@ const i18n = {
 				const chip = document.createElement("span");
 				chip.textContent = word;
 				if (i < span) {
-
 					chip.className = "chip chip-correct";
 				} else if (i === span && this.wrongPick) {
-
 					chip.className = "chip chip-wrong";
-					chip.title = fill(this.str.youTapped, { word: this.wrongPick });
+					chip.title = fill(this.str.youTapped, {
+						word: this.wrongPick,
+					});
 				} else {
-
 					chip.className = "chip chip-missed";
 				}
 				list.appendChild(chip);
@@ -1188,15 +1689,21 @@ const i18n = {
 		}
 
 		private bindResult() {
-			this.q<HTMLButtonElement>('[data-action="again"]').addEventListener("click", () => this.startWatch());
-			this.q<HTMLButtonElement>('[data-action="change-time"]').addEventListener("click", () => this.show("setup"));
+			this.q<HTMLButtonElement>('[data-action="again"]').addEventListener(
+				"click",
+				() => this.startWatch(),
+			);
+			this.q<HTMLButtonElement>(
+				'[data-action="change-time"]',
+			).addEventListener("click", () => this.show("setup"));
 		}
 
 		private formatClock(totalSec: number): string {
 			const h = Math.floor(totalSec / 3600);
 			const m = Math.floor((totalSec % 3600) / 60);
 			const s = totalSec % 60;
-			if (h > 0) return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+			if (h > 0)
+				return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
 			return `${m}:${String(s).padStart(2, "0")}`;
 		}
 	}
