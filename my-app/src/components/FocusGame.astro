@@ -606,7 +606,7 @@ const i18n = {
 								input.value = String(i);
 								input.dispatchEvent(new Event("input", { bubbles: true }));
 								this.markCol(col, i);
-								this.scrollToSel(col, range);
+								this.scrollToSel(col, true);
 							});
 						}
 					}
@@ -614,8 +614,6 @@ const i18n = {
 					// Recenter: jump scroll to middle copy without animation
 					const recenter = () => {
 						const oneSetH = range * 36; // each option is 36px tall
-						const scrollMin = 0;
-						const scrollMax = oneSetH * COPIES - col.clientHeight;
 						const midStart = oneSetH;
 						const midEnd = oneSetH * 2 - col.clientHeight;
 						if (col.scrollTop < midStart - 2 || col.scrollTop > midEnd + 2) {
@@ -638,7 +636,7 @@ const i18n = {
 						input.value = String(v);
 						input.dispatchEvent(new Event("input", { bubbles: true }));
 						this.markCol(col, v);
-						if (panel.classList.contains("is-open")) this.scrollToSel(col, range);
+						if (panel.classList.contains("is-open")) this.scrollToSel(col, true);
 					}, { passive: false });
 
 					let st: number;
@@ -652,7 +650,7 @@ const i18n = {
 							if (d < bestD) { bestD = d; best = o; }
 						});
 						if (best) {
-							col.querySelectorAll(".tp-opt").forEach((o) =>
+							col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) =>
 								o.classList.toggle("is-sel", Number(o.dataset.val) === Number(best!.dataset.val)));
 						}
 						window.clearTimeout(st);
@@ -683,7 +681,7 @@ const i18n = {
 						input.value = String(v);
 						input.dispatchEvent(new Event("input", { bubbles: true }));
 						this.markCol(col, v);
-						if (panel.classList.contains("is-open")) this.scrollToSel(col, range);
+						if (panel.classList.contains("is-open")) this.scrollToSel(col, true);
 					});
 				});
 
@@ -696,12 +694,8 @@ const i18n = {
 						panel.classList.add("is-open");
 						// Scroll each column to middle copy's selected value
 						const cols = Array.from(panel.querySelectorAll<HTMLElement>(".tp-col"));
-						const wInputs = Array.from(wrapper.querySelectorAll<HTMLInputElement>(".time-input"));
-						cols.forEach((c, ci) => {
-							const mn = Number(wInputs[ci]?.getAttribute("min")) || 0;
-							const mx = Number(wInputs[ci]?.getAttribute("max")) || 59;
-							const range = mx - mn + 1;
-							this.scrollToSel(c, range);
+						cols.forEach((c) => {
+							this.scrollToSel(c);
 						});
 					}
 				});
@@ -734,13 +728,18 @@ const i18n = {
 			this.updateCol3D(col);
 		}
 
-		private scrollToSel(col: HTMLElement, range: number) {
+		private scrollToSel(col: HTMLElement, smooth = false) {
 			// Always scroll to the MIDDLE copy's selected element
 			const sel = Array.from(col.querySelectorAll<HTMLElement>(".tp-opt.is-sel"))
 				.find((o) => o.dataset.copy === "1");
 			if (sel) {
-				col.scrollTop = sel.offsetTop - 87;
-				this.updateCol3D(col);
+				const targetTop = sel.offsetTop - 87;
+				if (smooth) {
+					col.scrollTo({ top: targetTop, behavior: "smooth" });
+				} else {
+					col.scrollTop = targetTop;
+					this.updateCol3D(col);
+				}
 			}
 		}
 
