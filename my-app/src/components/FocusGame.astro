@@ -50,37 +50,37 @@ const i18n = {
 
 			<div class="mt-8 flex flex-col sm:flex-row sm:items-start justify-center gap-8 sm:gap-20">
 
-			<div>
+			<div class="tp-wrapper" data-picker-group="duration">
 				<p class="text-caption text-ink-muted-48 mb-3">{g.customTime}</p>
-				<div class="flex items-end justify-center gap-3">
+				<div class="flex items-end justify-center gap-3 cursor-pointer" data-tp-trigger>
 					<label class="flex flex-col items-center gap-1.5">
-						<input type="number" min="0" max="12" value="0" data-unit="hours" class="time-input" />
+						<input type="text" readonly inputmode="none" min="0" max="12" value="0" data-unit="hours" class="time-input" />
 						<span class="text-fine text-ink-muted-48">{g.unitHours}</span>
 					</label>
 					<span class="text-lead text-hairline pb-6 select-none">:</span>
 					<label class="flex flex-col items-center gap-1.5">
-						<input type="number" min="0" max="59" value="0" data-unit="minutes" class="time-input" />
+						<input type="text" readonly inputmode="none" min="0" max="59" value="0" data-unit="minutes" class="time-input" />
 						<span class="text-fine text-ink-muted-48">{g.unitMin}</span>
 					</label>
 					<span class="text-lead text-hairline pb-6 select-none">:</span>
 					<label class="flex flex-col items-center gap-1.5">
-						<input type="number" min="0" max="59" value="30" data-unit="seconds" class="time-input" />
+						<input type="text" readonly inputmode="none" min="0" max="59" value="30" data-unit="seconds" class="time-input" />
 						<span class="text-fine text-ink-muted-48">{g.unitSec}</span>
 					</label>
 				</div>
 				<p data-duration-hint class="text-fine text-ink-muted-48 mt-4" aria-live="polite"></p>
 			</div>
 
-			<div>
+			<div class="tp-wrapper" data-picker-group="pace">
 				<p class="text-caption text-ink-muted-48 mb-3">{g.paceLabel}</p>
-				<div class="flex items-end justify-center gap-3">
+				<div class="flex items-end justify-center gap-3 cursor-pointer" data-tp-trigger>
 					<label class="flex flex-col items-center gap-1.5">
-						<input type="number" min="0" max="3" value="0" data-pace-unit="minutes" class="time-input" />
+						<input type="text" readonly inputmode="none" min="0" max="3" value="0" data-pace-unit="minutes" class="time-input" />
 						<span class="text-fine text-ink-muted-48">{g.unitMin}</span>
 					</label>
 					<span class="text-lead text-hairline pb-6 select-none">:</span>
 					<label class="flex flex-col items-center gap-1.5">
-						<input type="number" min="0" max="59" value="3" data-pace-unit="seconds" class="time-input" />
+						<input type="text" readonly inputmode="none" min="0" max="59" value="3" data-pace-unit="seconds" class="time-input" />
 						<span class="text-fine text-ink-muted-48">{g.unitSec}</span>
 					</label>
 				</div>
@@ -206,12 +206,95 @@ const i18n = {
 		border-bottom: 2px solid var(--color-hairline);
 		padding: 4px 0 8px;
 		font-variant-numeric: tabular-nums;
+		cursor: pointer;
+		user-select: none;
 		-moz-appearance: textfield;
 		appearance: textfield;
 	}
 	.time-input::-webkit-outer-spin-button,
 	.time-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
 	.time-input:focus { outline: none; border-bottom-color: var(--color-primary); }
+
+	.tp-wrapper { position: relative; display: inline-block; }
+
+
+	:global(.tp-panel) {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%) translateY(4px);
+
+		background: color-mix(in srgb, var(--color-canvas) 45%, transparent);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border: 1px solid var(--color-hairline);
+		border-radius: 12px;
+		box-shadow: 0 10px 40px rgba(0,0,0,0.08), 0 2px 10px rgba(0,0,0,0.04);
+		z-index: 60;
+		display: flex;
+		align-items: stretch;
+		padding: 8px 4px;
+		gap: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+	}
+
+	:global(.tp-panel.is-open) {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(-50%) translateY(10px);
+	}
+
+	:global(.tp-col) {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 56px;
+		height: 210px;
+		overflow-y: auto;
+		scroll-snap-type: y mandatory;
+		scrollbar-width: none;
+		padding: 87px 0;
+	}
+	:global(.tp-col::-webkit-scrollbar) { display: none; }
+
+	:global(.tp-sep) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 16px;
+		font-family: var(--font-display);
+		font-size: 20px;
+		font-weight: 600;
+		color: var(--color-ink-muted-48);
+		user-select: none;
+	}
+
+	:global(.tp-opt) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 48px;
+		height: 36px;
+		flex-shrink: 0;
+		font-family: var(--font-display);
+		font-size: 20px;
+		font-weight: 400;
+		color: var(--color-ink-muted-80);
+		background: transparent;
+		border: 2px solid transparent;
+		border-radius: 6px;
+		cursor: pointer;
+		scroll-snap-align: center;
+		transition: border-color 0.12s ease, color 0.12s ease, font-weight 0.12s ease;
+	}
+	:global(.tp-opt:hover) { color: var(--color-ink); }
+	:global(.tp-opt.is-sel) {
+		border-color: transparent;
+		color: var(--color-ink);
+		font-weight: 600;
+	}
 
 	:global(.pool-word) {
 		font-family: var(--font-text);
@@ -333,6 +416,7 @@ const i18n = {
 
 		connectedCallback() {
 			this.readLocaleData();
+			this.initTimePickers();
 			this.bindSetup();
 			this.bindWatch();
 			this.bindRecall();
@@ -478,6 +562,199 @@ const i18n = {
 			this.q<HTMLInputElement>('.time-input[data-unit="hours"]').value = String(h);
 			this.q<HTMLInputElement>('.time-input[data-unit="minutes"]').value = String(m);
 			this.q<HTMLInputElement>('.time-input[data-unit="seconds"]').value = String(s);
+			this.syncPanelsFromInputs();
+		}
+
+		private initTimePickers() {
+			const COPIES = 3; // render 3 copies for infinite illusion
+
+			this.querySelectorAll<HTMLElement>(".tp-wrapper").forEach((wrapper) => {
+				const inputs = Array.from(wrapper.querySelectorAll<HTMLInputElement>(".time-input"));
+				const panel = document.createElement("div");
+				panel.className = "tp-panel";
+				wrapper.appendChild(panel);
+
+				inputs.forEach((input, idx) => {
+					if (idx > 0) {
+						const sep = document.createElement("span");
+						sep.className = "tp-sep";
+						panel.appendChild(sep);
+					}
+
+					const col = document.createElement("div");
+					col.className = "tp-col";
+					panel.appendChild(col);
+
+					const mn = Number(input.getAttribute("min")) || 0;
+					const mx = Number(input.getAttribute("max")) || 59;
+					const range = mx - mn + 1;
+					const cur = Number(input.value) || 0;
+
+					// Create 3 copies of the range for infinite scroll
+					for (let copy = 0; copy < COPIES; copy++) {
+						for (let i = mn; i <= mx; i++) {
+							const btn = document.createElement("button");
+							btn.type = "button";
+							btn.className = `tp-opt${i === cur ? " is-sel" : ""}`;
+							btn.dataset.val = String(i);
+							btn.dataset.copy = String(copy);
+							btn.textContent = String(i).padStart(2, "0");
+							col.appendChild(btn);
+
+							btn.addEventListener("click", (e) => {
+								e.stopPropagation();
+								input.value = String(i);
+								input.dispatchEvent(new Event("input", { bubbles: true }));
+								this.markCol(col, i);
+								this.scrollToSel(col, range);
+							});
+						}
+					}
+
+					// Recenter: jump scroll to middle copy without animation
+					const recenter = () => {
+						const oneSetH = range * 36; // each option is 36px tall
+						const scrollMin = 0;
+						const scrollMax = oneSetH * COPIES - col.clientHeight;
+						const midStart = oneSetH;
+						const midEnd = oneSetH * 2 - col.clientHeight;
+						if (col.scrollTop < midStart - 2 || col.scrollTop > midEnd + 2) {
+							// Jump to equivalent position in middle copy
+							const offset = ((col.scrollTop % oneSetH) + oneSetH) % oneSetH;
+							col.scrollTop = oneSetH + offset;
+							this.updateCol3D(col);
+						}
+					};
+
+					input.addEventListener("wheel", (e) => {
+						e.preventDefault();
+						let v = Number(input.value) || 0;
+						// Wrap around
+						if (e.deltaY < 0) {
+							v = v >= mx ? mn : v + 1;
+						} else {
+							v = v <= mn ? mx : v - 1;
+						}
+						input.value = String(v);
+						input.dispatchEvent(new Event("input", { bubbles: true }));
+						this.markCol(col, v);
+						if (panel.classList.contains("is-open")) this.scrollToSel(col, range);
+					}, { passive: false });
+
+					let st: number;
+					col.addEventListener("scroll", () => {
+						this.updateCol3D(col);
+						const mid = col.scrollTop + 105;
+						let best: HTMLButtonElement | null = null;
+						let bestD = Infinity;
+						col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) => {
+							const d = Math.abs(o.offsetTop + 18 - mid);
+							if (d < bestD) { bestD = d; best = o; }
+						});
+						if (best) {
+							col.querySelectorAll(".tp-opt").forEach((o) =>
+								o.classList.toggle("is-sel", Number(o.dataset.val) === Number(best!.dataset.val)));
+						}
+						window.clearTimeout(st);
+						st = window.setTimeout(() => {
+							if (best) {
+								const sv = Number(best.dataset.val);
+								if (Number(input.value) !== sv) {
+									input.value = String(sv);
+									input.dispatchEvent(new Event("input", { bubbles: true }));
+								}
+							}
+							recenter();
+						}, 120);
+					});
+
+					input.addEventListener("keydown", (e) => {
+						let v = Number(input.value) || 0;
+						if (e.key === "ArrowUp") {
+							e.preventDefault();
+							v = v >= mx ? mn : v + 1;
+						} else if (e.key === "ArrowDown") {
+							e.preventDefault();
+							v = v <= mn ? mx : v - 1;
+						} else if (e.key === "Escape") {
+							panel.classList.remove("is-open");
+							return;
+						} else return;
+						input.value = String(v);
+						input.dispatchEvent(new Event("input", { bubbles: true }));
+						this.markCol(col, v);
+						if (panel.classList.contains("is-open")) this.scrollToSel(col, range);
+					});
+				});
+
+				const trigger = wrapper.querySelector("[data-tp-trigger]") as HTMLElement;
+				trigger.addEventListener("click", (e) => {
+					e.stopPropagation();
+					const open = panel.classList.contains("is-open");
+					this.querySelectorAll(".tp-panel.is-open").forEach((p) => p.classList.remove("is-open"));
+					if (!open) {
+						panel.classList.add("is-open");
+						// Scroll each column to middle copy's selected value
+						const cols = Array.from(panel.querySelectorAll<HTMLElement>(".tp-col"));
+						const wInputs = Array.from(wrapper.querySelectorAll<HTMLInputElement>(".time-input"));
+						cols.forEach((c, ci) => {
+							const mn = Number(wInputs[ci]?.getAttribute("min")) || 0;
+							const mx = Number(wInputs[ci]?.getAttribute("max")) || 59;
+							const range = mx - mn + 1;
+							this.scrollToSel(c, range);
+						});
+					}
+				});
+			});
+
+			document.addEventListener("click", (e) => {
+				if (!(e.target as HTMLElement).closest(".tp-wrapper")) {
+					this.querySelectorAll(".tp-panel.is-open").forEach((p) => p.classList.remove("is-open"));
+				}
+			});
+		}
+
+		private updateCol3D(col: HTMLElement) {
+			const mid = col.scrollTop + 105;
+			col.querySelectorAll<HTMLElement>(".tp-opt").forEach((o) => {
+				const dist = (o.offsetTop + 18) - mid;
+				const ratio = Math.max(-1.5, Math.min(1.5, dist / 105));
+				const angle = ratio * 55;
+				const scale = 1 - Math.abs(ratio) * 0.15;
+				const translateZ = -Math.abs(ratio) * 35;
+				const opacity = Math.max(0.2, 1 - Math.abs(ratio) * 0.65);
+				o.style.transform = `perspective(300px) rotateX(${angle}deg) translateZ(${translateZ}px) scale(${scale})`;
+				o.style.opacity = String(opacity);
+			});
+		}
+
+		private markCol(col: HTMLElement, val: number) {
+			col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) =>
+				o.classList.toggle("is-sel", Number(o.dataset.val) === val));
+			this.updateCol3D(col);
+		}
+
+		private scrollToSel(col: HTMLElement, range: number) {
+			// Always scroll to the MIDDLE copy's selected element
+			const sel = Array.from(col.querySelectorAll<HTMLElement>(".tp-opt.is-sel"))
+				.find((o) => o.dataset.copy === "1");
+			if (sel) {
+				col.scrollTop = sel.offsetTop - 87;
+				this.updateCol3D(col);
+			}
+		}
+
+		private syncPanelsFromInputs() {
+			this.querySelectorAll<HTMLInputElement>(".time-input").forEach((input) => {
+				const w = input.closest(".tp-wrapper");
+				if (!w) return;
+				const cols = Array.from(w.querySelectorAll<HTMLElement>(".tp-col"));
+				const inputs = Array.from(w.querySelectorAll<HTMLInputElement>(".time-input"));
+				const i = inputs.indexOf(input);
+				if (i !== -1 && cols[i]) {
+					this.markCol(cols[i], Number(input.value) || 0);
+				}
+			});
 		}
 
 		private clampDuration(): number {
