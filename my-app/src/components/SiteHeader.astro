@@ -38,7 +38,8 @@ const headerI18n = {
 };
 ---
 
-<header class="sticky top-0 z-40 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md" data-i18n={JSON.stringify(headerI18n)}>
+<header class="sticky top-0 z-40 w-full" data-i18n={JSON.stringify(headerI18n)}>
+	<div class="header-bg absolute inset-0 -z-10 border-b border-hairline bg-canvas/80 backdrop-blur-md"></div>
 	<div class="mx-auto flex h-14 max-w-300 items-center justify-between px-5">
 
 		<div class="relative flex items-center gap-2" data-profile-wrap>
@@ -148,13 +149,10 @@ const headerI18n = {
 </header>
 
 <style>
-	header.sticky {
+	.header-bg {
 		-webkit-backdrop-filter: blur(12px);
 	}
-	header.sticky.dropdown-open {
-		backdrop-filter: none;
-		-webkit-backdrop-filter: none;
-	}
+
 	.icon-btn {
 		display: inline-flex;
 		align-items: center;
@@ -495,34 +493,19 @@ const headerI18n = {
 	const fill = (tpl: string, vars: Record<string, string | number>) =>
 		tpl.replace(/\{(\w+)\}/g, (_, k) => (k in vars ? String(vars[k]) : `{${k}}`));
 
-	const headerEl = $<HTMLElement>("header.sticky");
 	const langWrap = $<HTMLElement>("[data-lang-wrap]");
 	const langBtn = $<HTMLButtonElement>('[data-action="lang"]');
 	const langMenu = $<HTMLElement>("[data-lang-menu]");
 
-	function updateHeaderBlurState() {
-		if (!headerEl) return;
-		const boardOpen = boardPanel && !boardPanel.hidden;
-		const profileOpen = profileMenu && !profileMenu.hidden;
-		const langOpen = langMenu && !langMenu.hidden;
-		if (boardOpen || profileOpen || langOpen) {
-			headerEl.classList.add("dropdown-open");
-		} else {
-			headerEl.classList.remove("dropdown-open");
-		}
-	}
-
 	function closeLangMenu() {
 		if (langMenu) langMenu.hidden = true;
 		langBtn?.setAttribute("aria-expanded", "false");
-		updateHeaderBlurState();
 	}
 	langBtn?.addEventListener("click", () => {
 		if (!langMenu) return;
 		const open = langMenu.hidden;
 		langMenu.hidden = !open;
 		langBtn.setAttribute("aria-expanded", String(open));
-		updateHeaderBlurState();
 	});
 
 	const THEME_KEY = "focus-attention:theme";
@@ -672,7 +655,6 @@ const headerI18n = {
 	function closeProfileMenu() {
 		if (profileMenu) profileMenu.hidden = true;
 		profileBtn?.setAttribute("aria-expanded", "false");
-		updateHeaderBlurState();
 	}
 
 	async function applyStoredProfile() {
@@ -700,7 +682,6 @@ const headerI18n = {
 		if (open) renderProfileBest();
 		if (profileMenu) profileMenu.hidden = !open;
 		profileBtn.setAttribute("aria-expanded", String(!!open));
-		updateHeaderBlurState();
 	});
 
 	signInBtn?.addEventListener("click", async () => {
@@ -930,18 +911,15 @@ const headerI18n = {
 			if (boardList) boardList.innerHTML = `<li class="lb-empty">${STR.boardNotSetUp}</li>`;
 			if (boardFoot) boardFoot.innerHTML = "";
 			if (boardTotal) boardTotal.textContent = "";
-			updateHeaderBlurState();
 			return;
 		}
 		boardPanel.hidden = false;
 		boardBtn?.setAttribute("aria-expanded", "true");
 		loadBoard();
-		updateHeaderBlurState();
 	}
 	function closeBoard() {
 		if (boardPanel) boardPanel.hidden = true;
 		boardBtn?.setAttribute("aria-expanded", "false");
-		updateHeaderBlurState();
 	}
 
 	boardBtn?.addEventListener("click", () => {
