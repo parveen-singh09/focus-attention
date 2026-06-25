@@ -253,9 +253,14 @@ const i18n = {
 		width: 56px;
 		height: 210px;
 		overflow-y: auto;
-		scroll-snap-type: y mandatory;
+		scroll-snap-type: none;
 		scrollbar-width: none;
 		padding: 87px 0;
+		scroll-padding-top: 87px;
+		scroll-padding-bottom: 87px;
+	}
+	:global(.tp-col.is-snapping) {
+		scroll-snap-type: y mandatory;
 	}
 	:global(.tp-col::-webkit-scrollbar) { display: none; }
 
@@ -277,6 +282,12 @@ const i18n = {
 		justify-content: center;
 		width: 48px;
 		height: 36px;
+		min-height: 36px;
+		max-height: 36px;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		line-height: 1;
 		flex-shrink: 0;
 		font-family: var(--font-display);
 		font-size: 20px;
@@ -473,6 +484,7 @@ const i18n = {
 			this.syncDurationHint();
 			this.syncPaceHint();
 			this.loadBest();
+			this.syncPanelsFromInputs();
 		}
 
 		private readLocaleData() {
@@ -638,6 +650,8 @@ const i18n = {
 					const mx = Number(input.getAttribute("max")) || 59;
 					const range = mx - mn + 1;
 					const cur = Number(input.value) || 0;
+					const colAny = col as any;
+					colAny._lastVal = cur;
 
 					// Create 3 copies of the range for infinite scroll
 					for (let copy = 0; copy < COPIES; copy++) {
@@ -664,20 +678,33 @@ const i18n = {
 					const recenter = () => {
 						const oneSetH = range * 36; // each option is 36px tall
 						const midStart = oneSetH;
-						const midEnd = oneSetH * 2 - col.clientHeight;
+						const midEnd = oneSetH * 2 - 36;
 						if (col.scrollTop < midStart - 2 || col.scrollTop > midEnd + 2) {
 							// Jump to equivalent position in middle copy
 							const offset = ((col.scrollTop % oneSetH) + oneSetH) % oneSetH;
-							col.dataset.programmatic = "true";
-							col.style.scrollSnapType = "none";
-							const colAny = col as any;
+							const targetTop = oneSetH + offset;
+
 							window.clearTimeout(colAny._progTimer);
-							col.scrollTop = oneSetH + offset;
-							this.updateCol3D(col);
-							colAny._progTimer = window.setTimeout(() => {
-								col.style.scrollSnapType = "";
+							window.clearTimeout(colAny._valTimer);
+
+							col.dataset.programmatic = "true";
+							col.classList.remove("is-snapping");
+
+							const finishRecenter = () => {
+								window.clearTimeout(colAny._progTimer);
+								col.removeEventListener("scrollend", onRecenterScrollEnd);
+								col.classList.add("is-snapping");
 								col.removeAttribute("data-programmatic");
-							}, 100);
+								this.updateCol3D(col);
+							};
+
+							function onRecenterScrollEnd() {
+								finishRecenter();
+							}
+
+							col.addEventListener("scrollend", onRecenterScrollEnd, { once: true });
+							col.scrollTop = targetTop;
+							colAny._progTimer = window.setTimeout(finishRecenter, 100);
 						}
 					};
 
@@ -696,18 +723,16 @@ const i18n = {
 						if (panel.classList.contains("is-open")) this.scrollToSel(col, true);
 					}, { passive: false });
 
-					let lastVal = cur;
-					let st: number;
+					const enableSnap = () => {
+						col.classList.add("is-snapping");
+					};
+					col.addEventListener("pointerdown", enableSnap, { passive: true });
+					col.addEventListener("wheel", enableSnap, { passive: true });
+
 					col.addEventListener("scroll", () => {
 						this.updateCol3D(col);
 						if (!panel.classList.contains("is-open")) return;
 						if (col.dataset.programmatic === "true") {
-							const colAny = col as any;
-							window.clearTimeout(colAny._progTimer);
-							colAny._progTimer = window.setTimeout(() => {
-								col.style.scrollSnapType = "";
-								col.removeAttribute("data-programmatic");
-							}, 150);
 							return;
 						}
 
@@ -723,13 +748,13 @@ const i18n = {
 								o.classList.toggle("is-sel", Number(o.dataset.val) === Number(best!.dataset.val)));
 							
 							const sv = Number((best as HTMLButtonElement).dataset.val);
-							if (sv !== lastVal) {
-								lastVal = sv;
+							if (sv !== colAny._lastVal) {
+								colAny._lastVal = sv;
 								this.playHapticTick();
 							}
 						}
-						window.clearTimeout(st);
-						st = window.setTimeout(() => {
+						window.clearTimeout(colAny._valTimer);
+						colAny._valTimer = window.setTimeout(() => {
 							if (best) {
 								const sv = Number((best as HTMLButtonElement).dataset.val);
 								if (Number(input.value) !== sv) {
@@ -738,10 +763,11 @@ const i18n = {
 								}
 							}
 							recenter();
-						}, 120);
+						}, 200);
 					});
 
 					input.addEventListener("keydown", (e) => {
+						col.classList.add("is-snapping");
 						let v = Number(input.value) || 0;
 						if (e.key === "ArrowUp") {
 							e.preventDefault();
@@ -764,24 +790,26 @@ const i18n = {
 				trigger.addEventListener("click", (e) => {
 					e.stopPropagation();
 					const open = panel.classList.contains("is-open");
-					this.querySelectorAll(".tp-panel.is-open").forEach((p) => p.classList.remove("is-open"));
+					this.querySelectorAll(".tp-panel.is-open").forEach((p) => {
+						p.classList.remove("is-open");
+						p.querySelectorAll(".tp-col").forEach((c) => c.classList.remove("is-snapping"));
+					});
 					if (!open) {
 						panel.classList.add("is-open");
-						// Scroll each column to middle copy's selected value
 						const cols = Array.from(panel.querySelectorAll<HTMLElement>(".tp-col"));
-						// Defer scrolling slightly to ensure layout is ready and scrollHeight is computed correctly
-						window.setTimeout(() => {
-							cols.forEach((c) => {
-								this.scrollToSel(c);
-							});
-						}, 0);
+						cols.forEach((c) => {
+							this.scrollToSel(c);
+						});
 					}
 				});
 			});
 
 			document.addEventListener("click", (e) => {
 				if (!(e.target as HTMLElement).closest(".tp-wrapper")) {
-					this.querySelectorAll(".tp-panel.is-open").forEach((p) => p.classList.remove("is-open"));
+					this.querySelectorAll(".tp-panel.is-open").forEach((p) => {
+						p.classList.remove("is-open");
+						p.querySelectorAll(".tp-col").forEach((c) => c.classList.remove("is-snapping"));
+					});
 				}
 			});
 		}
@@ -791,11 +819,17 @@ const i18n = {
 			col.querySelectorAll<HTMLElement>(".tp-opt").forEach((o) => {
 				const dist = (o.offsetTop + 18) - mid;
 				const ratio = Math.max(-1.5, Math.min(1.5, dist / 105));
-				const angle = ratio * 55;
-				const scale = 1 - Math.abs(ratio) * 0.15;
-				const translateZ = -Math.abs(ratio) * 35;
-				const opacity = Math.max(0.2, 1 - Math.abs(ratio) * 0.65);
-				o.style.transform = `perspective(300px) rotateX(${angle}deg) translateZ(${translateZ}px) scale(${scale})`;
+				
+				// Angle from -60deg to +60deg (in radians)
+				const theta = ratio * (Math.PI / 3);
+				
+				// 2D cylinder projection mimicking 3D rotateX and translateZ
+				const scaleY = Math.cos(theta); // Vertical height compression based on angle
+				const scaleX = 1 - Math.abs(ratio) * 0.15; // Horizontal width scale
+				const translateY = 105 * (Math.sin(theta) - theta); // Circular vertical shift
+				
+				const opacity = Math.max(0.15, 1 - Math.abs(ratio) * 0.65);
+				o.style.transform = `translateY(${translateY}px) scale(${scaleX}, ${scaleY})`;
 				o.style.opacity = String(opacity);
 			});
 		}
@@ -807,33 +841,54 @@ const i18n = {
 		}
 
 		private scrollToSel(col: HTMLElement, smooth = false) {
-			// Always scroll to the MIDDLE copy's selected element
+			const panel = col.closest(".tp-panel");
+			if (!panel || !panel.classList.contains("is-open")) {
+				return;
+			}
 			const sel = Array.from(col.querySelectorAll<HTMLElement>(".tp-opt.is-sel"))
 				.find((o) => o.dataset.copy === "1");
 			if (sel) {
-				// Defer scrolling if layout is not ready yet
 				if (col.scrollHeight < 300) {
 					requestAnimationFrame(() => this.scrollToSel(col, smooth));
 					return;
 				}
 				const targetTop = sel.offsetTop - 87;
-				col.dataset.programmatic = "true";
-				col.style.scrollSnapType = "none";
 				const colAny = col as any;
+
 				window.clearTimeout(colAny._progTimer);
-				if (smooth) {
-					col.scrollTo({ top: targetTop, behavior: "smooth" });
-					colAny._progTimer = window.setTimeout(() => {
-						col.style.scrollSnapType = "";
-						col.removeAttribute("data-programmatic");
-					}, 350); // fallback cleanup
-				} else {
+				window.clearTimeout(colAny._valTimer);
+
+				if (Math.abs(col.scrollTop - targetTop) < 1) {
 					col.scrollTop = targetTop;
 					this.updateCol3D(col);
-					colAny._progTimer = window.setTimeout(() => {
-						col.style.scrollSnapType = "";
-						col.removeAttribute("data-programmatic");
-					}, 150); // fallback cleanup
+					col.classList.add("is-snapping");
+					col.removeAttribute("data-programmatic");
+					return;
+				}
+
+				col.dataset.programmatic = "true";
+				col.classList.remove("is-snapping");
+
+				const finishScroll = () => {
+					window.clearTimeout(colAny._progTimer);
+					col.removeEventListener("scrollend", onScrollEnd);
+					col.classList.add("is-snapping");
+					col.removeAttribute("data-programmatic");
+					this.updateCol3D(col);
+				};
+
+				function onScrollEnd() {
+					finishScroll();
+				}
+
+				col.addEventListener("scrollend", onScrollEnd, { once: true });
+
+				if (smooth) {
+					col.scrollTo({ top: targetTop, behavior: "smooth" });
+					colAny._progTimer = window.setTimeout(finishScroll, 600);
+				} else {
+					col.scrollTop = targetTop;
+					colAny._progTimer = window.setTimeout(finishScroll, 100);
 				}
 			}
 		}
@@ -847,6 +902,7 @@ const i18n = {
 				const i = inputs.indexOf(input);
 				if (i !== -1 && cols[i]) {
 					this.markCol(cols[i], Number(input.value) || 0);
+					(cols[i] as any)._lastVal = Number(input.value) || 0;
 					this.scrollToSel(cols[i], false);
 				}
 			});

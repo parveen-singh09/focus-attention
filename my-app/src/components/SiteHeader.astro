@@ -148,6 +148,13 @@ const headerI18n = {
 </header>
 
 <style>
+	header.sticky {
+		-webkit-backdrop-filter: blur(12px);
+	}
+	header.sticky.dropdown-open {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+	}
 	.icon-btn {
 		display: inline-flex;
 		align-items: center;
@@ -193,7 +200,10 @@ const headerI18n = {
 	.dropdown {
 		position: absolute;
 		top: calc(100% + 8px);
-		background-color: var(--color-canvas);
+		background: color-mix(in srgb, var(--color-canvas) 80%, transparent);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		will-change: backdrop-filter;
 		border: 1px solid var(--color-hairline);
 		border-radius: var(--radius-md);
 		box-shadow: rgba(0, 0, 0, 0.16) 0 8px 30px 0;
@@ -201,26 +211,34 @@ const headerI18n = {
 		overflow: hidden;
 	}
 
-	.lang-dropdown {
+	.lang-dropdown,
+	[data-board-list] {
 		overflow-y: auto;
-		max-height: min(70vh, 360px);
 		scrollbar-width: thin;
 		scrollbar-color: transparent transparent;
 	}
-	.lang-dropdown:hover {
+	.lang-dropdown {
+		max-height: min(70vh, 360px);
+	}
+	.lang-dropdown:hover,
+	[data-board-list]:hover {
 		scrollbar-color: var(--color-hairline) transparent;
 	}
-	.lang-dropdown::-webkit-scrollbar {
+	.lang-dropdown::-webkit-scrollbar,
+	[data-board-list]::-webkit-scrollbar {
 		width: 3px;
 	}
-	.lang-dropdown::-webkit-scrollbar-track {
+	.lang-dropdown::-webkit-scrollbar-track,
+	[data-board-list]::-webkit-scrollbar-track {
 		background: transparent;
 	}
-	.lang-dropdown::-webkit-scrollbar-thumb {
+	.lang-dropdown::-webkit-scrollbar-thumb,
+	[data-board-list]::-webkit-scrollbar-thumb {
 		background: transparent;
 		border-radius: 99px;
 	}
-	.lang-dropdown:hover::-webkit-scrollbar-thumb {
+	.lang-dropdown:hover::-webkit-scrollbar-thumb,
+	[data-board-list]:hover::-webkit-scrollbar-thumb {
 		background: var(--color-hairline);
 	}
 
@@ -381,6 +399,27 @@ const headerI18n = {
 	:global(.lb-btn:active) { transform: scale(0.97); }
 	:global(.lb-btn .lb-g) { flex: none; }
 	:global(.lb-foot-note) { font-size: 13px; color: var(--color-ink-muted-48); text-align: center; }
+
+	:global(.lb-dots) {
+		display: inline-flex;
+		margin-left: 2px;
+	}
+	:global(.lb-dots span) {
+		animation: lb-blink 1.4s infinite both;
+		font-family: inherit;
+		font-weight: inherit;
+	}
+	:global(.lb-dots span:nth-child(2)) {
+		animation-delay: 0.2s;
+	}
+	:global(.lb-dots span:nth-child(3)) {
+		animation-delay: 0.4s;
+	}
+	@keyframes lb-blink {
+		0% { opacity: 0.2; }
+		20% { opacity: 1; }
+		100% { opacity: 0.2; }
+	}
 </style>
 
 <script>
@@ -456,18 +495,34 @@ const headerI18n = {
 	const fill = (tpl: string, vars: Record<string, string | number>) =>
 		tpl.replace(/\{(\w+)\}/g, (_, k) => (k in vars ? String(vars[k]) : `{${k}}`));
 
+	const headerEl = $<HTMLElement>("header.sticky");
 	const langWrap = $<HTMLElement>("[data-lang-wrap]");
 	const langBtn = $<HTMLButtonElement>('[data-action="lang"]');
 	const langMenu = $<HTMLElement>("[data-lang-menu]");
+
+	function updateHeaderBlurState() {
+		if (!headerEl) return;
+		const boardOpen = boardPanel && !boardPanel.hidden;
+		const profileOpen = profileMenu && !profileMenu.hidden;
+		const langOpen = langMenu && !langMenu.hidden;
+		if (boardOpen || profileOpen || langOpen) {
+			headerEl.classList.add("dropdown-open");
+		} else {
+			headerEl.classList.remove("dropdown-open");
+		}
+	}
+
 	function closeLangMenu() {
 		if (langMenu) langMenu.hidden = true;
 		langBtn?.setAttribute("aria-expanded", "false");
+		updateHeaderBlurState();
 	}
 	langBtn?.addEventListener("click", () => {
 		if (!langMenu) return;
 		const open = langMenu.hidden;
 		langMenu.hidden = !open;
 		langBtn.setAttribute("aria-expanded", String(open));
+		updateHeaderBlurState();
 	});
 
 	const THEME_KEY = "focus-attention:theme";
@@ -617,6 +672,7 @@ const headerI18n = {
 	function closeProfileMenu() {
 		if (profileMenu) profileMenu.hidden = true;
 		profileBtn?.setAttribute("aria-expanded", "false");
+		updateHeaderBlurState();
 	}
 
 	async function applyStoredProfile() {
@@ -644,6 +700,7 @@ const headerI18n = {
 		if (open) renderProfileBest();
 		if (profileMenu) profileMenu.hidden = !open;
 		profileBtn.setAttribute("aria-expanded", String(!!open));
+		updateHeaderBlurState();
 	});
 
 	signInBtn?.addEventListener("click", async () => {
@@ -796,7 +853,8 @@ const headerI18n = {
 
 	async function loadBoard() {
 		if (!boardList) return;
-		boardList.innerHTML = `<li class="lb-empty">${STR.loading}</li>`;
+		const text = STR.loading.replace(/[…\.]+/g, "");
+		boardList.innerHTML = `<li class="lb-empty">${text}<span class="lb-dots"><span>.</span><span>.</span><span>.</span></span></li>`;
 		if (boardFoot) boardFoot.innerHTML = "";
 
 		boardLoaded = 0;
@@ -855,7 +913,8 @@ const headerI18n = {
 		btn.textContent = STR.showMore;
 		btn.addEventListener("click", () => {
 			btn.disabled = true;
-			btn.textContent = STR.loading;
+			const text = STR.loading.replace(/[…\.]+/g, "");
+			btn.innerHTML = `${text}<span class="lb-dots"><span>.</span><span>.</span><span>.</span></span>`;
 			loadMore();
 		});
 		li.appendChild(btn);
@@ -871,15 +930,18 @@ const headerI18n = {
 			if (boardList) boardList.innerHTML = `<li class="lb-empty">${STR.boardNotSetUp}</li>`;
 			if (boardFoot) boardFoot.innerHTML = "";
 			if (boardTotal) boardTotal.textContent = "";
+			updateHeaderBlurState();
 			return;
 		}
 		boardPanel.hidden = false;
 		boardBtn?.setAttribute("aria-expanded", "true");
 		loadBoard();
+		updateHeaderBlurState();
 	}
 	function closeBoard() {
 		if (boardPanel) boardPanel.hidden = true;
 		boardBtn?.setAttribute("aria-expanded", "false");
+		updateHeaderBlurState();
 	}
 
 	boardBtn?.addEventListener("click", () => {
