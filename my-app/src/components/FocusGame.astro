@@ -414,6 +414,40 @@ const i18n = {
 		private bestAttentionSec = 0;
 		private bestRecallSec = 0;
 
+		private audioCtx: AudioContext | null = null;
+
+		private playHapticTick() {
+			try {
+				const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
+				if (AudioCtx) {
+					if (!this.audioCtx) {
+						this.audioCtx = new AudioCtx();
+					}
+					if (this.audioCtx.state === "suspended") {
+						this.audioCtx.resume();
+					}
+					const osc = this.audioCtx.createOscillator();
+					const gain = this.audioCtx.createGain();
+					osc.type = "sine";
+					// Short click chirping sound
+					osc.frequency.setValueAtTime(650, this.audioCtx.currentTime);
+					osc.frequency.exponentialRampToValueAtTime(120, this.audioCtx.currentTime + 0.012);
+					gain.gain.setValueAtTime(0.025, this.audioCtx.currentTime);
+					gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + 0.012);
+					osc.connect(gain);
+					gain.connect(this.audioCtx.destination);
+					osc.start();
+					osc.stop(this.audioCtx.currentTime + 0.012);
+				}
+			} catch (e) {}
+
+			try {
+				if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+					navigator.vibrate(8);
+				}
+			} catch (e) {}
+		}
+
 		connectedCallback() {
 			this.readLocaleData();
 			this.initTimePickers();
@@ -639,6 +673,7 @@ const i18n = {
 						if (panel.classList.contains("is-open")) this.scrollToSel(col, true);
 					}, { passive: false });
 
+					let lastVal = cur;
 					let st: number;
 					col.addEventListener("scroll", () => {
 						this.updateCol3D(col);
@@ -652,11 +687,17 @@ const i18n = {
 						if (best) {
 							col.querySelectorAll<HTMLButtonElement>(".tp-opt").forEach((o) =>
 								o.classList.toggle("is-sel", Number(o.dataset.val) === Number(best!.dataset.val)));
+							
+							const sv = Number((best as HTMLButtonElement).dataset.val);
+							if (sv !== lastVal) {
+								lastVal = sv;
+								this.playHapticTick();
+							}
 						}
 						window.clearTimeout(st);
 						st = window.setTimeout(() => {
 							if (best) {
-								const sv = Number(best.dataset.val);
+								const sv = Number((best as HTMLButtonElement).dataset.val);
 								if (Number(input.value) !== sv) {
 									input.value = String(sv);
 									input.dispatchEvent(new Event("input", { bubbles: true }));
