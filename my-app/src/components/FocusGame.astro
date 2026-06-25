@@ -668,8 +668,12 @@ const i18n = {
 						if (col.scrollTop < midStart - 2 || col.scrollTop > midEnd + 2) {
 							// Jump to equivalent position in middle copy
 							const offset = ((col.scrollTop % oneSetH) + oneSetH) % oneSetH;
+							col.dataset.programmatic = "true";
 							col.scrollTop = oneSetH + offset;
 							this.updateCol3D(col);
+							setTimeout(() => {
+								col.removeAttribute("data-programmatic");
+							}, 50);
 						}
 					};
 
@@ -693,6 +697,7 @@ const i18n = {
 					col.addEventListener("scroll", () => {
 						this.updateCol3D(col);
 						if (!panel.classList.contains("is-open")) return;
+						if (col.dataset.programmatic === "true") return;
 
 						const mid = col.scrollTop + 105;
 						let best: HTMLButtonElement | null = null;
@@ -792,11 +797,18 @@ const i18n = {
 				.find((o) => o.dataset.copy === "1");
 			if (sel) {
 				const targetTop = sel.offsetTop - 87;
+				col.dataset.programmatic = "true";
 				if (smooth) {
 					col.scrollTo({ top: targetTop, behavior: "smooth" });
+					setTimeout(() => {
+						col.removeAttribute("data-programmatic");
+					}, 320); // clean up after smooth scroll transition finishes
 				} else {
 					col.scrollTop = targetTop;
 					this.updateCol3D(col);
+					setTimeout(() => {
+						col.removeAttribute("data-programmatic");
+					}, 50); // clean up after layout scroll event fires
 				}
 			}
 		}
