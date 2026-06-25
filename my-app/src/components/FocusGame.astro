@@ -692,6 +692,8 @@ const i18n = {
 					let st: number;
 					col.addEventListener("scroll", () => {
 						this.updateCol3D(col);
+						if (!panel.classList.contains("is-open")) return;
+
 						const mid = col.scrollTop + 105;
 						let best: HTMLButtonElement | null = null;
 						let bestD = Infinity;
