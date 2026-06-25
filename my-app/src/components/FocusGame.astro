@@ -669,11 +669,13 @@ const i18n = {
 							// Jump to equivalent position in middle copy
 							const offset = ((col.scrollTop % oneSetH) + oneSetH) % oneSetH;
 							col.dataset.programmatic = "true";
+							const colAny = col as any;
+							window.clearTimeout(colAny._progTimer);
 							col.scrollTop = oneSetH + offset;
 							this.updateCol3D(col);
-							setTimeout(() => {
+							colAny._progTimer = window.setTimeout(() => {
 								col.removeAttribute("data-programmatic");
-							}, 50);
+							}, 100);
 						}
 					};
 
@@ -697,7 +699,14 @@ const i18n = {
 					col.addEventListener("scroll", () => {
 						this.updateCol3D(col);
 						if (!panel.classList.contains("is-open")) return;
-						if (col.dataset.programmatic === "true") return;
+						if (col.dataset.programmatic === "true") {
+							const colAny = col as any;
+							window.clearTimeout(colAny._progTimer);
+							colAny._progTimer = window.setTimeout(() => {
+								col.removeAttribute("data-programmatic");
+							}, 100);
+							return;
+						}
 
 						const mid = col.scrollTop + 105;
 						let best: HTMLButtonElement | null = null;
@@ -798,17 +807,19 @@ const i18n = {
 			if (sel) {
 				const targetTop = sel.offsetTop - 87;
 				col.dataset.programmatic = "true";
+				const colAny = col as any;
+				window.clearTimeout(colAny._progTimer);
 				if (smooth) {
 					col.scrollTo({ top: targetTop, behavior: "smooth" });
-					setTimeout(() => {
+					colAny._progTimer = window.setTimeout(() => {
 						col.removeAttribute("data-programmatic");
-					}, 320); // clean up after smooth scroll transition finishes
+					}, 350); // fallback cleanup
 				} else {
 					col.scrollTop = targetTop;
 					this.updateCol3D(col);
-					setTimeout(() => {
+					colAny._progTimer = window.setTimeout(() => {
 						col.removeAttribute("data-programmatic");
-					}, 50); // clean up after layout scroll event fires
+					}, 100); // fallback cleanup
 				}
 			}
 		}
@@ -822,6 +833,7 @@ const i18n = {
 				const i = inputs.indexOf(input);
 				if (i !== -1 && cols[i]) {
 					this.markCol(cols[i], Number(input.value) || 0);
+					this.scrollToSel(cols[i], false);
 				}
 			});
 		}
