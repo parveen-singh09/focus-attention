@@ -766,9 +766,12 @@ const i18n = {
 						panel.classList.add("is-open");
 						// Scroll each column to middle copy's selected value
 						const cols = Array.from(panel.querySelectorAll<HTMLElement>(".tp-col"));
-						cols.forEach((c) => {
-							this.scrollToSel(c);
-						});
+						// Defer scrolling slightly to ensure layout is ready and scrollHeight is computed correctly
+						window.setTimeout(() => {
+							cols.forEach((c) => {
+								this.scrollToSel(c);
+							});
+						}, 0);
 					}
 				});
 			});
